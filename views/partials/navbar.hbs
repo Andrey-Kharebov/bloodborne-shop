@@ -1,0 +1,47 @@
+<div class="nav">
+  <div class="navbar">
+    <ul>
+      {{#if isWeapons}}
+        <li class="active"><a href="/weapons">Оружие</a></li>
+      {{else}}
+        <li><a href="/weapons">Оружие</a></li>
+      {{/if}}
+
+      {{#if isHats}}
+        <li class="active"><a href="/hats">Головные уборы</a></li>
+      {{else}}              
+        <li><a href="/hats">Головные уборы</a></li>
+      {{/if}}
+
+      {{#if isOuterwear}}
+        <li class="active"><a href="/outerwear">Верхняя одежда</a></li>
+      {{else}}              
+        <li><a href="/outerwear">Верхняя одежда</a></li>
+      {{/if}}
+
+      {{#if isGloves}}
+        <li class="active"><a href="/gloves">Перчатки</a></li>
+      {{else}}              
+        <li><a href="/gloves">Перчатки</a></li>
+      {{/if}}
+
+      {{#if isPants}}
+        <li class="active"><a href="/pants">Брюки</a></li>
+      {{else}}              
+        <li><a href="/pants">Брюки</a></li>
+      {{/if}}
+
+      {{#if isFAQ}}
+        <li class="active"><a href="/faq">FAQ</a></li>
+      {{else}}              
+        <li><a href="/faq">FAQ</a></li>
+      {{/if}}
+
+      {{#if isOrStatus}}
+        <li class="active"><a href="/order-status">Статус заказа</a></li>
+      {{else}}              
+        <li><a href="/order-status">Статус заказа</a></li>
+      {{/if}}
+    </ul>
+  </div>
+</div>

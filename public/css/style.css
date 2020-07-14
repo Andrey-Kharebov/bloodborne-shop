@@ -1,0 +1,62 @@
+@import 'reset.css';
+
+body {
+  font-family: 'EB Garamond', serif;
+  background: rgb(13, 13, 14);
+}
+
+/* header */
+
+.header {
+  width: 100%;
+}
+
+.upper-header {
+  width: 100%;
+  max-height: 100px;
+  text-align: center;
+  border-bottom: 2px solid white;
+}
+
+.upper-header img {
+  width: 0 auto;
+  max-height: 100px;
+}
+
+.lower-header {
+  font-weight: 600;
+  font-size: 15px;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.lower-header .nav .navbar {
+  padding: 0 20%;
+}
+
+.lower-header .nav .navbar ul {
+  display: flex;
+  justify-content: space-between;
+}
+
+.lower-header .nav .navbar ul li:after {
+  display: block;
+  content: '';
+  border-bottom: solid 1px white;  
+  transform: scaleX(0);  
+  transition: transform 250ms ease-in-out;
+}
+
+.lower-header .nav .navbar ul li:hover:after {
+  transform: scaleX(1);
+}
+
+.active {
+  border-bottom: solid 1px white;  
+}
+
+.lower-header .nav .navbar ul li a {
+  color: white; 
+  text-decoration: none;
+  text-transform: uppercase;
+}

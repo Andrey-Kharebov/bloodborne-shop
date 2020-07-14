@@ -4,6 +4,17 @@ const exphbs = require('express-handlebars');
 const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access');
 const path = require('path');
 
+// Routes
+const homeRoutes = require('./routes/home');
+const faqRoutes = require('./routes/faq');
+const orderStatusRoutes = require('./routes/order-status');
+const weapons = require('./routes/categories/weapons');
+const hats = require('./routes/categories/hats');
+const outerwear = require('./routes/categories/outerwear');
+const gloves = require('./routes/categories/gloves');
+const pants = require('./routes/categories/pants');
+
+
 
 const app = express();
 const hbs = exphbs.create({
@@ -19,11 +30,16 @@ app.set('views', 'views');
 
 
 app.use(express.static(path.join(__dirname, '')));
+app.use('/', homeRoutes);
+app.use('/faq', faqRoutes);
+app.use('/order-status', orderStatusRoutes);
+app.use('/weapons', weapons);
+app.use('/hats', hats);
+app.use('/outerwear', outerwear);
+app.use('/gloves', gloves);
+app.use('/pants', pants);
 
 
-app.get('/', (req, res) => {
-  res.render('index');
-});
 
 
 
