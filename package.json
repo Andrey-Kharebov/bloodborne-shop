@@ -13,7 +13,9 @@
     "@handlebars/allow-prototype-access": "^1.0.3",
     "express": "^4.17.1",
     "express-handlebars": "^5.0.0",
-    "handlebars": "^4.7.6"
+    "handlebars": "^4.7.6",
+    "mysql2": "^2.1.0",
+    "sequelize": "^6.3.3"
   },
   "devDependencies": {
     "nodemon": "^2.0.4"

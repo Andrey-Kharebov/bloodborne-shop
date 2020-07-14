@@ -2,6 +2,7 @@ const express = require('express');
 const Handlebars = require('handlebars');
 const exphbs = require('express-handlebars');
 const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access');
+const sequelize = require('./utils/database');
 const path = require('path');
 
 // Routes
@@ -44,7 +45,16 @@ app.use('/pants', pants);
 
 
 const PORT = process.env.PORT || 3000;
+async function start() {
+  try {
+    await sequelize.sync();
+    app.listen(PORT, () => {
+      console.log(`Server  is running on port ${PORT}`);
+    });
+  } catch (e) {
+    console.log(e);
+  }
+}
 
-app.listen(PORT, () => {
-  console.log(`Server  is running on port ${PORT}`);
-});
+start();
+
