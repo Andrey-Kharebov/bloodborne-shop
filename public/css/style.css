@@ -44,7 +44,7 @@ body {
   content: '';
   border-bottom: solid 1px white;  
   transform: scaleX(0);  
-  transition: transform 250ms ease-in-out;
+  transition: transform 600ms ease-in-out;
 }
 
 .lower-header .nav .navbar ul li:hover:after {
