@@ -2,7 +2,21 @@
   {{#if category}}
   <h1>{{category.title}}</h1>
   <div class="product-list">
-    <div class="product">
+    {{#if products.length}}
+      {{#each products}}
+        <div class="product">
+          <div class="product-cover">
+            <img src="" alt="{{title}}">
+          </div>
+          <div class="product-title">{{title}}</div>
+          <div class="product-price">{{price}}<span><img src="/public/img/bloodechoes.png" alt="bloodechoes"></span></div>
+          <div class="more">Подробнеe <span>&#8640;</span></div>
+        </div>
+      {{/each}}
+    {{else}}
+      <p>Здесь пока нет ни одного продукта</p>
+    {{/if}}
+    {{!-- <div class="product">
       <div class="product-cover">
         <img src="/public/img/axe.png" alt="axe">
       </div>
@@ -18,8 +32,8 @@
       <div class="product-title">Пила-топор</div>
       <div class="product-price">1 000<span><img src="/public/img/bloodechoes.png" alt="bloodechoes"></span></div>
       <div class="more">Подробнеe <span>&#8640;</span></div>
-
     </div>
+
     <div class="product">
       <div class="product-cover">
         <img src="/public/img/kirkhammer.png" alt="kirkhammer">
@@ -27,7 +41,7 @@
       <div class="product-title">Молот-меч</div>
       <div class="product-price">3000<span><img src="/public/img/bloodechoes.png" alt="bloodechoes"></span></div>
       <div class="more">Подробнеe <span>&#8640;</span></div>
-    </div>
+    </div> --}}
   </div>
   {{/if}}
 </div>

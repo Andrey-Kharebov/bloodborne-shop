@@ -16,24 +16,30 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 
   function showHomeTabs(i = 0) {
-    homeTabs[i].style.display = 'block';
-    tabs[i].classList.add('tab-active');
+    if (tabs.length) { // костыль! переделать
+      homeTabs[i].style.display = 'block';
+      tabs[i].classList.add('tab-active');
+    }
   }
+
 
   hideHomeTabs();
   showHomeTabs();
 
-  switchers.addEventListener('click', (event) => {
-    const target = event.target;
-
-    if (target && target.classList.contains('tab')) {
-      tabs.forEach((item, i) => {
-        if (target == item) {
-          hideHomeTabs();
-          showHomeTabs(i);
-          console.log('hello');
-        }
-      });
-    } 
-  });
+  if (tabs.length) { // костыль! переделать
+    switchers.addEventListener('click', (event) => {
+      const target = event.target;
+  
+      if (target && target.classList.contains('tab')) {
+        tabs.forEach((item, i) => {
+          if (target == item) {
+            hideHomeTabs();
+            showHomeTabs(i);
+            console.log('hello');
+          }
+        });
+      } 
+    });
+  }
+  
 });

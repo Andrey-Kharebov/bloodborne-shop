@@ -10,13 +10,17 @@ const categoriesRoutes = require('./routes/categories');
 const homeRoutes = require('./routes/home');
 const faqRoutes = require('./routes/faq');
 const orderStatusRoutes = require('./routes/order-status');
+const addRoutes = require('./routes/add');
 
 
 // Models
 const User = require('./models/user');
 const Category = require('./models/category');
+const Product = require('./models/product');
 
 
+// Assossiations 
+Category.hasMany(Product);
 
 
 const app = express();
@@ -45,6 +49,7 @@ app.use('/', homeRoutes);
 app.use('/categories', categoriesRoutes);
 app.use('/faq', faqRoutes);
 app.use('/order-status', orderStatusRoutes);
+app.use('/add', addRoutes);
 
 
 
@@ -84,3 +89,4 @@ async function start() {
 
 start();
 
+ 
