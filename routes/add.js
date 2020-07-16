@@ -5,7 +5,6 @@ const Category = require('../models/category');
 
 router.get('/', async (req, res) => {
   const categories = await Category.findAll();
-  console.log(categories);
   res.render('add', {
     layout: 'admin',
     title: 'Adding page',
@@ -18,10 +17,14 @@ router.post('/', async (req, res) => {
     await Product.create({
       title: req.body.title,
       price: req.body.price,
-      imageUrl: req.body.imageUrl,
+      imageUrl: req.file.path,
       description: req.body.description,
       categoryId: req.body.categoryId
     });
+
+    console.log(req.file);
+    console.log(req.body);
+
     res.redirect('/add');
   } catch (e) {
     console.log(e);

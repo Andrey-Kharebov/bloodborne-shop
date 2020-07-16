@@ -5,6 +5,10 @@ const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-acce
 const sequelize = require('./utils/database');
 const path = require('path');
 
+// Middlewares
+const fileMiddleware = require('./middleware/file');
+
+
 // Routes
 const categoriesRoutes = require('./routes/categories');
 const homeRoutes = require('./routes/home');
@@ -44,7 +48,11 @@ app.use(async (req, res, next) => {
 });
 
 app.use(express.static(path.join(__dirname, '')));
+app.use(express.static(path.join(__dirname, 'images')));
 app.use(express.urlencoded({extended: true}));
+app.use(fileMiddleware.single('image')); // посмотреть еще раз после сессий
+
+
 app.use('/', homeRoutes);
 app.use('/categories', categoriesRoutes);
 app.use('/faq', faqRoutes);
