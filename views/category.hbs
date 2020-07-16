@@ -1,3 +1,33 @@
-{{#if category}}
-  {{category.title}}
-{{/if}}
+<div class="category">
+  {{#if category}}
+  <h1>{{category.title}}</h1>
+  <div class="product-list">
+    <div class="product">
+      <div class="product-cover">
+        <img src="/public/img/axe.png" alt="axe">
+      </div>
+      <div class="product-title">Секира охотника</div>
+      <div class="product-price">1100<span><img src="/public/img/bloodechoes.png" alt="bloodechoes"></span></div>
+      <div class="more">Подробнеe <span>&#8640;</span></div>
+    </div>
+
+    <div class="product">
+      <div class="product-cover">
+        <img src="/public/img/saw.png" alt="saw">
+      </div>
+      <div class="product-title">Пила-топор</div>
+      <div class="product-price">1 000<span><img src="/public/img/bloodechoes.png" alt="bloodechoes"></span></div>
+      <div class="more">Подробнеe <span>&#8640;</span></div>
+
+    </div>
+    <div class="product">
+      <div class="product-cover">
+        <img src="/public/img/kirkhammer.png" alt="kirkhammer">
+      </div>
+      <div class="product-title">Молот-меч</div>
+      <div class="product-price">3000<span><img src="/public/img/bloodechoes.png" alt="bloodechoes"></span></div>
+      <div class="more">Подробнеe <span>&#8640;</span></div>
+    </div>
+  </div>
+  {{/if}}
+</div>
