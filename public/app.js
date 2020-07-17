@@ -42,4 +42,21 @@ window.addEventListener('DOMContentLoaded', () => {
     });
   }
   
+ // Product page counter plus/minus
+
+const counter = document.querySelector('.product-counter');
+if (counter) {
+  let value = +document.querySelector('.counter-value').value;
+  counter.addEventListener('click', (event) => {
+    if (event.target.classList.contains('counter-plus')) {
+      value++;
+      console.log(value);
+    }
+
+    if (event.target.classList.contains('counter-minus')) {
+      value--;
+      console.log(value);
+    }
+  });
+}
 });

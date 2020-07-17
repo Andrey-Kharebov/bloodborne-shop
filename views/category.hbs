@@ -3,16 +3,22 @@
   <h1>{{category.title}}</h1>
   <div class="product-list">
     {{#if products.length}}
-      {{#each products}}
-        <div class="product">
+    {{#each products}}
+      <div class="product">
+        <a href="/product/{{id}}">
           <div class="product-cover">
             <img src="/{{imageUrl}}" alt="{{title}}">
           </div>
           <div class="product-title">{{title}}</div>
           <div class="product-price">{{price}}<span><img src="/public/img/bloodechoes.png" alt="bloodechoes"></span></div>
           <div class="more">Подробнеe <span>&#8640;</span></div>
+        </a>
+        <div class="edit_delete">
+          <button class="product-edit"><i class="far fa-edit"></i></button>
+          <button class="product-delete"><i class="far fa-trash-alt"></i></button>
         </div>
-      {{/each}}
+      </div>
+    {{/each}}
     {{else}}
       <p>Здесь пока нет ни одного продукта</p>
     {{/if}}

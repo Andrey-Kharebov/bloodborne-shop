@@ -1,0 +1,53 @@
+<div class="product-page">
+  <h1>{{title}}</h1>
+
+  <div class="product-section">
+    <div class="product-slider">
+      <div class="product-slider-center">
+        <div class="product-image">
+          <img src="/{{product.imageUrl}}" alt="{{title}}">
+        </div>
+      </div>
+      <div class="product-slider-bottom">
+        <div class="product-switchers">
+          switchers
+        </div>
+      </div>
+    </div>
+    <div class="product-info">
+      <div class="product-price">
+        {{product.price}}<span><img src="/public/img/bloodechoes.png" alt="bloodechoes"></span>
+      </div>
+      <hr>
+      <div class="product-description">
+        {{{product.description}}}
+      </div>   
+      <div class="product-size">
+        <p>Выберите размер:</p>
+        <ul>
+          <li><button class="product-size-btn">XS</button></li>
+          <li><button class="product-size-btn">S</button></li>
+          <li><button class="product-size-btn">M</button></li>
+          <li><button class="product-size-btn">L</button></li>
+          <li><button class="product-size-btn">XL</button></li>
+          <li><button class="product-size-btn">2XL</button></li>
+          <li><button class="product-size-btn">3XL</button></li>
+        </ul>
+      </div>
+      <div class="quantity_add">
+        <div class="quantity">
+          <p>Количество:</p>
+          <div class="product-counter">
+            <button class="counter-minus">-</button>
+            <input class="counter-value" type="number" value="1">
+            <button class="counter-plus">+</button>
+          </div>
+          
+        </div>
+        <div class="add">
+          <button type="submit">Добавить в корзину <span>&#8640;</span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
