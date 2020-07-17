@@ -22,8 +22,8 @@ router.post('/', async (req, res) => {
       categoryId: req.body.categoryId
     });
 
-    console.log(req.file);
-    console.log(req.body);
+    // console.log(req.file);
+    // console.log(req.body);
 
     res.redirect('/add');
   } catch (e) {
