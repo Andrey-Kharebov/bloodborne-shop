@@ -15,7 +15,7 @@ const homeRoutes = require('./routes/home');
 const faqRoutes = require('./routes/faq');
 const orderStatusRoutes = require('./routes/order-status');
 const addRoutes = require('./routes/add');
-const productRoutes = require('./routes/product');
+const productRoutes = require('./routes/products');
 
 
 // Models
@@ -59,7 +59,7 @@ app.use('/categories', categoriesRoutes);
 app.use('/faq', faqRoutes);
 app.use('/order-status', orderStatusRoutes);
 app.use('/add', addRoutes);
-app.use('/product', productRoutes);
+app.use('/products', productRoutes);
 
 
 

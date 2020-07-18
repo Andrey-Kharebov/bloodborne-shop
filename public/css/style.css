@@ -305,6 +305,7 @@ body {
   position: absolute;
   top: -30px;
   right: 0;
+  display: flex;
 }
 
 .category .product .edit_delete button {

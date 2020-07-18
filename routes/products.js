@@ -61,7 +61,17 @@ router.post('/edit', async (req, res) => {
       });
     }
     product.save();
-    res.redirect(`/product/${product.id}`);
+    res.redirect(`/products/${product.id}`);
+  } catch (e) {
+    console.log(e);
+  }
+});
+
+router.post('/:id/remove', async (req, res) => {
+  try {
+    const product = await Product.findByPk(req.params.id);
+    product.destroy();
+    res.redirect('/');
   } catch (e) {
     console.log(e);
   }
