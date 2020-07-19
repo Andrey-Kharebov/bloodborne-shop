@@ -8,16 +8,27 @@
       <li><a href="/categories/pants">Брюки</a></li>
 
       {{#if isFAQ}}
-        <li class="active"><a href="/faq">FAQ</a></li>
-      {{else}}              
-        <li><a href="/faq">FAQ</a></li>
+      <li class="active"><a href="/faq">FAQ</a></li>
+      {{else}}
+      <li><a href="/faq">FAQ</a></li>
       {{/if}}
 
       {{#if isOrStatus}}
-        <li class="active"><a href="/order-status">Статус заказа</a></li>
-      {{else}}              
-        <li><a href="/order-status">Статус заказа</a></li>
+      <li class="active"><a href="/order-status">Статус заказа</a></li>
+      {{else}}
+      <li><a href="/order-status">Статус заказа</a></li>
       {{/if}}
     </ul>
+    <div class="login_cart">
+      <div class="login">
+        <button><i class="fas fa-user"></i></button>
+      </div>
+      <input type="checkbox" id="check">
+        <div class="cart"> 
+          <button><i class="fas fa-shopping-cart"></i></button>
+          <p class="total-cost">0</p>
+          <img src="/public/img/bloodechoes.png" alt="bloodechoes">
+        </div>      
+    </div>
   </div>
 </div>

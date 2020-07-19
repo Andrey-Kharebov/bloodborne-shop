@@ -3,6 +3,13 @@
 body {
   font-family: 'EB Garamond', serif;
   background: rgb(13, 13, 14);
+  position: relative;
+  overflow: hidden; 
+  overflow-y: scroll;
+}
+
+.container {
+  transition: all .5s;
 }
 
 /* header */
@@ -18,7 +25,6 @@ body {
   max-height: 100px;
   text-align: center;
   border-bottom: 2px solid white;
-  background-color: black;
   background-color: rgba(0, 0, 0, 0.5);
 }
 
@@ -37,12 +43,49 @@ body {
 
 .lower-header .nav .navbar {
   padding: 0 20%;
+  position: relative;
 }
+
+.lower-header .nav .navbar .login_cart {
+  position: absolute;
+  top: -10px;
+  right: 5%;
+  display: flex;
+  align-items: center;
+}
+
+.lower-header .nav .navbar .login_cart div button {
+  border: none;
+  background-color: rgba(0, 0, 0, 0);
+  color: #fff;
+  font-size: 15px;
+}
+
+.lower-header .nav .navbar .login_cart div:first-child {
+  margin-right: 15px;
+}
+
+.lower-header .nav .navbar .login_cart .cart {
+  display: flex;
+}
+
+.lower-header .nav .navbar .login_cart .cart p {
+  color: #fff;
+  padding-top: 7px;
+}
+
+.lower-header .nav .navbar .login_cart .cart img {
+  width: 30px;
+  height: auto;
+}
+ 
 
 .lower-header .nav .navbar ul {
   display: flex;
   justify-content: space-between;
+  position: relative;
 }
+
 
 .lower-header .nav .navbar ul li:after {
   display: block;
@@ -176,6 +219,12 @@ body {
   text-decoration: none;
   text-transform: uppercase;
 }
+
+/* !!!!!!!!!! */
+.footer-content .nav .login_cart {
+  display: none;
+}
+/* !!!!!!!!!! */
 
 .footer-content .footer-info {
   margin-top: 50px;
@@ -366,7 +415,6 @@ body {
 }
 
 .category .product .more {
-  /* border: 1px solid black; */
   display: none;
   position: absolute;
   top: 35%;
@@ -443,9 +491,6 @@ body {
 .product-section .product-slider .product-slider-bottom .product-switchers {
   margin: 0 auto;
 }
-
-
-
 
 .product-section .product-info {
   box-sizing: border-box;
@@ -594,4 +639,178 @@ input::-webkit-inner-spin-button {
 }
 
 
+
+
+/* modals */
+
+input[type='checkbox']
+{
+  display: none;
+}
+
+.cart-modal {
+  box-sizing: border-box;
+  position: absolute;
+  height: 100%;
+  width: 380px;
+  top: 0;
+  right: -380px;
+  background: rgb(255, 255, 255);
+  z-index: 2;
+  transition: all .5s;
+} 
+
+input[type='checkbox']:checked ~ .cart-modal
+{
+  transform: translateX(350px);
+}
+
+.cart-modal .continue {
+  border-bottom: 2px solid rgb(236, 238, 241);
+  height: 100px;
+  line-height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cart-modal .continue img {
+  height: 40px;
+  width: auto;
+}
+
+.cart-modal .continue p {
+  text-transform: uppercase;
+  font-weight: 500;
+  letter-spacing: 1px;
+  font-size: 15px;
+}
+
+.cart-modal .purchases {
+  border-bottom: 2px solid black;
+  height: 110px;
+  line-height: 110px;
+  padding-left: 15px;
+}
+
+.cart-modal .purchases p {
+  position: relative;
+  font-size: 25px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.cart-modal .purchases p::after {
+  content: '';
+  position: absolute;
+  width: 40%;
+  top: 52%;
+  margin-left: 10px;
+  border-top: 3px solid black;
+}
+ 
+.cart-modal .purchases .purchases-list {
+  margin-bottom: 30px;
+}
+
+.cart-modal .promotional {
+  padding-left: 30px;
+  margin-top: 20px;
+}
+
+.cart-modal .promotional p {
+  font-weight: 500;
+  text-transform: uppercase;
+  color: rgb(150, 150, 150);
+  font-size: 12px;
+  letter-spacing: 1.5px;
+}
+
+.cart-modal .promotional input {
+  position: relative;
+  margin-top: 10px;
+  border: none;
+  background-color: rgb(244, 246, 248);
+  width: 240px;
+  height: 35px;
+  border-radius: 30px;
+}
+.cart-modal .promotional button {
+  position: absolute;
+  margin-top: 10px;
+  border: none;
+  background-color: black;
+  right: 35px;
+  width: 130px;
+  height: 35px;
+  border-radius: 30px;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 100;
+  letter-spacing: 1px;
+  font-size: 13px;
+}
+
+.cart-modal hr {
+  margin-top: 30px;
+  margin-left: 30px;
+  margin-right: 30px;
+  border: 1px solid rgb(236, 238, 241);
+}
+
+.cart-modal .cart-info {
+  margin-top: 50px;
+  padding-left: 30px;
+  padding-right: 30px;
+  font-weight: 500;
+  text-transform: uppercase;
+  color: rgb(150, 150, 150);
+  font-size: 12px;
+  letter-spacing: 1.5px;
+}
+
+.cart-modal .cart-info .products-cost {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.cart-modal .cart-info .total-cost {
+  margin-top: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cart-modal .cart-info p {
+  margin-bottom: 10px;
+}
+
+.cart-modal .cart-info .price {
+  font-size: 12px;
+  font-weight: 700;
+  color: black;
+}
+
+.cart-modal .cart-info .total-cost .price {
+  font-size: 20px;
+}
+
+.cart-modal .makeAnOrder {
+  margin: 50px 30px 0 30px;
+  text-align: center;
+}
+
+.cart-modal .makeAnOrder button {
+  width: 280px;
+  height: 50px;
+  border: none;
+  border-radius: 30px;
+  background-color: black;
+  color: #fff;
+  font-weight: 100;
+  letter-spacing: 1.5px;
+  font-size: 15px;
+  text-transform: uppercase;
+}
 
