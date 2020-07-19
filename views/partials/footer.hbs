@@ -15,7 +15,9 @@
           <p>© 2020, Bloodborne-shop</p>
         </div>
         <div class="offer">
-          <a href="/"><h4>Публичная оферта</h4></a>
+          <a href="/">
+            <h4>Публичная оферта</h4>
+          </a>
         </div>
       </div>
     </div>
@@ -47,8 +49,114 @@
     <p>Продолжить покупки</p>
   </div>
   <div class="purchases">
-    <p>Мои покупки</p>
-    <div class="purchases-list"></div>
+    <p class="myPurchases">Мои покупки</p>
+    <div class="purchases-list">
+      <div class="modal-cart-product-section">
+        <div class="modal-cart-product-image">
+          <img src="/images/2020-07-16T21:08:33.478Z-axe.png" alt="image">
+          {{!-- <img src="/{{product.imageUrl}}" alt="{{title}}"> --}}
+          <span class="modal-cart-product-remove"><i class="far fa-times-circle"></i></span>
+        </div>
+        <div class="modal-cart-product-info">
+          <div class="modal-cart-product-title">
+            <p>Секира охотника</p>
+          </div>
+          <div class="modal-cart-product-size">
+            <p>Размер:</p>
+            <ul>
+              <li>XS</li>
+              <li>S</li>
+              <li>M</li>
+              <li>L</li>
+              <li>XL</li>
+              <li class="size-active">2XL</li>
+              <li>3XL</li>
+            </ul>
+          </div>
+          <div class="modal-cart-product-quantity">
+            <p>Количество:</p>
+            <div class="modal-cart-product-quantity-info">
+              <span class="number">0</span>
+              <button class="plus">+</button>
+              <button class="minus">-</button>
+            </div>
+          </div>
+          <div class="modal-cart-product-price">
+            <p class="price">0 отг. к.</p>
+          </div>
+        </div>
+      </div>
+      <div class="modal-cart-product-section">
+        <div class="modal-cart-product-image">
+          <img src="/images/2020-07-17T19:13:14.092Z-CharredHunterGarb.png" alt="image">
+          {{!-- <img src="/{{product.imageUrl}}" alt="{{title}}"> --}}
+          <span class="modal-cart-product-remove"><i class="far fa-times-circle"></i></span>
+        </div>
+        <div class="modal-cart-product-info">
+          <div class="modal-cart-product-title">
+            <p>Секира охотника</p>
+          </div>
+          <div class="modal-cart-product-size">
+            <p>Размер:</p>
+            <ul>
+              <li>XS</li>
+              <li>S</li>
+              <li>M</li>
+              <li>L</li>
+              <li>XL</li>
+              <li class="size-active">2XL</li>
+              <li>3XL</li>
+            </ul>
+          </div>
+          <div class="modal-cart-product-quantity">
+            <p>Количество:</p>
+            <div class="modal-cart-product-quantity-info">
+              <span class="number">0</span>
+              <button class="plus">+</button>
+              <button class="minus">-</button>
+            </div>
+          </div>
+          <div class="modal-cart-product-price">
+            <p class="price">0 отг. к.</p>
+          </div>
+        </div>
+      </div>
+      <div class="modal-cart-product-section">
+        <div class="modal-cart-product-image">
+          <img src="/images/2020-07-17T20:15:37.265Z-Chikage.png" alt="image">
+          {{!-- <img src="/{{product.imageUrl}}" alt="{{title}}"> --}}
+          <span class="modal-cart-product-remove"><i class="far fa-times-circle"></i></span>
+        </div>
+        <div class="modal-cart-product-info">
+          <div class="modal-cart-product-title">
+            <p>Секира охотника</p>
+          </div>
+          <div class="modal-cart-product-size">
+            <p>Размер:</p>
+            <ul>
+              <li>XS</li>
+              <li>S</li>
+              <li>M</li>
+              <li>L</li>
+              <li>XL</li>
+              <li class="size-active">2XL</li>
+              <li>3XL</li>
+            </ul>
+          </div>
+          <div class="modal-cart-product-quantity">
+            <p>Количество:</p>
+            <div class="modal-cart-product-quantity-info">
+              <span class="number">0</span>
+              <button class="plus">+</button>
+              <button class="minus">-</button>
+            </div>
+          </div>
+          <div class="modal-cart-product-price">
+            <p class="price">0 отг. к.</p>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="promotional">
     <p>Промокод</p>
@@ -58,13 +166,16 @@
   <hr>
   <div class="cart-info">
     <div class="products-cost">
-      <p>Общая стоимость:</p><p class="price">0 отг. к.</p>
-      <p>Стоимость доставки:</p><p class="price">0 отг. к.</p>
+      <p>Общая стоимость:</p>
+      <p class="price">0 отг. к.</p>
+      <p>Стоимость доставки:</p>
+      <p class="price">0 отг. к.</p>
     </div>
 
-     <div class="total-cost">
-       <p>Итого:</p><p class="price">0 отг. к.</p>
-     </div>
+    <div class="total-cost">
+      <p>Итого:</p>
+      <p class="price">0 отг. к.</p>
+    </div>
   </div>
   <div class="makeAnOrder">
     <button>Оформить заказ</button>
@@ -72,3 +183,38 @@
 </div>
 
 <script src="/public/app.js"></script>
+
+{{!-- <p class="myPurchases">Мои покупки</p>
+<div class="purchases-list">
+  <div class="modal-cart-product-section">
+    <div class="modal-cart-product-image">
+      <img src="" alt="image">
+      {{!-- <img src="/{{product.imageUrl}}" alt="{{title}}"> --}}
+{{!-- </div>
+    <div class="modal-cart-product-info">
+      <div class="modal-cart-product-title">
+        <p>Title</p>
+      </div>
+      <div class="modal-cart-product-size">
+        <p>Size</p>
+        <ul>
+          <li>XS</li>
+          <li>S</li>
+          <li>M</li>
+          <li>L</li>
+          <li>XL</li>
+          <li>2XL</li>
+          <li>3XL</li>
+        </ul>
+      </div>
+      <div class="modal-cart-product-quantity">
+        <p>0</p>
+        <button>+</button>
+        <button>-</button>
+      </div>
+      <div class="modal-cart-product-price">
+        <p class="price">0 отг. к.</p>
+      </div>
+    </div>
+  </div>
+</div> --}}
