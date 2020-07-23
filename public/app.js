@@ -1,9 +1,9 @@
 window.addEventListener('DOMContentLoaded', () => {
   // Home tabs
 
-  const tabs = document.querySelectorAll('.tab'), 
-        homeTabs = document.querySelectorAll('.home-tab'), 
-        switchers = document.querySelector('.switchers'); 
+  const tabs = document.querySelectorAll('.tab'),
+    homeTabs = document.querySelectorAll('.home-tab'),
+    switchers = document.querySelector('.switchers');
 
   function hideHomeTabs() {
     homeTabs.forEach(item => {
@@ -29,45 +29,93 @@ window.addEventListener('DOMContentLoaded', () => {
   if (tabs.length) { // костыль! переделать
     switchers.addEventListener('click', (event) => {
       const target = event.target;
-  
+
       if (target && target.classList.contains('tab')) {
         tabs.forEach((item, i) => {
           if (target == item) {
             hideHomeTabs();
             showHomeTabs(i);
-            console.log('hello');
           }
         });
-      } 
+      }
     });
   }
-  
+
+  // Product size choosing
+  function productSizeChoosing() {
+    const sizeList = document.querySelectorAll('.product-size ul button');
+
+    function removeAllSizeActive() {
+      sizeList.forEach(item => {
+        item.classList.remove('product-size-btn-active');
+        item.classList.add('product-size-btn');
+      });
+    }
+
+    sizeList.forEach(item => {
+      item.addEventListener('click', (event) => {
+        removeAllSizeActive();
+        event.target.classList.remove('product-size-btn');
+        event.target.classList.add('product-size-btn-active');
+      });
+    });
+  }
+
+  productSizeChoosing();
+
   // Product page counter plus/minus
 
-  const counter = document.querySelector('.product-counter');
-  if (counter) {
-    let value = +document.querySelector('.counter-value').value;
-    counter.addEventListener('click', (event) => {
-      if (event.target.classList.contains('counter-plus')) {
-        value++;
-        console.log(value);
-      }
+  let valueSection = document.querySelector('.counter-value');
 
-      if (event.target.classList.contains('counter-minus')) {
-        value--;
-        console.log(value);
-      }
-    });
+  function productCounter(counterSelector, valueSelector, plusSelector, minusSelector) {
+    const counter = document.querySelectorAll(counterSelector);
+    
+    if (counter) {
+      counter.forEach(item => {
+        let valueSection = item.querySelector(valueSelector);
+        item.addEventListener('click', (event) => {
+          if (event.target.classList.contains(plusSelector)) {
+            if (valueSection.value == 10) {
+              valueSection.value = 10;
+            } else {
+              valueSection.value++;
+            }
+          }          
+    
+          if (event.target.classList.contains(minusSelector)) {
+            if (valueSection.value == 1) {
+              valueSection.value = 1;
+            } else {
+              valueSection.value--;
+            }
+          }
+
+          let LSkey = event.currentTarget.dataset.quantity;
+          if (LSkey) {
+            let cartData = getCartData();
+            for (let key in cartData) {
+              if (LSkey === key) {
+                cartData[key][3] = valueSection.value;
+                cartData[key][4] = +cartData[key][5] * valueSection.value;
+                setCartData(cartData);
+                document.querySelector(`[data-price="${key}"] p`).textContent = `${cartData[key][4]} отг. к.`;
+                showPrices();
+              }
+            }
+          }
+        });
+      });
+    }
   }
-
-  // Modal
+  
+  // ModalCart
 
   const checkbox = document.querySelector('#check'),
-        navCartBox = document.querySelector('.cart'),
-        cartModal = document.querySelector('.cart-modal'),
-        closeModal = document.querySelector('.continue'),
-        container = document.querySelector('.container'),
-        body = document.querySelector('body');
+    navCartBox = document.querySelector('.cart'),
+    cartModal = document.querySelector('.cart-modal'),
+    closeModal = document.querySelector('.continue'),
+    container = document.querySelector('.container'),
+    body = document.querySelector('body');
 
   function openCartModal() {
     checkbox.click();
@@ -84,17 +132,266 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 
   container.addEventListener('click', (event) => {
-    if (event.currentTarget === container) {
-      closeCartModal();
-    }
+    // if (event.currentTarget == container) {
+    //   closeCartModal();
+    // }
   });
-
 
   navCartBox.addEventListener('click', (event) => {
     openCartModal();
   });
 
-  closeModal.addEventListener('click', (e) => {
+  closeModal.addEventListener('click', () => {
     closeCartModal();
   });
+
+
+  // LocalStorage create/update Cart
+
+  const addToCartBtn = document.querySelector('.add-to-cart'),
+        productPage = document.querySelector('.product-page');
+
+
+  function setCartData(cartItem) {
+    localStorage.setItem('cart', JSON.stringify(cartItem));
+  }
+
+  function getCartData() {
+    return JSON.parse(localStorage.getItem('cart'));
+  }
+
+  if (addToCartBtn) {
+    addToCartBtn.addEventListener('click', () => {
+      let cartData = getCartData() || {},
+        itemId = addToCartBtn.getAttribute('data-id'),
+        itemTitle = productPage.querySelector('h1').textContent,
+        itemImage = productPage.querySelector('.product-image img').getAttribute('src'),
+        itemSize = productPage.querySelector('.product-size-btn-active').textContent,
+        itemQuantity = +productPage.querySelector('.counter-value').value,
+        itemPriceForOne = productPage.querySelector('.product-price').textContent.trim(), 
+        itemPrice = productPage.querySelector('.product-price').textContent.trim(),
+        itemTotalPrice = itemPrice * itemQuantity;
+
+      if (cartData.hasOwnProperty(itemId)) {
+        cartData[itemId][3] += itemQuantity;
+        cartData[itemId][4] += itemTotalPrice;
+      } else {
+        cartData[itemId] = [itemTitle, itemImage, itemSize, itemQuantity, itemTotalPrice, itemPriceForOne];
+      }
+
+      setCartData(cartData);
+      showInModalCart(itemId);
+      valueSection.value = 1;
+      openCartModal(); 
+      deleteInModalCart();
+      properSize(); 
+      showPrices();
+      productCounter('.modal-cart-product-quantity-info', '.number', 'plus', 'minus');
+    });
+  }
+
+  // LocalStorage show modalCart
+
+  let modalPurchasesList = document.querySelector('.purchases-list');
+  
+
+  function showInModalCart(itemId) {
+    if (getCartData()) {
+      const LSCart = getCartData();      
+      if (itemId) {
+        const modalCartItem = document.getElementById(`${itemId}`);
+        if (modalCartItem === null) {
+          for (let key in LSCart) {
+            if (key === itemId) {
+              modalPurchasesList.innerHTML += `
+              <div class="modal-cart-product-section" id="${key}">
+                <div class="modal-cart-product-image">
+                  <img src="${LSCart[key][1]}" alt="${LSCart[key][0]}">
+                  <span class="modal-cart-product-remove" data-removeBtn="${key}"><i class="far fa-times-circle"></i></span>
+                </div>
+                <div class="modal-cart-product-info">
+                  <div class="modal-cart-product-title">
+                    <p>${LSCart[key][0]}</p>
+                  </div>
+                  <div class="modal-cart-product-size">
+                    <p>Размер:</p>
+                    <ul>
+                      <li>XS</li>
+                      <li>S</li>
+                      <li>M</li>
+                      <li>L</li>
+                      <li>XL</li>
+                      <li>2XL</li>
+                      <li>3XL</li>
+                    </ul>
+                  </div>
+                  <div class="modal-cart-product-quantity">
+                    <p>Количество:</p>
+                    <div class="modal-cart-product-quantity-info" data-quantity="${key}">
+                      <input disabled class="number" type="number" value="${LSCart[key][3]}"></input>
+                      <button class="plus">+</button>
+                      <button class="minus">-</button>
+                    </div>
+                  </div>
+                  <div class="modal-cart-product-price" data-price="${key}">
+                    <p class="price">${LSCart[key][4]} отг. к.</p>
+                  </div>
+                </div>
+              </div> 
+            `;
+            }
+          }
+        } else {
+          let modalCartProductSections = document.querySelectorAll('.modal-cart-product-section');
+          modalCartProductSections.forEach(item => {
+            if (+item.getAttribute('id') == itemId) {
+              item.innerHTML = `
+                <div class="modal-cart-product-image">
+                  <img src="${LSCart[itemId][1]}" alt="${LSCart[itemId][0]}">
+                  <span class="modal-cart-product-remove" data-removeBtn="${itemId}"><i class="far fa-times-circle"></i></span>
+                </div>
+                <div class="modal-cart-product-info">
+                  <div class="modal-cart-product-title">
+                    <p>${LSCart[itemId][0]}</p>
+                  </div>
+                  <div class="modal-cart-product-size">
+                    <p>Размер:</p>
+                    <ul>
+                      <li>XS</li>
+                      <li>S</li>
+                      <li>M</li>
+                      <li>L</li>
+                      <li>XL</li>
+                      <li>2XL</li>
+                      <li>3XL</li>
+                    </ul>
+                  </div>
+                  <div class="modal-cart-product-quantity">
+                    <p>Количество:</p>
+                    <div class="modal-cart-product-quantity-info" data-quantity="${itemId}">
+                      <input disabled class="number" type="number" value="${LSCart[itemId][3]}"></input>
+                      <button class="plus">+</button>
+                      <button class="minus">-</button>
+                    </div>
+                  </div>
+                  <div class="modal-cart-product-price" data-price="${itemId}">
+                    <p class="price">${LSCart[itemId][4]} отг. к.</p>
+                  </div>
+                </div>
+              `;
+            }
+          });
+        } 
+      } else {
+        for (let key in LSCart) {
+          modalPurchasesList.innerHTML += `
+            <div class="modal-cart-product-section" id="${key}">
+              <div class="modal-cart-product-image">
+                <img src="${LSCart[key][1]}" alt="${LSCart[key][0]}">
+                <span class="modal-cart-product-remove" data-removeBtn="${key}"><i class="far fa-times-circle"></i></span>
+              </div>
+              <div class="modal-cart-product-info">
+                <div class="modal-cart-product-title">
+                  <p>${LSCart[key][0]}</p>
+                </div>
+                <div class="modal-cart-product-size">
+                  <p>Размер:</p>
+                  <ul>
+                    <li>XS</li>
+                    <li>S</li>
+                    <li>M</li>
+                    <li>L</li>
+                    <li>XL</li>
+                    <li>2XL</li>
+                    <li>3XL</li>
+                  </ul>
+                </div>
+                <div class="modal-cart-product-quantity">
+                  <p>Количество:</p>
+                  <div class="modal-cart-product-quantity-info" data-quantity="${key}">
+                    <input disabled class="number" type="number" value="${LSCart[key][3]}"></input>
+                    <button class="plus">+</button>
+                    <button class="minus">-</button>
+                  </div>
+                </div>
+                <div class="modal-cart-product-price" data-price="${key}">
+                  <p class="price">${LSCart[key][4]} отг. к.</p>
+                </div>
+              </div>
+            </div> 
+          `;
+        }
+      }
+    }
+  }
+
+  function deleteInModalCart() {
+    const delModalProductBtns = document.querySelectorAll('.modal-cart-product-remove');
+    delModalProductBtns.forEach(item => {
+      item.addEventListener('click', (event) => {
+        let LSkey = event.currentTarget.dataset.removebtn;
+        let cartData = getCartData();
+        for (let key in cartData) {
+          if (LSkey === key) {
+            delete cartData[key];
+            setCartData(cartData);
+            modalPurchasesList.innerHTML = '';
+          }
+        }
+        showInModalCart();
+        deleteInModalCart();
+        properSize();
+        showPrices();
+        productCounter('.modal-cart-product-quantity-info', '.number', 'plus', 'minus');
+      });
+    });
+  }
+
+  function properSize() {
+    let modalCartProductSections = document.querySelectorAll('.modal-cart-product-section');
+    modalCartProductSections.forEach(section => {
+      let cartData = getCartData();
+      for (let key in cartData) {
+        if (section.getAttribute('id') === key) {
+          let modalCartProductSizes = section.querySelectorAll('.modal-cart-product-section ul li');
+          modalCartProductSizes.forEach(item => {
+            if (cartData[key][2] === item.textContent) {
+              item.classList.add('size-active');
+            }
+          });
+        }
+      }
+    });
+  }
+
+  function showPrices() {
+    const totalPrice = document.querySelector('.total-price'),
+          deliveryPrice = document.querySelector('.delivery-price'),
+          totalModalCost = document.querySelector('.total-modal-cost'),
+          modalCartProductPrices = document.querySelectorAll('.modal-cart-product-price p'),
+          totalHeaderCost = document.querySelector('.total-cost');
+
+    let counter = 0;
+    modalCartProductPrices.forEach(item => {
+      counter += parseInt(item.textContent);
+    });
+
+    let deliveryCounter = ((5 / 100) * counter);
+    let totalCostCounter = counter + deliveryCounter;
+    totalPrice.textContent = `${counter}  отг. к.`;
+    deliveryPrice.textContent = `${deliveryCounter} отг. к.`;
+    totalModalCost.textContent = `${totalCostCounter} отг. к.`;
+    totalHeaderCost.textContent = `${totalCostCounter}`;
+  }
+
+
+  showInModalCart();
+  deleteInModalCart();
+  properSize();
+  showPrices();
+  productCounter('.product-counter', '.counter-value', 'counter-plus', 'counter-minus');
+  productCounter('.modal-cart-product-quantity-info', '.number', 'plus', 'minus');
+  
+
 });
+

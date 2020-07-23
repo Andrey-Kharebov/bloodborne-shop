@@ -45,7 +45,8 @@
           
         </div>
         <div class="add">
-          <button type="submit">Добавить в корзину <span>&#8640;</span></button>
+          <input type="hidden" name="id" value="{{product.id}}">
+          <button class="add-to-cart" type="submit" data-id="{{product.id}}">Добавить в корзину <span>&#8640;</span></button>
         </div>
       </div>
     </div>

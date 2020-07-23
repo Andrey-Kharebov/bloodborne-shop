@@ -7,14 +7,15 @@ input[type='checkbox']
 
 .cart-modal {
   box-sizing: border-box;
-  position: absolute;
-  height: 100%;
+  position: fixed;
+  height: 100vh;
   width: 380px;
   top: 0;
   right: -380px;
   background: rgb(255, 255, 255);
   z-index: 2;
   transition: all .5s;
+  overflow-y: scroll;
 } 
 
 input[type='checkbox']:checked ~ .cart-modal
@@ -156,6 +157,15 @@ input[type='checkbox']:checked ~ .cart-modal
   margin-top: 10px;
 }
 
+.cart-modal .purchases .purchases-list .modal-cart-product-section .modal-cart-product-info .modal-cart-product-quantity .modal-cart-product-quantity-info .number {
+  border: none;
+  width: 30px;
+  text-align: center;
+  font-size: 15px;
+  background-color: #fff;
+}
+
+
 .cart-modal .purchases .purchases-list .modal-cart-product-section .modal-cart-product-info .modal-cart-product-quantity .modal-cart-product-quantity-info .plus {
   border: none;
   background-color: #fff;
@@ -283,4 +293,5 @@ input[type='checkbox']:checked ~ .cart-modal
   letter-spacing: 1.5px;
   font-size: 15px;
   text-transform: uppercase;
+  margin-bottom: 100px;
 }
