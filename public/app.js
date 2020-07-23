@@ -16,7 +16,7 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 
   function showHomeTabs(i = 0) {
-    if (tabs.length) { // костыль! переделать
+    if (tabs.length) { 
       homeTabs[i].style.display = 'block';
       tabs[i].classList.add('tab-active');
     }
@@ -26,7 +26,7 @@ window.addEventListener('DOMContentLoaded', () => {
   hideHomeTabs();
   showHomeTabs();
 
-  if (tabs.length) { // костыль! переделать
+  if (tabs.length) { 
     switchers.addEventListener('click', (event) => {
       const target = event.target;
 
@@ -42,26 +42,37 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 
   // Product size choosing
-  function productSizeChoosing() {
-    const sizeList = document.querySelectorAll('.product-size ul button');
 
-    function removeAllSizeActive() {
-      sizeList.forEach(item => {
-        item.classList.remove('product-size-btn-active');
-        item.classList.add('product-size-btn');
+  function productSizeChoosing(sizeListSelector, activeSelector) {
+    let sizeList = document.querySelectorAll(sizeListSelector);
+
+    function removeAllSizeActive(itemList) {
+      itemList.querySelectorAll('li').forEach(item => {
+        let button = item.querySelector('button');
+        button.classList.remove(activeSelector);
       });
     }
 
     sizeList.forEach(item => {
       item.addEventListener('click', (event) => {
-        removeAllSizeActive();
-        event.target.classList.remove('product-size-btn');
-        event.target.classList.add('product-size-btn-active');
+        let LSkey = event.currentTarget.dataset.size;
+        itemList = event.currentTarget;
+        removeAllSizeActive(itemList);
+        event.target.classList.add(activeSelector);
+        if (LSkey) {
+          let cartData = getCartData();
+          for (let key in cartData) {
+            if (LSkey === key) {
+              console.log(cartData[key]);
+              console.log(event.target.textContent);
+              cartData[key][2] = event.target.textContent;
+              setCartData(cartData);
+            }
+          }
+        }
       });
     });
   }
-
-  productSizeChoosing();
 
   // Product page counter plus/minus
 
@@ -69,7 +80,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
   function productCounter(counterSelector, valueSelector, plusSelector, minusSelector) {
     const counter = document.querySelectorAll(counterSelector);
-    
+
     if (counter) {
       counter.forEach(item => {
         let valueSection = item.querySelector(valueSelector);
@@ -80,8 +91,8 @@ window.addEventListener('DOMContentLoaded', () => {
             } else {
               valueSection.value++;
             }
-          }          
-    
+          }
+
           if (event.target.classList.contains(minusSelector)) {
             if (valueSection.value == 1) {
               valueSection.value = 1;
@@ -107,7 +118,7 @@ window.addEventListener('DOMContentLoaded', () => {
       });
     }
   }
-  
+
   // ModalCart
 
   const checkbox = document.querySelector('#check'),
@@ -149,7 +160,7 @@ window.addEventListener('DOMContentLoaded', () => {
   // LocalStorage create/update Cart
 
   const addToCartBtn = document.querySelector('.add-to-cart'),
-        productPage = document.querySelector('.product-page');
+    productPage = document.querySelector('.product-page');
 
 
   function setCartData(cartItem) {
@@ -166,9 +177,9 @@ window.addEventListener('DOMContentLoaded', () => {
         itemId = addToCartBtn.getAttribute('data-id'),
         itemTitle = productPage.querySelector('h1').textContent,
         itemImage = productPage.querySelector('.product-image img').getAttribute('src'),
-        itemSize = productPage.querySelector('.product-size-btn-active').textContent,
+        itemSize = productPage.querySelector('.product-size-active').textContent,
         itemQuantity = +productPage.querySelector('.counter-value').value,
-        itemPriceForOne = productPage.querySelector('.product-price').textContent.trim(), 
+        itemPriceForOne = productPage.querySelector('.product-price').textContent.trim(),
         itemPrice = productPage.querySelector('.product-price').textContent.trim(),
         itemTotalPrice = itemPrice * itemQuantity;
 
@@ -182,22 +193,23 @@ window.addEventListener('DOMContentLoaded', () => {
       setCartData(cartData);
       showInModalCart(itemId);
       valueSection.value = 1;
-      openCartModal(); 
+      openCartModal();
       deleteInModalCart();
-      properSize(); 
+      properSize();
       showPrices();
       productCounter('.modal-cart-product-quantity-info', '.number', 'plus', 'minus');
+      productSizeChoosing('.modal-cart-product-size ul', 'modal-size-active');
     });
   }
 
   // LocalStorage show modalCart
 
   let modalPurchasesList = document.querySelector('.purchases-list');
-  
+
 
   function showInModalCart(itemId) {
     if (getCartData()) {
-      const LSCart = getCartData();      
+      const LSCart = getCartData();
       if (itemId) {
         const modalCartItem = document.getElementById(`${itemId}`);
         if (modalCartItem === null) {
@@ -215,14 +227,14 @@ window.addEventListener('DOMContentLoaded', () => {
                   </div>
                   <div class="modal-cart-product-size">
                     <p>Размер:</p>
-                    <ul>
-                      <li>XS</li>
-                      <li>S</li>
-                      <li>M</li>
-                      <li>L</li>
-                      <li>XL</li>
-                      <li>2XL</li>
-                      <li>3XL</li>
+                    <ul data-size="${key}">
+                      <li><button class="modal-product-size-btn">XS</button></li>
+                      <li><button class="modal-product-size-btn">S</button></li>
+                      <li><button class="modal-product-size-btn">M</button></li>
+                      <li><button class="modal-product-size-btn">L</button></li>
+                      <li><button class="modal-product-size-btn">XL</button></li>
+                      <li><button class="modal-product-size-btn">2XL</button></li>
+                      <li><button class="modal-product-size-btn">3XL</button></li>                      
                     </ul>
                   </div>
                   <div class="modal-cart-product-quantity">
@@ -256,14 +268,14 @@ window.addEventListener('DOMContentLoaded', () => {
                   </div>
                   <div class="modal-cart-product-size">
                     <p>Размер:</p>
-                    <ul>
-                      <li>XS</li>
-                      <li>S</li>
-                      <li>M</li>
-                      <li>L</li>
-                      <li>XL</li>
-                      <li>2XL</li>
-                      <li>3XL</li>
+                    <ul data-size="${itemId}">
+                      <li><button class="modal-product-size-btn">XS</button></li>
+                      <li><button class="modal-product-size-btn">S</button></li>
+                      <li><button class="modal-product-size-btn">M</button></li>
+                      <li><button class="modal-product-size-btn">L</button></li>
+                      <li><button class="modal-product-size-btn">XL</button></li>
+                      <li><button class="modal-product-size-btn">2XL</button></li>
+                      <li><button class="modal-product-size-btn">3XL</button></li>                      
                     </ul>
                   </div>
                   <div class="modal-cart-product-quantity">
@@ -281,7 +293,7 @@ window.addEventListener('DOMContentLoaded', () => {
               `;
             }
           });
-        } 
+        }
       } else {
         for (let key in LSCart) {
           modalPurchasesList.innerHTML += `
@@ -296,14 +308,14 @@ window.addEventListener('DOMContentLoaded', () => {
                 </div>
                 <div class="modal-cart-product-size">
                   <p>Размер:</p>
-                  <ul>
-                    <li>XS</li>
-                    <li>S</li>
-                    <li>M</li>
-                    <li>L</li>
-                    <li>XL</li>
-                    <li>2XL</li>
-                    <li>3XL</li>
+                  <ul data-size="${key}">
+                    <li><button class="modal-product-size-btn">XS</button></li>
+                    <li><button class="modal-product-size-btn">S</button></li>
+                    <li><button class="modal-product-size-btn">M</button></li>
+                    <li><button class="modal-product-size-btn">L</button></li>
+                    <li><button class="modal-product-size-btn">XL</button></li>
+                    <li><button class="modal-product-size-btn">2XL</button></li>
+                    <li><button class="modal-product-size-btn">3XL</button></li>                      
                   </ul>
                 </div>
                 <div class="modal-cart-product-quantity">
@@ -343,6 +355,7 @@ window.addEventListener('DOMContentLoaded', () => {
         properSize();
         showPrices();
         productCounter('.modal-cart-product-quantity-info', '.number', 'plus', 'minus');
+        productSizeChoosing('.modal-cart-product-size ul', 'modal-size-active');
       });
     });
   }
@@ -353,10 +366,10 @@ window.addEventListener('DOMContentLoaded', () => {
       let cartData = getCartData();
       for (let key in cartData) {
         if (section.getAttribute('id') === key) {
-          let modalCartProductSizes = section.querySelectorAll('.modal-cart-product-section ul li');
+          let modalCartProductSizes = section.querySelectorAll('.modal-cart-product-section ul li .modal-product-size-btn');
           modalCartProductSizes.forEach(item => {
             if (cartData[key][2] === item.textContent) {
-              item.classList.add('size-active');
+              item.classList.add('modal-size-active');
             }
           });
         }
@@ -366,10 +379,10 @@ window.addEventListener('DOMContentLoaded', () => {
 
   function showPrices() {
     const totalPrice = document.querySelector('.total-price'),
-          deliveryPrice = document.querySelector('.delivery-price'),
-          totalModalCost = document.querySelector('.total-modal-cost'),
-          modalCartProductPrices = document.querySelectorAll('.modal-cart-product-price p'),
-          totalHeaderCost = document.querySelector('.total-cost');
+      deliveryPrice = document.querySelector('.delivery-price'),
+      totalModalCost = document.querySelector('.total-modal-cost'),
+      modalCartProductPrices = document.querySelectorAll('.modal-cart-product-price p'),
+      totalHeaderCost = document.querySelector('.total-cost');
 
     let counter = 0;
     modalCartProductPrices.forEach(item => {
@@ -391,7 +404,6 @@ window.addEventListener('DOMContentLoaded', () => {
   showPrices();
   productCounter('.product-counter', '.counter-value', 'counter-plus', 'counter-minus');
   productCounter('.modal-cart-product-quantity-info', '.number', 'plus', 'minus');
-  
-
+  productSizeChoosing('.product-size ul', 'product-size-active');
+  productSizeChoosing('.modal-cart-product-size ul', 'modal-size-active');
 });
-

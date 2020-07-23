@@ -570,7 +570,7 @@ body {
   font-weight: 700;
 }
 
-.product-size-btn-active {
+.product-section .product-info .product-size .product-size-active {
   margin-right: 10px;
   width: 40px;
   height: 40px;

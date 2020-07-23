@@ -132,14 +132,23 @@ input[type='checkbox']:checked ~ .cart-modal
   justify-content: space-between;
 }
 
+.cart-modal .purchases .purchases-list .modal-cart-product-section .modal-cart-product-info .modal-cart-product-size .modal-product-size-btn {
+  border: none;
+  padding: 0 3px;
+  background: #fff;
+  font-weight: 500;
+  font-size: 15px;
+}
 
-.cart-modal .purchases .purchases-list .modal-cart-product-section .modal-cart-product-info .modal-cart-product-size ul .size-active {
+
+.cart-modal .purchases .purchases-list .modal-cart-product-section .modal-cart-product-info .modal-cart-product-size ul .modal-size-active {
+  padding: 0 3px;
   font-size: 16px;
   font-weight: 700;
-  padding: 0 3px;
   border-left: 1px solid rgb(150, 150, 150);
   border-right: 1px solid rgb(150, 150, 150);
 }
+
 
 
 .cart-modal .purchases .purchases-list .modal-cart-product-section .modal-cart-product-info .modal-cart-product-quantity {
