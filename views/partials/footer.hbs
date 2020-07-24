@@ -48,33 +48,35 @@
     <img src="/public/img/leftarrow.png" alt="continue">
     <p>Продолжить покупки</p>
   </div>
-  <div class="purchases">
-    <p class="myPurchases">Мои покупки</p>
-    <div class="purchases-list">
+  {{!-- <form action="#" method="POST"> --}}
+    <div class="purchases">
+      <p class="myPurchases">Мои покупки</p>
+      <div class="purchases-list">
+      </div>
     </div>
-  </div>
-  <div class="promotional">
-    <p>Промокод</p>
-    <input type="text">
-    <button>Применить</button>
-  </div>
-  <hr>
-  <div class="cart-info">
-    <div class="products-cost">
-      <p>Общая стоимость:</p>
-      <p class="price total-price"></p>
-      <p>Стоимость доставки:</p>
-      <p class="price delivery-price"></p>
+    <div class="promotional">
+      <p>Промокод</p>
+      <input type="text">
+      <button>Применить</button>
     </div>
+    <hr>
+    <div class="cart-info">
+      <div class="products-cost">
+        <p>Общая стоимость:</p>
+        <p class="price total-price"></p>
+        <p>Стоимость доставки:</p>
+        <p class="price delivery-price"></p>
+      </div>
 
-    <div class="total-cost">
-      <p>Итого:</p>
-      <p class="price total-modal-cost"></p>
+      <div class="total-cost">
+        <p>Итого:</p>
+        <p class="price total-modal-cost"></p>
+      </div>
     </div>
-  </div>
-  <div class="makeAnOrder">
-    <button>Оформить заказ</button>
-  </div>
+    <div class="makeAnOrder">
+      <button>Оформить заказ</button>
+    </div>
+  {{!-- </form> --}}
 </div>
 
 <script src="/public/app.js"></script>

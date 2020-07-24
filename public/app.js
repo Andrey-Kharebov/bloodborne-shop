@@ -106,7 +106,7 @@ window.addEventListener('DOMContentLoaded', () => {
             let cartData = getCartData();
             for (let key in cartData) {
               if (LSkey === key) {
-                cartData[key][3] = valueSection.value;
+                cartData[key][3] = +valueSection.value;
                 cartData[key][4] = +cartData[key][5] * valueSection.value;
                 setCartData(cartData);
                 document.querySelector(`[data-price="${key}"] p`).textContent = `${cartData[key][4]} отг. к.`;
@@ -160,15 +160,21 @@ window.addEventListener('DOMContentLoaded', () => {
   // LocalStorage create/update Cart
 
   const addToCartBtn = document.querySelector('.add-to-cart'),
-    productPage = document.querySelector('.product-page');
+        productPage = document.querySelector('.product-page');
+  let cartId;
 
+  if (localStorage.length >= 1) {
+    cartId = Object.keys(localStorage);
+  } else {
+    cartId = Number(new Date());
+  }
 
   function setCartData(cartItem) {
-    localStorage.setItem('cart', JSON.stringify(cartItem));
+    localStorage.setItem(`${cartId}`, JSON.stringify(cartItem));
   }
 
   function getCartData() {
-    return JSON.parse(localStorage.getItem('cart'));
+    return JSON.parse(localStorage.getItem(`${cartId}`));
   }
 
   if (addToCartBtn) {
@@ -179,7 +185,7 @@ window.addEventListener('DOMContentLoaded', () => {
         itemImage = productPage.querySelector('.product-image img').getAttribute('src'),
         itemSize = productPage.querySelector('.product-size-active').textContent,
         itemQuantity = +productPage.querySelector('.counter-value').value,
-        itemPriceForOne = productPage.querySelector('.product-price').textContent.trim(),
+        itemPriceForOne = +productPage.querySelector('.product-price').textContent.trim(),
         itemPrice = productPage.querySelector('.product-price').textContent.trim(),
         itemTotalPrice = itemPrice * itemQuantity;
       let itemDubId;
@@ -204,7 +210,8 @@ window.addEventListener('DOMContentLoaded', () => {
       }
 
       setCartData(cartData);
-      showInModalCart(itemDubId);
+      clearModalCart();
+      showInModalCart();
       valueSection.value = 1;
       openCartModal();
       deleteInModalCart();
@@ -219,135 +226,52 @@ window.addEventListener('DOMContentLoaded', () => {
 
   let modalPurchasesList = document.querySelector('.purchases-list');
 
-
-  function showInModalCart(itemId) {
+  function showInModalCart() {
     if (getCartData()) {
-      const LSCart = getCartData();
-      if (itemId) {
-        const modalCartItem = document.getElementById(`${itemId}`);
-        if (modalCartItem === null) {
-          for (let key in LSCart) {
-            if (key === itemId) {
-              modalPurchasesList.innerHTML += `
-              <div class="modal-cart-product-section" id="${key}">
-                <div class="modal-cart-product-image">
-                  <img src="${LSCart[key][1]}" alt="${LSCart[key][0]}">
-                  <span class="modal-cart-product-remove" data-removeBtn="${key}"><i class="far fa-times-circle"></i></span>
-                </div>
-                <div class="modal-cart-product-info">
-                  <div class="modal-cart-product-title">
-                    <p>${LSCart[key][0]}</p>
-                  </div>
-                  <div class="modal-cart-product-size">
-                    <p>Размер:</p>
-                    <ul data-size="${key}">
-                      <li><button class="modal-product-size-btn">XS</button></li>
-                      <li><button class="modal-product-size-btn">S</button></li>
-                      <li><button class="modal-product-size-btn">M</button></li>
-                      <li><button class="modal-product-size-btn">L</button></li>
-                      <li><button class="modal-product-size-btn">XL</button></li>
-                      <li><button class="modal-product-size-btn">2XL</button></li>
-                      <li><button class="modal-product-size-btn">3XL</button></li>                      
-                    </ul>
-                  </div>
-                  <div class="modal-cart-product-quantity">
-                    <p>Количество:</p>
-                    <div class="modal-cart-product-quantity-info" data-quantity="${key}">
-                      <input disabled class="number" type="number" value="${LSCart[key][3]}"></input>
-                      <button class="plus">+</button>
-                      <button class="minus">-</button>
-                    </div>
-                  </div>
-                  <div class="modal-cart-product-price" data-price="${key}">
-                    <p class="price">${LSCart[key][4]} отг. к.</p>
-                  </div>
-                </div>
-              </div> 
-            `;
-            }
-          }
-        } else {
-          let modalCartProductSections = document.querySelectorAll('.modal-cart-product-section');
-          modalCartProductSections.forEach(item => {
-            if (+item.getAttribute('id') == itemId) {
-              item.innerHTML = `
-                <div class="modal-cart-product-image">
-                  <img src="${LSCart[itemId][1]}" alt="${LSCart[itemId][0]}">
-                  <span class="modal-cart-product-remove" data-removeBtn="${itemId}"><i class="far fa-times-circle"></i></span>
-                </div>
-                <div class="modal-cart-product-info">
-                  <div class="modal-cart-product-title">
-                    <p>${LSCart[itemId][0]}</p>
-                  </div>
-                  <div class="modal-cart-product-size">
-                    <p>Размер:</p>
-                    <ul data-size="${itemId}">
-                      <li><button class="modal-product-size-btn">XS</button></li>
-                      <li><button class="modal-product-size-btn">S</button></li>
-                      <li><button class="modal-product-size-btn">M</button></li>
-                      <li><button class="modal-product-size-btn">L</button></li>
-                      <li><button class="modal-product-size-btn">XL</button></li>
-                      <li><button class="modal-product-size-btn">2XL</button></li>
-                      <li><button class="modal-product-size-btn">3XL</button></li>                      
-                    </ul>
-                  </div>
-                  <div class="modal-cart-product-quantity">
-                    <p>Количество:</p>
-                    <div class="modal-cart-product-quantity-info" data-quantity="${itemId}">
-                      <input disabled class="number" type="number" value="${LSCart[itemId][3]}"></input>
-                      <button class="plus">+</button>
-                      <button class="minus">-</button>
-                    </div>
-                  </div>
-                  <div class="modal-cart-product-price" data-price="${itemId}">
-                    <p class="price">${LSCart[itemId][4]} отг. к.</p>
-                  </div>
-                </div>
-              `;
-            }
-          });
-        }
-      } else {
-        for (let key in LSCart) {
-          modalPurchasesList.innerHTML += `
-            <div class="modal-cart-product-section" id="${key}">
-              <div class="modal-cart-product-image">
-                <img src="${LSCart[key][1]}" alt="${LSCart[key][0]}">
-                <span class="modal-cart-product-remove" data-removeBtn="${key}"><i class="far fa-times-circle"></i></span>
+      let LSCart = getCartData();
+      for (let key in LSCart) {
+        modalPurchasesList.innerHTML += `
+          <div class="modal-cart-product-section" id="${key}">
+            <div class="modal-cart-product-image">
+              <img src="${LSCart[key][1]}" alt="${LSCart[key][0]}">
+              <span class="modal-cart-product-remove" data-removeBtn="${key}"><i class="far fa-times-circle"></i></span>
+            </div>
+            <div class="modal-cart-product-info">
+              <div class="modal-cart-product-title">
+                <p>${LSCart[key][0]}</p>
               </div>
-              <div class="modal-cart-product-info">
-                <div class="modal-cart-product-title">
-                  <p>${LSCart[key][0]}</p>
-                </div>
-                <div class="modal-cart-product-size">
-                  <p>Размер:</p>
-                  <ul data-size="${key}">
-                    <li><button class="modal-product-size-btn">XS</button></li>
-                    <li><button class="modal-product-size-btn">S</button></li>
-                    <li><button class="modal-product-size-btn">M</button></li>
-                    <li><button class="modal-product-size-btn">L</button></li>
-                    <li><button class="modal-product-size-btn">XL</button></li>
-                    <li><button class="modal-product-size-btn">2XL</button></li>
-                    <li><button class="modal-product-size-btn">3XL</button></li>                      
-                  </ul>
-                </div>
-                <div class="modal-cart-product-quantity">
-                  <p>Количество:</p>
-                  <div class="modal-cart-product-quantity-info" data-quantity="${key}">
-                    <input disabled class="number" type="number" value="${LSCart[key][3]}"></input>
-                    <button class="plus">+</button>
-                    <button class="minus">-</button>
-                  </div>
-                </div>
-                <div class="modal-cart-product-price" data-price="${key}">
-                  <p class="price">${LSCart[key][4]} отг. к.</p>
+              <div class="modal-cart-product-size">
+                <p>Размер:</p>
+                <ul data-size="${key}">
+                  <li><button class="modal-product-size-btn">XS</button></li>
+                  <li><button class="modal-product-size-btn">S</button></li>
+                  <li><button class="modal-product-size-btn">M</button></li>
+                  <li><button class="modal-product-size-btn">L</button></li>
+                  <li><button class="modal-product-size-btn">XL</button></li>
+                  <li><button class="modal-product-size-btn">2XL</button></li>
+                  <li><button class="modal-product-size-btn">3XL</button></li>                      
+                </ul>
+              </div>
+              <div class="modal-cart-product-quantity">
+                <p>Количество:</p>
+                <div class="modal-cart-product-quantity-info" data-quantity="${key}">
+                  <input disabled class="number" type="number" value="${LSCart[key][3]}"></input>
+                  <button class="plus">+</button>
+                  <button class="minus">-</button>
                 </div>
               </div>
-            </div> 
-          `;
-        }
+              <div class="modal-cart-product-price" data-price="${key}">
+                <p class="price">${LSCart[key][4]} отг. к.</p>
+              </div>
+            </div>
+          </div> 
+        `;
       }
     }
+  }
+  
+  function clearModalCart() {
+    modalPurchasesList.innerHTML = '';
   }
 
   function deleteInModalCart() {
