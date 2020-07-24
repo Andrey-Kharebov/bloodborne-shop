@@ -182,16 +182,29 @@ window.addEventListener('DOMContentLoaded', () => {
         itemPriceForOne = productPage.querySelector('.product-price').textContent.trim(),
         itemPrice = productPage.querySelector('.product-price').textContent.trim(),
         itemTotalPrice = itemPrice * itemQuantity;
-
+      let itemDubId;
+        
       if (cartData.hasOwnProperty(itemId)) {
-        cartData[itemId][3] += itemQuantity;
-        cartData[itemId][4] += itemTotalPrice;
+        if (cartData[itemId][2] == itemSize) {
+          cartData[itemId][3] += itemQuantity;
+          cartData[itemId][4] += itemTotalPrice;
+        } else {
+          itemDubId = itemId + itemSize;
+          if (cartData[itemDubId]) {
+            if (cartData[itemDubId][2] == itemSize) {
+              cartData[itemDubId][3] += itemQuantity;
+              cartData[itemDubId][4] += itemTotalPrice;
+            }
+          } else {
+            cartData[itemDubId] = [itemTitle, itemImage, itemSize, itemQuantity, itemTotalPrice, itemPriceForOne];
+          }
+        }
       } else {
         cartData[itemId] = [itemTitle, itemImage, itemSize, itemQuantity, itemTotalPrice, itemPriceForOne];
       }
 
       setCartData(cartData);
-      showInModalCart(itemId);
+      showInModalCart(itemDubId);
       valueSection.value = 1;
       openCartModal();
       deleteInModalCart();
