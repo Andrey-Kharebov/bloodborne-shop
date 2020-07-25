@@ -110,7 +110,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 cartData[key][4] = +cartData[key][5] * valueSection.value;
                 setCartData(cartData);
                 document.querySelector(`[data-price="${key}"] p`).textContent = `${cartData[key][4]} отг. к.`;
-                showPrices();
+                showPrices('.total-price', '.delivery-price', '.total-modal-cost', '.modal-cart-product-price p', '.total-cost');
               }
             }
           }
@@ -229,7 +229,7 @@ window.addEventListener('DOMContentLoaded', () => {
       openCartModal();
       deleteInModalCart();
       properSize();
-      showPrices();
+      showPrices('.total-price', '.delivery-price', '.total-modal-cost', '.modal-cart-product-price p', '.total-cost');
       productCounter('.modal-cart-product-quantity-info', '.number', 'plus', 'minus');
       productSizeChoosing('.modal-cart-product-size ul', 'modal-size-active');
     });
@@ -303,7 +303,7 @@ window.addEventListener('DOMContentLoaded', () => {
         showInModalCart();
         deleteInModalCart();
         properSize();
-        showPrices();
+        showPrices('.total-price', '.delivery-price', '.total-modal-cost', '.modal-cart-product-price p', '.total-cost');
         productCounter('.modal-cart-product-quantity-info', '.number', 'plus', 'minus');
         productSizeChoosing('.modal-cart-product-size ul', 'modal-size-active');
       });
@@ -327,15 +327,22 @@ window.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  function showPrices() {
-    const totalPrice = document.querySelector('.total-price'),
-      deliveryPrice = document.querySelector('.delivery-price'),
-      totalModalCost = document.querySelector('.total-modal-cost'),
-      modalCartProductPrices = document.querySelectorAll('.modal-cart-product-price p'),
-      totalHeaderCost = document.querySelector('.total-cost');
+  // function showPrices() {
+  //   const totalPrice = document.querySelector('.total-price'),
+  //     deliveryPrice = document.querySelector('.delivery-price'),
+  //     totalModalCost = document.querySelector('.total-modal-cost'),
+  //     modalCartProductPrices = document.querySelectorAll('.modal-cart-product-price p'),
+  //     totalHeaderCost = document.querySelector('.total-cost');
+
+  function showPrices(totalPriceSelector, deliveryPriceSelector, totalCostSelector, cartProductPricesSelector, totalHeaderCostSelector) {
+    const totalPrice = document.querySelector(totalPriceSelector),
+      deliveryPrice = document.querySelector(deliveryPriceSelector),
+      totalCost = document.querySelector(totalCostSelector),
+      cartProductPrices = document.querySelectorAll(cartProductPricesSelector),
+      totalHeaderCost = document.querySelector(totalHeaderCostSelector);
 
     let counter = 0;
-    modalCartProductPrices.forEach(item => {
+    cartProductPrices.forEach(item => {
       counter += parseInt(item.textContent);
     });
 
@@ -343,26 +350,45 @@ window.addEventListener('DOMContentLoaded', () => {
     let totalCostCounter = counter + deliveryCounter;
     totalPrice.textContent = `${counter}  отг. к.`;
     deliveryPrice.textContent = `${deliveryCounter} отг. к.`;
-    totalModalCost.textContent = `${totalCostCounter} отг. к.`;
+    totalCost.textContent = `${totalCostCounter} отг. к.`;
     totalHeaderCost.textContent = `${totalCostCounter}`;
   }
 
 
   // LS making an order page
 
-  const makeAnOrderBtn = document.querySelector('.make-an-order-btn');
+  let orderProductsList = document.querySelector('.order-products-list');
 
-  makeAnOrderBtn.addEventListener('click', (event) => {
-    console.log(+cartId);
-  });
+  function showInOrderDetails() {
+    if (getCartData()) {
+      let LSCart = getCartData();
+      for (let key in LSCart) {
+        orderProductsList.innerHTML += `
+        <div class="order-product-item id="${key}">
+          <h3>${LSCart[key][0]}</h3>
+          <p>Размер: <span>${LSCart[key][2]}</span></p>
+          <p>Количество: <span>${LSCart[key][3]}</span></p>
+          <div class="order-product-price">
+            <p class="p-price">${LSCart[key][4]} отг. к.</p>
+          </div>
+          <hr>
+        </div>
+        `;
+      }
+    }
+  } 
 
 
   showInModalCart();
   deleteInModalCart();
   properSize();
-  showPrices();
+  showPrices('.total-price', '.delivery-price', '.total-modal-cost', '.modal-cart-product-price p', '.total-cost');
   productCounter('.product-counter', '.counter-value', 'counter-plus', 'counter-minus');
   productCounter('.modal-cart-product-quantity-info', '.number', 'plus', 'minus');
   productSizeChoosing('.product-size ul', 'product-size-active');
   productSizeChoosing('.modal-cart-product-size ul', 'modal-size-active');
+  if (orderProductsList) {
+    showInOrderDetails();
+    showPrices('.order-total-price', '.order-delivery-price', '.order-total-cost', '.order-product-price p', '.total-cost');
+  }
 });
