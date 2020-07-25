@@ -1,5 +1,6 @@
 @import 'reset.css';
 @import '/public/css/modals/cart-modal.css';
+@import '/public/css/pages/order-details.css';
 
 body {
   font-family: 'EB Garamond', serif;

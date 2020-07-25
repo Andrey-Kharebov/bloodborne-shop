@@ -286,12 +286,12 @@ input[type='checkbox']:checked ~ .cart-modal
   font-size: 20px;
 }
 
-.cart-modal .makeAnOrder {
+.cart-modal .make-an-order {
   margin: 50px 30px 0 30px;
   text-align: center;
 }
 
-.cart-modal .makeAnOrder button {
+.cart-modal .make-an-order button {
   width: 280px;
   height: 50px;
   border: none;

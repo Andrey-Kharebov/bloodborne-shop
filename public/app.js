@@ -160,14 +160,27 @@ window.addEventListener('DOMContentLoaded', () => {
   // LocalStorage create/update Cart
 
   const addToCartBtn = document.querySelector('.add-to-cart'),
-        productPage = document.querySelector('.product-page');
+        productPage = document.querySelector('.product-page'),
+        makeAnOrderSection = document.querySelector('.make-an-order');
   let cartId;
 
   if (localStorage.length >= 1) {
     cartId = Object.keys(localStorage);
+    makeAnOrderSection.innerHTML += `
+      <form action="/order/${cartId}/details" method="POST">
+        <input type="hidden" name="id" value="${cartId}">
+        <button type="submit" class="make-an-order-btn">Оформить заказ</button>
+      </form>
+    `;
   } else {
     cartId = Number(new Date());
-  }
+    makeAnOrderSection.innerHTML += `
+    <form action="/order/${cartId}/details" method="POST">
+      <input type="hidden" name="id" value="${cartId}">
+      <button type="submit" class="make-an-order-btn">Оформить заказ</button>
+    </form>
+    `;
+  } 
 
   function setCartData(cartItem) {
     localStorage.setItem(`${cartId}`, JSON.stringify(cartItem));
@@ -333,6 +346,15 @@ window.addEventListener('DOMContentLoaded', () => {
     totalModalCost.textContent = `${totalCostCounter} отг. к.`;
     totalHeaderCost.textContent = `${totalCostCounter}`;
   }
+
+
+  // LS making an order page
+
+  const makeAnOrderBtn = document.querySelector('.make-an-order-btn');
+
+  makeAnOrderBtn.addEventListener('click', (event) => {
+    console.log(+cartId);
+  });
 
 
   showInModalCart();
