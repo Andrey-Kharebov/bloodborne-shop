@@ -1,9 +1,9 @@
 /* modals */
 
-input[type='checkbox']
+/* input[type='checkbox']
 {
   display: none;
-}
+} */
 
 .cart-modal {
   box-sizing: border-box;

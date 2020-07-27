@@ -22,7 +22,6 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-
   hideHomeTabs();
   showHomeTabs();
 
@@ -40,6 +39,12 @@ window.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+
+
+
+
+
+
 
   // Product size choosing
 
@@ -73,6 +78,11 @@ window.addEventListener('DOMContentLoaded', () => {
       });
     });
   }
+
+
+
+
+
 
   // Product page counter plus/minus
 
@@ -119,6 +129,11 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+
+
+
+
+
   // ModalCart
 
   const checkbox = document.querySelector('#check'),
@@ -143,9 +158,14 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 
   container.addEventListener('click', (event) => {
+    let addToCartBtn = document.querySelector('.add-to-cart');
     // if (event.currentTarget == container) {
     //   closeCartModal();
     // }
+    if (checkbox.checked && event.currentTarget == container && event.target != addToCartBtn) {
+      console.log('checked');
+      closeCartModal();
+    }
   });
 
   navCartBox.addEventListener('click', (event) => {
@@ -155,6 +175,10 @@ window.addEventListener('DOMContentLoaded', () => {
   closeModal.addEventListener('click', () => {
     closeCartModal();
   });
+
+
+
+
 
 
   // LocalStorage create/update Cart
@@ -226,14 +250,23 @@ window.addEventListener('DOMContentLoaded', () => {
       clearModalCart();
       showInModalCart();
       valueSection.value = 1;
-      openCartModal();
       deleteInModalCart();
       properSize();
       showPrices('.total-price', '.delivery-price', '.total-modal-cost', '.modal-cart-product-price p', '.total-cost');
       productCounter('.modal-cart-product-quantity-info', '.number', 'plus', 'minus');
       productSizeChoosing('.modal-cart-product-size ul', 'modal-size-active');
+      if (checkbox.checked) {
+        console.log('checked');
+      } else {
+        console.log('unchecked');
+        openCartModal();
+      }
     });
   }
+
+
+
+
 
   // LocalStorage show modalCart
 
@@ -386,6 +419,14 @@ window.addEventListener('DOMContentLoaded', () => {
       localStorage.clear();
     });
   }
+
+
+
+
+
+
+
+
 
 
   showInModalCart();
