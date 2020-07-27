@@ -167,7 +167,7 @@ window.addEventListener('DOMContentLoaded', () => {
   if (localStorage.length >= 1) {
     cartId = Object.keys(localStorage);
     makeAnOrderSection.innerHTML += `
-      <form action="/order/${cartId}/details" method="POST">
+      <form action="/order/${cartId}/step1" method="POST">
         <input type="hidden" name="id" value="${cartId}">
         <button type="submit" class="make-an-order-btn">Оформить заказ</button>
       </form>
@@ -175,7 +175,7 @@ window.addEventListener('DOMContentLoaded', () => {
   } else {
     cartId = Number(new Date());
     makeAnOrderSection.innerHTML += `
-    <form action="/order/${cartId}/details" method="POST">
+    <form action="/order/${cartId}/step1" method="POST">
       <input type="hidden" name="id" value="${cartId}">
       <button type="submit" class="make-an-order-btn">Оформить заказ</button>
     </form>
@@ -327,13 +327,6 @@ window.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // function showPrices() {
-  //   const totalPrice = document.querySelector('.total-price'),
-  //     deliveryPrice = document.querySelector('.delivery-price'),
-  //     totalModalCost = document.querySelector('.total-modal-cost'),
-  //     modalCartProductPrices = document.querySelectorAll('.modal-cart-product-price p'),
-  //     totalHeaderCost = document.querySelector('.total-cost');
-
   function showPrices(totalPriceSelector, deliveryPriceSelector, totalCostSelector, cartProductPricesSelector, totalHeaderCostSelector) {
     const totalPrice = document.querySelector(totalPriceSelector),
       deliveryPrice = document.querySelector(deliveryPriceSelector),
@@ -352,19 +345,29 @@ window.addEventListener('DOMContentLoaded', () => {
     deliveryPrice.textContent = `${deliveryCounter} отг. к.`;
     totalCost.textContent = `${totalCostCounter} отг. к.`;
     totalHeaderCost.textContent = `${totalCostCounter}`;
+
+    if (document.querySelector('.hidden-inputs')) {
+      document.querySelector('#total-price').value = `${counter}`;
+      document.querySelector('#delivery-price').value = `${deliveryCounter}`;
+      document.querySelector('#total-cost').value = `${totalCostCounter}`;
+    }   
   }
 
 
   // LS making an order page
 
-  let orderProductsList = document.querySelector('.order-products-list');
+  let orderProductsList = document.querySelector('.order-products-list'),
+      orderNumber = document.querySelector('.p-details'),
+      step2btn = document.querySelector('.continue-section button');
 
   function showInOrderDetails() {
     if (getCartData()) {
       let LSCart = getCartData();
+      orderNumber.innerHTML = `Номер заказа: ${localStorage.key(0)}`;
       for (let key in LSCart) {
         orderProductsList.innerHTML += `
         <div class="order-product-item id="${key}">
+          <input type="hidden" name="products" value="${key},${LSCart[key]}">
           <h3>${LSCart[key][0]}</h3>
           <p>Размер: <span>${LSCart[key][2]}</span></p>
           <p>Количество: <span>${LSCart[key][3]}</span></p>
@@ -377,6 +380,12 @@ window.addEventListener('DOMContentLoaded', () => {
       }
     }
   } 
+
+  if (step2btn) {
+    step2btn.addEventListener('click', (event) => {
+      localStorage.clear();
+    });
+  }
 
 
   showInModalCart();

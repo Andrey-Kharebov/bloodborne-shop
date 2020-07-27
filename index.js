@@ -23,10 +23,20 @@ const ordersRoutes = require('./routes/orders');
 const User = require('./models/user');
 const Category = require('./models/category');
 const Product = require('./models/product');
+const Order = require('./models/order');
+const OrderItem = require('./models/order-item');
 
 
 // Assossiations 
 Category.hasMany(Product);
+
+
+Order.belongsToMany(Product, {
+  through: OrderItem
+});
+Product.belongsToMany(Order, {
+  through: OrderItem
+});
 
 
 const app = express();

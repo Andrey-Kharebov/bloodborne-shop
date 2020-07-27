@@ -6,7 +6,10 @@ const DB_NAME = 'Bloodborne',
 
 const sequelize = new Sequelize(DB_NAME, USER_NAME, PASSWORD, {
   host: 'localhost',
-  dialect: 'mysql'
+  dialect: 'mysql',
+  dialectOptions: {
+    supportBigNumbers: true
+  }
 });
 
 module.exports = sequelize;
