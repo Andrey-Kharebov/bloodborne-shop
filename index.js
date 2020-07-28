@@ -23,15 +23,24 @@ const ordersRoutes = require('./routes/orders');
 const User = require('./models/user');
 const Category = require('./models/category');
 const Product = require('./models/product');
+const Cart = require('./models/cart');
+const CartItem = require('./models/cart-item');
 const Order = require('./models/order');
 const OrderItem = require('./models/order-item');
 
 
 // Assossiations 
-// User.hasOne(Cart);
-// Cart.belongsTo(User);
+User.hasOne(Cart);
+Cart.belongsTo(User);
 
 Category.hasMany(Product);
+
+Cart.belongsToMany(Product, {
+  through: CartItem
+});
+Product.belongsToMany(Cart, {
+  through: CartItem
+});
 
 User.hasMany(Order);
 Order.belongsTo(User);
