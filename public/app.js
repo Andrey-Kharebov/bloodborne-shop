@@ -139,7 +139,7 @@ window.addEventListener('DOMContentLoaded', () => {
   const checkbox = document.querySelector('#check'),
     navCartBox = document.querySelector('.cart'),
     cartModal = document.querySelector('.cart-modal'),
-    closeModal = document.querySelector('.continue'),
+    continueCartModal = document.querySelector('.continue'),
     container = document.querySelector('.container'),
     body = document.querySelector('body');
 
@@ -159,9 +159,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
   container.addEventListener('click', (event) => {
     let addToCartBtn = document.querySelector('.add-to-cart');
-    // if (event.currentTarget == container) {
-    //   closeCartModal();
-    // }
     if (checkbox.checked && event.currentTarget == container && event.target != addToCartBtn) {
       console.log('checked');
       closeCartModal();
@@ -172,10 +169,80 @@ window.addEventListener('DOMContentLoaded', () => {
     openCartModal();
   });
 
-  closeModal.addEventListener('click', () => {
+  continueCartModal.addEventListener('click', () => {
     closeCartModal();
   });
 
+  // Modals
+  // Login modal
+
+  const loginBtn = document.querySelector('.login button'),
+        modalBg = document.querySelector('.modal-bg'),
+        loginModal = document.querySelector('.login-modal'),
+        forgotModal = document.querySelector('.forgot-modal'),
+        registrationModal = document.querySelector('.registration-modal'),
+        closeModalBtns = document.querySelectorAll('.close-modal-btn'),
+        forgotModalBtn = document.querySelector('.forgot'),
+        cancelingModalBtn = document.querySelector('.canceling'),
+        fastRegistrationModalBtn = document.querySelector('.fast-registration'),
+        registrationLoginBtn = document.querySelector('.registration-login');
+
+  function openModal(modalSelector) {
+    checkbox.click();
+    container.style.opacity = '0.7';
+    modalBg.style.display = 'block';
+    modalSelector.style.display = 'block';
+  }
+
+  function closeModal(modalSelector) {
+    checkbox.click();
+    container.style.opacity = '1';
+    modalBg.style.display = 'none';
+    modalSelector.style.display = 'none';
+  }
+
+  loginBtn.addEventListener('click', (event) => {
+    openModal(loginModal);
+  });
+
+  forgotModalBtn.addEventListener('click', (event) => {
+    closeModal(loginModal);
+    openModal(forgotModal);
+  });
+
+  fastRegistrationModalBtn.addEventListener('click', (event) => {
+    closeModal(loginModal);
+    openModal(registrationModal);
+  });
+
+  registrationLoginBtn.addEventListener('click', (event) => {
+    closeModal(registrationModal);
+    openModal(loginModal);
+  });
+
+  modalBg.addEventListener('click', (event) => {
+    if (event.currentTarget == event.target) {
+      closeModal(loginModal);
+      closeModal(forgotModal);
+      closeModal(registrationModal);
+    }
+  });
+
+  cancelingModalBtn.addEventListener('click', (event) => {
+    closeModal(forgotModal);
+  });
+
+  closeModalBtns.forEach(btn => {
+    btn.addEventListener('click', (event) => {
+      if (event.currentTarget.dataset.modal === 'login') {
+        closeModal(loginModal);
+      } else if (event.currentTarget.dataset.modal === 'forgot') {
+        closeModal(forgotModal);
+      } else if (event.currentTarget.dataset.modal === 'registration') {
+        closeModal(registrationModal)
+      }
+    });
+  });
 
 
 

@@ -1,12 +1,14 @@
 @import 'reset.css';
 @import '/public/css/modals/cart-modal.css';
 @import '/public/css/pages/order-details.css';
+@import '/public/css/modals/login-modal.css';
+@import '/public/css/modals/forgot-password-modal.css';
+@import '/public/css/modals/registration-modal.css';
 
 body {
   font-family: 'EB Garamond', serif;
   background: rgb(13, 13, 14);
   position: relative;
-  /* overflow: hidden;  */
   overflow-y: scroll;
 }
 
@@ -40,7 +42,7 @@ body {
   font-size: 15px;
   margin-top: 20px;
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
 }
 
 .lower-header .nav .navbar {
@@ -652,5 +654,13 @@ input::-webkit-inner-spin-button {
   background-color: black;
 }
 
+/* Modals */
 
-
+.modal-bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  display: none;
+  z-index: 100;
+}
