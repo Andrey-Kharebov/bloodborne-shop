@@ -36,14 +36,45 @@ router.post('/:id/step2', async (req, res) => {
       zipcode: req.body.zipcode
     })
       .then((order) => {
-        products.forEach(item => {
+        if (products.length > 60) {
           OrderItem.create({
             orderId: order.id,
-            productId: item.split(',')[0],
-            size: item.split(',')[3],
-            quantity: item.split(',')[4]
+            productId: products.split(',')[0],
+            size: products.split(',')[3],
+            quantity: products.split(',')[4]
           });
-        });
+        } else {
+          products.forEach(item => {
+            OrderItem.create({
+              orderId: order.id,
+              productId: item.split(',')[0],
+              size: item.split(',')[3],
+              quantity: item.split(',')[4]
+            });
+          });
+        }
+        // let length = products.split(',').length;
+        // console.log(length);
+        // if (products.split(',').length > 7) {
+          
+          // console.log('more than one')
+          // products.forEach(item => {
+          //   OrderItem.create({
+          //     orderId: order.id,
+          //     productId: item.split(',')[0],
+          //     size: item.split(',')[3],
+          //     quantity: item.split(',')[4]
+          //   });
+          // });
+        // } else {
+          // console.log('one')
+          // OrderItem.create({
+          //   orderId: order.id,
+          //   productId: products.split(',')[0],
+          //   size: products.split(',')[3],
+          //   quantity: products.split(',')[4]
+          // });
+        // }
       });
   } catch (e) {
     console.log(e);

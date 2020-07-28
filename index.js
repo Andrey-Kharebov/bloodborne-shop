@@ -28,8 +28,13 @@ const OrderItem = require('./models/order-item');
 
 
 // Assossiations 
+// User.hasOne(Cart);
+// Cart.belongsTo(User);
+
 Category.hasMany(Product);
 
+User.hasMany(Order);
+Order.belongsTo(User);
 
 Order.belongsToMany(Product, {
   through: OrderItem
