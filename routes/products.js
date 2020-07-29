@@ -5,11 +5,13 @@ const Category = require('../models/category');
 
 router.get('/:id', async (req, res) => {
   try {
+    const user = req.user;
+    console.log(user);
     const product = await Product.findByPk(req.params.id);
-    // console.log(product);
     res.render('product', {
       title: product.title,
-      product
+      product,
+      user
     });
   } catch (e) {
     console.log(e);

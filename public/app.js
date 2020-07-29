@@ -250,13 +250,26 @@ window.addEventListener('DOMContentLoaded', () => {
 
   // LocalStorage create/update Cart
 
-  const addToCartBtn = document.querySelector('.add-to-cart'),
+  const user = document.querySelector('#user'), 
+        addToCartBtn = document.querySelector('.add-to-cart'),
         productPage = document.querySelector('.product-page'),
         makeAnOrderSection = document.querySelector('.make-an-order');
   let cartId;
 
+  if (user && +user.value != 0) {
+    console.log(+user.value);
+  } 
+
   if (localStorage.length >= 1) {
     cartId = Object.keys(localStorage);
+    makeAnOrderSection.innerHTML += `
+      <form action="/order/${cartId}/step1" method="POST">
+        <input type="hidden" name="id" value="${cartId}">
+        <button type="submit" class="make-an-order-btn">Оформить заказ</button>
+      </form>
+    `;
+  } else if (user && +user.value != 0) {
+    cartId = +user.value;
     makeAnOrderSection.innerHTML += `
       <form action="/order/${cartId}/step1" method="POST">
         <input type="hidden" name="id" value="${cartId}">
@@ -463,7 +476,7 @@ window.addEventListener('DOMContentLoaded', () => {
   function showInOrderDetails() {
     if (getCartData()) {
       let LSCart = getCartData();
-      orderNumber.innerHTML = `Номер заказа: ${localStorage.key(0)}`;
+      // orderNumber.innerHTML = `Номер заказа: ${localStorage.key(0)}`;
       for (let key in LSCart) {
         orderProductsList.innerHTML += `
         <div class="order-product-item id="${key}">
@@ -486,11 +499,6 @@ window.addEventListener('DOMContentLoaded', () => {
       localStorage.clear();
     });
   }
-
-
-
-
-
 
 
 

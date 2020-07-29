@@ -12,8 +12,8 @@ router.get('/:title', async (req, res) => {
       model: Product
     }
   });
+  
   const products = category.products;
-  // console.log(products);
   res.render('category', {
     title: `${category.title}`,
     category,

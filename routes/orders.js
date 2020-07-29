@@ -7,20 +7,26 @@ const Order = require('../models/order');
 
 // LS Order Step 1
 router.post('/:id/step1', async (req, res) => {
+  const user = req.user;
+  console.log(req.user);
+  const cartId = req.body.id;
   res.render('order-step1', {
     title: 'Bloodborne shop',
-    orderId: req.body.id
+    cartId: cartId
   });
 });
 
 // LS Order Step 2
 router.post('/:id/step2', async (req, res) => {
   try {
-    console.log(req.body);
+    let userId;
+    if (req.user) {
+      userId = req.user.id;
+    }
     let products = req.body.products;
+    // console.log(req.body);
 
-    await Order.create({
-      id: req.body.orderId,
+    let order = await Order.create({
       totalPrice: req.body.totalPrice,
       deliveryPrice: req.body.deliveryPrice,
       totalCost: req.body.totalCost,
@@ -33,7 +39,8 @@ router.post('/:id/step2', async (req, res) => {
       town: req.body.town,
       region: req.body.region,
       address: req.body.address,
-      zipcode: req.body.zipcode
+      zipcode: req.body.zipcode,
+      userId: userId
     })
       .then((order) => {
         if (products.length > 60) {
@@ -53,10 +60,21 @@ router.post('/:id/step2', async (req, res) => {
             });
           });
         }
+        return order;
       });
+    
+    res.redirect(`/order/${order.id}/step2`);
   } catch (e) {
     console.log(e);
   }
+});
+
+router.get('/:id/step2', async (req, res) => {
+  const order = await Order.findByPk(req.params.id);
+  res.render('order-step2', {
+    title: 'Bloodborne shop',
+    order: order
+  });
 });
 
 

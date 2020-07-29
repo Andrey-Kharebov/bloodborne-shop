@@ -1,5 +1,5 @@
 <div class="order-details">
-  <form action="/order/{{orderId}}/step2" method="POST">
+  <form action="/order/{{cartId}}/step2" method="POST">
     <h1>Оформление заказа</h1>
     <p class="p-details"></p>
 
@@ -48,7 +48,7 @@
             <input name="zipcode" id="zipcode" type="text">
           </div>
           <div class="continue-section">
-            <input type="hidden" name="orderId" value="{{orderId}}">
+            <input type="hidden" name="cartId" value="{{cartId}}">
             <button type="submit">Далее <span>&#8640;</span></button>
             <div class="continue-part">
               <p class="p-part">Этап 1 <span class="span-part">из 2</span></p>

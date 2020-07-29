@@ -24,6 +24,13 @@
   letter-spacing: .5px;
 }
 
+.order-details .p-details .order-number {
+  margin-left: 10px;
+  color: #000;
+  font-size: 16px;
+  font-weight: 700;
+}
+
 .order-details .order-section {
   /* border: 1px solid red; */
   margin: 0 15%;
@@ -59,6 +66,13 @@
   font-size: 12px;
   letter-spacing: 1.5px;
   margin-top: 20px;
+}
+
+.order-details .order-section .delivery-info .delivery-info-list .input-field .p-input .info {
+  margin-left: 10px;
+  color: #000;
+  font-size: 12px;
+  font-weight: 700;
 }
 
 .order-details .order-section .delivery-info .delivery-info-list .input-field input {

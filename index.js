@@ -23,24 +23,12 @@ const ordersRoutes = require('./routes/orders');
 const User = require('./models/user');
 const Category = require('./models/category');
 const Product = require('./models/product');
-const Cart = require('./models/cart');
-const CartItem = require('./models/cart-item');
 const Order = require('./models/order');
 const OrderItem = require('./models/order-item');
 
 
 // Assossiations 
-User.hasOne(Cart);
-Cart.belongsTo(User);
-
 Category.hasMany(Product);
-
-Cart.belongsToMany(Product, {
-  through: CartItem
-});
-Product.belongsToMany(Cart, {
-  through: CartItem
-});
 
 User.hasMany(Order);
 Order.belongsTo(User);
@@ -102,6 +90,16 @@ async function start() {
         email: 'admin@bloodborne.com',
         password: '123456',
         admin: true
+      });
+    }
+
+    const candidate2 = await User.findByPk('2');
+    if (!candidate2)   {
+      const user2 = await User.create({
+        name: 'Test User',
+        email: 'testuser@gmail.com',
+        password: '123456',
+        admin: false
       });
     }
 
