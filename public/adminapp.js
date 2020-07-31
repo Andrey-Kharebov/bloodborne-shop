@@ -1,10 +1,33 @@
-console.log('admin');
+window.addEventListener('DOMContentLoaded', () => {
+  // Search input showing
 
-// Select 
+  function searchInput() {
+    const searchIcon = document.querySelector('.search-icon'),
+      searchInput = document.querySelector('#search'),
+      searchClose = document.querySelector('.close-icon');
 
-document.addEventListener('DOMContentLoaded', function () {
-  var elems = document.querySelectorAll('select');
-  var instances = M.FormSelect.init(elems);
+    searchIcon.addEventListener('click', (event) => {
+      searchInput.style.display = 'block';
+      searchClose.style.display = 'block';
+    });
+
+    searchClose.addEventListener('click', (event) => {
+      searchInput.style.display = 'none';
+      searchClose.style.display = 'none';
+    });
+  }
+
+  function showBriefInfoSection(rowSelector) {
+    const userRow = document.querySelectorAll(rowSelector);
+
+    userRow.forEach(item => {
+      item.addEventListener('click', (event) => {
+        event.currentTarget.nextElementSibling.classList.toggle('show');
+      });
+    });
+  }
+
+  searchInput();
+  showBriefInfoSection('.user-row');
+  showBriefInfoSection('.order-row');
 });
-
-console.log(document.querySelector('select').value);

@@ -1,0 +1,234 @@
+.admin-panel .admin-users-panel .panel-heading {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+
+.admin-panel .admin-users-panel .panel-heading .panel-heading-logo {
+  height: 35px;
+  width: 35px;
+  background: rgb(60, 60, 60);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+}
+
+.admin-panel .admin-users-panel .panel-heading .panel-heading-logo i {
+  color: #fff;
+  font-size: 25px;
+}
+
+.admin-panel .admin-users-panel .panel-heading .panel-heading-text {
+  margin-left: 15px;
+  font-weight: 700;
+}
+
+.admin-panel .admin-users-plates {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.admin-panel .admin-users-plates .first-plate {
+  border-radius: 10px;
+  box-sizing: border-box;
+  padding: 20px 20px;
+  max-width: 520px;
+  width: 100%;
+  height: 190px;
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(90deg, #607d8b, #263238 );
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-panel .admin-users-plates .first-plate .search-by {
+  display: flex;
+  flex-direction: column;
+}
+.admin-panel .admin-users-plates .first-plate .search-by div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  font-weight: 300;
+}
+
+.admin-panel .admin-users-plates .first-plate .search-by div input {
+  max-width: 370px;
+  width: 100%;
+  border: none;
+  border-radius: 5px;
+  background: linear-gradient(220deg, rgba(154, 154, 154, 0.1), rgba(154, 154, 154, 0.5));
+  color: #fff;
+  padding: 0 10px;
+  height: 30px;
+}
+
+.admin-panel .admin-users-plates .second-plate {
+  border-radius: 10px;
+  box-sizing: border-box;
+  padding: 20px 20px;
+  max-width: 520px;
+  width: 100%;
+  height: 190px;
+  color: #fff;
+  background: linear-gradient(90deg, #263238, #607d8b );
+}
+
+.admin-panel .admin-users-plates .second-plate .plate-user-info {
+  margin-top: 10px;
+}
+
+.admin-panel .admin-users-plates .second-plate .plate-user-info p {
+  font-size: 12px;
+  font-weight: 300;
+  margin-top: 5px;
+}
+
+
+.admin-panel .admin-users-plates .second-plate span {
+  font-weight: 700;
+  color: #fff;
+}
+
+.admin-panel .home-panel-users {
+  margin-top: 50px;
+  background-color: #fff;
+  padding: 30px 5%;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.admin-panel .home-panel-users h2 {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.admin-panel .home-panel-users .new-users {
+  margin-top: 20px;
+  width: 100%;
+}
+
+.admin-panel .home-panel-users .new-users thead {
+  border-bottom: 1px solid rgb(154, 154, 154);
+  font-size: 15px;
+  font-weight: 700;
+  text-align: left;
+}
+
+.admin-panel .home-panel-users .new-users thead tr {
+  height: 30px;
+}
+
+.admin-panel .home-panel-users .new-users tbody tr {
+  max-height: 50px;
+  height: 100%;
+  line-height: 50px;
+  border-bottom: 1px solid rgb(154, 154, 154);
+  color: rgb(154, 154, 154);
+  font-weight: 500;
+  font-size: 12px;
+  transition: 0.3s;
+}
+
+.admin-panel .home-panel-users .new-users tbody tr:hover {
+  color: rgb(51, 51, 51);
+  border-bottom: 1px solid rgb(51, 51, 51);
+}
+
+.admin-panel .home-panel-users .new-users tbody tr:last-child {
+  border-bottom: none;
+}
+
+.admin-panel .home-panel-users .new-users tbody tr.user-brief-info-section {
+  pointer-events: none;
+}
+
+.admin-panel .home-panel-users .new-users tbody tr.user-brief-info-section td .user-brief-info { 
+  max-height: 0;
+  line-height: 0;
+  overflow: hidden;
+  transition: 1s;
+}
+
+.admin-panel .home-panel-users .new-users tbody tr.user-brief-info-section.show {
+  pointer-events: none;
+}
+
+.admin-panel .home-panel-users .new-users tbody tr.user-brief-info-section.show td .user-brief-info { 
+  max-height: 401px;
+  line-height: 50px;
+}
+
+
+
+
+
+
+
+
+
+
+.admin-panel .home-panel-users .new-users tbody .user-brief-info-section td .user-brief-info .p-user-brief-info {
+  font-size: 13px;
+  color: rgb(154, 154, 154);
+  font-weight: 500;
+}
+
+.admin-panel .home-panel-users .new-users tbody .user-brief-info-section td .user-brief-info .p-user-brief-info span {
+  color: rgb(51, 51, 51);
+}
+
+.admin-panel .home-panel-users .new-users tbody .user-brief-info-section td .user-brief-info {
+  display: flex;
+  justify-content: space-around;
+}
+
+.admin-panel .home-panel-users .new-users tbody .user-brief-info .user-brief-info-last-orders #last-order {
+  pointer-events: all;
+}
+
+.admin-panel .home-panel-users .new-users tbody .user-brief-info .user-brief-info-last-orders #last-order:hover {
+  cursor: pointer;
+  color: rgb(51, 51, 51);
+  font-weight: 500;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* Statuses */
+
+.admin-panel .home-panel-users .new-users tbody tr td .status {
+  width: 90px;
+  height: 25px;
+  text-align: center;
+  vertical-align: center;
+  color: #fff;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 11px;
+  border: none;
+  border-radius: 5px;
+}
+
+.admin-panel .home-panel-users .new-users tbody tr td .passing {
+  background: rgba(154, 154, 154, 0.2);
+  color: rgb(154, 154, 154);
+}
+
+.admin-panel .home-panel-users .new-users tbody tr td .passing:hover {
+  color: rgb(51, 51, 51);
+}
+

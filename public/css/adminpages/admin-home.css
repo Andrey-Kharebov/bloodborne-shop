@@ -1,0 +1,163 @@
+.admin-panel .admin-home-panel .panel-heading {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+
+.admin-panel .admin-home-panel .panel-heading .panel-heading-logo {
+  height: 35px;
+  width: 35px;
+  background: rgb(60, 60, 60);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+}
+
+.admin-panel .admin-home-panel .panel-heading .panel-heading-logo i {
+  color: #fff;
+  font-size: 25px;
+}
+
+.admin-panel .admin-home-panel .panel-heading .panel-heading-text {
+  margin-left: 15px;
+  font-weight: 700;
+}
+
+.admin-panel .admin-home-plates {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.admin-panel .admin-home-plates div {
+  border-radius: 10px;
+  box-sizing: border-box;
+  padding: 30px 30px;
+  max-width: 335px;
+  width: 100%;
+  height: 180px;
+  font-weight: 700;
+}
+
+.admin-panel .admin-home-plates div .plate-title {
+  margin-top: 15px;
+  font-size: 15px;
+}
+
+.admin-panel .admin-home-plates div .plate-p {
+  margin-top: 15px;
+  font-size: 20px;
+}
+
+.admin-panel .admin-home-plates div .plate-result {
+  margin-top: 20px;
+  font-size: 12px;
+}
+
+.admin-panel .admin-home-plates .first-plate {
+  color: #fff;
+  background: linear-gradient(125deg, #607d8b, #263238 );
+}
+
+.admin-panel .admin-home-plates .second-plate {
+  color: #fff;
+  background: linear-gradient(125deg, #795548, #3e2723 );
+}
+
+.admin-panel .admin-home-plates .third-plate {
+  color: #fff;
+  background: linear-gradient(125deg, #9e9e9e, #212121);
+}
+
+.admin-panel .home-panel-orders {
+  margin-top: 50px;
+  background-color: #fff;
+  padding: 30px 5%;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.admin-panel .home-panel-orders h2 {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.admin-panel .home-panel-orders .new-orders {
+  margin-top: 20px;
+  width: 100%;
+}
+
+.admin-panel .home-panel-orders .new-orders thead {
+  border-bottom: 1px solid rgb(154, 154, 154);
+  font-size: 15px;
+  font-weight: 700;
+  text-align: left;
+}
+
+.admin-panel .home-panel-orders .new-orders thead tr {
+  height: 30px;
+}
+
+.admin-panel .home-panel-orders .new-orders tbody tr {
+  height: 50px;
+  line-height: 50px;
+  border-bottom: 1px solid rgb(154, 154, 154);
+  color: rgb(154, 154, 154);
+  font-weight: 500;
+  font-size: 12px;
+  transition: 0.3s;
+}
+
+.admin-panel .home-panel-orders .new-orders tbody tr:hover {
+  color: rgb(51, 51, 51);
+  font-weight: 700;
+  border-top: 1px solid rgb(51, 51, 51);
+  border-bottom: 1px solid rgb(51, 51, 51);
+}
+
+.admin-panel .home-panel-orders .new-orders tbody tr:last-child {
+  border-bottom: none;
+}
+
+
+/* Statuses */
+
+.admin-panel .home-panel-orders .new-orders tbody tr td .status {
+  width: 90px;
+  height: 25px;
+  text-align: center;
+  vertical-align: center;
+  color: #fff;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 11px;
+  border: none;
+  border-radius: 5px;
+}
+
+
+
+
+
+.admin-panel .home-panel-orders .new-orders tbody tr td .processing {
+  background: linear-gradient(180deg, #80d8ff , #0091ea );
+}
+
+.admin-panel .home-panel-orders .new-orders tbody tr td .ordered {
+  background: linear-gradient(180deg, #ffe57f, #ffab00 );
+}
+
+.admin-panel .home-panel-orders .new-orders tbody tr td .delivery {
+  background: linear-gradient(180deg, #a7ffeb, #00bfa5 );
+}
+
+.admin-panel .home-panel-orders .new-orders tbody tr td .completed {
+  background: linear-gradient(180deg, #ccff90, #64dd17 );
+}
+
+.admin-panel .home-panel-orders .new-orders tbody tr td .rejected {
+  background: linear-gradient(180deg, #795548, #3e2723 );
+}
+
+

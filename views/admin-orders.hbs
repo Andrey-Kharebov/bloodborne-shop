@@ -1,0 +1,372 @@
+<div class="admin-orders-panel">
+  <div class="panel-heading">
+    <div class="panel-heading-logo">
+      <i class="material-icons">add_shopping_cart</i>
+    </div>
+    <div class="panel-heading-text">
+      <h1>Заказы</h1>
+    </div>
+  </div>
+  <div class="admin-orders-plates">
+    <div class="first-plate">
+      <p class="icon"><i class="material-icons">search</i></p>
+      <div class="search-by">
+        <div class="search-by-order-number">
+          <label>Номер заказа</label>
+          <input type="text">
+        </div>
+        <div class="search-by-email">
+          <label>Email</label>
+          <input type="text">
+        </div>
+        <div class="search-by-phone">
+          <label>Тел. номер</label><input type="number">
+        </div>
+      </div>
+    </div>
+    <div class="second-plate">
+      <p class="icon"><i class="material-icons">person</i></p>
+      <div class="plate-user-info">
+        <p class="plate-user-name">Пользователь: <span>Екатерина Юрьева</span></p>
+        <p class="plate-user-statistic">Статистика пользователя</p>
+        <hr>
+        <p class="user-plate-orders">Заказы:</p>
+        <p>Выполненные: <span>11</span></p>
+        <p>Отмененные: <span>3</span></p>
+        <p>Текущие: <span>1</span></p>
+      </div>
+    </div>
+  </div>
+  <div class="home-panel-orders">
+    <h2>Заказы</h2>
+    <table class="new-orders">
+      <thead>
+        <tr>
+          <th>Номер заказа</th>
+          <th>Имя</th>
+          <th>Тел. номер</th>
+          <th>Стоимость</th>
+          <th>Действия</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="order-row">
+          <td>32211</td>
+          <td>Юлия Коновалова</td>
+          <td>71104921001</td>
+          <td>13700</td>
+          <td>
+            <button class="status processing">Обработка</button>
+            <button class="status passing">Перейти</button>
+          </td>
+        </tr>
+        <tr class="order-brief-info-section">
+          <td colspan="5">
+            <div class="order-brief-info">
+              <div class="order-brief-info-contacts">
+                <p class="p-order-brief-info">Имя: <span>Юлия Коновалова</span></p>
+                <p class="p-order-brief-info">Email: <span>firstjulia@yandex.ru</span></p>
+                <p class="p-order-brief-info">Тел. номер: <span>71104921001</span></p>
+              </div>
+              <div class="order-brief-info-address">
+                <p class="p-order-brief-info">Страна: <span>Россия</span></p>
+                <p class="p-order-brief-info">Город: <span>Москва</span></p>
+                <p class="p-order-brief-info">Регион: <span>Московская обл.</span></p>
+                <p class="p-order-brief-info">Улица, дом, квартира: <br><span>Ул. Коккинак, д. 8, кв. 87</span></p>
+                <p class="p-order-brief-info">Индекс: <span>135219</span></p>
+              </div>
+              <div class="order-brief-info-orders">
+                <p class="p-order-brief-info">Секира Охотника <span>M</span> <span>11 шт.</span></p>
+              </div>
+            </div>
+          </td>
+        </tr>
+        <tr class="order-row">
+          <td>32143</td>
+          <td>Екатерина Юрьева</td>
+          <td>74359201023</td>
+          <td>24000</td>
+          <td>
+            <button class="status delivery">Доставка</button>
+            <button class="status passing">Перейти</button>
+          </td>
+        </tr>
+        <tr class="order-brief-info-section">
+          <td colspan="5">
+            <div class="order-brief-info">
+              <div class="order-brief-info-contacts">
+                <p class="p-order-brief-info">Имя: <span>Екатерина Юрьева</span></p>
+                <p class="p-order-brief-info">Email: <span>yuryeva@yandex.ru</span></p>
+                <p class="p-order-brief-info">Тел. номер: <span>74359201023</span></p>
+              </div>
+              <div class="order-brief-info-address">
+                <p class="p-order-brief-info">Страна: <span>Россия</span></p>
+                <p class="p-order-brief-info">Город: <span>Москва</span></p>
+                <p class="p-order-brief-info">Регион: <span>Московская обл.</span></p>
+                <p class="p-order-brief-info">Улица, дом, квартира: <br><span>Ул. Академика Ильюшина, д. 3, кв. 67</span></p>
+                <p class="p-order-brief-info">Индекс: <span>123319</span></p>
+              </div>
+              <div class="order-brief-info-orders">
+                <p class="p-order-brief-info">Секира Охотника <span>M</span> <span>3 шт.</span></p>
+                <p class="p-order-brief-info">Серый Волчий Колпак <span>2XL</span> <span>1 шт.</span></p>
+                <p class="p-order-brief-info">Черные Перчатки Яаар'гула <span>XS</span> <span>1 шт.</span></p>
+              </div>
+            </div>
+          </td>
+        </tr>
+        <tr class="order-row">
+          <td>31785</td>
+          <td>Диана Гогуа</td>
+          <td>75439768213</td>
+          <td>34050</td>
+          <td>
+            <button class="status rejected">Отменен</button>
+            <button class="status passing">Перейти</button>
+          </td>
+        </tr>
+        <tr class="order-brief-info-section">
+          <td colspan="5">
+            <div class="order-brief-info">
+              <div class="order-brief-info-contacts">
+                <p class="p-order-brief-info">Имя: <span>Диана Гогуа</span></p>
+                <p class="p-order-brief-info">Email: <span>gogua@bk.ru</span></p>
+                <p class="p-order-brief-info">Тел. номер: <span>75439768213</span></p>
+              </div>
+              <div class="order-brief-info-address">
+                <p class="p-order-brief-info">Страна: <span>Россия</span></p>
+                <p class="p-order-brief-info">Город: <span>Санкт-Петербург</span></p>
+                <p class="p-order-brief-info">Регион: <span></span></p>
+                <p class="p-order-brief-info">Улица, дом, квартира: <br><span>Ул. Пушкина, д. 16, кв. 421</span></p>
+                <p class="p-order-brief-info">Индекс: <span>122219</span></p>
+              </div>
+              <div class="order-brief-info-orders">
+                <p class="p-order-brief-info">Клинок Милосердия <span>S</span> <span>1 шт.</span></p>
+                <p class="p-order-brief-info">Мушкетон Охотника <span>S</span> <span>1 шт.</span></p>
+                <p class="p-order-brief-info">Серый Волчий Колпак <span>S</span> <span>1 шт.</span></p>
+                <p class="p-order-brief-info">Одеяние Обугленного Охотника <span>S</span> <span>1 шт.</span></p>
+                <p class="p-order-brief-info">Перчатки Волчий Колпак <span>S</span> <span>1 шт.</span></p>
+                <p class="p-order-brief-info">Штаны Волчий Колпак <span>S</span> <span>1 шт.</span></p>
+              </div>
+            </div>
+          </td>
+        </tr>
+        <tr class="order-row">
+          <td>31785</td>
+          <td>Диана Гогуа</td>
+          <td>75439768213</td>
+          <td>34050</td>
+          <td>
+            <button class="status delivery">Доставка</button>
+            <button class="status passing">Перейти</button>
+          </td>
+        </tr>
+        <tr class="order-brief-info-section">
+          <td colspan="5">
+            <div class="order-brief-info">
+              <div class="order-brief-info-contacts">
+                <p class="p-order-brief-info">Имя: <span>Диана Гогуа</span></p>
+                <p class="p-order-brief-info">Email: <span>gogua@bk.ru</span></p>
+                <p class="p-order-brief-info">Тел. номер: <span>75439768213</span></p>
+              </div>
+              <div class="order-brief-info-address">
+                <p class="p-order-brief-info">Страна: <span>Россия</span></p>
+                <p class="p-order-brief-info">Город: <span>Санкт-Петербург</span></p>
+                <p class="p-order-brief-info">Регион: <span></span></p>
+                <p class="p-order-brief-info">Улица, дом, квартира: <br><span>Ул. Пушкина, д. 16, кв. 421</span></p>
+                <p class="p-order-brief-info">Индекс: <span>122219</span></p>
+              </div>
+              <div class="order-brief-info-orders">
+                <p class="p-order-brief-info">Клинок Милосердия <span>S</span> <span>1 шт.</span></p>
+                <p class="p-order-brief-info">Мушкетон Охотника <span>S</span> <span>1 шт.</span></p>
+                <p class="p-order-brief-info">Серый Волчий Колпак <span>S</span> <span>1 шт.</span></p>
+                <p class="p-order-brief-info">Одеяние Обугленного Охотника <span>S</span> <span>1 шт.</span></p>
+                <p class="p-order-brief-info">Перчатки Волчий Колпак <span>S</span> <span>1 шт.</span></p>
+                <p class="p-order-brief-info">Штаны Волчий Колпак <span>S</span> <span>1 шт.</span></p>
+              </div>
+            </div>
+          </td>
+        </tr>
+        <tr class="order-row">
+          <td>31785</td>
+          <td>Диана Гогуа</td>
+          <td>75439768213</td>
+          <td>34050</td>
+          <td>
+            <button class="status ordered">Заказано</button>
+            <button class="status passing">Перейти</button>
+          </td>
+        </tr>
+        <tr class="order-brief-info-section">
+          <td colspan="5">
+            <div class="order-brief-info">
+              <div class="order-brief-info-contacts">
+                <p class="p-order-brief-info">Имя: <span>Диана Гогуа</span></p>
+                <p class="p-order-brief-info">Email: <span>gogua@bk.ru</span></p>
+                <p class="p-order-brief-info">Тел. номер: <span>75439768213</span></p>
+              </div>
+              <div class="order-brief-info-address">
+                <p class="p-order-brief-info">Страна: <span>Россия</span></p>
+                <p class="p-order-brief-info">Город: <span>Санкт-Петербург</span></p>
+                <p class="p-order-brief-info">Регион: <span></span></p>
+                <p class="p-order-brief-info">Улица, дом, квартира: <br><span>Ул. Пушкина, д. 16, кв. 421</span></p>
+                <p class="p-order-brief-info">Индекс: <span>122219</span></p>
+              </div>
+              <div class="order-brief-info-orders">
+                <p class="p-order-brief-info">Клинок Милосердия <span>S</span> <span>1 шт.</span></p>
+                <p class="p-order-brief-info">Мушкетон Охотника <span>S</span> <span>1 шт.</span></p>
+                <p class="p-order-brief-info">Серый Волчий Колпак <span>S</span> <span>1 шт.</span></p>
+                <p class="p-order-brief-info">Одеяние Обугленного Охотника <span>S</span> <span>1 шт.</span></p>
+                <p class="p-order-brief-info">Перчатки Волчий Колпак <span>S</span> <span>1 шт.</span></p>
+                <p class="p-order-brief-info">Штаны Волчий Колпак <span>S</span> <span>1 шт.</span></p>
+              </div>
+            </div>
+          </td>
+        </tr>
+        <tr class="order-row">
+          <td>31785</td>
+          <td>Диана Гогуа</td>
+          <td>75439768213</td>
+          <td>34050</td>
+          <td>
+            <button class="status completed">Выполнен</button>
+            <button class="status passing">Перейти</button>
+          </td>
+        </tr>
+        <tr class="order-brief-info-section">
+          <td colspan="5">
+            <div class="order-brief-info">
+              <div class="order-brief-info-contacts">
+                <p class="p-order-brief-info">Имя: <span>Диана Гогуа</span></p>
+                <p class="p-order-brief-info">Email: <span>gogua@bk.ru</span></p>
+                <p class="p-order-brief-info">Тел. номер: <span>75439768213</span></p>
+              </div>
+              <div class="order-brief-info-address">
+                <p class="p-order-brief-info">Страна: <span>Россия</span></p>
+                <p class="p-order-brief-info">Город: <span>Санкт-Петербург</span></p>
+                <p class="p-order-brief-info">Регион: <span></span></p>
+                <p class="p-order-brief-info">Улица, дом, квартира: <br><span>Ул. Пушкина, д. 16, кв. 421</span></p>
+                <p class="p-order-brief-info">Индекс: <span>122219</span></p>
+              </div>
+              <div class="order-brief-info-orders">
+                <p class="p-order-brief-info">Клинок Милосердия <span>S</span> <span>1 шт.</span></p>
+                <p class="p-order-brief-info">Мушкетон Охотника <span>S</span> <span>1 шт.</span></p>
+                <p class="p-order-brief-info">Серый Волчий Колпак <span>S</span> <span>1 шт.</span></p>
+                <p class="p-order-brief-info">Одеяние Обугленного Охотника <span>S</span> <span>1 шт.</span></p>
+                <p class="p-order-brief-info">Перчатки Волчий Колпак <span>S</span> <span>1 шт.</span></p>
+                <p class="p-order-brief-info">Штаны Волчий Колпак <span>S</span> <span>1 шт.</span></p>
+              </div>
+            </div>
+          </td>
+        </tr>
+        <tr class="order-row">
+          <td>31785</td>
+          <td>Диана Гогуа</td>
+          <td>75439768213</td>
+          <td>34050</td>
+          <td>
+            <button class="status rejected">Отменен</button>
+            <button class="status passing">Перейти</button>
+          </td>
+        </tr>
+        <tr class="order-brief-info-section">
+          <td colspan="5">
+            <div class="order-brief-info">
+              <div class="order-brief-info-contacts">
+                <p class="p-order-brief-info">Имя: <span>Диана Гогуа</span></p>
+                <p class="p-order-brief-info">Email: <span>gogua@bk.ru</span></p>
+                <p class="p-order-brief-info">Тел. номер: <span>75439768213</span></p>
+              </div>
+              <div class="order-brief-info-address">
+                <p class="p-order-brief-info">Страна: <span>Россия</span></p>
+                <p class="p-order-brief-info">Город: <span>Санкт-Петербург</span></p>
+                <p class="p-order-brief-info">Регион: <span></span></p>
+                <p class="p-order-brief-info">Улица, дом, квартира: <br><span>Ул. Пушкина, д. 16, кв. 421</span></p>
+                <p class="p-order-brief-info">Индекс: <span>122219</span></p>
+              </div>
+              <div class="order-brief-info-orders">
+                <p class="p-order-brief-info">Клинок Милосердия <span>S</span> <span>1 шт.</span></p>
+                <p class="p-order-brief-info">Мушкетон Охотника <span>S</span> <span>1 шт.</span></p>
+                <p class="p-order-brief-info">Серый Волчий Колпак <span>S</span> <span>1 шт.</span></p>
+                <p class="p-order-brief-info">Одеяние Обугленного Охотника <span>S</span> <span>1 шт.</span></p>
+                <p class="p-order-brief-info">Перчатки Волчий Колпак <span>S</span> <span>1 шт.</span></p>
+                <p class="p-order-brief-info">Штаны Волчий Колпак <span>S</span> <span>1 шт.</span></p>
+              </div>
+            </div>
+          </td>
+        </tr>
+        <tr class="order-row">
+          <td>31785</td>
+          <td>Диана Гогуа</td>
+          <td>75439768213</td>
+          <td>34050</td>
+          <td>
+            <button class="status rejected">Отменен</button>
+            <button class="status passing">Перейти</button>
+          </td>
+        </tr>
+        <tr class="order-brief-info-section">
+          <td colspan="5">
+            <div class="order-brief-info">
+              <div class="order-brief-info-contacts">
+                <p class="p-order-brief-info">Имя: <span>Диана Гогуа</span></p>
+                <p class="p-order-brief-info">Email: <span>gogua@bk.ru</span></p>
+                <p class="p-order-brief-info">Тел. номер: <span>75439768213</span></p>
+              </div>
+              <div class="order-brief-info-address">
+                <p class="p-order-brief-info">Страна: <span>Россия</span></p>
+                <p class="p-order-brief-info">Город: <span>Санкт-Петербург</span></p>
+                <p class="p-order-brief-info">Регион: <span></span></p>
+                <p class="p-order-brief-info">Улица, дом, квартира: <br><span>Ул. Пушкина, д. 16, кв. 421</span></p>
+                <p class="p-order-brief-info">Индекс: <span>122219</span></p>
+              </div>
+              <div class="order-brief-info-orders">
+                <p class="p-order-brief-info">Клинок Милосердия <span>S</span> <span>1 шт.</span></p>
+                <p class="p-order-brief-info">Мушкетон Охотника <span>S</span> <span>1 шт.</span></p>
+                <p class="p-order-brief-info">Серый Волчий Колпак <span>S</span> <span>1 шт.</span></p>
+                <p class="p-order-brief-info">Одеяние Обугленного Охотника <span>S</span> <span>1 шт.</span></p>
+                <p class="p-order-brief-info">Перчатки Волчий Колпак <span>S</span> <span>1 шт.</span></p>
+                <p class="p-order-brief-info">Штаны Волчий Колпак <span>S</span> <span>1 шт.</span></p>
+              </div>
+            </div>
+          </td>
+        </tr>
+        <tr class="order-row">
+          <td>31785</td>
+          <td>Диана Гогуа</td>
+          <td>75439768213</td>
+          <td>34050</td>
+          <td>
+            <button class="status completed">Выполнен</button>
+            <button class="status passing">Перейти</button>
+          </td>
+        </tr>
+        <tr class="order-brief-info-section">
+          <td colspan="5">
+            <div class="order-brief-info">
+              <div class="order-brief-info-contacts">
+                <p class="p-order-brief-info">Имя: <span>Диана Гогуа</span></p>
+                <p class="p-order-brief-info">Email: <span>gogua@bk.ru</span></p>
+                <p class="p-order-brief-info">Тел. номер: <span>75439768213</span></p>
+              </div>
+              <div class="order-brief-info-address">
+                <p class="p-order-brief-info">Страна: <span>Россия</span></p>
+                <p class="p-order-brief-info">Город: <span>Санкт-Петербург</span></p>
+                <p class="p-order-brief-info">Регион: <span></span></p>
+                <p class="p-order-brief-info">Улица, дом, квартира: <br><span>Ул. Пушкина, д. 16, кв. 421</span></p>
+                <p class="p-order-brief-info">Индекс: <span>122219</span></p>
+              </div>
+              <div class="order-brief-info-orders">
+                <p class="p-order-brief-info">Клинок Милосердия <span>S</span> <span>1 шт.</span></p>
+                <p class="p-order-brief-info">Мушкетон Охотника <span>S</span> <span>1 шт.</span></p>
+                <p class="p-order-brief-info">Серый Волчий Колпак <span>S</span> <span>1 шт.</span></p>
+                <p class="p-order-brief-info">Одеяние Обугленного Охотника <span>S</span> <span>1 шт.</span></p>
+                <p class="p-order-brief-info">Перчатки Волчий Колпак <span>S</span> <span>1 шт.</span></p>
+                <p class="p-order-brief-info">Штаны Волчий Колпак <span>S</span> <span>1 шт.</span></p>
+              </div>
+            </div>
+          </td>
+        </tr>
+      <tbody>
+    </table>
+  </div>
+</div>

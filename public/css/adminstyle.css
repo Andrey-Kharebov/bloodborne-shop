@@ -1,0 +1,233 @@
+@import 'reset.css';
+@import '/public/css/adminpages/admin-home.css';
+@import '/public/css/adminpages/admin-users.css';
+@import '/public/css/adminpages/admin-orders.css';
+
+body {
+  font-family: 'Comfortaa', cursive;
+  /* 300, 500, 700 */
+}
+
+/* navbar */
+
+
+.admin-nav {
+  width: 100%;
+  max-height: 60px;
+  height: auto;
+  padding: 10px 0;
+}
+
+.admin-nav i {
+  color: rgb(107, 107, 107);
+  transition: 0.3s;
+}
+
+.admin-nav i:hover {
+  color: #000;
+}
+
+
+.admin-nav .nav-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.admin-nav .nav-wrapper .nav-logo {
+  max-width: 250px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.admin-nav .nav-wrapper .nav-logo img {
+  max-width: 200px;
+  width: 100%;
+  height: auto;
+}
+
+.admin-nav .nav-wrapper .nav-search {
+  max-width: 500px;
+  width: 100%;
+}
+
+.admin-nav .nav-wrapper .nav-search form {
+  position: relative;
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.admin-nav .nav-wrapper .nav-search form input {
+  margin-left: 10px;
+  max-width: 500px;
+  height: 35px;
+  width: 100%;
+  border: none;
+  border-radius: 10px;
+  background: #f5f5f5;
+  display: none;
+}
+
+.admin-nav .nav-wrapper .nav-search form i.close-icon {
+  position: absolute;
+  right: 5%;
+  display: none;
+}
+
+.admin-nav .nav-wrapper .nav-profile_icons {
+  max-width: 500px;
+  width: 100%;
+  margin-left: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.admin-nav .nav-wrapper .nav-profile_icons .nav-profile {
+  display: flex;
+  align-items: center;
+}
+
+.admin-nav .nav-wrapper .nav-profile_icons .nav-profile .nav-profile-img img {
+  width: 30px;
+  height: auto;
+  border-radius: 50%;
+}
+
+.admin-nav .nav-wrapper .nav-profile_icons .nav-profile .nav-profile-name {
+  margin-left: 10px;
+}
+
+.admin-nav .nav-wrapper .nav-profile_icons .nav-profile .nav-profile-name .profile-name {
+  color: rgb(107, 107, 107);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+
+.admin-nav .nav-wrapper .nav-profile_icons .nav-icons {
+  max-width: 100px;
+  width: 100%;
+  margin: 0 50px;
+}
+
+.admin-nav .nav-wrapper .nav-profile_icons .nav-icons ul {
+  display: flex;
+  justify-content: space-between;
+}
+
+.admin-nav .nav-wrapper .nav-profile_icons .nav-icons ul li {
+}
+
+
+/* container */
+
+.container {
+  display: flex;
+}
+/* sidenav */
+
+.admin-sidenav {
+  box-sizing: border-box;
+  max-width: 250px;
+  width: 100%;
+  padding: 30px 40px;
+  height: 100%;
+}
+
+.admin-sidenav .admin-sidenav-info {
+
+}
+
+.admin-sidenav .admin-sidenav-info .admin-sidenav-info-profile {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+
+.admin-sidenav .admin-sidenav-info .admin-sidenav-info-profile .admin-sidenav-info-profile-img img {
+  width: 50px;
+  height: auto;
+  border-radius: 50%;
+}
+
+.admin-sidenav .admin-sidenav-info .admin-sidenav-info-profile .admin-sidenav-info-profile-name {
+  margin-left: 10px;
+}
+
+.admin-sidenav .admin-sidenav-info .admin-sidenav-info-profile .admin-sidenav-info-profile-name .admin-profile-name {
+  color: rgb(107, 107, 107);
+  font-size: 12px;
+  font-weight: 700;
+} 
+
+.admin-sidenav .admin-sidenav-info .admin-sidenav-info-profile .admin-sidenav-info-profile-name .admin-profile-position {
+  color: rgb(154, 154, 154);
+  margin-top: 5px;
+  font-size: 10px;
+  font-weight: 300;
+} 
+
+.admin-sidenav .admin-sidenav-info .admin-sidenav-info-email {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.admin-sidenav .admin-sidenav-info .admin-sidenav-info-email .admin-email {
+  color: rgb(107, 107, 107);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+
+.admin-sidenav .admin-sidenav-info .admin-sidenav-menu {
+  margin-top: 30px;
+  color: rgb(107, 107, 107);
+  font-size: 15px;
+}
+
+.admin-sidenav .admin-sidenav-info .admin-sidenav-menu ul {
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-sidenav .admin-sidenav-info .admin-sidenav-menu ul li {
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.admin-sidenav .admin-sidenav-info .admin-sidenav-menu ul li:hover {
+  color: rgb(30, 30, 30);
+}
+
+.admin-sidenav .admin-sidenav-info .admin-sidenav-menu-back-to-shop {
+  margin-top: 50px;
+}
+
+.admin-sidenav .admin-sidenav-info .admin-sidenav-menu-back-to-shop .admin-sidenav-menu-back-to-shop-btn {
+  color: #fff;
+  font-size: 15px;
+  font-weight: 500;
+  width: 100%;
+  height: 50px;
+  border: none;
+  border-radius: 10px;
+  letter-spacing: 1px;
+  background: linear-gradient(360deg, rgb(30,30,30), rgb(51,51,51));
+}
+
+/* admin-panel */
+
+.admin-panel {
+  background: rgb(245, 245, 245);
+  width: 100%;
+  padding: 30px 5%;
+  height: 100%;
+}
+

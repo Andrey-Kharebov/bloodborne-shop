@@ -1,11 +1,16 @@
-{{> adminhead}}
+{{> admin-head}}
 <body>
+  {{> admin-navbar}}
 
   <div class="container">
-    {{{ body }}}
+    {{> admin-sidenav}}
+    <div class="admin-panel">
+      {{{ body }}}  
+    </div>
   </div>
+  
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  
 <script src="/public/adminapp.js"></script>
 </body>
 </html>

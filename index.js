@@ -17,6 +17,7 @@ const orderStatusRoutes = require('./routes/order-status');
 const addRoutes = require('./routes/add');
 const productRoutes = require('./routes/products');
 const ordersRoutes = require('./routes/orders');
+const adminRoutes = require('./routes/admin');
 
 
 // Models
@@ -74,6 +75,7 @@ app.use('/order-status', orderStatusRoutes);
 app.use('/add', addRoutes);
 app.use('/products', productRoutes);
 app.use('/order', ordersRoutes);
+app.use('/admin', adminRoutes);
 
 
 
