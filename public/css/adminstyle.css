@@ -2,6 +2,7 @@
 @import '/public/css/adminpages/admin-home.css';
 @import '/public/css/adminpages/admin-users.css';
 @import '/public/css/adminpages/admin-orders.css';
+@import '/public/css/adminpages/admin-catalog.css';
 
 body {
   font-family: 'Comfortaa', cursive;

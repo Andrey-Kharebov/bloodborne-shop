@@ -22,5 +22,12 @@ router.get('/:id/orders', (req, res) => {
   });
 });
 
+router.get('/:id/catalog', (req, res) => {
+  res.render('admin-catalog', {
+    layout: 'admin',
+    title: 'Admin orders'
+  });
+});
+
 
 module.exports = router;

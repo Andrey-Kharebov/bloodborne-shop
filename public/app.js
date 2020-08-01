@@ -17,7 +17,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
   function showHomeTabs(i = 0) {
     if (tabs.length) { 
-      homeTabs[i].style.display = 'block';
+      homeTabs[i].style.display = 'table-row';
       tabs[i].classList.add('tab-active');
     }
   }
