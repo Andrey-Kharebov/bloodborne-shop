@@ -20,8 +20,8 @@ router.post('/:id/step1', async (req, res) => {
 router.post('/:id/step2', async (req, res) => {
   try {
     let userId;
-    if (req.user) {
-      userId = req.user.id;
+    if (req.session.user) {
+      userId = req.session.user.id;
     }
     let products = req.body.products;
     // console.log(req.body);

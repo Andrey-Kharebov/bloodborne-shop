@@ -1,9 +1,10 @@
 const {Router} = require('express');
 const router = Router();
+const admin = require('../middleware/admin');
 const Product = require('../models/product');
 const Category = require('../models/category');
 
-router.get('/', async (req, res) => {
+router.get('/', admin, async (req, res) => {
   const categories = await Category.findAll();
   res.render('add', {
     layout: 'admin',
@@ -12,7 +13,7 @@ router.get('/', async (req, res) => {
   });
 });
 
-router.post('/', async (req, res) => {
+router.post('/', admin, async (req, res) => {
   try {
     await Product.create({
       title: req.body.title,

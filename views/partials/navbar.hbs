@@ -12,17 +12,28 @@
       {{else}}
       <li><a href="/faq">FAQ</a></li>
       {{/if}}
-
+      
       {{#if isOrStatus}}
       <li class="active"><a href="/order-status">Статус заказа</a></li>
       {{else}}
       <li><a href="/order-status">Статус заказа</a></li>
       {{/if}}
+
     </ul>
     <div class="login_cart">
-      <div class="login">
-        <button><i class="fas fa-user"></i></button>
-      </div>
+      {{#if isAuth}}
+        <div class="login">
+          <a href="/profile/1"><button class="isauth"><i class="fas fa-user"></i></button></a>
+        </div>
+      {{else if isAdmin}}
+        <div class="login">
+          <a href="/profile/1"><button class="isauth"><i class="fas fa-user"></i></button></a>
+        </div>
+      {{else}}
+        <div class="login">
+          <button class="noauth"><i class="fas fa-user"></i></button>
+        </div>
+      {{/if}}
       <input type="checkbox" id="check">
         <div class="cart"> 
           <button><i class="fas fa-shopping-cart"></i></button>

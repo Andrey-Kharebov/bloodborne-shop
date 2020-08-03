@@ -13,6 +13,7 @@
           <div class="product-price">{{price}}<span><img src="/public/img/bloodechoes.png" alt="bloodechoes"></span></div>
           <div class="more">Подробнеe <span>&#8640;</span></div>
         </a>
+        {{#if @root.isAdmin}}
         <div class="edit_delete">
           <a href="/products/{{id}}/edit?allow=true"><button class="product-edit"><i class="far fa-edit"></i></button></a>
           <form action="/products/{{id}}/remove" method="POST">
@@ -20,37 +21,12 @@
             <button class="product-delete"><i class="far fa-trash-alt"></i></button>
           </form>
         </div>
+        {{/if}}
       </div>
     {{/each}}
     {{else}}
       <p>Здесь пока нет ни одного продукта</p>
     {{/if}}
-    {{!-- <div class="product">
-      <div class="product-cover">
-        <img src="/public/img/axe.png" alt="axe">
-      </div>
-      <div class="product-title">Секира охотника</div>
-      <div class="product-price">1100<span><img src="/public/img/bloodechoes.png" alt="bloodechoes"></span></div>
-      <div class="more">Подробнеe <span>&#8640;</span></div>
-    </div>
-
-    <div class="product">
-      <div class="product-cover">
-        <img src="/public/img/saw.png" alt="saw">
-      </div>
-      <div class="product-title">Пила-топор</div>
-      <div class="product-price">1 000<span><img src="/public/img/bloodechoes.png" alt="bloodechoes"></span></div>
-      <div class="more">Подробнеe <span>&#8640;</span></div>
-    </div>
-
-    <div class="product">
-      <div class="product-cover">
-        <img src="/public/img/kirkhammer.png" alt="kirkhammer">
-      </div>
-      <div class="product-title">Молот-меч</div>
-      <div class="product-price">3000<span><img src="/public/img/bloodechoes.png" alt="bloodechoes"></span></div>
-      <div class="more">Подробнеe <span>&#8640;</span></div>
-    </div> --}}
   </div>
   {{/if}}
 </div>

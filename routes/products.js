@@ -1,12 +1,12 @@
 const {Router} = require('express');
 const router = Router();
+const admin = require('../middleware/admin');
 const Product = require('../models/product');
 const Category = require('../models/category');
 
 router.get('/:id', async (req, res) => {
   try {
-    const user = req.user;
-    console.log(user);
+    const user = req.session.user;
     const product = await Product.findByPk(req.params.id);
     res.render('product', {
       title: product.title,
@@ -18,7 +18,7 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-router.get('/:id/edit', async (req, res) => {
+router.get('/:id/edit', admin, async (req, res) => {
   try {
     const categories = await Category.findAll();
     const product = await Product.findByPk(req.params.id);
@@ -27,9 +27,9 @@ router.get('/:id/edit', async (req, res) => {
         id: product.categoryId
       }
     });
-    if (!req.query.allow) {
-      return res.redirect('/');
-    }
+    // if (!req.query.allow) {
+    //   return res.redirect('/');
+    // }
     res.render('product-edit', {
       layout: 'admin',
       title: `Редактировать '${product.title}'`,
@@ -42,7 +42,7 @@ router.get('/:id/edit', async (req, res) => {
   }
 });
 
-router.post('/edit', async (req, res) => {
+router.post('/edit', admin, async (req, res) => {
   try {
     const product = await Product.findByPk(req.body.id);
     
@@ -69,7 +69,7 @@ router.post('/edit', async (req, res) => {
   }
 });
 
-router.post('/:id/remove', async (req, res) => {
+router.post('/:id/remove', admin, async (req, res) => {
   try {
     const product = await Product.findByPk(req.params.id);
     product.destroy();

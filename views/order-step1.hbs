@@ -48,6 +48,7 @@
             <input name="zipcode" id="zipcode" type="text">
           </div>
           <div class="continue-section">
+            <input type="hidden" id="csrf" name="_csrf" value="{{csrf}}">
             <input type="hidden" name="cartId" value="{{cartId}}">
             <button type="submit">Далее <span>&#8640;</span></button>
             <div class="continue-part">

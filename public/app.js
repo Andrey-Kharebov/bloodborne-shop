@@ -68,8 +68,8 @@ window.addEventListener('DOMContentLoaded', () => {
           let cartData = getCartData();
           for (let key in cartData) {
             if (LSkey === key) {
-              console.log(cartData[key]);
-              console.log(event.target.textContent);
+              // console.log(cartData[key]);
+              // console.log(event.target.textContent);
               cartData[key][2] = event.target.textContent;
               setCartData(cartData);
             }
@@ -160,7 +160,6 @@ window.addEventListener('DOMContentLoaded', () => {
   container.addEventListener('click', (event) => {
     let addToCartBtn = document.querySelector('.add-to-cart');
     if (checkbox.checked && event.currentTarget == container && event.target != addToCartBtn) {
-      console.log('checked');
       closeCartModal();
     }
   });
@@ -176,7 +175,7 @@ window.addEventListener('DOMContentLoaded', () => {
   // Modals
   // Login modal
 
-  const loginBtn = document.querySelector('.login button'),
+  const loginBtn = document.querySelector('.login .noauth'),
         modalBg = document.querySelector('.modal-bg'),
         loginModal = document.querySelector('.login-modal'),
         forgotModal = document.querySelector('.forgot-modal'),
@@ -185,7 +184,8 @@ window.addEventListener('DOMContentLoaded', () => {
         forgotModalBtn = document.querySelector('.forgot'),
         cancelingModalBtn = document.querySelector('.canceling'),
         fastRegistrationModalBtn = document.querySelector('.fast-registration'),
-        registrationLoginBtn = document.querySelector('.registration-login');
+        registrationLoginBtn = document.querySelector('.registration-login'),
+        loginBtnSubmit = document.querySelector('.login-btn button');
 
   function openModal(modalSelector) {
     checkbox.click();
@@ -201,9 +201,19 @@ window.addEventListener('DOMContentLoaded', () => {
     modalSelector.style.display = 'none';
   }
 
-  loginBtn.addEventListener('click', (event) => {
-    openModal(loginModal);
+  if (loginBtn) {
+    loginBtn.addEventListener('click', (event) => {
+      openModal(loginModal);
+    });
+  }
+
+  loginBtnSubmit.addEventListener('click', (event) => {
+    console.log(event.target);
+    if (localStorage.length) {
+      localStorage.clear();
+    }
   });
+  
 
   forgotModalBtn.addEventListener('click', (event) => {
     closeModal(loginModal);
@@ -253,17 +263,20 @@ window.addEventListener('DOMContentLoaded', () => {
   const user = document.querySelector('#user'), 
         addToCartBtn = document.querySelector('.add-to-cart'),
         productPage = document.querySelector('.product-page'),
-        makeAnOrderSection = document.querySelector('.make-an-order');
+        makeAnOrderSection = document.querySelector('.make-an-order'),
+        csrf = document.querySelector('#csrf').value;
   let cartId;
 
-  if (user && +user.value != 0) {
-    console.log(+user.value);
-  } 
+  // if (user && +user.value != 0) {
+  //   console.log(+user.value);
+  // } 
+
 
   if (localStorage.length >= 1) {
     cartId = Object.keys(localStorage);
     makeAnOrderSection.innerHTML += `
       <form action="/order/${cartId}/step1" method="POST">
+        <input type="hidden" name="_csrf" value="${csrf}">
         <input type="hidden" name="id" value="${cartId}">
         <button type="submit" class="make-an-order-btn">Оформить заказ</button>
       </form>
@@ -272,6 +285,7 @@ window.addEventListener('DOMContentLoaded', () => {
     cartId = +user.value;
     makeAnOrderSection.innerHTML += `
       <form action="/order/${cartId}/step1" method="POST">
+      <input type="hidden" name="_csrf" value="${csrf}">
         <input type="hidden" name="id" value="${cartId}">
         <button type="submit" class="make-an-order-btn">Оформить заказ</button>
       </form>
@@ -280,6 +294,7 @@ window.addEventListener('DOMContentLoaded', () => {
     cartId = Number(new Date());
     makeAnOrderSection.innerHTML += `
     <form action="/order/${cartId}/step1" method="POST">
+      <input type="hidden" name="_csrf" value="${csrf}">
       <input type="hidden" name="id" value="${cartId}">
       <button type="submit" class="make-an-order-btn">Оформить заказ</button>
     </form>
@@ -335,10 +350,7 @@ window.addEventListener('DOMContentLoaded', () => {
       showPrices('.total-price', '.delivery-price', '.total-modal-cost', '.modal-cart-product-price p', '.total-cost');
       productCounter('.modal-cart-product-quantity-info', '.number', 'plus', 'minus');
       productSizeChoosing('.modal-cart-product-size ul', 'modal-size-active');
-      if (checkbox.checked) {
-        console.log('checked');
-      } else {
-        console.log('unchecked');
+      if (!checkbox.checked) {
         openCartModal();
       }
     });
@@ -476,7 +488,6 @@ window.addEventListener('DOMContentLoaded', () => {
   function showInOrderDetails() {
     if (getCartData()) {
       let LSCart = getCartData();
-      // orderNumber.innerHTML = `Номер заказа: ${localStorage.key(0)}`;
       for (let key in LSCart) {
         orderProductsList.innerHTML += `
         <div class="order-product-item id="${key}">
