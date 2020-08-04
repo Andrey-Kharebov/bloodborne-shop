@@ -54,7 +54,7 @@
 }
 
 .order-details .order-section .delivery-info .delivery-info-list .input-field {
-  /* border: 1px solid orange; */
+  border: 1px solid orange;
   width: 100%;
 }
 

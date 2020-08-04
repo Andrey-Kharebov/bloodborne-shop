@@ -60,8 +60,17 @@ router.post('/register', async (req, res) => {
     });
 
     if (candidate) {
+      // req.flash('message', 'Пользователь с таким e-mail уже существует');
+      // req.flash('error', 'Пользователь с таким e-mail уже существует');
+      // req.flash('info', 'Пользователь с таким e-mail уже существует');
+      // req.flash('success', 'Пользователь с таким e-mail уже существует');
+      // req.flash('warning', 'Пользователь с таким e-mail уже существует');
+
       res.redirect('/');
-      console.log('est');
+      // console.log(req.flash('error'));
+      // console.log(req.flash('info'));
+      // console.log(req.flash('success'));
+      // console.log(req.flash('warning'));
     } else {
       const hashPassword = await bcrypt.hash(password, 10);
       const user = await User.create({

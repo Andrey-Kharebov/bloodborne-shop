@@ -511,6 +511,36 @@ window.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  
+
+
+  // Profile changes mode
+
+  const changeBtn = document.querySelectorAll('.profile-list-info-heading p');
+
+  changeBtn.forEach(item => {
+    item.addEventListener('click', (event) => {
+      item.parentNode.parentNode.classList.toggle('change-active');
+      if (item.parentNode.parentNode.classList.contains('change-active')) {
+        item.parentNode.parentNode.classList.remove('change-unactive');
+        item.parentNode.parentNode.querySelectorAll('input').forEach(i => {
+          i.disabled = false;
+        });
+        event.target.textContent = 'Отменить';
+      } else {
+        item.parentNode.parentNode.classList.add('change-unactive');
+        item.parentNode.parentNode.querySelectorAll('input').forEach(i => {
+          i.disabled = true;
+        });
+        event.target.textContent = 'Изменить';
+      }
+    });
+  });
+
+
+
+
+
 
 
 

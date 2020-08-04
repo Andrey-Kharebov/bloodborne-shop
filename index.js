@@ -1,6 +1,7 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
 const csrf = require('csurf');
+const flash = require('connect-flash');
 const Handlebars = require('handlebars');
 const exphbs = require('express-handlebars');
 const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access');
@@ -80,6 +81,7 @@ app.use(session({
   store: sessionStore
 }));
 app.use(csrf());
+app.use(flash());
 app.use(varMiddleware);
 app.use(fileMiddleware.single('image')); // посмотреть еще раз после сессий
 

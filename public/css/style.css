@@ -1,6 +1,10 @@
 @import 'reset.css';
-@import '/public/css/modals/cart-modal.css';
+
+/* pages */
 @import '/public/css/pages/order-details.css';
+@import '/public/css/pages/profile.css';
+/* modals */
+@import '/public/css/modals/cart-modal.css';
 @import '/public/css/modals/login-modal.css';
 @import '/public/css/modals/forgot-password-modal.css';
 @import '/public/css/modals/registration-modal.css';

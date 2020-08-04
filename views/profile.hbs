@@ -1,1 +1,83 @@
-<a href="/auth/logout">Выйти</a>
+<div class="profile">
+  <h1>Мой аккаунт</h1>
+  <div class="profile-list">
+    <div class="profile-list-menu">
+      <div class="profile-list-menu-block">
+        {{#if isMyProfile}}
+          <a href="/profile/{{user.id}}" class="active">Личные данные</a>
+        {{else}}
+          <a href="/profile/{{user.id}}">Личные данные</a>
+        {{/if}}
+
+        {{#if isMyOrders}}
+          <a href="/profile/{{user.id}}/orders" class="active">Мои заказы</a>
+        {{else}}
+          <a href="/profile/{{user.id}}/orders">Мои заказы</a>
+        {{/if}}
+      </div>
+      <div class="profile-list-menu-exit">
+        <a href="/auth/logout"><button>Выйти</button></a>
+      </div>
+    </div>
+    <div class="profile-list-info">
+      <div class="personal-data change-unactive">
+        <div class="profile-list-info-heading">
+          <h2>Персональные данные</h2>
+          <p>Изменить</p>
+        </div>
+        <div class="profile-list-data-section">
+          <div class="input-field">
+            <label for="name">Имя</label>
+            <input type="text" id="name" name="name" disabled>
+          </div>
+          <div class="input-field">
+            <label for="surname">Фамилия</label>
+            <input type="text" id="surname" name="surname" disabled>
+          </div>
+          <div class="input-field">
+            <label for="name">Отчество</label>
+            <input type="text" id="patronymic" name="patronymic" disabled>
+          </div>
+          <div class="input-field">
+            <label for="name">Телефон</label>
+            <input type="number" id="phone" name="phone" disabled>
+          </div>          
+        </div>
+        <div class="save-changes-btn">
+          <button>Сохранить изменения</button>
+        </div>
+      </div>
+      <div class="delivery-data change-unactive">
+        <div class="profile-list-info-heading">
+          <h2>Адрес доставки</h2>
+          <p>Изменить</p>
+        </div>
+        <div class="profile-list-data-section">
+          <div class="input-field">
+            <label for="name">Страна</label>
+            <input type="text" id="country" name="country" disabled>
+          </div>
+          <div class="input-field">
+            <label for="surname">Город</label>
+            <input type="text" id="town" name="town" disabled>
+          </div>
+          <div class="input-field">
+            <label for="name">Край/Область/Регион</label>
+            <input type="text" id="region" name="region" disabled>
+          </div>
+          <div class="input-field">
+            <label for="name">Улица, дом, квартира</label>
+            <input type="number" id="address" name="address" disabled>
+          </div>
+          <div class="input-field">
+            <label for="name">Почтовый индекс</label>
+            <input type="number" id="zipcode" name="zipcode" disabled>
+          </div>
+        </div>
+        <div class="save-changes-btn">
+          <button>Сохранить изменения</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

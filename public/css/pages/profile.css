@@ -1,0 +1,228 @@
+.profile {
+  box-sizing: border-box;
+  width: 100%;
+  height: auto;
+  background-color: rgba(255, 255, 255, 0.95);
+  padding-top: 50px;
+  padding-bottom: 70px;
+}
+
+.profile h1 {
+  text-transform: capitalize;
+  font-weight: 600;
+  text-align: center;
+  font-size: 30px;
+}
+
+.profile .profile-list {
+  margin: 0 7%;
+  margin-top: 50px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.profile .profile-list .profile-list-menu {
+  margin-right: 100px;
+}
+
+.profile .profile-list .profile-list-menu a {
+  text-decoration: none;
+  color: #fff;
+}
+
+.profile .profile-list .profile-list-menu .profile-list-menu-block {
+  box-sizing: border-box;
+  width: 200px;
+  background: black;
+  border-radius: 15px;
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.profile .profile-list .profile-list-menu .profile-list-menu-block a {
+  margin-bottom: 15px;
+  font-weight: 300;
+}
+
+.profile .profile-list .profile-list-menu .profile-list-menu-block a:hover {
+  font-weight: 700;
+}
+
+.profile .profile-list .profile-list-menu .profile-list-menu-block a.active {
+  font-weight: 700;
+  border: none;
+}
+
+.profile .profile-list .profile-list-menu .profile-list-menu-exit {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.profile .profile-list .profile-list-menu .profile-list-menu-exit button {
+  max-width: 200px;
+  width: 100%;
+  height: 40px;
+  border: none;
+  border-radius: 30px;
+  background-color: black;
+  color: #fff;
+  letter-spacing: 1.5px;
+  font-size: 15px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+
+
+
+
+
+
+
+
+.profile .profile-list .profile-list-info {
+  /* border: 1px solid blue; */
+  max-width: 900px;
+  width: 100%;
+}
+
+.profile .profile-list .profile-list-info .profile-list-info-heading {
+  display: flex;
+  justify-content: start;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.profile .profile-list .profile-list-info .profile-list-info-heading h2 {
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  margin-right: 10px;
+}
+
+.profile .profile-list .profile-list-info .profile-list-info-heading p {
+  border-bottom: 1px dashed rgb(150, 150, 150);
+  color: rgb(150, 150, 150);
+  margin-top: 3px;
+  cursor: pointer;
+}
+
+.profile .profile-list .profile-list-info .profile-list-data-section {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.profile .profile-list .profile-list-info .profile-list-data-section input, label {
+  display: block;
+}
+
+.profile .profile-list .profile-list-info .profile-list-data-section .input-field {
+  margin-right: 20px;
+}
+
+.profile .profile-list .profile-list-info .profile-list-data-section .input-field label {
+  text-align: left;
+  font-weight: 500;
+  text-transform: uppercase;
+  color: rgb(150, 150, 150);
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  margin-top: 20px;
+}
+
+.profile .profile-list .profile-list-info .profile-list-data-section {
+
+}
+
+.personal-data.change-unactive .input-field input {
+  margin-top: 10px;
+  background: rgb(243, 243, 243);
+  width: calc(100% + 16px);
+  border: none;
+  border-bottom: 1px solid rgb(150, 150, 150);
+}
+
+.delivery-data.change-unactive .input-field input {
+  margin-top: 10px;
+  background: rgb(243, 243, 243);
+  border: none;
+  border-bottom: 1px solid rgb(150, 150, 150);
+}
+
+.change-active .input-field input {
+  margin-top: 5px;
+  border: none;
+  background-color: #fff;
+  width: 100%;
+  max-width: 700px;
+  height: 35px;
+  border-radius: 30px;
+}
+
+.save-changes-btn button {
+  display: none;
+}
+
+.change-active .save-changes-btn button {
+  display: block;
+  max-width: 300px;
+  width: 100%;
+  height: 40px;
+  border: none;
+  border-radius: 30px;
+  background-color: black;
+  color: #fff;
+  letter-spacing: 1.5px;
+  font-size: 15px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+
+/* orders */
+
+.profile .profile-list .profile-list-info .profile-list-orders {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile .profile-list .profile-list-info .profile-list-orders .order-card {
+  box-sizing: border-box;
+  border: 1px solid rgb(150, 150, 150);
+  max-width: 300px;
+  width: 100%;
+  border-radius: 15px;
+  padding: 20px 25px;
+  margin-bottom: 30px;
+}
+
+.profile .profile-list .profile-list-info .profile-list-orders .order-card .card-title {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.profile .profile-list .profile-list-info .profile-list-orders .order-card p {
+  margin-top: 10px;
+}
+
+.profile .profile-list .profile-list-info .profile-list-orders .order-card em {
+  font-style: italic;
+}
+
+.profile .profile-list .profile-list-info .profile-list-orders .order-card ol {
+  margin-top: 15px;
+  margin-left: 30px;
+  list-style-type: decimal;
+}
+
+.profile .profile-list .profile-list-info .profile-list-orders .order-card hr {
+  margin-top: 15px;
+}
+
+.profile .profile-list .profile-list-info .profile-list-orders .order-card .price {
+  font-size: 20px;
+  font-weight: 700;
+}

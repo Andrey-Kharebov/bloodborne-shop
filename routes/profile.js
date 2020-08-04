@@ -4,9 +4,20 @@ const User = require('../models/user');
 const router = Router();
 
 router.get('/:id', auth, async (req, res) => {
-  console.log(req.user);
+  const user = await User.findByPk(req.params.id);
   res.render('profile', {
-    title: 'Profile'
+    title: 'Profile',
+    isMyProfile: true,
+    user
+  });
+});
+
+router.get('/:id/orders', auth, async (req, res) => {
+  const user = await User.findByPk(req.params.id);
+  res.render('profile-orders', {
+    title: 'My orders',
+    isMyOrders: true,
+    user
   });
 });
 

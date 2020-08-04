@@ -6,5 +6,12 @@ module.exports = function(req, res, next) {
     res.locals.isAuth = req.session.isAuthenticated;
   }
   res.locals.csrf = req.csrfToken();
+
+  // res.locals.alert_message = req.flash('message');
+  // res.locals.alert_error = req.flash('error');
+  // res.locals.alert_info = req.flash('info');
+  // res.locals.alert_success = req.flash('success');
+  // res.locals.alert_warning = req.flash('warning');
+
   next();
 };
