@@ -8,9 +8,6 @@ const User = sequelize.define('user', {
       allowNull: false,
       primaryKey: true
   },
-  name: {
-      type: Sequelize.STRING
-  },
   email: {
     type: Sequelize.STRING,
     allowNull: false
@@ -22,7 +19,34 @@ const User = sequelize.define('user', {
   admin: {
     type: Sequelize.BOOLEAN,
     dafaultValue: false
-  }
+  },
+  name: {
+    type: Sequelize.STRING
+  },
+  surname: {
+    type: Sequelize.STRING
+  },
+  patronymic: {
+    type: Sequelize.STRING
+  },
+  phone: {
+    type: Sequelize.STRING
+  },
+  country: {
+    type: Sequelize.STRING
+  },
+  town: {
+    type: Sequelize.STRING
+  },
+  region: {
+    type: Sequelize.STRING
+  },
+  address: {
+    type: Sequelize.STRING
+  },
+  zipcode: {
+    type: Sequelize.STRING
+  },
 });
 
 

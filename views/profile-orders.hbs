@@ -4,15 +4,15 @@
     <div class="profile-list-menu">
       <div class="profile-list-menu-block">
         {{#if isMyProfile}}
-        <a href="/profile/{{user.id}}" class="active">Личные данные</a>
+        <a href="/profile" class="active">Личные данные</a>
         {{else}}
-        <a href="/profile/{{user.id}}">Личные данные</a>
+        <a href="/profile">Личные данные</a>
         {{/if}}
 
         {{#if isMyOrders}}
-        <a href="/profile/{{user.id}}/orders" class="active">Мои заказы</a>
+        <a href="/profile/orders" class="active">Мои заказы</a>
         {{else}}
-        <a href="/profile/{{user.id}}/orders">Мои заказы</a>
+        <a href="/profile/orders">Мои заказы</a>
         {{/if}}
       </div>
       <div class="profile-list-menu-exit">
@@ -21,98 +21,33 @@
     </div>
     <div class="profile-list-info">
       <div class="profile-list-orders">
-        {{!-- {{#if orders.length}}
-      {{#each orders}} --}}
-        <div class="order-card">
-          <div class="card-content">
-            <span class="card-title">
-              Заказ: 2
-              {{!-- Order: {{id}} --}}
-            </span>
-            {{!-- <p class="date">{{createdAt}}</p>
-            <p><em>{{@root.user.name}}</em> <small>({{@root.user.email}})</small></p> --}}
-            <p class="date">28.04.1294</p>
-            <p><em>Андрей Харебов</em> <small>(admin@bb.com)</small></p>
+        {{#if orders.length}}
+          {{#each orders}}
+            <div class="order-card">
+            <div class="card-content">
+              <span class="card-title">
+                Заказ: {{id}}
+              </span>
 
-            <ol>
-              {{!-- {{#each products}}
-              <li>{{title}} (x<strong> {{orderItem.quantity}}</strong>)</li>
-              {{/each}} --}}
+              <p class="date">{{createdAt}}</p>
+              <p><em>{{@root.user.name}} {{@root.user.surname}}</em> <small>({{@root.user.email}})</small></p>
 
-              <li>Секира Охотника (<strong>S</strong> x <strong>3</strong>)</li>
-              <li>Перчатки Обугленного Охотника (<strong>2XL</strong> x <strong>1</strong>)</li>
+              <ol>
+                {{#each orderItems}} 
+                  <li>{{title}} (<strong>{{size}}</strong> x <strong>{{quantity}}</strong>)</li>
+                {{/each}} 
+              </ol>
 
-            </ol>
+              <hr>
 
-            <hr>
+              <p>Общая стоимость: <span class="price">{{totalPrice}} отг. к.</span></p>
+              <p>Стоимость доставки: <span class="price">{{deliveryPrice}} отг. к.</span></p>
+              <p>Итого: <span class="price">{{totalCost}} отг. к.</span></p>
 
-            {{!-- <p>Price: <span class="price">{{price}}</span></p> --}}
-            <p>Стоимость: <span class="price">3300 отг. к.</span></p>
-
-          </div>
-        </div>
-        {{!-- {{/each}}
-      {{else}}
-        <p>Здесь пока нет заказов.</p>
-      {{/if}} --}}
-
-        <div class="order-card">
-          <div class="card-content">
-            <span class="card-title">
-              Заказ: 2
-              {{!-- Order: {{id}} --}}
-            </span>
-            {{!-- <p class="date">{{createdAt}}</p>
-            <p><em>{{@root.user.name}}</em> <small>({{@root.user.email}})</small></p> --}}
-            <p class="date">28.04.1294</p>
-            <p><em>Андрей Харебов</em> <small>(admin@bb.com)</small></p>
-
-            <ol>
-              {{!-- {{#each products}}
-              <li>{{title}} (x<strong> {{orderItem.quantity}}</strong>)</li>
-              {{/each}} --}}
-
-              <li>Секира Охотника (<strong>S</strong> x <strong>3</strong>)</li>
-              <li>Перчатки Обугленного Охотника (<strong>2XL</strong> x <strong>1</strong>)</li>
-
-            </ol>
-
-            <hr>
-
-            {{!-- <p>Price: <span class="price">{{price}}</span></p> --}}
-            <p>Стоимость: <span class="price">3300 отг. к.</span></p>
-
-          </div>
-        </div>
-
-        <div class="order-card">
-          <div class="card-content">
-            <span class="card-title">
-              Заказ: 2
-              {{!-- Order: {{id}} --}}
-            </span>
-            {{!-- <p class="date">{{createdAt}}</p>
-          <p><em>{{@root.user.name}}</em> <small>({{@root.user.email}})</small></p> --}}
-            <p class="date">28.04.1294</p>
-            <p><em>Андрей Харебов</em> <small>(admin@bb.com)</small></p>
-
-            <ol>
-              {{!-- {{#each products}}
-            <li>{{title}} (x<strong> {{orderItem.quantity}}</strong>)</li>
-            {{/each}} --}}
-
-              <li>Секира Охотника (<strong>S</strong> x <strong>3</strong>)</li>
-              <li>Перчатки Обугленного Охотника (<strong>2XL</strong> x <strong>1</strong>)</li>
-
-            </ol>
-
-            <hr>
-
-            {{!-- <p>Price: <span class="price">{{price}}</span></p> --}}
-            <p>Стоимость: <span class="price">3300 отг. к.</span></p>
-
-          </div>
-        </div>
+            </div>
+            </div>
+          {{/each}}
+        {{/if}}
       </div>
     </div>
   </div>

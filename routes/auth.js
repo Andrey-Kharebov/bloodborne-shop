@@ -25,7 +25,7 @@ router.post('/login', async (req, res) => {
             throw err;
           }
         });
-        res.redirect(`/profile/${candidate.id}`);
+        res.redirect(`/profile`);
         
         console.log('good job');
       } else {

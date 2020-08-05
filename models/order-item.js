@@ -9,6 +9,7 @@ const OrderItem = sequelize.define('orderItem', {
     allowNull: false,
     primaryKey: true
   },
+  title: Sequelize.STRING,
   size: Sequelize.STRING,
   quantity: Sequelize.INTEGER
 });

@@ -43,11 +43,19 @@ Category.hasMany(Product);
 User.hasMany(Order);
 Order.belongsTo(User);
 
+Order.hasMany(OrderItem);
+
 Order.belongsToMany(Product, {
-  through: OrderItem
+  through: {
+    model: OrderItem,
+    unique: false
+  }
 });
 Product.belongsToMany(Order, {
-  through: OrderItem
+  through: {
+    model: OrderItem,
+    unique: false
+  }
 });
 
 

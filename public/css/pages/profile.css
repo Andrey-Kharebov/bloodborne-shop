@@ -19,11 +19,15 @@
   margin-top: 50px;
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
-.profile .profile-list .profile-list-menu {
-  margin-right: 100px;
+@media screen and (min-width: 1280px) {
+  .profile .profile-list .profile-list-menu {
+    margin-right: 100px; 
+  }
 }
+
 
 .profile .profile-list .profile-list-menu a {
   text-decoration: none;
@@ -223,6 +227,6 @@
 }
 
 .profile .profile-list .profile-list-info .profile-list-orders .order-card .price {
-  font-size: 20px;
-  font-weight: 700;
+  font-size: 17px;
+  font-weight: 500;
 }
