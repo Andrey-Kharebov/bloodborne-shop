@@ -11,8 +11,8 @@
     <div class="first-plate">
       <p class="icon"><i class="material-icons">event_note</i></p>
       <p class="plate-title">Заказы (мес.)</p>
-      <p class="plate-p">+34</p>
-      <p class="plate-result">Увеличение на 25%</p>
+      <p class="plate-p">{{monthOrdersQuantity.increase}}</p>
+      <p class="plate-result">Увеличение на {{monthOrdersQuantity.percents}}%</p>
     </div>
     <div class="second-plate">
       <p class="icon"><i class="material-icons">euro_symbol</i></p>
@@ -23,8 +23,8 @@
     <div class="third-plate">
       <p class="icon"><i class="material-icons">group_add</i></p>
       <p class="plate-title">Пользователи (мес.)</p>
-      <p class="plate-p">+8</p>
-      <p class="plate-result">Увеличение на 2%</p>
+      <p class="plate-p">{{monthUsersQuantity.increase}}</p>
+      <p class="plate-result">Увеличение на {{monthUsersQuantity.percents}}%</p>
     </div>
   </div>
   <div class="home-panel-orders">
@@ -36,45 +36,22 @@
           <th>Email</th>
           <th>Тел. номер</th>
           <th>Стоимость</th>
-          <th>Статус</th>
+          <th>Действия</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>Екатерина Юрьева</td>
-          <td>yuryeva@yandex.ru</td>
-          <td>74359201023</td>
-          <td>2000</td>
-          <td><button class="status processing">Обработка</button></td>
-        </tr>
-        <tr>
-          <td>Дарья Политова</td>
-          <td>datya-pol@rambler.ru</td>
-          <td>74359000021</td>
-          <td>50760</td>
-          <td><button class="status ordered">Заказано</button></td>
-        </tr>
-        <tr>
-          <td>Алена Федорова</td>
-          <td>fedorova99@gmail.com</td>
-          <td>81236669312</td>
-          <td>26500</td>
-          <td><button class="status delivery">Доставка</button></td>
-        </tr>
-        <tr>
-          <td>Екатерина Холмова</td>
-          <td>kholmova95@pk.ru</td>
-          <td>86679022020</td>
-          <td>72500</td>
-          <td><button class="status completed">Выполнен</button></td>
-        </tr>
-        <tr>
-          <td>Дарья Гудкова</td>
-          <td>dasha@yandex.ru</td>
-          <td>70102343592</td>
-          <td>90120</td>
-          <td><button class="status rejected">Отменен</button></td>
-        </tr>
+        {{#each lastOrders}}
+          <tr>
+            <td>{{name}} {{surname}}</td>
+            <td>{{email}}</td>
+            <td>{{phone}}</td>
+            <td>{{totalCost}}</td>
+            <td>
+              <button class="status ordered">Заказано</button>
+              <a href="/admin/order/{{id}}"><button class="status passing">Перейти</button></a>
+            </td>
+          </tr>         
+        {{/each}}
       <tbody>
     </table>
   </div>

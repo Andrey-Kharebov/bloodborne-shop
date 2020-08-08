@@ -50,7 +50,47 @@
         </tr>
       </thead>
       <tbody>
-        <tr class="order-row">
+        {{#if orders.length}}
+          {{#each orders}}
+            <tr class="order-row">
+              <td>{{id}}</td>
+              <td>{{name}} {{surname}}</td>
+              <td>{{phone}}</td>
+              <td>{{totalCost}}</td>
+              <td>
+                {{!-- <button class="status processing">Обработка</button> --}}
+                <button class="status {{status}}">{{status}}</button>
+                <button class="status passing">Перейти</button>
+              </td>
+            </tr>
+            <tr class="order-brief-info-section">
+              <td colspan="5">
+                <div class="order-brief-info">
+                  <div class="order-brief-info-contacts">
+                    <p class="p-order-brief-info">Имя: <span>{{name}} {{surname}}</span></p>
+                    <p class="p-order-brief-info">Email: <span>{{email}}</span></p>
+                    <p class="p-order-brief-info">Тел. номер: <span>{{phone}}</span></p>
+                  </div>
+                  <div class="order-brief-info-address">
+                    <p class="p-order-brief-info">Страна: <span>{{country}}</span></p>
+                    <p class="p-order-brief-info">Город: <span>{{town}}</span></p>
+                    <p class="p-order-brief-info">Регион: <span>{{region}}</span></p>
+                    <p class="p-order-brief-info">Улица, дом, квартира: <br><span>{{address}}</span></p>
+                    <p class="p-order-brief-info">Индекс: <span>{{zipcode}}</span></p>
+                  </div>
+                  <div class="order-brief-info-orders">
+                    {{#each orderItems}}
+                    <p class="p-order-brief-info">{{title}} <span>{{size}}</span> <span>{{quantity}} шт.</span></p>
+                    {{/each}}
+                  </div>
+                </div>
+              </td>
+            </tr>
+          {{/each}}
+        {{else}}
+          <p>Здесь пока нет ни одного заказа.</p>
+        {{/if}}
+        {{!-- <tr class="order-row">
           <td>32211</td>
           <td>Юлия Коновалова</td>
           <td>71104921001</td>
@@ -300,7 +340,7 @@
           <td>75439768213</td>
           <td>34050</td>
           <td>
-            <button class="status rejected">Отменен</button>
+            <button class="status new">Новый</button>
             <button class="status passing">Перейти</button>
           </td>
         </tr>
@@ -365,7 +405,7 @@
               </div>
             </div>
           </td>
-        </tr>
+        </tr> --}}
       <tbody>
     </table>
   </div>

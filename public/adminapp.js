@@ -29,8 +29,8 @@ window.addEventListener('DOMContentLoaded', () => {
 
   function showCatalogTabs() {
     let categoryTabs = document.querySelectorAll('.category-tab'),
-        categoryTabsParent = document.querySelector('.catalog-tabs'),
-        tables = document.querySelectorAll('.catalog-items');
+      categoryTabsParent = document.querySelector('.catalog-tabs'),
+      tables = document.querySelectorAll('.catalog-items');
 
     function hideTables() {
       tables.forEach(item => {
@@ -43,7 +43,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
       });
 
-      
+
     }
 
     function showTables(i = 0) {
@@ -69,6 +69,88 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 
 
+
+  // Order info change inputs
+
+  function adminOrderChangeUserInputs() {
+    const changeBtn = document.querySelector('#edit'),
+      inputSec = document.querySelector('.plate-user-info');
+
+    if (changeBtn) {
+      changeBtn.addEventListener('click', (event) => {
+        inputSec.classList.toggle('change-active');
+        if (inputSec.classList.contains('change-active')) {
+          inputSec.classList.remove('change-unactive');
+          inputSec.querySelectorAll('input').forEach(i => {
+            i.disabled = false;
+          });
+          if (inputSec.querySelector('select')) {
+            inputSec.querySelector('select').disabled = false;
+          }
+  
+          event.target.textContent = 'check';
+        } else {
+          inputSec.classList.add('change-unactive');
+          inputSec.querySelectorAll('input').forEach(i => {
+            i.disabled = true;
+          });
+          if (inputSec.querySelector('select')) {
+            inputSec.querySelector('select').disabled = true;
+          }
+  
+          event.target.textContent = 'edit';
+        }
+      });
+    }
+  }
+
+  function adminOrderChangeOrderItemInputs() {
+    const changeBtn = document.querySelectorAll('#row-edit');
+    if (changeBtn) {
+      changeBtn.forEach(item => {
+        item.addEventListener('click', (event) => {
+          let properRow = event.target.parentElement.parentElement.parentElement;
+          let postBtn = properRow.querySelector('button');
+          properRow.classList.toggle('change-active');
+          if (properRow.classList.contains('change-active')) {
+            properRow.classList.remove('change-unactive');
+            properRow.querySelectorAll('input').forEach(i => {
+              i.disabled = false;
+            });
+            if (properRow.querySelector('select')) {
+              properRow.querySelector('select').disabled = false;
+            }
+            event.target.style.display = 'none';
+            postBtn.style.display = 'block';
+          } else {
+            properRow.classList.add('change-unactive');
+            properRow.querySelectorAll('input').forEach(i => {
+              i.disabled = true;
+            });
+            if (properRow.querySelector('select')) {
+              properRow.querySelector('select').disabled = true;
+            }
+  
+            event.target.style.display = 'block';
+            event.target.textContent = 'edit';
+            postBtn.style.display = 'none';
+          }
+        });
+      });
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+  adminOrderChangeUserInputs();
+  adminOrderChangeOrderItemInputs();
   searchInput();
   showBriefInfoSection('.user-row');
   showBriefInfoSection('.order-row');

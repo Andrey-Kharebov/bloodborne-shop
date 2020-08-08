@@ -72,9 +72,15 @@ router.post('/register', async (req, res) => {
       // console.log(req.flash('success'));
       // console.log(req.flash('warning'));
     } else {
+      // Moscow time
+      let offset = +3;
+      let date = new Date( new Date().getTime() + offset * 3600 * 1000);
+
       const hashPassword = await bcrypt.hash(password, 10);
       const user = await User.create({
-        email, password: hashPassword
+        email, password: hashPassword,
+        createdAt: date,
+        updatedAt: date
       });
       res.redirect('/');
       console.log('novii');

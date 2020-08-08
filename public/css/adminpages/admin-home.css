@@ -111,9 +111,9 @@
 
 .admin-panel .home-panel-orders .new-orders tbody tr:hover {
   color: rgb(51, 51, 51);
-  font-weight: 700;
   border-top: 1px solid rgb(51, 51, 51);
   border-bottom: 1px solid rgb(51, 51, 51);
+
 }
 
 .admin-panel .home-panel-orders .new-orders tbody tr:last-child {

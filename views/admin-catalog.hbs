@@ -45,13 +45,12 @@
   <div class="home-panel-catalog">
     <h2>Каталог</h2>
     <div class="catalog-tabs">
-      <button class="category-tab tab-active">Оружие</button>
-      <button class="category-tab">Головные уборы</button>
-      <button class="category-tab">Верхняя одежда</button>
-      <button class="category-tab">Перчатки</button>
-      <button class="category-tab">Брюки</button>
+      {{#each categories}}
+        <button class="category-tab">{{title}}</button>
+      {{/each}}
     </div>
-    <table class="catalog-items" id="weapons">
+    {{#each categories}}
+      <table class="catalog-items">
       <thead>
         <tr>
           <th>Артикул</th>
@@ -62,17 +61,23 @@
         </tr>
       </thead>
       <tbody>
-        <tr class="item-row">
-          <td>32</td>
-          <td>Фростморн</td>
-          <td>1</td>
-          <td>124000</td>
-          <td>
-            <button class="status passing">Изменить</button>
-            <button class="status passing">Удалить</button>
-          </td>
-        </tr>
-        <tr class="item-row">
+        {{#if products}}
+          {{#each products}}
+          <tr class="item-row">
+            <td>{{id}}</td>
+            <td>{{title}}</td>
+            <td>99</td>
+            <td>{{price}}</td>
+            <td>
+              <button class="status passing">Изменить</button>
+              <button class="status passing">Удалить</button>
+            </td>
+          </tr>
+          {{/each}}
+        {{else}}
+          <p>Здесь пока нет ни одного продукта</p>
+        {{/if}}
+        {{!-- <tr class="item-row">
           <td>5</td>
           <td>Молот-меч</td>
           <td>17</td>
@@ -121,10 +126,12 @@
             <button class="status passing">Изменить</button>
             <button class="status passing">Удалить</button>
           </td>
-        </tr>
+        </tr> --}}
       <tbody>
-    </table>
-    <table class="catalog-items" id="hats">
+      </table>
+    {{/each}}
+  
+    {{!-- <table class="catalog-items">
       <thead>
         <tr>
           <th>Артикул</th>
@@ -196,6 +203,6 @@
           </td>
         </tr>
       <tbody>
-    </table>
+    </table> --}}
   </div>
 </div>

@@ -2,14 +2,14 @@ module.exports = function(req, res, next) {
 
   if (req.session.isAuthenticated && req.session.user.admin === true) {
     res.locals.isAdmin = req.session.isAuthenticated;
-    if (req.session.user) {
-      res.locals.userId = req.session.user.id;
-    }
+    // if (req.session.user) {
+    //   res.locals.userId = req.session.user.id;
+    // }
   } else {
     res.locals.isAuth = req.session.isAuthenticated;
-    if (req.session.user) {
-      res.locals.userId = req.session.user.id;
-    }
+    // if (req.session.user) {
+    //   res.locals.userId = req.session.user.id;
+    // }
   }
   res.locals.csrf = req.csrfToken();
 

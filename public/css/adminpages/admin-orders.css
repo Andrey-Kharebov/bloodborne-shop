@@ -222,6 +222,8 @@
   border-radius: 5px;
 }
 
+
+/* перейти */
 .admin-panel .home-panel-orders .new-orders tbody tr td .passing {
   background: rgba(154, 154, 154, 0.2);
   color: rgb(154, 154, 154);
@@ -231,22 +233,32 @@
   color: rgb(51, 51, 51);
 }
 
+/* новый */
+.admin-panel .home-panel-orders .new-orders tbody tr td .new {
+  background: linear-gradient(180deg, #ede7f6 , #673ab7 );
+}
+
+/* обработка */
 .admin-panel .home-panel-orders .new-orders tbody tr td .processing {
   background: linear-gradient(180deg, #80d8ff , #0091ea );
 }
 
+/* заказано */
 .admin-panel .home-panel-orders .new-orders tbody tr td .ordered {
   background: linear-gradient(180deg, #ffe57f, #ffab00 );
 }
 
+/* доставка */
 .admin-panel .home-panel-orders .new-orders tbody tr td .delivery {
   background: linear-gradient(180deg, #a7ffeb, #00bfa5 );
 }
 
+ /* выполнен */
 .admin-panel .home-panel-orders .new-orders tbody tr td .completed {
   background: linear-gradient(180deg, #ccff90, #64dd17 );
 }
 
+/* отменен */
 .admin-panel .home-panel-orders .new-orders tbody tr td .rejected {
   background: linear-gradient(180deg, #795548, #3e2723 );
 }

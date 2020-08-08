@@ -3,6 +3,7 @@
 @import '/public/css/adminpages/admin-users.css';
 @import '/public/css/adminpages/admin-orders.css';
 @import '/public/css/adminpages/admin-catalog.css';
+@import '/public/css/adminpages/admin-order.css';
 
 body {
   font-family: 'Comfortaa', cursive;
@@ -194,6 +195,11 @@ body {
 .admin-sidenav .admin-sidenav-info .admin-sidenav-menu ul {
   display: flex;
   flex-direction: column;
+}
+
+.admin-sidenav .admin-sidenav-info .admin-sidenav-menu ul a {
+  text-decoration: none;
+  color: inherit;
 }
 
 .admin-sidenav .admin-sidenav-info .admin-sidenav-menu ul li {

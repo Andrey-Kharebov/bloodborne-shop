@@ -14,6 +14,7 @@ const path = require('path');
 // Middlewares
 const fileMiddleware = require('./middleware/file');
 const varMiddleware = require('./middleware/variables');
+const userMiddleware = require('./middleware/user');
 
 
 // Routes
@@ -35,6 +36,7 @@ const Category = require('./models/category');
 const Product = require('./models/product');
 const Order = require('./models/order');
 const OrderItem = require('./models/order-item');
+const Admin = require('./models/admin');
 
 
 // Assossiations 
@@ -90,6 +92,7 @@ app.use(session({
 }));
 app.use(csrf());
 app.use(flash());
+app.use(userMiddleware);
 app.use(varMiddleware);
 app.use(fileMiddleware.single('image')); // посмотреть еще раз после сессий
 

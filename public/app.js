@@ -490,7 +490,7 @@ window.addEventListener('DOMContentLoaded', () => {
       let LSCart = getCartData();
       for (let key in LSCart) {
         orderProductsList.innerHTML += `
-        <div class="order-product-item id="${key}">
+        <div class="order-product-item" id="${key}">
           <input type="hidden" name="products" value="${key},${LSCart[key]}">
           <h3>${LSCart[key][0]}</h3>
           <p>Размер: <span>${LSCart[key][2]}</span></p>

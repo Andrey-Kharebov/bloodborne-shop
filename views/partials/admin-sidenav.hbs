@@ -2,23 +2,23 @@
   <div class="admin-sidenav-info">
     <div class="admin-sidenav-info-profile">
       <div class="admin-sidenav-info-profile-img">
-        <img src="https://sun1-87.userapi.com/impf/lrot46ZLQR-DlGYVeAFMQL-mXiFYTXpLIZ8QUw/izdYd4HvDpE.jpg?size=400x0&quality=90&sign=69aec8c5ce41173fd51d5a5b9b053f45&ava=1" alt="admin">
+        <img src="https://telegram.org/file/811140509/b45/dQTLEwKZ9gs.22232.gif/4580677d940852f30e" alt="admin">
       </div>
       <div class="admin-sidenav-info-profile-name">
-        <p class="admin-profile-name">Диана Хабалова</p>
+        <p class="admin-profile-name">{{user.name}} {{user.surname}}</p>
         <p class="admin-profile-position">Проект-менеджер</p>
       </div>
     </div>
     <div class="admin-sidenav-info-email">
-      <p class="admin-email">dianakhabalova@gmail.com</p>
+      <p class="admin-email">{{user.email}}</p>
     </div>
     <div class="admin-sidenav-menu">
       <ul>
-        <li><p>Дашборд</p><i class="material-icons">home</i></li>
-        <li><p>Пользователи</p><i class="material-icons">people</i></li>
-        <li><p>Заказы</p><i class="material-icons">add_shopping_cart</i></li>
-        <li><p>Каталог</p><i class="material-icons">folder</i></li>
-        <li><p>Склад</p><i class="material-icons">local_mall</i></li>
+        <a href="/admin"><li><p>Дашборд</p><i class="material-icons">home</i></li></a>
+        <a href="/admin/users"><li><p>Пользователи</p><i class="material-icons">people</i></li></a>
+        <a href="/admin/orders"><li><p>Заказы</p><i class="material-icons">add_shopping_cart</i></li></a>
+        <a href="/admin/catalog"><li><p>Каталог</p><i class="material-icons">folder</i></li></a>
+        {{!-- <a href="/admin"><li><p>Склад</p><i class="material-icons">local_mall</i></li></a> --}}
       </ul>
     </div>
     <div class="admin-sidenav-menu-back-to-shop">

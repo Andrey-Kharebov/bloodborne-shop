@@ -27,15 +27,7 @@ router.post('/:id/step2', async (req, res) => {
       userId = req.session.user.id;
     }
     let products = req.body.products;
-    // console.log(JSON.stringify(req.body.products));
-    // console.log(JSON.stringify(req.body.products).length);
-    // console.log(JSON.stringify(req.body.products).match(/,/g).length); // >6
-
-    // products.forEach(item => {
-    //   let size = item.split(',')[3];
-    //   console.log(item.split(',')[0].replace(size, ''));
-    // });
-
+    
     let order = await Order.create({
         totalPrice: req.body.totalPrice,
         deliveryPrice: req.body.deliveryPrice,
@@ -64,9 +56,6 @@ router.post('/:id/step2', async (req, res) => {
         } else {
           products.forEach(async item => {
             let size = item.split(',')[3];
-            // console.log(order.id);
-            // console.log(item.split(',')[0].replace(size, ''));
-            // console.log(item);
 
             OrderItem.create({
               orderId: order.id,

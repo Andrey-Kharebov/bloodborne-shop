@@ -50,396 +50,53 @@
         </tr>
       </thead>
       <tbody>
-        <tr class="user-row">
-          <td>Екатерина Юрьева</td>
-          <td>yuryeva@yandex.ru</td>
-          <td>74359201023</td>
-          <td>02.03.2019</td>
-          <td><button class="status passing">Перейти</button></td>
-        </tr>
-        <tr class="user-brief-info-section">
-          <td colspan="5">
-            <div class="user-brief-info">
-              <div class="user-brief-info-contacts">
-                <p class="p-user-brief-info">Имя: <span>Екатерина Юрьева</span></p>
-                <p class="p-user-brief-info">Email: <span>yuryeva@yandex.ru</span></p>
-                <p class="p-user-brief-info">Тел. номер: <span>74359201023</span></p>
-                <p class="p-user-brief-info">Дата регистрации: <span>02.03.2019</span></p>
+        {{#if users.length}}
+          {{#each users}}
+            <tr class="user-row">
+            <td>{{name}} {{surname}}</td>
+            <td>{{email}}</td>
+            <td>{{phone}}</td>
+            <td>{{createdAt}}</td>
+            <td><button class="status passing">Перейти</button></td>
+            </tr>
+            <tr class="user-brief-info-section">
+            <td colspan="5">
+              <div class="user-brief-info">
+                <div class="user-brief-info-contacts">
+                  <p class="p-user-brief-info">Имя: <span>{{name}} {{surname}}</span></p>
+                  <p class="p-user-brief-info">Email: <span>{{email}}</span></p>
+                  <p class="p-user-brief-info">Тел. номер: <span>{{phone}}</span></p>
+                  <p class="p-user-brief-info">Дата регистрации: <span>{{createdAt}}</span></p>
+                </div>
+                <div class="user-brief-info-address">
+                  <p class="p-user-brief-info">Страна: <span>{{counrty}}</span></p>
+                  <p class="p-user-brief-info">Город: <span>{{town}}</span></p>
+                  <p class="p-user-brief-info">Регион: <span>{{region}}</span></p>
+                  <p class="p-user-brief-info">Индекс: <span>{{zipcode}}</span></p>
+                </div>
+                <div class="user-brief-info-orders">
+                  <p class="p-user-brief-info">Заказы: <span>{{orders.length}}</span></p>
+                  <p class="p-user-brief-info">Выполненные: <span>11</span></p>
+                  <p class="p-user-brief-info">Отмененные: <span>3</span></p>
+                  <p class="p-user-brief-info">Текущие: <span>1</span></p>
+                </div>
+                <div class="user-brief-info-last-orders">
+                  <ul>
+                    {{#if orders.length}}
+                      {{#each orders}}
+                        <li>
+                          <p class="p-user-brief-info" id="last-order">Заказ №: <span>{{id}}</span> от <span>{{createdAt}}</span>
+                          </p>
+                        </li>
+                      {{/each}}
+                    {{/if}}
+                  </ul>
+                </div>
               </div>
-              <div class="user-brief-info-address">
-                <p class="p-user-brief-info">Страна: <span>Россия</span></p>
-                <p class="p-user-brief-info">Город: <span>Москва</span></p>
-                <p class="p-user-brief-info">Регион: <span>Московская обл.</span></p>
-                <p class="p-user-brief-info">Индекс: <span>123319</span></p>
-              </div>
-              <div class="user-brief-info-orders">
-                <p class="p-user-brief-info">Заказы: <span>25</span></p>
-                <p class="p-user-brief-info">Выполненные: <span>11</span></p>
-                <p class="p-user-brief-info">Отмененные: <span>3</span></p>
-                <p class="p-user-brief-info">Текущие: <span>1</span></p>
-              </div>
-              <div class="user-brief-info-last-orders">
-                <ul>
-                  <li><p class="p-user-brief-info" id="last-order">Заказ №: <span>34865</span> от <span>17.07.2020</span></p></li>
-                  <li><p class="p-user-brief-info" id="last-order">Заказ №: <span>34321</span> от <span>29.06.2020</span></p></li>
-                  <li><p class="p-user-brief-info" id="last-order">Заказ №: <span>33920</span> от <span>11.06.2020</span></p></li>
-                  <li><p class="p-user-brief-info" id="last-order">Заказ №: <span>33365</span> от <span>22.05.2020</span></p></li>
-                </ul>
-              </div>
-            </div>
-          </td>
-        </tr>
-        <tr class="user-row">
-          <td>Дарья Политова</td>
-          <td>datya-pol@rambler.ru</td>
-          <td>74359000021</td>
-          <td>12.05.2020</td>
-          <td><button class="status passing">Перейти</button></td>
-        </tr>
-        <tr class="user-brief-info-section hidden">
-          <td colspan="5">
-            <div class="user-brief-info">
-              <div class="user-brief-info-contacts">
-                <p class="p-user-brief-info">Имя: <span>Екатерина Юрьева</span></p>
-                <p class="p-user-brief-info">Email: <span>yuryeva@yandex.ru</span></p>
-                <p class="p-user-brief-info">Тел. номер: <span>74359201023</span></p>
-                <p class="p-user-brief-info">Дата регистрации: <span>02.03.2019</span></p>
-              </div>
-              <div class="user-brief-info-address">
-                <p class="p-user-brief-info">Страна: <span>Россия</span></p>
-                <p class="p-user-brief-info">Город: <span>Москва</span></p>
-                <p class="p-user-brief-info">Регион: <span>Московская обл.</span></p>
-                <p class="p-user-brief-info">Индекс: <span>123319</span></p>
-              </div>
-              <div class="user-brief-info-orders">
-                <p class="p-user-brief-info">Заказы: <span>25</span></p>
-                <p class="p-user-brief-info">Выполненные: <span>11</span></p>
-                <p class="p-user-brief-info">Отмененные: <span>3</span></p>
-                <p class="p-user-brief-info">Текущие: <span>1</span></p>
-              </div>
-              <div class="user-brief-info-last-orders">
-                <ul>
-                  <li><p class="p-user-brief-info" id="last-order">Заказ №: <span>34865</span> от <span>17.07.2020</span></p></li>
-                  <li><p class="p-user-brief-info" id="last-order">Заказ №: <span>34321</span> от <span>29.06.2020</span></p></li>
-                  <li><p class="p-user-brief-info" id="last-order">Заказ №: <span>33920</span> от <span>11.06.2020</span></p></li>
-                  <li><p class="p-user-brief-info" id="last-order">Заказ №: <span>33365</span> от <span>22.05.2020</span></p></li>
-                </ul>
-              </div>
-            </div>
-          </td>
-        </tr>
-        <tr class="user-row">
-          <td>Алена Федорова</td>
-          <td>fedorova99@gmail.com</td>
-          <td>81236669312</td>
-          <td>22.05.2020</td>
-          <td><button class="status passing">Перейти</button></td>
-        </tr>
-        <tr class="user-brief-info-section">
-          <td colspan="5">
-            <div class="user-brief-info">
-              <div class="user-brief-info-contacts">
-                <p class="p-user-brief-info">Имя: <span>Екатерина Юрьева</span></p>
-                <p class="p-user-brief-info">Email: <span>yuryeva@yandex.ru</span></p>
-                <p class="p-user-brief-info">Тел. номер: <span>74359201023</span></p>
-                <p class="p-user-brief-info">Дата регистрации: <span>02.03.2019</span></p>
-              </div>
-              <div class="user-brief-info-address">
-                <p class="p-user-brief-info">Страна: <span>Россия</span></p>
-                <p class="p-user-brief-info">Город: <span>Москва</span></p>
-                <p class="p-user-brief-info">Регион: <span>Московская обл.</span></p>
-                <p class="p-user-brief-info">Индекс: <span>123319</span></p>
-              </div>
-              <div class="user-brief-info-orders">
-                <p class="p-user-brief-info">Заказы: <span>25</span></p>
-                <p class="p-user-brief-info">Выполненные: <span>11</span></p>
-                <p class="p-user-brief-info">Отмененные: <span>3</span></p>
-                <p class="p-user-brief-info">Текущие: <span>1</span></p>
-              </div>
-              <div class="user-brief-info-last-orders">
-                <ul>
-                  <li><p class="p-user-brief-info" id="last-order">Заказ №: <span>34865</span> от <span>17.07.2020</span></p></li>
-                  <li><p class="p-user-brief-info" id="last-order">Заказ №: <span>34321</span> от <span>29.06.2020</span></p></li>
-                  <li><p class="p-user-brief-info" id="last-order">Заказ №: <span>33920</span> от <span>11.06.2020</span></p></li>
-                  <li><p class="p-user-brief-info" id="last-order">Заказ №: <span>33365</span> от <span>22.05.2020</span></p></li>
-                </ul>
-              </div>
-            </div>
-          </td>
-        </tr>
-        <tr class="user-row">
-          <td>Екатерина Холмова</td>
-          <td>kholmova95@pk.ru</td>
-          <td>86679022020</td>
-          <td>29.01.2020</td>
-          <td><button class="status passing">Перейти</button></td>
-        </tr>
-        <tr class="user-brief-info-section">
-          <td colspan="5">
-            <div class="user-brief-info">
-              <div class="user-brief-info-contacts">
-                <p class="p-user-brief-info">Имя: <span>Екатерина Юрьева</span></p>
-                <p class="p-user-brief-info">Email: <span>yuryeva@yandex.ru</span></p>
-                <p class="p-user-brief-info">Тел. номер: <span>74359201023</span></p>
-                <p class="p-user-brief-info">Дата регистрации: <span>02.03.2019</span></p>
-              </div>
-              <div class="user-brief-info-address">
-                <p class="p-user-brief-info">Страна: <span>Россия</span></p>
-                <p class="p-user-brief-info">Город: <span>Москва</span></p>
-                <p class="p-user-brief-info">Регион: <span>Московская обл.</span></p>
-                <p class="p-user-brief-info">Индекс: <span>123319</span></p>
-              </div>
-              <div class="user-brief-info-orders">
-                <p class="p-user-brief-info">Заказы: <span>25</span></p>
-                <p class="p-user-brief-info">Выполненные: <span>11</span></p>
-                <p class="p-user-brief-info">Отмененные: <span>3</span></p>
-                <p class="p-user-brief-info">Текущие: <span>1</span></p>
-              </div>
-              <div class="user-brief-info-last-orders">
-                <ul>
-                  <li><p class="p-user-brief-info" id="last-order">Заказ №: <span>34865</span> от <span>17.07.2020</span></p></li>
-                  <li><p class="p-user-brief-info" id="last-order">Заказ №: <span>34321</span> от <span>29.06.2020</span></p></li>
-                  <li><p class="p-user-brief-info" id="last-order">Заказ №: <span>33920</span> от <span>11.06.2020</span></p></li>
-                  <li><p class="p-user-brief-info" id="last-order">Заказ №: <span>33365</span> от <span>22.05.2020</span></p></li>
-                </ul>
-              </div>
-            </div>
-          </td>
-        </tr>
-        <tr class="user-row">
-          <td>Дарья Гудкова</td>
-          <td>dasha@yandex.ru</td>
-          <td>70102343592</td>
-          <td>11.07.2020</td>
-          <td><button class="status passing">Перейти</button></td>
-        </tr>
-        <tr class="user-brief-info-section">
-          <td colspan="5">
-            <div class="user-brief-info">
-              <div class="user-brief-info-contacts">
-                <p class="p-user-brief-info">Имя: <span>Екатерина Юрьева</span></p>
-                <p class="p-user-brief-info">Email: <span>yuryeva@yandex.ru</span></p>
-                <p class="p-user-brief-info">Тел. номер: <span>74359201023</span></p>
-                <p class="p-user-brief-info">Дата регистрации: <span>02.03.2019</span></p>
-              </div>
-              <div class="user-brief-info-address">
-                <p class="p-user-brief-info">Страна: <span>Россия</span></p>
-                <p class="p-user-brief-info">Город: <span>Москва</span></p>
-                <p class="p-user-brief-info">Регион: <span>Московская обл.</span></p>
-                <p class="p-user-brief-info">Индекс: <span>123319</span></p>
-              </div>
-              <div class="user-brief-info-orders">
-                <p class="p-user-brief-info">Заказы: <span>25</span></p>
-                <p class="p-user-brief-info">Выполненные: <span>11</span></p>
-                <p class="p-user-brief-info">Отмененные: <span>3</span></p>
-                <p class="p-user-brief-info">Текущие: <span>1</span></p>
-              </div>
-              <div class="user-brief-info-last-orders">
-                <ul>
-                  <li><p class="p-user-brief-info" id="last-order">Заказ №: <span>34865</span> от <span>17.07.2020</span></p></li>
-                  <li><p class="p-user-brief-info" id="last-order">Заказ №: <span>34321</span> от <span>29.06.2020</span></p></li>
-                  <li><p class="p-user-brief-info" id="last-order">Заказ №: <span>33920</span> от <span>11.06.2020</span></p></li>
-                  <li><p class="p-user-brief-info" id="last-order">Заказ №: <span>33365</span> от <span>22.05.2020</span></p></li>
-                </ul>
-              </div>
-            </div>
-          </td>
-        </tr>
-        <tr class="user-row">
-          <td>Екатерина Юрьева</td>
-          <td>yuryeva@yandex.ru</td>
-          <td>74359201023</td>
-          <td>02.03.2019</td>
-          <td><button class="status passing">Перейти</button></td>
-        </tr>
-        <tr class="user-brief-info-section">
-          <td colspan="5">
-            <div class="user-brief-info">
-              <div class="user-brief-info-contacts">
-                <p class="p-user-brief-info">Имя: <span>Екатерина Юрьева</span></p>
-                <p class="p-user-brief-info">Email: <span>yuryeva@yandex.ru</span></p>
-                <p class="p-user-brief-info">Тел. номер: <span>74359201023</span></p>
-                <p class="p-user-brief-info">Дата регистрации: <span>02.03.2019</span></p>
-              </div>
-              <div class="user-brief-info-address">
-                <p class="p-user-brief-info">Страна: <span>Россия</span></p>
-                <p class="p-user-brief-info">Город: <span>Москва</span></p>
-                <p class="p-user-brief-info">Регион: <span>Московская обл.</span></p>
-                <p class="p-user-brief-info">Индекс: <span>123319</span></p>
-              </div>
-              <div class="user-brief-info-orders">
-                <p class="p-user-brief-info">Заказы: <span>25</span></p>
-                <p class="p-user-brief-info">Выполненные: <span>11</span></p>
-                <p class="p-user-brief-info">Отмененные: <span>3</span></p>
-                <p class="p-user-brief-info">Текущие: <span>1</span></p>
-              </div>
-              <div class="user-brief-info-last-orders">
-                <ul>
-                  <li><p class="p-user-brief-info" id="last-order">Заказ №: <span>34865</span> от <span>17.07.2020</span></p></li>
-                  <li><p class="p-user-brief-info" id="last-order">Заказ №: <span>34321</span> от <span>29.06.2020</span></p></li>
-                  <li><p class="p-user-brief-info" id="last-order">Заказ №: <span>33920</span> от <span>11.06.2020</span></p></li>
-                  <li><p class="p-user-brief-info" id="last-order">Заказ №: <span>33365</span> от <span>22.05.2020</span></p></li>
-                </ul>
-              </div>
-            </div>
-          </td>
-        </tr>
-        <tr class="user-row">
-          <td>Дарья Политова</td>
-          <td>datya-pol@rambler.ru</td>
-          <td>74359000021</td>
-          <td>12.05.2020</td>
-          <td><button class="status passing">Перейти</button></td>
-        </tr>
-        <tr class="user-brief-info-section hidden">
-          <td colspan="5">
-            <div class="user-brief-info">
-              <div class="user-brief-info-contacts">
-                <p class="p-user-brief-info">Имя: <span>Екатерина Юрьева</span></p>
-                <p class="p-user-brief-info">Email: <span>yuryeva@yandex.ru</span></p>
-                <p class="p-user-brief-info">Тел. номер: <span>74359201023</span></p>
-                <p class="p-user-brief-info">Дата регистрации: <span>02.03.2019</span></p>
-              </div>
-              <div class="user-brief-info-address">
-                <p class="p-user-brief-info">Страна: <span>Россия</span></p>
-                <p class="p-user-brief-info">Город: <span>Москва</span></p>
-                <p class="p-user-brief-info">Регион: <span>Московская обл.</span></p>
-                <p class="p-user-brief-info">Индекс: <span>123319</span></p>
-              </div>
-              <div class="user-brief-info-orders">
-                <p class="p-user-brief-info">Заказы: <span>25</span></p>
-                <p class="p-user-brief-info">Выполненные: <span>11</span></p>
-                <p class="p-user-brief-info">Отмененные: <span>3</span></p>
-                <p class="p-user-brief-info">Текущие: <span>1</span></p>
-              </div>
-              <div class="user-brief-info-last-orders">
-                <ul>
-                  <li><p class="p-user-brief-info" id="last-order">Заказ №: <span>34865</span> от <span>17.07.2020</span></p></li>
-                  <li><p class="p-user-brief-info" id="last-order">Заказ №: <span>34321</span> от <span>29.06.2020</span></p></li>
-                  <li><p class="p-user-brief-info" id="last-order">Заказ №: <span>33920</span> от <span>11.06.2020</span></p></li>
-                  <li><p class="p-user-brief-info" id="last-order">Заказ №: <span>33365</span> от <span>22.05.2020</span></p></li>
-                </ul>
-              </div>
-            </div>
-          </td>
-        </tr>
-        <tr class="user-row">
-          <td>Алена Федорова</td>
-          <td>fedorova99@gmail.com</td>
-          <td>81236669312</td>
-          <td>22.05.2020</td>
-          <td><button class="status passing">Перейти</button></td>
-        </tr>
-        <tr class="user-brief-info-section">
-          <td colspan="5">
-            <div class="user-brief-info">
-              <div class="user-brief-info-contacts">
-                <p class="p-user-brief-info">Имя: <span>Екатерина Юрьева</span></p>
-                <p class="p-user-brief-info">Email: <span>yuryeva@yandex.ru</span></p>
-                <p class="p-user-brief-info">Тел. номер: <span>74359201023</span></p>
-                <p class="p-user-brief-info">Дата регистрации: <span>02.03.2019</span></p>
-              </div>
-              <div class="user-brief-info-address">
-                <p class="p-user-brief-info">Страна: <span>Россия</span></p>
-                <p class="p-user-brief-info">Город: <span>Москва</span></p>
-                <p class="p-user-brief-info">Регион: <span>Московская обл.</span></p>
-                <p class="p-user-brief-info">Индекс: <span>123319</span></p>
-              </div>
-              <div class="user-brief-info-orders">
-                <p class="p-user-brief-info">Заказы: <span>25</span></p>
-                <p class="p-user-brief-info">Выполненные: <span>11</span></p>
-                <p class="p-user-brief-info">Отмененные: <span>3</span></p>
-                <p class="p-user-brief-info">Текущие: <span>1</span></p>
-              </div>
-              <div class="user-brief-info-last-orders">
-                <ul>
-                  <li><p class="p-user-brief-info" id="last-order">Заказ №: <span>34865</span> от <span>17.07.2020</span></p></li>
-                  <li><p class="p-user-brief-info" id="last-order">Заказ №: <span>34321</span> от <span>29.06.2020</span></p></li>
-                  <li><p class="p-user-brief-info" id="last-order">Заказ №: <span>33920</span> от <span>11.06.2020</span></p></li>
-                  <li><p class="p-user-brief-info" id="last-order">Заказ №: <span>33365</span> от <span>22.05.2020</span></p></li>
-                </ul>
-              </div>
-            </div>
-          </td>
-        </tr>
-        <tr class="user-row">
-          <td>Екатерина Холмова</td>
-          <td>kholmova95@pk.ru</td>
-          <td>86679022020</td>
-          <td>29.01.2020</td>
-          <td><button class="status passing">Перейти</button></td>
-        </tr>
-        <tr class="user-brief-info-section">
-          <td colspan="5">
-            <div class="user-brief-info">
-              <div class="user-brief-info-contacts">
-                <p class="p-user-brief-info">Имя: <span>Екатерина Юрьева</span></p>
-                <p class="p-user-brief-info">Email: <span>yuryeva@yandex.ru</span></p>
-                <p class="p-user-brief-info">Тел. номер: <span>74359201023</span></p>
-                <p class="p-user-brief-info">Дата регистрации: <span>02.03.2019</span></p>
-              </div>
-              <div class="user-brief-info-address">
-                <p class="p-user-brief-info">Страна: <span>Россия</span></p>
-                <p class="p-user-brief-info">Город: <span>Москва</span></p>
-                <p class="p-user-brief-info">Регион: <span>Московская обл.</span></p>
-                <p class="p-user-brief-info">Индекс: <span>123319</span></p>
-              </div>
-              <div class="user-brief-info-orders">
-                <p class="p-user-brief-info">Заказы: <span>25</span></p>
-                <p class="p-user-brief-info">Выполненные: <span>11</span></p>
-                <p class="p-user-brief-info">Отмененные: <span>3</span></p>
-                <p class="p-user-brief-info">Текущие: <span>1</span></p>
-              </div>
-              <div class="user-brief-info-last-orders">
-                <ul>
-                  <li><p class="p-user-brief-info" id="last-order">Заказ №: <span>34865</span> от <span>17.07.2020</span></p></li>
-                  <li><p class="p-user-brief-info" id="last-order">Заказ №: <span>34321</span> от <span>29.06.2020</span></p></li>
-                  <li><p class="p-user-brief-info" id="last-order">Заказ №: <span>33920</span> от <span>11.06.2020</span></p></li>
-                  <li><p class="p-user-brief-info" id="last-order">Заказ №: <span>33365</span> от <span>22.05.2020</span></p></li>
-                </ul>
-              </div>
-            </div>
-          </td>
-        </tr>
-        <tr class="user-row">
-          <td>Дарья Гудкова</td>
-          <td>dasha@yandex.ru</td>
-          <td>70102343592</td>
-          <td>11.07.2020</td>
-          <td><button class="status passing">Перейти</button></td>
-        </tr>
-        <tr class="user-brief-info-section">
-          <td colspan="5">
-            <div class="user-brief-info">
-              <div class="user-brief-info-contacts">
-                <p class="p-user-brief-info">Имя: <span>Екатерина Юрьева</span></p>
-                <p class="p-user-brief-info">Email: <span>yuryeva@yandex.ru</span></p>
-                <p class="p-user-brief-info">Тел. номер: <span>74359201023</span></p>
-                <p class="p-user-brief-info">Дата регистрации: <span>02.03.2019</span></p>
-              </div>
-              <div class="user-brief-info-address">
-                <p class="p-user-brief-info">Страна: <span>Россия</span></p>
-                <p class="p-user-brief-info">Город: <span>Москва</span></p>
-                <p class="p-user-brief-info">Регион: <span>Московская обл.</span></p>
-                <p class="p-user-brief-info">Индекс: <span>123319</span></p>
-              </div>
-              <div class="user-brief-info-orders">
-                <p class="p-user-brief-info">Заказы: <span>25</span></p>
-                <p class="p-user-brief-info">Выполненные: <span>11</span></p>
-                <p class="p-user-brief-info">Отмененные: <span>3</span></p>
-                <p class="p-user-brief-info">Текущие: <span>1</span></p>
-              </div>
-              <div class="user-brief-info-last-orders">
-                <ul>
-                  <li><p class="p-user-brief-info" id="last-order">Заказ №: <span>34865</span> от <span>17.07.2020</span></p></li>
-                  <li><p class="p-user-brief-info" id="last-order">Заказ №: <span>34321</span> от <span>29.06.2020</span></p></li>
-                  <li><p class="p-user-brief-info" id="last-order">Заказ №: <span>33920</span> от <span>11.06.2020</span></p></li>
-                  <li><p class="p-user-brief-info" id="last-order">Заказ №: <span>33365</span> от <span>22.05.2020</span></p></li>
-                </ul>
-              </div>
-            </div>
-          </td>
-        </tr>
+            </td>
+            </tr>
+          {{/each}}
+        {{/if}}
       <tbody>
     </table>
   </div>

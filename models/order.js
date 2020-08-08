@@ -1,6 +1,7 @@
 const Sequelize = require('sequelize');
 const sequelize = require('../utils/database');
 
+let offset = +3;
 const Order = sequelize.define('order', {
   id: {
     type: Sequelize.BIGINT,
@@ -50,6 +51,18 @@ const Order = sequelize.define('order', {
   paid: {
     type: Sequelize.BOOLEAN,
     defaultValue: false
+  },
+  status: {
+    type: Sequelize.STRING,
+    defaultValue: 'new'
+  },
+  createdAt: {
+    type: Sequelize.DataTypes.DATE,
+    defaultValue: new Date( new Date().getTime() + offset * 3600 * 1000)
+  },
+  updatedAt: {
+    type: Sequelize.DataTypes.DATE,
+    defaultValue: new Date( new Date().getTime() + offset * 3600 * 1000)
   }
 });
 

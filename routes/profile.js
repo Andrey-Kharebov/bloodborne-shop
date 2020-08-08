@@ -51,21 +51,6 @@ router.get('/orders', auth, async (req, res) => {
     ]
   });
 
-  // orders.forEach(item => {
-  //   item.products.forEach(async product => {
-  //     let orderItems = await Promise.all(orders.map(async (item) => {
-  //       return await OrderItem.findAll({
-  //         where: {
-  //           productId: product.id
-  //         }
-  //       });
-  //     }));
-  //     product.dataValues.orderItem = orderItems;
-  //   });
-  // });
-
-
-
   res.render('profile-orders', {
     title: 'My orders',
     isMyOrders: true,
