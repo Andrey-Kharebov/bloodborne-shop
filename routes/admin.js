@@ -121,7 +121,9 @@ router.post('/order/:id', admin, async (req, res) => {
 });
 
 router.post('/orderitem/:id', admin, async (req, res) => {
-
+  let totalPrice = 0;
+  let deliveryPrice = 0;
+  let totalCost = 0;
   const order = await Order.findOne({
     where: {
       id: req.body.orderId
@@ -129,23 +131,51 @@ router.post('/orderitem/:id', admin, async (req, res) => {
     include: {
       model: OrderItem
     }
-  });
-
-  order.orderItems.forEach(async (item) => {
-    if (item.id === +req.body.id) {
-      const orderItem = await OrderItem.findOne({
-        where: {
-          id: req.body.id
-        }
-      });
-      await orderItem.update({
-        size: req.body.size,
-        quantity: req.body.quantity
-      });
+  })
+  .then(async (order) => {
+    for (let key in order.orderItems) {
+      if (order.orderItems[key].id === +req.body.id) {
+        const orderItem = await OrderItem.findOne({
+          where: {
+            id: req.body.id
+          }
+        })
+        orderItem.update({
+          size: req.body.size,
+          quantity: req.body.quantity
+        })
+        .then(async () => {
+          const updatedOrder = await Order.findOne({
+            where: {
+              id: req.body.orderId
+            },
+            include: {
+              model: OrderItem
+            }
+          })
+          return updatedOrder;
+        })
+        .then(async (order) => {
+          for (let key in order.orderItems) {
+            const product = await Product.findOne({
+              where: {
+                id: order.orderItems[key].productId
+              }
+            })
+            totalPrice += order.orderItems[key].quantity * product.price;
+            deliveryPrice += ((5 / 100) * totalPrice);
+            totalCost = (totalPrice + deliveryPrice);
+            order.update({
+              totalPrice: totalPrice,
+              deliveryPrice: deliveryPrice,
+              totalCost: totalCost
+            })
+          }
+        })
+      }  
     }
-  });
-
-  console.log(req.body);
+  })
+  
   res.redirect(`/admin/order/${req.body.orderId}`);
 });
 
