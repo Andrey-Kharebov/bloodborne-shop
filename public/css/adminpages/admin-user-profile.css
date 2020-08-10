@@ -1,0 +1,8 @@
+.admin-order-panel .order-info .admin-orders-plates {
+  margin-top: 0;
+}
+
+.admin-order-panel .order-info .admin-orders-plates .second-plate {
+  max-width: 630px;
+  width: 100%;
+}

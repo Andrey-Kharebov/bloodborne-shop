@@ -1,3 +1,6 @@
+@import '/public/css/adminpages/order-status.css';
+
+
 .admin-panel .admin-home-panel .panel-heading {
   display: flex;
   justify-content: left;
@@ -119,45 +122,4 @@
 .admin-panel .home-panel-orders .new-orders tbody tr:last-child {
   border-bottom: none;
 }
-
-
-/* Statuses */
-
-.admin-panel .home-panel-orders .new-orders tbody tr td .status {
-  width: 90px;
-  height: 25px;
-  text-align: center;
-  vertical-align: center;
-  color: #fff;
-  font-weight: 700;
-  text-transform: uppercase;
-  font-size: 11px;
-  border: none;
-  border-radius: 5px;
-}
-
-
-
-
-
-.admin-panel .home-panel-orders .new-orders tbody tr td .processing {
-  background: linear-gradient(180deg, #80d8ff , #0091ea );
-}
-
-.admin-panel .home-panel-orders .new-orders tbody tr td .ordered {
-  background: linear-gradient(180deg, #ffe57f, #ffab00 );
-}
-
-.admin-panel .home-panel-orders .new-orders tbody tr td .delivery {
-  background: linear-gradient(180deg, #a7ffeb, #00bfa5 );
-}
-
-.admin-panel .home-panel-orders .new-orders tbody tr td .completed {
-  background: linear-gradient(180deg, #ccff90, #64dd17 );
-}
-
-.admin-panel .home-panel-orders .new-orders tbody tr td .rejected {
-  background: linear-gradient(180deg, #795548, #3e2723 );
-}
-
 

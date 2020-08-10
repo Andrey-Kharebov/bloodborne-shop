@@ -1,0 +1,140 @@
+<div class="admin-order-panel">
+  <div class="panel-heading">
+    <div class="panel-heading-logo">
+      <i class="material-icons">person</i>
+    </div>
+    <div class="panel-heading-text">
+      <h1>{{userProfile.name}} {{userProfile.surname}}</h1>
+    </div>
+  </div>
+  <div class="admin-order-plates">
+    <div class="second-plate">
+      <div class="second-plate-icons">
+        <p class="icon"><i class="material-icons">person</i></p>
+        <p class="icon"><i class="material-icons" id="edit">edit</i></p>
+      </div>
+      <form action="/admin/profile/{{userProfile.id}}" method="post">
+        <div class="plate-user-info change-unactive">
+          <div class="input-field">
+            <label for="surname">Фамилия: </label>
+            <input type="text" id="surname" name="userProfileme" value="{{userProfile.surname}}" disabled>
+          </div>
+          <div class="input-field">
+            <label for="name">Имя:</label>
+            <input type="text" id="name" name="name" value="{{userProfile.name}}" disabled>
+          </div>
+          <div class="input-field">
+            <label for="patronymic">Отчество:</label>
+            <input type="text" id="patronymic" name="patronymic" value="{{userProfile.patronymic}}" disabled>
+          </div>
+          <hr>
+          <div class="input-field">
+            <label for="phone">Телефон:</label>
+            <input type="text" id="phone" name="phone" value="{{userProfile.phone}}" disabled>
+          </div>
+          <div class="input-field">
+            <label for="email">Эл. почта:</label>
+            <input type="text" id="email" name="email" value="{{userProfile.email}}" disabled>
+          </div>
+          <hr>
+          <div class="input-field">
+            <label for="country">Страна:</label>
+            <input type="text" id="country" name="country" value="{{userProfile.country}}" disabled>
+          </div>
+          <div class="input-field">
+            <label for="town">Город:</label>
+            <input type="text" id="town" name="town" value="{{userProfile.town}}" disabled>
+          </div>
+          <div class="input-field">
+            <label for="region">Край/Область/Регион:</label>
+            <input type="text" id="region" name="region" value="{{userProfile.region}}" disabled>
+          </div>
+          <div class="input-field">
+            <label for="address">Улица, дом, квартира:</label>
+            <input type="text" id="address" name="address" value="{{userProfile.address}}" disabled>
+          </div>
+          <div class="input-field">
+            <label for="zipcode">Почтовый индекс:</label>
+            <input type="number" id="zipcode" name="zipcode" value="{{userProfile.zipcode}}" disabled>
+          </div>
+          <div class="save-changes-btn">
+            <input type="hidden" name="_csrf" value="{{csrf}}">
+            <input type="hidden" name="id" value="{{userProfile.id}}">
+            <button type="submit">Сохранить изменения</button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="order-info">
+      <div class="admin-orders-plates">
+        <div class="second-plate">
+          <p class="icon"><i class="material-icons">person</i></p>
+          <div class="plate-user-info">
+            <p class="plate-user-name">Пользователь: <span>{{userProfile.name}} {{userProfile.surname}}</span></p>
+            <p class="plate-user-statistic">Статистика пользователя</p>
+            <hr>
+            <p class="user-plate-orders">Заказы:</p>
+            <p>Выполненные: <span>{{orderStat.completedOrders}}</span></p>
+            <p>Отмененные: <span>{{orderStat.rejectedOrders}}</span></p>
+            <p>Текущие: <span>{{orderStat.processingOrders}}</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="home-panel-orders">
+    <h2>Заказы</h2>
+    <table class="new-orders">
+      <thead>
+        <tr>
+          <th>Номер заказа</th>
+          <th>Имя</th>
+          <th>Тел. номер</th>
+          <th>Стоимость</th>
+          <th>Действия</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#if userOrders.length}}
+        {{#each userOrders}}
+        <tr class="order-row">
+          <td>{{id}}</td>
+          <td>{{name}} {{surname}}</td>
+          <td>{{phone}}</td>
+          <td>{{totalCost}}</td>
+          <td>
+            <button class="status {{status}}">{{status}}</button>
+            <a href="/admin/order/{{id}}" target="_blank"><button class="status passing">Перейти</button></a>
+          </td>
+        </tr>
+        <tr class="order-brief-info-section">
+          <td colspan="5">
+            <div class="order-brief-info">
+              <div class="order-brief-info-contacts">
+                <p class="p-order-brief-info">Имя: <span>{{name}} {{surname}}</span></p>
+                <p class="p-order-brief-info">Email: <span>{{email}}</span></p>
+                <p class="p-order-brief-info">Тел. номер: <span>{{phone}}</span></p>
+              </div>
+              <div class="order-brief-info-address">
+                <p class="p-order-brief-info">Страна: <span>{{country}}</span></p>
+                <p class="p-order-brief-info">Город: <span>{{town}}</span></p>
+                <p class="p-order-brief-info">Регион: <span>{{region}}</span></p>
+                <p class="p-order-brief-info">Улица, дом, квартира: <br><span>{{address}}</span></p>
+                <p class="p-order-brief-info">Индекс: <span>{{zipcode}}</span></p>
+              </div>
+              <div class="order-brief-info-orders">
+                {{#each orderItems}}
+                <p class="p-order-brief-info">{{title}} <span>{{size}}</span> <span>{{quantity}} шт.</span></p>
+                {{/each}}
+              </div>
+            </div>
+          </td>
+        </tr>
+        {{/each}}
+        {{else}}
+        <p>Здесь пока нет ни одного заказа.</p>
+        {{/if}}
+      <tbody>
+    </table>
+  </div>
+</div>

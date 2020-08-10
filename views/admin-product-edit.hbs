@@ -1,0 +1,59 @@
+<div class="admin-order-panel">
+  <div class="panel-heading">
+    <div class="panel-heading-logo">
+      <i class="material-icons">add_shopping_cart</i>
+    </div>
+    <div class="panel-heading-text">
+      <h1>Редактирование продукта: '{{product.title}}'</h1>
+    </div>
+  </div>
+  <div class="admin-order-plates">
+    <div class="second-plate">
+      <div class="second-plate-icons">
+        <p class="icon"><i class="material-icons">person</i></p>
+        <p class="icon"><i class="material-icons" id="edit">edit</i></p>
+      </div>
+      <form action="/admin/product/{{product.id}}/edit/?_csrf={{csrf}}" method="post" enctype="multipart/form-data">
+        <div class="plate-user-info change-unactive">
+          <div class="input-field">
+            <label for="title">Название: </label>
+            <input type="text" name="title" value="{{product.title}}" disabled>
+          </div>
+          {{#if categories}}
+          <div class="input-field">
+            <label>Категория</label>
+            <select name="categoryId" disabled>
+              <option value="{{@root.product.categoryId}}" selected>{{category.title}}</option>
+              {{#each categories}}
+              <option value="{{id}}">{{title}}</option>
+              {{/each}}
+            </select>
+          </div>
+          {{/if}}
+          <div class="input-field">
+            <label for="price">Стоимость:</label>
+            <input type="number" name="price" value="{{product.price}}" disabled>
+          </div>
+          <hr>
+          <div class="input-field">
+            <span>Файл:</span>
+            <input id="image" name="image" type="file" disabled>
+          </div>
+          <div class="input-field">
+            <span>{{product.imageUrl}}</span>
+          </div>
+          <hr>
+          <div class="input-field">
+            <label for="description">Описание:</label>
+            <textarea id="description" name="description" disabled>{{product.description}}</textarea>
+          </div>
+          <hr>
+          <div class="save-changes-btn">
+            <input type="hidden" name="id" value="{{product.id}}">
+            <button type="submit">Сохранить изменения</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

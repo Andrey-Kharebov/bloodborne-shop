@@ -22,7 +22,6 @@ const categoriesRoutes = require('./routes/categories');
 const homeRoutes = require('./routes/home');
 const faqRoutes = require('./routes/faq');
 const orderStatusRoutes = require('./routes/order-status');
-const addRoutes = require('./routes/add');
 const productRoutes = require('./routes/products');
 const ordersRoutes = require('./routes/orders');
 const adminRoutes = require('./routes/admin');
@@ -36,7 +35,6 @@ const Category = require('./models/category');
 const Product = require('./models/product');
 const Order = require('./models/order');
 const OrderItem = require('./models/order-item');
-const Admin = require('./models/admin');
 
 
 // Assossiations 
@@ -100,7 +98,6 @@ app.use('/', homeRoutes);
 app.use('/categories', categoriesRoutes);
 app.use('/faq', faqRoutes);
 app.use('/order-status', orderStatusRoutes);
-app.use('/add', addRoutes);
 app.use('/products', productRoutes);
 app.use('/order', ordersRoutes);
 app.use('/admin', adminRoutes);

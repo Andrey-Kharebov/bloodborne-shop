@@ -13,6 +13,10 @@
       <div class="search-by">
         <div class="search-by-id-number">
           <label>Артикул</label>
+          <input type="number">
+        </div>
+        <div class="search-by-title">
+          <label>Название</label>
           <input type="text">
         </div>
       </div>
@@ -20,23 +24,22 @@
     <div class="second-plate">
       <p class="icon"><i class="material-icons">folder</i></p>
       <div class="plate-catalog-info">
-        <p class="plate-catalog-name"><span>Секира Охотника</span></p>
+        <p class="plate-catalog-name"><span></span></p>
         <hr>
         <div class="plate-catalog-item-info">
           <div class="plate-catalog-item-img">
-            <img src="https://4.bp.blogspot.com/-faR0qtx8Vso/WxtJjdT9MTI/AAAAAAAAYVo/4BOZxR895n83TBScaYsKuqCk3pkPv31dgCLcBGAs/s1600/menu_knowledge_01003.png" alt="">
           </div>
           <div class="plate-catalog-item-text">
-            <p>Стоимость: <span>1100</span></p>
-            <p>Остаток: <span>28</span></p>
+            <p>Стоимость: <span class="plate-price"></span></p>
+            <p>Остаток: <span class="plate-quantity"></span></p>
           </div>
           <div class="plate-catalog-item-residue">
-                <p>Размер: <span>S</span> <span>2 шт</span></p>
-                <p>Размер: <span>M</span> <span>5 шт</span></p>
-                <p>Размер: <span>L</span> <span>10 шт</span></p>
-                <p>Размер: <span>XL</span> <span>2 шт</span></p>
-                <p>Размер: <span>2XL</span> <span>4 шт</span></p>
-                <p>Размер: <span>3XL</span> <span>4 шт</span></p>
+            <p>Размер: <span>S</span> <span>99 шт</span></p>
+            <p>Размер: <span>M</span> <span>99 шт</span></p>
+            <p>Размер: <span>L</span> <span>99 шт</span></p>
+            <p>Размер: <span>XL</span> <span>99 шт</span></p>
+            <p>Размер: <span>2XL</span> <span>99 шт</span></p>
+            <p>Размер: <span>3XL</span> <span>99 шт</span></p>
           </div>
         </div>
       </div>
@@ -46,11 +49,11 @@
     <h2>Каталог</h2>
     <div class="catalog-tabs">
       {{#each categories}}
-        <button class="category-tab">{{title}}</button>
+      <button class="category-tab">{{title}}</button>
       {{/each}}
     </div>
     {{#each categories}}
-      <table class="catalog-items">
+    <table class="catalog-items">
       <thead>
         <tr>
           <th>Артикул</th>
@@ -62,147 +65,28 @@
       </thead>
       <tbody>
         {{#if products}}
-          {{#each products}}
-          <tr class="item-row">
-            <td>{{id}}</td>
-            <td>{{title}}</td>
-            <td>99</td>
-            <td>{{price}}</td>
-            <td>
-              <button class="status passing">Изменить</button>
-              <button class="status passing">Удалить</button>
-            </td>
-          </tr>
-          {{/each}}
+        {{#each products}}
+        <tr class="item-row">
+          <td class="productId">{{id}}</td>
+          <td class="productTitle">{{title}}</td>
+          <td class="productQuantity">99</td>
+          <td class="productPrice">{{price}}</td>
+          <td>
+            <a href="/admin/product/{{id}}/edit"><button class="status passing">Изменить</button></a>
+            <form action="/admin/product/{{id}}/remove" method="POST">
+              <input type="hidden" name="_csrf" value="{{@root.csrf}}">
+              <input type="hidden" name="id" value="{{id}}">
+              <button typa="submit" class="status passing">Удалить</button>
+            </form>
+          </td>
+          <input id="imageUrl" type="hidden" name="img" value="/{{imageUrl}}">
+        </tr>
+        {{/each}}
         {{else}}
-          <p>Здесь пока нет ни одного продукта</p>
+        <p>Здесь пока нет ни одного продукта</p>
         {{/if}}
-        {{!-- <tr class="item-row">
-          <td>5</td>
-          <td>Молот-меч</td>
-          <td>17</td>
-          <td>3000</td>
-          <td>
-            <button class="status passing">Изменить</button>
-            <button class="status passing">Удалить</button>
-          </td>
-        </tr>
-        <tr class="item-row">
-          <td>14</td>
-          <td>Меч Людвига</td>
-          <td>1</td>
-          <td>12300</td>
-          <td>
-            <button class="status passing">Изменить</button>
-            <button class="status passing">Удалить</button>
-          </td>
-        </tr>
-        <tr class="item-row">
-          <td>1</td>
-          <td>Секира Охотника</td>
-          <td>28</td>
-          <td>1100</td>
-          <td>
-            <button class="status passing">Изменить</button>
-            <button class="status passing">Удалить</button>
-          </td>
-        </tr>
-        <tr class="item-row">
-          <td>2</td>
-          <td>Чикаге</td>
-          <td>13</td>
-          <td>1000</td>
-          <td>
-            <button class="status passing">Изменить</button>
-            <button class="status passing">Удалить</button>
-          </td>
-        </tr>
-        <tr class="item-row">
-          <td>3</td>
-          <td>Мушкетон Охотника</td>
-          <td>6</td>
-          <td>1700</td>
-          <td>
-            <button class="status passing">Изменить</button>
-            <button class="status passing">Удалить</button>
-          </td>
-        </tr> --}}
       <tbody>
-      </table>
+    </table>
     {{/each}}
-  
-    {{!-- <table class="catalog-items">
-      <thead>
-        <tr>
-          <th>Артикул</th>
-          <th>Название</th>
-          <th>Остаток</th>
-          <th>Стоимость</th>
-          <th>Действия</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr class="item-row">
-          <td>32</td>
-          <td>Шапка охотниуа</td>
-          <td>1</td>
-          <td>124000</td>
-          <td>
-            <button class="status passing">Изменить</button>
-            <button class="status passing">Удалить</button>
-          </td>
-        </tr>
-        <tr class="item-row">
-          <td>5</td>
-          <td>Молот-меч</td>
-          <td>17</td>
-          <td>3000</td>
-          <td>
-            <button class="status passing">Изменить</button>
-            <button class="status passing">Удалить</button>
-          </td>
-        </tr>
-        <tr class="item-row">
-          <td>14</td>
-          <td>Меч Людвига</td>
-          <td>1</td>
-          <td>12300</td>
-          <td>
-            <button class="status passing">Изменить</button>
-            <button class="status passing">Удалить</button>
-          </td>
-        </tr>
-        <tr class="item-row">
-          <td>1</td>
-          <td>Секира Охотника</td>
-          <td>28</td>
-          <td>1100</td>
-          <td>
-            <button class="status passing">Изменить</button>
-            <button class="status passing">Удалить</button>
-          </td>
-        </tr>
-        <tr class="item-row">
-          <td>2</td>
-          <td>Чикаге</td>
-          <td>13</td>
-          <td>1000</td>
-          <td>
-            <button class="status passing">Изменить</button>
-            <button class="status passing">Удалить</button>
-          </td>
-        </tr>
-        <tr class="item-row">
-          <td>3</td>
-          <td>Мушкетон Охотника</td>
-          <td>6</td>
-          <td>1700</td>
-          <td>
-            <button class="status passing">Изменить</button>
-            <button class="status passing">Удалить</button>
-          </td>
-        </tr>
-      <tbody>
-    </table> --}}
   </div>
 </div>

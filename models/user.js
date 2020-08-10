@@ -1,5 +1,7 @@
 const Sequelize = require('sequelize');
-const { Op } = require('sequelize');
+const {
+  Op
+} = require('sequelize');
 const sequelize = require('../utils/database');
 const Order = require('../models/order');
 const OrderItem = require('../models/order-item');
@@ -9,15 +11,15 @@ const Product = require('../models/product');
 let offset = +3;
 const User = sequelize.define('user', {
   id: {
-      type: Sequelize.INTEGER,
-      autoIncrement: true,
-      allowNull: false,
-      primaryKey: true
+    type: Sequelize.INTEGER,
+    autoIncrement: true,
+    allowNull: false,
+    primaryKey: true
   },
   email: {
     type: Sequelize.STRING,
     allowNull: false
-  }, 
+  },
   password: {
     type: Sequelize.STRING,
     allowNull: false
@@ -55,30 +57,32 @@ const User = sequelize.define('user', {
   },
   createdAt: {
     type: Sequelize.DataTypes.DATE,
-    defaultValue: new Date( new Date().getTime() + offset * 3600 * 1000)
+    defaultValue: new Date(new Date().getTime() + offset * 3600 * 1000)
   },
   updatedAt: {
     type: Sequelize.DataTypes.DATE,
-    defaultValue: new Date( new Date().getTime() + offset * 3600 * 1000)
+    defaultValue: new Date(new Date().getTime() + offset * 3600 * 1000)
   }
 });
 
-User.prototype.adminLastOrders = async function() {
-  const orders = await Order.findAll({ 
-    limit: 5, 
-    order: [ ['id',  'DESC'] ] 
+User.prototype.adminLastOrders = async function () {
+  const orders = await Order.findAll({
+    limit: 5,
+    order: [
+      ['id', 'DESC']
+    ]
   });
 
   return orders;
 };
 
-User.prototype.adminMonthOrdersQuantity = async function() {
+User.prototype.adminMonthOrdersQuantity = async function () {
   let yesterday = new Date();
   yesterday.setDate(yesterday.getDate() - 1);
-  yesterday.setHours(3,0,0,0);
+  yesterday.setHours(3, 0, 0, 0);
 
   let today = new Date();
-  today.setHours(3,0,0,0);
+  today.setHours(3, 0, 0, 0);
 
   let offset = +3;
   console.log(yesterday);
@@ -97,17 +101,17 @@ User.prototype.adminMonthOrdersQuantity = async function() {
     where: {
       createdAt: {
         [Op.gte]: today,
-        [Op.lt]: new Date( new Date().getTime() + offset * 3600 * 1000)
+        [Op.lt]: new Date(new Date().getTime() + offset * 3600 * 1000)
       }
     }
   };
-  
+
   let yesterdayDay = await Order.findAll(yesterdayQuery);
   let todayDay = await Order.findAll(todayQuery);
   let a = yesterdayDay;
   let b = todayDay;
 
-  let ordersStatistic = { 
+  let ordersStatistic = {
     increase: 0,
     percents: 0
   };
@@ -134,13 +138,13 @@ User.prototype.adminMonthOrdersQuantity = async function() {
 
 };
 
-User.prototype.adminMonthUsersQuantity = async function() {
+User.prototype.adminMonthUsersQuantity = async function () {
   let yesterday = new Date();
   yesterday.setDate(yesterday.getDate() - 1);
-  yesterday.setHours(3,0,0,0);
+  yesterday.setHours(3, 0, 0, 0);
 
   let today = new Date();
-  today.setHours(3,0,0,0);
+  today.setHours(3, 0, 0, 0);
 
   let offset = +3;
   console.log(yesterday);
@@ -159,17 +163,17 @@ User.prototype.adminMonthUsersQuantity = async function() {
     where: {
       createdAt: {
         [Op.gte]: today,
-        [Op.lt]: new Date( new Date().getTime() + offset * 3600 * 1000)
+        [Op.lt]: new Date(new Date().getTime() + offset * 3600 * 1000)
       }
     }
   };
-  
+
   let yesterdayDay = await User.findAll(yesterdayQuery);
   let todayDay = await User.findAll(todayQuery);
   let a = yesterdayDay;
   let b = todayDay;
 
-  let ordersStatistic = { 
+  let ordersStatistic = {
     increase: 0,
     percents: 0
   };
@@ -195,21 +199,43 @@ User.prototype.adminMonthUsersQuantity = async function() {
   return ordersStatistic;
 };
 
-User.prototype.adminFetchUsers = async function() {
+User.prototype.adminFetchUsers = async function () {
   const users = await User.findAll({
-    order: [ ['createdAt',  'DESC'] ],
+    order: [
+      ['createdAt', 'DESC']
+    ],
     include: {
       model: Order
     }
   });
 
+  let completedOrders = 0,
+    rejectedOrders = 0,
+    processingOrders = 0;
+
+  for (let key in users) {
+    for (let order in users[key].orders) {
+      // console.log(users[key].orders[order].status);
+
+      if (users[key].orders[order].status == 'completed') {
+        completedOrders++;
+      } else if (users[key].orders[order].status == 'rejected') {
+        rejectedOrders++;
+      } else {
+        processingOrders++;
+      }
+    }
+    users[key].completedOrders = completedOrders;
+    users[key].rejectedOrders = rejectedOrders;
+    users[key].processingOrders = processingOrders;
+  }
+
   users.forEach(item => {
-    // let date = new Date(i.dataValues.createdAt).toUTCString();
     let date = new Date(item.dataValues.createdAt);
     date = (date.getDate() + '-' + date.getMonth() + '-' + date.getFullYear());
     item.dataValues.createdAt = date;
 
-    let ordersQuantity = item.orders.length; 
+    let ordersQuantity = item.orders.length;
 
     item.orders.reverse(); // от последнего к первому
     item.orders.splice(4); // обрезание после 4-го элемента
@@ -221,33 +247,48 @@ User.prototype.adminFetchUsers = async function() {
     });
 
     item.orders.length = ordersQuantity; // задает изначальное значение, т.к. после splice значение = 4
-
   });
 
   return users;
 };
 
-User.prototype.adminFetchOrders = async function() {
-  const orders = await Order.findAll({
-    order: [ ['id',  'DESC'] ],
-    include: {
-      model: OrderItem
-    }
-  });
+User.prototype.adminFetchOrders = async function (user) {
+  if (user) {
+    const orders = await Order.findAll({
+      where: {
+        userId: user.id
+      },
+      order: [
+        ['id', 'DESC']
+      ],
+      include: {
+        model: OrderItem
+      }
+    });
+    return orders;
 
-  console.log(orders);
+  } else {
+    const orders = await Order.findAll({
+      order: [
+        ['id', 'DESC']
+      ],
+      include: {
+        model: OrderItem
+      }
+    });
+    return orders;
 
-  return orders;
+  }
+
 };
 
-User.prototype.adminFetchCategories = async function() {
+User.prototype.adminFetchCategories = async function () {
   const categories = await Category.findAll({
     include: {
       model: Product
     }
   });
 
-  console.log(categories)
   return categories;
 };
 

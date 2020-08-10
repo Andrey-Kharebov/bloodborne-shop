@@ -1,3 +1,6 @@
+@import '/public/css/adminpages/order-status.css';
+
+
 .admin-panel .admin-users-panel .panel-heading {
   display: flex;
   justify-content: left;
@@ -187,11 +190,17 @@
   justify-content: space-around;
 }
 
+.admin-panel .home-panel-users .new-users tbody .user-brief-info .user-brief-info-last-orders #last-order a {
+  text-decoration: none;
+  color: rgb(154, 154, 154);
+}
+
+
 .admin-panel .home-panel-users .new-users tbody .user-brief-info .user-brief-info-last-orders #last-order {
   pointer-events: all;
 }
 
-.admin-panel .home-panel-users .new-users tbody .user-brief-info .user-brief-info-last-orders #last-order:hover {
+.admin-panel .home-panel-users .new-users tbody .user-brief-info .user-brief-info-last-orders #last-order a:hover {
   cursor: pointer;
   color: rgb(51, 51, 51);
   font-weight: 500;
@@ -204,31 +213,4 @@
 
 
 
-
-
-
-
-/* Statuses */
-
-.admin-panel .home-panel-users .new-users tbody tr td .status {
-  width: 90px;
-  height: 25px;
-  text-align: center;
-  vertical-align: center;
-  color: #fff;
-  font-weight: 700;
-  text-transform: uppercase;
-  font-size: 11px;
-  border: none;
-  border-radius: 5px;
-}
-
-.admin-panel .home-panel-users .new-users tbody tr td .passing {
-  background: rgba(154, 154, 154, 0.2);
-  color: rgb(154, 154, 154);
-}
-
-.admin-panel .home-panel-users .new-users tbody tr td .passing:hover {
-  color: rgb(51, 51, 51);
-}
 

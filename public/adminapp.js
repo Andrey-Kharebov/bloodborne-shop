@@ -32,6 +32,7 @@ window.addEventListener('DOMContentLoaded', () => {
       categoryTabsParent = document.querySelector('.catalog-tabs'),
       tables = document.querySelectorAll('.catalog-items');
 
+
     function hideTables() {
       tables.forEach(item => {
         item.style.display = 'none';
@@ -67,10 +68,12 @@ window.addEventListener('DOMContentLoaded', () => {
     hideTables();
     showTables();
   }
+  
 
 
 
-  // Order info change inputs
+
+  // Admin order change inputs
 
   function adminOrderChangeUserInputs() {
     const changeBtn = document.querySelector('#edit'),
@@ -87,6 +90,10 @@ window.addEventListener('DOMContentLoaded', () => {
           if (inputSec.querySelector('select')) {
             inputSec.querySelector('select').disabled = false;
           }
+          if (inputSec.querySelector('textarea')) {
+            inputSec.querySelector('textarea').disabled = false;
+          }
+          
   
           event.target.textContent = 'check';
         } else {
@@ -96,6 +103,9 @@ window.addEventListener('DOMContentLoaded', () => {
           });
           if (inputSec.querySelector('select')) {
             inputSec.querySelector('select').disabled = true;
+          }
+          if (inputSec.querySelector('textarea')) {
+            inputSec.querySelector('textarea').disabled = true;
           }
   
           event.target.textContent = 'edit';
@@ -130,7 +140,6 @@ window.addEventListener('DOMContentLoaded', () => {
             if (properRow.querySelector('select')) {
               properRow.querySelector('select').disabled = true;
             }
-  
             event.target.style.display = 'block';
             event.target.textContent = 'edit';
             postBtn.style.display = 'none';
@@ -140,19 +149,88 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  // Admin order change status
+
+  function adminOrderChangeOrderStatus() {
+    let changeStatusBtn = document.querySelector('.changeStatusBtn'),
+        saveStatusBtn = document.querySelector('.saveStatusBtn'),
+        statusSelect = document.querySelector('.admin-order-status-flex-item.select');
+
+    changeStatusBtn.addEventListener('click', (event) => {
+      console.log('boom');
+      statusSelect.classList.toggle('select-active');
+      if (statusSelect.classList.contains('select-active')) {
+        statusSelect.style.display = 'block';
+        saveStatusBtn.style.display = 'block';
+        changeStatusBtn.textContent = 'Отмена';
+      } else {
+        statusSelect.style.display = 'none';
+        saveStatusBtn.style.display = 'none';
+        changeStatusBtn.textContent = 'Изменить';
+      }
+    });
+  }
+
+  // Admin user info in second plate 
+
+  function userCardInfo() {
+    let userRowSection = document.querySelectorAll('.user-row'),
+      plateName = document.querySelector('.plate-user-name span'),
+      plateCompletedOrders = document.querySelector('.plate-completed span'),
+      plateRejectedOrders = document.querySelector('.plate-rejected span'),
+      plateProcessingOrders = document.querySelector('.plate-processing span');
+
+    userRowSection.forEach((item) => {
+      item.addEventListener('click', (event) => {
+        console.log(event.currentTarget);
+        plateName.textContent = event.currentTarget.nextElementSibling.querySelector('.user-brief-info-contacts #name span').textContent;
+        plateCompletedOrders.textContent = event.currentTarget.nextElementSibling.querySelector('#completed span').textContent
+        plateRejectedOrders.textContent = event.currentTarget.nextElementSibling.querySelector('#rejected span').textContent
+        plateProcessingOrders.textContent = event.currentTarget.nextElementSibling.querySelector('#processing span').textContent
+      });
+    });
+
+  }
+
+  // Admin catalog info in second plate
+
+  function catalogCardInfo() {
+    let productRowSection = document.querySelectorAll('.item-row'),
+      plateName = document.querySelector('.plate-catalog-name span'),
+      plateImg = document.querySelector('.plate-catalog-item-img'),
+      platePrice = document.querySelector('.plate-price'),
+      plateQuantity = document.querySelector('.plate-quantity');
+
+    productRowSection.forEach((item) => {
+      item.addEventListener('click', (event) => {
+        console.log(event.currentTarget);
+        plateName.textContent = event.currentTarget.querySelector('.productTitle').textContent;
+        plateImg.innerHTML = `
+          <img src='${event.currentTarget.querySelector('#imageUrl').value}' alt='${event.currentTarget.querySelector('.productTitle').textContent}'>
+        `;
+        platePrice.textContent = event.currentTarget.querySelector('.productPrice').textContent;
+        plateQuantity.textContent = event.currentTarget.querySelector('.productQuantity').textContent;
+      //   plateCompletedOrders.textContent = event.currentTarget.nextElementSibling.querySelector('#completed span').textContent
+      //   plateRejectedOrders.textContent = event.currentTarget.nextElementSibling.querySelector('#rejected span').textContent
+      //   plateProcessingOrders.textContent = event.currentTarget.nextElementSibling.querySelector('#processing span').textContent
+      });
+    });
+  }
 
 
 
 
-
-
-
-
-
+  userCardInfo();  
+  catalogCardInfo()
+  if (document.querySelector('.changeStatusBtn')) {
+    adminOrderChangeOrderStatus();
+  }
   adminOrderChangeUserInputs();
   adminOrderChangeOrderItemInputs();
   searchInput();
   showBriefInfoSection('.user-row');
   showBriefInfoSection('.order-row');
-  showCatalogTabs();
+  if (document.querySelector('.catalog-tabs')) {
+    showCatalogTabs();
+  }
 });

@@ -80,7 +80,6 @@
           <tbody>
             {{#each order.orderItems}}
             <tr class="order-table-row change-unactive">
-              {{!-- <input type="hidden" name="price" value="{{price}}"> --}}
               <form action="/admin/orderitem/{{id}}" method="post">
                 <td>
                   <p>{{productId}}</p>
@@ -102,12 +101,12 @@
                 <td><input type="text" name="quantity" value="{{quantity}}" disabled></td>
                 <td>
                   <p class="icon"><i class="material-icons" id="row-edit">edit</i></p>
-                  
+
                   <p class="icon">
                     <input type="hidden" name="id" value="{{id}}">
                     <input type="hidden" name="orderId" value="{{@root.order.id}}">
                     <input type="hidden" name="productId" value="{{productId}}">
-                    
+
                     <input type="hidden" name="_csrf" value="{{@root.csrf}}">
                     <button type="submit"><i class="material-icons">check</i></button>
                   </p>
@@ -123,6 +122,33 @@
         <p>Стоимость доставки: <span>{{order.deliveryPrice}} отг. к.</span></p>
         <hr>
         <p>Итого к оплате: <span>{{order.totalCost}} отг. к.</span></p>
+        <hr>
+        <form action="/admin/order/{{order.id}}" method="post">
+          <div class="admin-order-status">
+            <form action="/admin/order/{{order.id}}" method="post">
+              <div class="admin-order-status-flex-item">
+                <button class="status {{order.status}}">{{rusStatus}}</button>
+              </div>
+              <div class="admin-order-status-flex-item select">
+                <select name="status">
+                  <option value="{{order.status}}" selected>{{rusStatus}}</option>
+                  <option value="new">Новый</option>
+                  <option value="processing">Обработка</option>
+                  <option value="ordered">Заказано</option>
+                  <option value="delivery">Доставка</option>
+                  <option value="completed">Выполнен</option>
+                  <option value="rejected">Отменен</option>
+                </select>
+              </div>
+              <div class="admin-order-status-flex-item">
+                <input type="hidden" name="id" value="{{order.id}}">
+                <input type="hidden" name="_csrf" value="{{@root.csrf}}">
+                <button type="submit" class="saveStatusBtn">Сохранить</button>
+                <button type="button" class="changeStatusBtn">Изменить</button>
+              </div>
+            </form>
+          </div>
+        </form>
       </div>
     </div>
   </div>

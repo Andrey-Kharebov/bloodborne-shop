@@ -4,6 +4,7 @@
 @import '/public/css/adminpages/admin-orders.css';
 @import '/public/css/adminpages/admin-catalog.css';
 @import '/public/css/adminpages/admin-order.css';
+@import '/public/css/adminpages/admin-user-profile.css';
 
 body {
   font-family: 'Comfortaa', cursive;

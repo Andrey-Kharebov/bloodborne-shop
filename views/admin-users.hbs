@@ -27,13 +27,13 @@
     <div class="second-plate">
       <p class="icon"><i class="material-icons">person</i></p>
       <div class="plate-user-info">
-        <p class="plate-user-name">Пользователь: <span>Екатерина Юрьева</span></p>
+        <p class="plate-user-name">Пользователь: <span></span></p>
         <p class="plate-user-statistic">Статистика пользователя</p>
         <hr>
         <p class="user-plate-orders">Заказы:</p>
-        <p>Выполненные: <span>11</span></p>
-        <p>Отмененные: <span>3</span></p>
-        <p>Текущие: <span>1</span></p>
+        <p class="plate-completed">Выполненные: <span></span></p>
+        <p class="plate-rejected">Отмененные: <span></span></p>
+        <p class="plate-processing">Текущие: <span></span></p>
       </div>
     </div>
   </div>
@@ -57,13 +57,13 @@
             <td>{{email}}</td>
             <td>{{phone}}</td>
             <td>{{createdAt}}</td>
-            <td><button class="status passing">Перейти</button></td>
+            <td><a href="/admin/profile/{{id}}"><button class="status passing">Перейти</button></a></td>
             </tr>
             <tr class="user-brief-info-section">
             <td colspan="5">
               <div class="user-brief-info">
                 <div class="user-brief-info-contacts">
-                  <p class="p-user-brief-info">Имя: <span>{{name}} {{surname}}</span></p>
+                  <p class="p-user-brief-info" id="name">Имя: <span>{{name}} {{surname}}</span></p>
                   <p class="p-user-brief-info">Email: <span>{{email}}</span></p>
                   <p class="p-user-brief-info">Тел. номер: <span>{{phone}}</span></p>
                   <p class="p-user-brief-info">Дата регистрации: <span>{{createdAt}}</span></p>
@@ -76,16 +76,16 @@
                 </div>
                 <div class="user-brief-info-orders">
                   <p class="p-user-brief-info">Заказы: <span>{{orders.length}}</span></p>
-                  <p class="p-user-brief-info">Выполненные: <span>11</span></p>
-                  <p class="p-user-brief-info">Отмененные: <span>3</span></p>
-                  <p class="p-user-brief-info">Текущие: <span>1</span></p>
+                  <p class="p-user-brief-info" id="completed">Выполненные: <span>{{completedOrders}}</span></p>
+                  <p class="p-user-brief-info" id="rejected">Отмененные: <span>{{rejectedOrders}}</span></p>
+                  <p class="p-user-brief-info" id="processing">Текущие: <span>{{processingOrders}}</span></p>
                 </div>
                 <div class="user-brief-info-last-orders">
                   <ul>
                     {{#if orders.length}}
                       {{#each orders}}
                         <li>
-                          <p class="p-user-brief-info" id="last-order">Заказ №: <span>{{id}}</span> от <span>{{createdAt}}</span>
+                          <a href="/admin/order/{{id}}" target="_blank"><p class="p-user-brief-info" id="last-order">Заказ №: <span>{{id}}</span> от <span>{{createdAt}}</span></a>             
                           </p>
                         </li>
                       {{/each}}

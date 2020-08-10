@@ -15,8 +15,9 @@
         </a>
         {{#if @root.isAdmin}}
         <div class="edit_delete">
-          <a href="/products/{{id}}/edit?allow=true"><button class="product-edit"><i class="far fa-edit"></i></button></a>
-          <form action="/products/{{id}}/remove" method="POST">
+          <a href="/admin/product/{{id}}/edit"><button class="product-edit"><i class="far fa-edit"></i></button></a>
+          <form action="/admin/product/{{id}}/remove" method="POST">
+            <input type="hidden" name="_csrf" value="{{@root.csrf}}">
             <input type="hidden" name="id" value="{{product.id}}">
             <button class="product-delete"><i class="far fa-trash-alt"></i></button>
           </form>

@@ -1,0 +1,55 @@
+/* Statuses */
+
+.status {
+  width: 90px;
+  height: 25px;
+  text-align: center;
+  vertical-align: center;
+  color: #fff;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 11px;
+  border: none;
+  border-radius: 5px;
+}
+
+
+/* перейти */
+.passing {
+  background: rgba(154, 154, 154, 0.2);
+  color: rgb(154, 154, 154);
+}
+
+.passing:hover {
+  color: rgb(51, 51, 51);
+}
+
+/* новый */
+.new {
+  background: linear-gradient(180deg, #ede7f6 , #673ab7 );
+}
+
+/* обработка */
+.processing {
+  background: linear-gradient(180deg, #80d8ff , #0091ea );
+}
+
+/* заказано */
+.ordered {
+  background: linear-gradient(180deg, #ffe57f, #ffab00 );
+}
+
+/* доставка */
+.delivery {
+  background: linear-gradient(180deg, #a7ffeb, #00bfa5 );
+}
+
+ /* выполнен */
+.completed {
+  background: linear-gradient(180deg, #ccff90, #64dd17 );
+}
+
+/* отменен */
+.rejected {
+  background: linear-gradient(180deg, #795548, #3e2723 );
+}

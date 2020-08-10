@@ -1,3 +1,5 @@
+@import '/public/css/adminpages/order-status.css';
+
 .admin-panel .admin-order-panel .panel-heading {
   display: flex;
   justify-content: left;
@@ -245,4 +247,43 @@
 
 .admin-panel .admin-order-plates .order-info .order-products-cost hr {
   margin-top: 20px;
+}
+
+.admin-panel .admin-order-plates .order-info .order-products-cost .admin-order-status {
+  display: flex;
+  align-items: center;
+}
+
+.admin-panel .admin-order-plates .order-info .order-products-cost .admin-order-status .admin-order-status-flex-item {
+  margin-right: 20px;
+}
+
+.admin-panel .admin-order-plates .order-info .order-products-cost .admin-order-status .admin-order-status-flex-item.select {
+  display: none;
+}
+
+.admin-panel .admin-order-plates .order-info .order-products-cost .admin-order-status .admin-order-status-flex-item:nth-child(3) {
+  display: flex;
+}
+
+.admin-panel .admin-order-plates .order-info .order-products-cost .admin-order-status .admin-order-status-flex-item:nth-child(3) button {
+  margin-top: 0;
+  border: none;
+  background: rgb(0,0,0,0);
+  color: #fff;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 5px 5px;
+}
+
+.admin-panel .admin-order-plates .order-info .order-products-cost .admin-order-status .admin-order-status-flex-item:nth-child(3) button:hover {
+  background: rgb(0, 0, 0, 0.1);
+  border-radius: 5px;
+}
+
+.admin-panel .admin-order-plates .order-info .order-products-cost .admin-order-status .admin-order-status-flex-item .changeStatusBtn {
+}
+
+.admin-panel .admin-order-plates .order-info .order-products-cost .admin-order-status .admin-order-status-flex-item .saveStatusBtn {
+  display: none;
 }
