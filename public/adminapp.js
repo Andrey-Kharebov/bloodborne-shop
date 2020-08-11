@@ -218,8 +218,19 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 
 
+  // Show notifcations circle 
+
+  function showNotification(notifcationSelector) {
+    const notifcationCircle = document.querySelector(notifcationSelector);
+
+    if (notifcationCircle.querySelector('p').textContent > 0) {
+      notifcationCircle.style.display = 'block';
+    }
+  }
 
 
+
+  showNotification('.bell-notification');
   userCardInfo();  
   catalogCardInfo()
   if (document.querySelector('.changeStatusBtn')) {
