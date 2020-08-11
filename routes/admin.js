@@ -218,7 +218,7 @@ router.post('/orderitem/:id', admin, async (req, res) => {
 router.get('/product/add', admin, async (req, res) => {
   const user = req.user;
   const categories = await Category.findAll();
-  res.render('add', {
+  res.render('admin-product-add', {
     layout: 'admin',
     title: 'Adding page',
     categories,

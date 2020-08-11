@@ -1,0 +1,59 @@
+<div class="admin-order-panel">
+  <div class="panel-heading">
+    <div class="panel-heading-logo">
+      <i class="material-icons">add_shopping_cart</i>
+    </div>
+    <div class="panel-heading-text">
+      <h1>Добавить новый продукт</h1>
+    </div>
+  </div>
+  <div class="admin-order-plates">
+    <div class="second-plate">
+      <div class="second-plate-icons">
+        <p class="icon"><i class="material-icons">person</i></p>
+        <p class="icon"><i class="material-icons" id="edit">edit</i></p>
+      </div>
+      <form action="/admin/product/add/?_csrf={{csrf}}" method="post" enctype="multipart/form-data">
+        <div class="plate-user-info change-unactive">
+          <div class="input-field">
+            <label for="title">Название: </label>
+            <input type="text" name="title">
+          </div>
+          {{#if categories}}
+          <div class="input-field">
+            <label>Категория</label>
+            <select name="categoryId">
+              <option value="" selected></option>
+              {{#each categories}}
+              <option value="{{id}}">{{title}}</option>
+              {{/each}}
+            </select>
+          </div>
+          {{/if}}
+          <div class="input-field">
+            <label for="price">Стоимость:</label>
+            <input type="number" name="price">
+          </div>
+          <hr>
+          <div class="input-field">
+            <span>Файл:</span>
+            <input id="image" name="image" type="file">
+          </div>
+          <div class="input-field">
+            <span></span>
+          </div>
+          <hr>
+          <div class="input-field">
+            <label for="description">Описание:</label>
+            <textarea id="description" name="description"></textarea>
+          </div>
+          <hr>
+          <div class="save-changes-btn">
+            <input type="hidden" name="id" value="{{product.id}}">
+            <button type="submit">Сохранить изменения</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

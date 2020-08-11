@@ -137,6 +137,10 @@
   font-weight: 700;
 }
 
+.admin-panel .home-panel-catalog .add-product-btn {
+  margin-top: 10px;
+}
+
 .admin-panel .home-panel-catalog .catalog-tabs {
   margin-top: 20px;
   display: flex;
