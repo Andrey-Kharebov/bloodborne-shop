@@ -68,9 +68,6 @@ window.addEventListener('DOMContentLoaded', () => {
     hideTables();
     showTables();
   }
-  
-
-
 
 
   // Admin order change inputs
@@ -93,8 +90,8 @@ window.addEventListener('DOMContentLoaded', () => {
           if (inputSec.querySelector('textarea')) {
             inputSec.querySelector('textarea').disabled = false;
           }
-          
-  
+
+
           event.target.textContent = 'check';
         } else {
           inputSec.classList.add('change-unactive');
@@ -107,7 +104,7 @@ window.addEventListener('DOMContentLoaded', () => {
           if (inputSec.querySelector('textarea')) {
             inputSec.querySelector('textarea').disabled = true;
           }
-  
+
           event.target.textContent = 'edit';
         }
       });
@@ -153,8 +150,8 @@ window.addEventListener('DOMContentLoaded', () => {
 
   function adminOrderChangeOrderStatus() {
     let changeStatusBtn = document.querySelector('.changeStatusBtn'),
-        saveStatusBtn = document.querySelector('.saveStatusBtn'),
-        statusSelect = document.querySelector('.admin-order-status-flex-item.select');
+      saveStatusBtn = document.querySelector('.saveStatusBtn'),
+      statusSelect = document.querySelector('.admin-order-status-flex-item.select');
 
     changeStatusBtn.addEventListener('click', (event) => {
       console.log('boom');
@@ -203,16 +200,12 @@ window.addEventListener('DOMContentLoaded', () => {
 
     productRowSection.forEach((item) => {
       item.addEventListener('click', (event) => {
-        console.log(event.currentTarget);
         plateName.textContent = event.currentTarget.querySelector('.productTitle').textContent;
         plateImg.innerHTML = `
           <img src='${event.currentTarget.querySelector('#imageUrl').value}' alt='${event.currentTarget.querySelector('.productTitle').textContent}'>
         `;
         platePrice.textContent = event.currentTarget.querySelector('.productPrice').textContent;
         plateQuantity.textContent = event.currentTarget.querySelector('.productQuantity').textContent;
-      //   plateCompletedOrders.textContent = event.currentTarget.nextElementSibling.querySelector('#completed span').textContent
-      //   plateRejectedOrders.textContent = event.currentTarget.nextElementSibling.querySelector('#rejected span').textContent
-      //   plateProcessingOrders.textContent = event.currentTarget.nextElementSibling.querySelector('#processing span').textContent
       });
     });
   }
@@ -229,9 +222,51 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 
 
+  // Admin catalog search by id
 
+  function searchBy(searchInputSelector, searchBySelector) {
+    const inputBy = document.querySelector(searchInputSelector),
+      homePanelCatalog = document.querySelector('.home-panel-catalog'),
+      searchPanelCatalog = document.querySelector('.search-home-panel-catalog');
+    
+    if (inputBy) {
+      inputBy.addEventListener('input', (event) => {
+        searchPanelCatalog.style.display = 'block';
+        homePanelCatalog.style.display = 'none';
+        searchPanelCatalog.querySelector('tbody').innerHTML = '';
+        let val = event.target.value.trim().toLowerCase();
+        let ids = document.querySelectorAll(searchBySelector);
+
+        if (val != '') {
+          ids.forEach(item => {
+            if (item.textContent.trim().toLowerCase().search(val) == -1) {
+              item.parentElement.style.display = 'none';
+            } else {
+              item.parentElement.style.display = 'table-row';
+              let itemClone = item.parentElement.cloneNode(true);
+              searchPanelCatalog.querySelector('tbody').appendChild(itemClone);
+            }
+          })
+        } else {
+          searchPanelCatalog.style.display = 'none';
+          searchPanelCatalog.querySelector('tbody').innerHTML = '';
+          ids.forEach(item => {
+            item.parentElement.style.display = 'table-row';
+          })
+          homePanelCatalog.style.display = 'block';
+        }
+      })
+    }
+  }
+
+
+
+
+
+  searchBy('#search-by-id', '.productId');
+  searchBy('#search-by-title', '.productTitle');
   showNotification('.bell-notification');
-  userCardInfo();  
+  userCardInfo();
   catalogCardInfo()
   if (document.querySelector('.changeStatusBtn')) {
     adminOrderChangeOrderStatus();
