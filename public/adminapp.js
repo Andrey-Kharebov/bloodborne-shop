@@ -30,7 +30,7 @@ window.addEventListener('DOMContentLoaded', () => {
   function showCatalogTabs() {
     let categoryTabs = document.querySelectorAll('.category-tab'),
       categoryTabsParent = document.querySelector('.catalog-tabs'),
-      tables = document.querySelectorAll('.catalog-items');
+      tables = document.querySelectorAll('.home-panel-table');
 
 
     function hideTables() {
@@ -224,10 +224,10 @@ window.addEventListener('DOMContentLoaded', () => {
 
   // Admin catalog search by id
 
-  function searchBy(searchInputSelector, searchBySelector) {
-    const inputBy = document.querySelector(searchInputSelector),
-      homePanelCatalog = document.querySelector('.home-panel-catalog'),
-      searchPanelCatalog = document.querySelector('.search-home-panel-catalog');
+  function searchBy(searchInputBlockSelector, searchBySelector, homePanelSelector) {
+    const inputBy = document.querySelector(searchInputBlockSelector),
+      homePanelCatalog = document.querySelector(homePanelSelector),
+      searchPanelCatalog = document.querySelector('.search-home-panel');
     
     if (inputBy) {
       inputBy.addEventListener('input', (event) => {
@@ -260,11 +260,17 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 
 
+  searchBy('.search-by-user-name', '.userName', '.home-panel');
+  searchBy('.search-by-user-email', '.userEmail', '.home-panel');
+  searchBy('.search-by-user-phone', '.userPhone', '.home-panel');
 
 
+  searchBy('.search-by-order-number', '.orderId', '.home-panel');
+  searchBy('.search-by-order-email', '.orderEmail', '.home-panel');
+  searchBy('.search-by-order-phone', '.orderPhone', '.home-panel');
 
-  searchBy('#search-by-id', '.productId');
-  searchBy('#search-by-title', '.productTitle');
+  searchBy('#search-by-product-id', '.productId', '.home-panel');
+  searchBy('#search-by-product-title', '.productTitle', '.home-panel');
   showNotification('.bell-notification');
   userCardInfo();
   catalogCardInfo()

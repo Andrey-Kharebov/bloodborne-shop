@@ -5,6 +5,8 @@
 @import '/public/css/adminpages/admin-catalog.css';
 @import '/public/css/adminpages/admin-order.css';
 @import '/public/css/adminpages/admin-user-profile.css';
+@import '/public/css/adminpages/search-section.css';
+@import '/public/css/adminpages/home-panel.css';
 
 body {
   font-family: 'Comfortaa', cursive;

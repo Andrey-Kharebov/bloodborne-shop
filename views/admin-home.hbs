@@ -27,9 +27,9 @@
       <p class="plate-result">Увеличение на {{monthUsersQuantity.percents}}%</p>
     </div>
   </div>
-  <div class="home-panel-orders">
+  <div class="home-panel">
     <h2>Новые заказы</h2>
-    <table class="new-orders">
+    <table class="home-panel-table">
       <thead>
         <tr>
           <th>Имя</th>
@@ -41,16 +41,20 @@
       </thead>
       <tbody>
         {{#each lastOrders}}
-          <tr>
-            <td>{{name}} {{surname}}</td>
-            <td>{{email}}</td>
-            <td>{{phone}}</td>
-            <td>{{totalCost}}</td>
-            <td>
+        <tr>
+          <td>{{name}} {{surname}}</td>
+          <td>{{email}}</td>
+          <td>{{phone}}</td>
+          <td>{{totalCost}}</td>
+          <td>
+            <div class="td-element">
               <button class="status {{status}}">{{status}}</button>
+            </div>
+            <div class="td-element">
               <a href="/admin/order/{{id}}"><button class="status passing">Перейти</button></a>
-            </td>
-          </tr>         
+            </div>
+          </td>
+        </tr>
         {{/each}}
       <tbody>
     </table>

@@ -111,32 +111,20 @@
 
 
 
-.admin-panel .home-panel-catalog {
-  margin-top: 50px;
-  background-color: #fff;
-  padding: 30px 5%;
-  border-radius: 10px;
-  margin-bottom: 20px;
-}
 
-.admin-panel .home-panel-catalog h2 {
-  font-size: 20px;
-  font-weight: 700;
-}
 
-.admin-panel .home-panel-catalog .add-product-btn {
+.admin-panel .home-panel .add-product-btn {
   margin-top: 10px;
 }
 
-.admin-panel .home-panel-catalog .catalog-tabs {
+.admin-panel .home-panel .catalog-tabs {
   margin-top: 20px;
   display: flex;
   justify-content: space-around;
 }
 
-.admin-panel .home-panel-catalog .catalog-tabs button {
+.admin-panel .home-panel .catalog-tabs button {
   background-color: inherit;
-  float: left;
   border: none;
   outline: none;
   cursor: pointer;
@@ -144,15 +132,15 @@
   transition: 0.3s;
 }
 
-.admin-panel .home-panel-catalog .catalog-tabs button:hover {
+.admin-panel .home-panel .catalog-tabs button:hover {
   background-color: #ddd;
 }
 
-.admin-panel .home-panel-catalog .catalog-tabs button.active {
+.admin-panel .home-panel .catalog-tabs button.active {
   background-color: #ccc;
 }
 
-.admin-panel .home-panel-catalog .catalog-items {
+.admin-panel .home-panel .home-panel-table {
   margin-top: 20px;
   width: 100%;
   animation: fadeEffect 1s;
@@ -163,98 +151,6 @@
   to {opacity: 1;}
 }
 
-.admin-panel .home-panel-catalog .catalog-items thead {
-  border-bottom: 1px solid rgb(154, 154, 154);
-  font-size: 15px;
-  font-weight: 700;
-  text-align: left;
-}
-
-.admin-panel .home-panel-catalog .catalog-items thead tr {
-  height: 30px;
-}
-
-.admin-panel .home-panel-catalog .catalog-items tbody tr {
-  max-height: 50px;
-  height: 100%;
-  line-height: 50px;
-  border-bottom: 1px solid rgb(154, 154, 154);
-  color: rgb(154, 154, 154);
-  font-weight: 500;
-  font-size: 12px;
-  transition: 0.3s;
-}
-
-.admin-panel .home-panel-catalog .catalog-items tbody tr:hover {
-  color: rgb(51, 51, 51);
-  border-bottom: 1px solid rgb(51, 51, 51);
-}
-
-.admin-panel .home-panel-catalog .catalog-items tbody tr td:nth-child(5) {
-  display: flex;
-}
-
-.admin-panel .home-panel-catalog .catalog-items tbody tr td:nth-child(5) a{
-  margin-right: 10px;
-}
-
-
-/* search-section */
-
-.admin-panel .search-home-panel-catalog {
-  margin-top: 50px;
-  background-color: #fff;
-  padding: 30px 5%;
-  border-radius: 10px;
-  margin-bottom: 20px;
-  display: none;
-}
-
-.admin-panel .search-home-panel-catalog .search-catalog-items {
-  margin-top: 20px;
-  width: 100%;
-  animation: fadeEffect 1s;
-}
-
-@keyframes fadeEffect {
-  from {opacity: 0;}
-  to {opacity: 1;}
-}
-
-.admin-panel .search-home-panel-catalog .search-catalog-items thead {
-  border-bottom: 1px solid rgb(154, 154, 154);
-  font-size: 15px;
-  font-weight: 700;
-  text-align: left;
-}
-
-.admin-panel .search-home-panel-catalog .search-catalog-items thead tr {
-  height: 30px;
-}
-
-.admin-panel .search-home-panel-catalog .search-catalog-items tbody tr {
-  max-height: 50px;
-  height: 100%;
-  line-height: 50px;
-  border-bottom: 1px solid rgb(154, 154, 154);
-  color: rgb(154, 154, 154);
-  font-weight: 500;
-  font-size: 12px;
-  transition: 0.3s;
-}
-
-.admin-panel .search-home-panel-catalog .search-catalog-items tbody tr:hover {
-  color: rgb(51, 51, 51);
-  border-bottom: 1px solid rgb(51, 51, 51);
-}
-
-.admin-panel .search-home-panel-catalog .search-catalog-items tbody tr td:nth-child(5) {
-  display: flex;
-}
-
-.admin-panel .search-home-panel-catalog .search-catalog-items tbody tr td:nth-child(5) a{
-  margin-right: 10px;
-}
 
 
 
