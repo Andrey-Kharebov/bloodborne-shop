@@ -50,6 +50,7 @@ function orderStatistic(user) {
   return statistic;
 }
 
+// Fetch
 router.get('/navsearch/:value', admin, async (req, res) => {
   const products = await Product.findAll({
     attributes: ['id', 'title', 'price']
@@ -65,10 +66,17 @@ router.get('/navsearch/:value', admin, async (req, res) => {
   }
   res.status(200).json(searchResult);
 })
+router.get('/navbell', admin, async (req, res) => {
+  const newOrders = await Order.findAll({where: {status: 'new'}}); // для колокольчика
+  res.status(200).json(newOrders); 
+})
+
+
+
+
 
 router.get('/', admin, async (req, res) => {
   const user = req.user;
-  const newOrders = await Order.findAll({where: {status: 'new'}}); // для колокольчика
   const lastOrders = await req.user.adminLastOrders();
   const monthOrdersQuantity = await req.user.adminMonthOrdersQuantity();
   const monthUsersQuantity = await req.user.adminMonthUsersQuantity();
@@ -79,56 +87,48 @@ router.get('/', admin, async (req, res) => {
     user,
     lastOrders,
     monthOrdersQuantity,
-    monthUsersQuantity,
-    newOrders
+    monthUsersQuantity
   });
 });
 
 router.get('/users', admin, async (req, res) => {
   const user = req.user;
-  const newOrders = await Order.findAll({where: {status: 'new'}}); // для колокольчика
   const users = await req.user.adminFetchUsers();
 
   res.render('admin-users', {
     layout: 'admin',
     title: 'Admin users',
     user,
-    users,
-    newOrders
+    users
   });
 });
 
 router.get('/orders', admin, async (req, res) => {
   const user = await req.user;
-  const newOrders = await Order.findAll({where: {status: 'new'}}); // для колокольчика
   const orders = await req.user.adminFetchOrders();
 
   res.render('admin-orders', {
     layout: 'admin',
     title: 'Admin orders',
     user,
-    orders,
-    newOrders
+    orders
   });
 });
 
 router.get('/catalog', admin, async (req, res) => {
   const user = await req.user;
-  const newOrders = await Order.findAll({where: {status: 'new'}}); // для колокольчика
   const categories = await req.user.adminFetchCategories();
 
   res.render('admin-catalog', {
     layout: 'admin',
     title: 'Admin catalog',
     user,
-    categories,
-    newOrders
+    categories
   });
 });
 
 router.get('/order/:id', admin, async (req, res) => {
   const user = req.user;
-  const newOrders = await Order.findAll({where: {status: 'new'}}); // для колокольчика
   const order = await Order.findOne({
     where: {
       id: req.params.id
@@ -149,8 +149,7 @@ router.get('/order/:id', admin, async (req, res) => {
     title: 'Admin order',
     user,
     order,
-    rusStatus,
-    newOrders
+    rusStatus
   });
 });
 
@@ -243,14 +242,12 @@ router.post('/orderitem/:id', admin, async (req, res) => {
 
 router.get('/product/add', admin, async (req, res) => {
   const user = req.user;
-  const newOrders = await Order.findAll({where: {status: 'new'}}); // для колокольчика
   const categories = await Category.findAll();
   res.render('admin-product-add', {
     layout: 'admin',
     title: 'Adding page',
     categories,
-    user,
-    newOrders
+    user
   });
 });
 
@@ -272,7 +269,6 @@ router.post('/product/add', admin, async (req, res) => {
 
 router.get('/profile/:id', admin, async (req, res) => {
   const user = req.user;
-  const newOrders = await Order.findAll({where: {status: 'new'}}); // для колокольчика
   const userProfile = await User.findOne({
     where: {
       id: req.params.id
@@ -290,8 +286,7 @@ router.get('/profile/:id', admin, async (req, res) => {
     user,
     userProfile,
     orderStat,
-    userOrders,
-    newOrders
+    userOrders
   });
 });
 
@@ -315,7 +310,6 @@ router.post('/profile/:id', admin, async (req, res) => {
 router.get('/product/:id/edit', admin, async (req, res) => {
   try {
     const user = req.user;
-    const newOrders = await Order.findAll({where: {status: 'new'}}); // для колокольчика
     const categories = await Category.findAll();
     const product = await Product.findByPk(req.params.id);
     const category = await Category.findOne({
@@ -329,8 +323,7 @@ router.get('/product/:id/edit', admin, async (req, res) => {
       user,
       categories,
       category,
-      product,
-      newOrders
+      product
     });
   } catch (e) {
     console.log(e);

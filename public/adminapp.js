@@ -216,9 +216,27 @@ window.addEventListener('DOMContentLoaded', () => {
   function showNotification(notifcationSelector) {
     const notifcationCircle = document.querySelector(notifcationSelector);
 
-    if (notifcationCircle.querySelector('p').textContent > 0) {
-      notifcationCircle.style.display = 'block';
-    }
+
+    fetch('/admin/navbell/', {
+              method: 'GET'
+            })
+            .then((res) => res.json())
+            .then(newOrders => {
+              if (newOrders.length) {
+                notifcationCircle.innerHTML = `<p>${newOrders.length}</p>`
+              } else {
+                notifcationCircle.innerHTML = `<p>0</p>`
+              }
+            })
+            .then(res => {
+              if (notifcationCircle.querySelector('p') && notifcationCircle.querySelector('p').textContent > 0) {
+                notifcationCircle.style.display = 'block';
+              } else {
+                notifcationCircle.style.display = 'none';
+              }
+            })
+
+  
   }
 
 
@@ -373,6 +391,9 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+
+
+
   adminNavSearch();
 
   searchBy('.search-by-user-name', '.userName', '.home-panel');
@@ -387,6 +408,9 @@ window.addEventListener('DOMContentLoaded', () => {
   searchBy('#search-by-product-id', '.productId', '.home-panel');
   searchBy('#search-by-product-title', '.productTitle', '.home-panel');
   showNotification('.bell-notification');
+  setInterval(() => {
+    showNotification('.bell-notification');
+  }, 15000);
   userCardInfo();
   catalogCardInfo()
   if (document.querySelector('.changeStatusBtn')) {
