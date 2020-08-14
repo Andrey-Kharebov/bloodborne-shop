@@ -25,15 +25,14 @@
 }
 
 
-
-
-.admin-panel .admin-catalog-plates {
+.admin-panel .admin-catalog-panel .admin-catalog-plates {
   margin-top: 20px;
   display: flex;
   justify-content: space-between;
+  z-index: 1;
 }
 
-.admin-panel .admin-catalog-plates .first-plate {
+.admin-panel .admin-catalog-panel .admin-catalog-plates .first-plate {
   border-radius: 10px;
   box-sizing: border-box;
   padding: 20px 20px;
@@ -47,11 +46,11 @@
   flex-direction: column;
 }
 
-.admin-panel .admin-catalog-plates .first-plate .search-by {
+.admin-panel .admin-catalog-panel .admin-catalog-plates .first-plate .search-by {
   display: flex;
   flex-direction: column;
 }
-.admin-panel .admin-catalog-plates .first-plate .search-by div {
+.admin-panel .admin-catalog-panel .admin-catalog-plates .first-plate .search-by div {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -59,7 +58,7 @@
   font-weight: 300;
 }
 
-.admin-panel .admin-catalog-plates .first-plate .search-by div input {
+.admin-panel .admin-catalog-panel .admin-catalog-plates .first-plate .search-by div input {
   max-width: 370px;
   width: 100%;
   border: none;
@@ -70,7 +69,7 @@
   height: 30px;
 }
 
-.admin-panel .admin-catalog-plates .second-plate {
+.admin-panel .admin-catalog-panel .admin-catalog-plates .second-plate {
   border-radius: 10px;
   box-sizing: border-box;
   padding: 20px 20px;
@@ -81,28 +80,28 @@
   background: linear-gradient(90deg, #263238, #607d8b );
 }
 
-.admin-panel .admin-catalog-plates .second-plate .plate-catalog-info {
+.admin-panel .admin-catalog-panel .admin-catalog-plates .second-plate .plate-catalog-info {
   margin-top: 10px;
 }
 
-.admin-panel .admin-catalog-plates .second-plate .plate-catalog-info p {
+.admin-panel .admin-catalog-panel .admin-catalog-plates .second-plate .plate-catalog-info p {
   font-size: 12px;
   font-weight: 300;
   margin-top: 5px;
 }
 
-.admin-panel .admin-catalog-plates .second-plate span {
+.admin-panel .admin-catalog-panel .admin-catalog-plates .second-plate span {
   font-weight: 700;
   color: #fff;
 }
 
-.admin-panel .admin-catalog-plates .second-plate .plate-catalog-item-info {
+.admin-panel .admin-catalog-panel .admin-catalog-plates .second-plate .plate-catalog-item-info {
   display: flex;
   justify-content: space-around;
   align-items: center;
 }
 
-.admin-panel .admin-catalog-plates .second-plate .plate-catalog-item-info .plate-catalog-item-img img {
+.admin-panel .admin-catalog-panel .admin-catalog-plates .second-plate .plate-catalog-item-info .plate-catalog-item-img img {
   width: 80px;
   height: auto;
 }

@@ -50,7 +50,21 @@ function orderStatistic(user) {
   return statistic;
 }
 
-
+router.get('/navsearch/:value', admin, async (req, res) => {
+  const products = await Product.findAll({
+    attributes: ['id', 'title', 'price']
+  });
+  const users = await User.findAll({
+    attributes: ['id', 'name', 'surname', 'email', 'phone', 'town']
+  })
+  const orders = await Order.findAll({
+    attributes: ['id', 'name', 'surname', 'phone', 'email', 'totalCost', 'status']
+  })
+  const searchResult = {
+    products, users, orders
+  }
+  res.status(200).json(searchResult);
+})
 
 router.get('/', admin, async (req, res) => {
   const user = req.user;

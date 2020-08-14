@@ -3,13 +3,13 @@
     <div class="nav-logo">
       <a href="/" class="nav-logo"><img src="/public/img/logo-dark.png" alt="bloodborne"></a>
     </div>
-      <div class="nav-search">
-        <form>
-          <label class="search-icon" for="search"><i class="material-icons">search</i></label>
-          <input id="search" type="search" required>
-          <i class="material-icons close-icon">close</i>
-        </form>
-      </div>
+    <div class="nav-search">
+      <form action="" method="">
+        <label class="search-icon" for="search"><i class="material-icons">search</i></label>
+        <input id="search" type="search" data-csrf="{{csrf}}">
+        <i class="material-icons close-icon">close</i>
+      </form>
+    </div>
     <div class="nav-profile_icons">
       <div class="nav-profile">
         <div class="nav-profile-img">
@@ -23,11 +23,15 @@
         <ul>
           <li class="message">
             <p><i class="material-icons">mail_outline</i></p>
-            <div class="message-notification"><p>99</p></div>
+            <div class="message-notification">
+              <p>99</p>
+            </div>
           </li>
           <li class="bell">
             <p><i class="material-icons">notifications_none</i></p>
-            <div class="bell-notification"><p>{{newOrders.length}}</p></div>
+            <div class="bell-notification">
+              <p>{{newOrders.length}}</p>
+            </div>
           </li>
         </ul>
       </div>

@@ -222,13 +222,13 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 
 
-  // Admin catalog search by id
+  // Admin search on pages
 
   function searchBy(searchInputBlockSelector, searchBySelector, homePanelSelector) {
     const inputBy = document.querySelector(searchInputBlockSelector),
       homePanelCatalog = document.querySelector(homePanelSelector),
       searchPanelCatalog = document.querySelector('.search-home-panel');
-    
+
     if (inputBy) {
       inputBy.addEventListener('input', (event) => {
         searchPanelCatalog.style.display = 'block';
@@ -259,6 +259,121 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  // Admin search on nav
+
+
+  function adminNavSearch() {
+    const input = document.querySelector('#search'),
+      searchPanel = document.querySelector('.admin-search-modal');
+
+    if (input) {
+      input.addEventListener('input', (event) => {
+        searchPanel.style.display = 'block';
+        const csrf = event.target.dataset.csrf;
+        let val = event.target.value.trim().toLowerCase();
+
+        if (val != '') {
+          fetch('/admin/navsearch/' + val, {
+              method: 'GET',
+              headers: {
+                'X-XSRF-TOKEN': csrf
+              }
+            })
+            .then((res) => res.json())
+            .then(searchResult => {
+              if (searchResult.orders.length) {
+                const html = searchResult.orders.map(p => {
+                  return `
+                  <tr class="search-tr">
+                    <td class="column">${p.id}</td>
+                    <td class="column">${p.name} ${p.surname}</td>
+                    <td class="column">${p.email}</td>
+                    <td class="column">${p.phone}</td>
+                    <td>
+                      <div class="td-element">
+                        <button class="status ${p.status}">${p.status}</button>
+                      </div>
+                      <div class="td-element">
+                        <a href="/admin/order/${p.id}" target="_blank"><button class="status passing">Перейти</button></a>
+                      </div>
+                    </td>
+                  </tr>
+                  `
+                }).join('');
+                document.querySelector('.home-panel-table-modal tbody').innerHTML = html;
+              }
+              if (searchResult.products.length) {
+                const html = searchResult.products.map(p => {
+                  return `
+                  <tr class="search-tr">
+                    <td class="column">${p.id}</td>
+                    <td class="column">${p.title}</td>
+                    <td class="column">${p.quantity = 99}</td>
+                    <td class="column">${p.price}</td>
+                    <td>
+                      <div class="td-element">
+                        <a href="/admin/product/${p.id}/edit"><button class="status passing">Изменить</button></a>
+                      </div>
+                      <div class="td-element">
+                        <form action="/admin/product/${p.id}/remove" method="POST">
+                          <input type="hidden" name="_csrf" value="${csrf}">
+                          <input type="hidden" name="id" value="${p.id}">
+                          <button typa="submit" class="status passing">Удалить</button>
+                        </form>
+                      </div>
+                    </td>
+                    <input id="imageUrl" type="hidden" name="img" value="/images/2020-07-16T21:42:20.530Z-kirkhammer.png">
+                  </tr>
+                  `
+                }).join('');
+                document.querySelector('.home-panel-table-modal tbody').innerHTML += html;
+              }
+              if (searchResult.users.length) {
+                const html = searchResult.users.map(p => {
+                  return `
+                  <tr class="search-tr">
+                    <td class="column">${p.name} ${p.surname}</td>
+                    <td class="column">${p.email}</td>
+                    <td class="column">${p.phone}</td>
+                    <td class="column">${p.town}</td>
+                    <td>
+                      <div class="td-element">
+                        <a href="/admin/profile/${p.id}"><button class="status passing">Перейти</button></a>
+                      </div>
+                    </td>
+                  </tr>
+                  `
+                }).join('');
+                document.querySelector('.home-panel-table-modal tbody').innerHTML += html
+              }       
+            })
+            .then(res => {
+              let columns = document.querySelectorAll('.search-tr');
+              columns.forEach(item => {
+                let tds = item.querySelectorAll('td.column');
+                tds.forEach(td => {
+                  if (td.textContent.trim().toLowerCase().search(val) == -1) {
+                  } else {
+                    td.parentElement.classList.toggle('proper');
+                  }
+                })
+                if (item.classList.contains('proper')) {
+                } else {
+                  item.remove();
+                }
+              })
+            }) 
+        } else {
+          searchPanel.style.display = 'none';
+        }
+
+      })
+    } else {
+      searchPanel.style.display = 'none';
+    }
+  }
+
+  adminNavSearch();
 
   searchBy('.search-by-user-name', '.userName', '.home-panel');
   searchBy('.search-by-user-email', '.userEmail', '.home-panel');

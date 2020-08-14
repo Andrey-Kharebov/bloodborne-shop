@@ -1,0 +1,73 @@
+body {
+  position: relative;
+}
+
+body .admin-search-modal {
+  display: none;
+  position: absolute;
+  top: 70px;
+  left: 320px;
+  max-width: 1000px;
+  width: 100%;
+}
+
+body .admin-search-modal .home-panel-modal {
+  background-color: #fff;
+  padding: 30px 5%;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+body .admin-search-modal .home-panel-modal .home-panel-table-modal {
+  margin-top: 20px;
+  width: 100%;
+}
+
+body .admin-search-modal .home-panel-modal .home-panel-table-modal  thead {
+  border-bottom: 1px solid rgb(154, 154, 154);
+  font-size: 15px;
+  font-weight: 700;
+  text-align: left;
+}
+
+body .admin-search-modal .home-panel-modal .home-panel-table-modal  thead tr {
+  height: 30px;
+}
+
+body .admin-search-modal .home-panel-modal .home-panel-table-modal  tbody tr {
+  line-height: 50px;
+  border-bottom: 1px solid rgb(154, 154, 154);
+  color: rgb(154, 154, 154);
+  font-weight: 500;
+  font-size: 12px;
+  transition: 0.3s;
+}
+
+body .admin-search-modal .home-panel-modal .home-panel-table-modal  tbody tr:hover {
+  color: rgb(51, 51, 51);
+  border-top: 1px solid rgb(51, 51, 51);
+  border-bottom: 1px solid rgb(51, 51, 51);
+
+}
+
+body .admin-search-modal .home-panel-modal .home-panel-table-modal  tbody tr:last-child {
+  border-bottom: none;
+}
+
+body .admin-search-modal .home-panel-modal .home-panel-table-modal  tbody tr td:nth-child(5) {
+  display: flex;
+}
+
+body .admin-search-modal .home-panel-modal .home-panel-table-modal  tbody tr td:nth-child(5) .td-element {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+body .admin-search-modal .home-panel-modal .home-panel-table-modal  tbody a {
+  text-decoration: none;
+  color: rgb(154, 154, 154);
+}
+
+body .admin-search-modal .home-panel-modal .home-panel-table-modal  tbody a:hover {
+  color: rgb(51, 51, 51);
+}

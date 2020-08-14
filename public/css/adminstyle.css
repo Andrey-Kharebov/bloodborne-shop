@@ -7,6 +7,7 @@
 @import '/public/css/adminpages/admin-user-profile.css';
 @import '/public/css/adminpages/search-section.css';
 @import '/public/css/adminpages/home-panel.css';
+@import '/public/css/modals/admin-search-modal.css';
 
 body {
   font-family: 'Comfortaa', cursive;
@@ -73,6 +74,7 @@ body {
   border-radius: 10px;
   background: #f5f5f5;
   display: none;
+  padding-left: 10px;
 }
 
 .admin-nav .nav-wrapper .nav-search form i.close-icon {
