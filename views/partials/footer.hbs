@@ -175,6 +175,25 @@
       <p class="close"></p>
     </div>
   </div>
+  <div class="status-check-modal">
+    <div class="heading">
+      <hr>
+      <h3>Статус заказа</h3>
+    </div>
+    <form action="#" method="post">
+      <div class="forgot-info">
+        <p class="p-input">Номер заказа</p>
+        <input type="text" name="email">
+      </div>
+      <div class="check-status-btn">
+        <input type="hidden" name="_csrf" value="{{csrf}}">
+        <button type="submit">Найти заказ <span>&#8640;</span></button>
+      </div>
+    </form>
+    <div class="close-modal-btn" data-modal="check-status">
+      <p class="close"></p>
+    </div>
+  </div>
 </div>
 
 

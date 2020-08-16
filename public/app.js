@@ -179,10 +179,12 @@ window.addEventListener('DOMContentLoaded', () => {
         modalBg = document.querySelector('.modal-bg'),
         loginModal = document.querySelector('.login-modal'),
         forgotModal = document.querySelector('.forgot-modal'),
+        checkStatusModal = document.querySelector('.status-check-modal'),
         registrationModal = document.querySelector('.registration-modal'),
         closeModalBtns = document.querySelectorAll('.close-modal-btn'),
         forgotModalBtn = document.querySelector('.forgot'),
         cancelingModalBtn = document.querySelector('.canceling'),
+        checkStatusModalBtns = document.querySelectorAll('.check-status-btn'),
         fastRegistrationModalBtn = document.querySelector('.fast-registration'),
         registrationLoginBtn = document.querySelector('.registration-login'),
         loginBtnSubmit = document.querySelector('.login-btn button');
@@ -235,6 +237,7 @@ window.addEventListener('DOMContentLoaded', () => {
       closeModal(loginModal);
       closeModal(forgotModal);
       closeModal(registrationModal);
+      closeModal(checkStatusModal);
     }
   });
 
@@ -250,9 +253,17 @@ window.addEventListener('DOMContentLoaded', () => {
         closeModal(forgotModal);
       } else if (event.currentTarget.dataset.modal === 'registration') {
         closeModal(registrationModal)
+      } else if (event.currentTarget.dataset.modal === 'check-status') {
+        closeModal(checkStatusModal)
       }
     });
   });
+
+  checkStatusModalBtns.forEach(item => {
+    item.addEventListener('click', (event) => {
+      openModal(checkStatusModal);
+    })
+  })
 
 
 

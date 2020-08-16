@@ -8,6 +8,7 @@
 @import '/public/css/modals/login-modal.css';
 @import '/public/css/modals/forgot-password-modal.css';
 @import '/public/css/modals/registration-modal.css';
+@import '/public/css/modals/status-check-modal.css';
 
 body {
   font-family: 'EB Garamond', serif;
@@ -92,6 +93,12 @@ body {
   display: flex;
   justify-content: space-between;
   position: relative;
+}
+
+.lower-header .nav .navbar ul li {
+  color: white;
+  text-decoration: none;
+  text-transform: uppercase;
 }
 
 
@@ -204,6 +211,12 @@ body {
 .footer-content .nav .navbar ul {
   display: flex;
   justify-content: space-between;
+}
+
+.footer-content .nav .navbar ul li {
+  color: white;
+  text-decoration: none;
+  text-transform: uppercase;
 }
 
 .footer-content .nav .navbar ul li:after {
