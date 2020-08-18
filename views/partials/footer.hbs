@@ -79,12 +79,12 @@
 
 <div class="modal-bg">
   <div class="login-modal">
-    <form action="/auth/login" method="POST">
+    <form class="login-form" action="/auth/login" method="POST">
       <div class="login-info">
         <p class="p-input">Эл. почта</p>
-        <input type="text" name="email">
+        <input type="text" name="email" required>
         <p class="p-input">Пароль</p>
-        <input type="password" name="password">
+        <input type="password" name="password" required>
       </div>
       <div class="remember-forgot">
         <label class="remember">Запомнить
@@ -97,7 +97,7 @@
       </div>
       <div class="login-btn">
         <input type="hidden" name="_csrf" value="{{csrf}}">
-        <button type="submit">Войти <span>&#8640;</span></button>
+        <button type="submit" data-csrf="{{csrf}}">Войти <span>&#8640;</span></button>
       </div>
     </form>
     <div class="login-through">
@@ -181,20 +181,30 @@
       <h3>Статус заказа</h3>
     </div>
     <form action="#" method="post">
-      <div class="forgot-info">
+      <div class="order-number">
         <p class="p-input">Номер заказа</p>
         <input type="text" name="email">
       </div>
       <div class="check-status-btn">
         <input type="hidden" name="_csrf" value="{{csrf}}">
-        <button type="submit">Найти заказ <span>&#8640;</span></button>
+        <button id="bl" type="button">Найти заказ <span>&#8640;</span></button>
       </div>
     </form>
     <div class="close-modal-btn" data-modal="check-status">
       <p class="close"></p>
     </div>
   </div>
+  <div class="status-check-order">
+    
+  </div>
 </div>
 
+<div class="flash-message">
+  <p></p>
+  <div class="close-flash-btn" data-modal="flash-message">
+    <p class="close-flash"></p>
+  </div>
+  <div class="flash-progress-bar"></div>
+</div>
 
 <script src="/public/app.js"></script>

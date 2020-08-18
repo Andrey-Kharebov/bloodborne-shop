@@ -1,0 +1,84 @@
+.flash-message {
+  display: none;
+  position: fixed;
+  box-sizing: border-box;
+  bottom: 50px;
+  right: 20px;
+  width: 345px;
+  height: 95px;
+  padding: 35px 20px;
+  text-align: center;
+  border-radius: 20px;
+  background: rgb(121, 123, 139);
+  color: #fff;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  overflow: hidden;
+  z-index: 1000;
+}
+
+.flash-message .flash-progress-bar {
+  position: absolute;
+  bottom: 0;
+  margin-top: 24px;
+  margin-left: -20px;
+  width: 345px;
+  height: 4px;
+  background: rgb(161, 163, 174);
+  border-radius: 30px;
+  -webkit-animation: progressBar 5s linear;
+  -webkit-animation-fill-mode: both;  
+  -webkit-animation-direction: reverse;
+}
+
+@-webkit-keyframes progressBar {
+  100% { width: 345px; }
+  0% { width: 0; }
+}
+
+.flash-message:hover .close-flash-btn .close-flash {
+  display: block;
+}
+
+.flash-message:hover .flash-progress-bar {
+  margin-top: 24px;
+  margin-left: -20px;
+  width: 345px;
+  height: 4px;
+  background: rgb(161, 163, 174);
+  border-radius: 30px;
+  animation: initial;
+  animation-play-state: paused;
+}
+
+
+.flash-message .close-flash-btn .close-flash {
+  display: none;
+  position: absolute;
+  right: 5px;
+  top: 10px;
+  width: 32px;
+  height: 32px;
+  opacity: 0.3;
+}
+
+.flash-message .close-flash-btn .close-flash:hover {
+  opacity: 1;
+}
+
+.flash-message .close-flash-btn .close-flash:before, .close-flash:after {
+  position: absolute;
+  left: 15px;
+  content: ' ';
+  height: 20px;
+  width: 2px;
+  background-color: #fff;
+}
+
+.flash-message .close-flash-btn .close-flash:before {
+  transform: rotate(45deg);
+}
+
+.flash-message .close-flash-btn .close-flash:after {
+  transform: rotate(-45deg);
+}

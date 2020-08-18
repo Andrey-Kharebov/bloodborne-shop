@@ -9,6 +9,8 @@
 @import '/public/css/modals/forgot-password-modal.css';
 @import '/public/css/modals/registration-modal.css';
 @import '/public/css/modals/status-check-modal.css';
+@import '/public/css/modals/status-check-order.css';
+@import '/public/css/modals/flash-message.css';
 
 body {
   font-family: 'EB Garamond', serif;

@@ -6,6 +6,18 @@ const OrderItem = require('../models/order-item');
 const Order = require('../models/order');
 const User = require('../models/user');
 
+// Fetch
+router.get('/check/:id', async (req, res) => {
+  const order = await Order.findOne({
+    where: {
+      id: req.params.id
+    },
+    include: {
+      model: OrderItem
+    }
+  });
+  res.status(200).json(order); 
+})
 
 
 // LS Order Step 1
@@ -71,7 +83,6 @@ router.post('/:id/step2', async (req, res) => {
         }
         return order;
       });
-
     res.redirect(`/order/${order.id}/step2`);
   } catch (e) {
     console.log(e);
@@ -80,6 +91,14 @@ router.post('/:id/step2', async (req, res) => {
 
 router.get('/:id/step2', async (req, res) => {
   const order = await Order.findByPk(req.params.id);
+  let offset = +3;
+  if (new Date( new Date().getTime() + offset * 3600 * 1000) > (new Date( order.createdAt.getTime() + 30000))) {
+    res.redirect('/');
+  }
+
+  console.log(new Date( new Date().getTime() + offset * 3600 * 1000));
+  console.log(new Date( order.createdAt.getTime()));
+  console.log(new Date( new Date().getTime() + offset * 3600 * 1000) - new Date( order.createdAt.getTime()))
   res.render('order-step2', {
     title: 'Bloodborne shop',
     order: order

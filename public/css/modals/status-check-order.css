@@ -1,0 +1,111 @@
+.modal-bg .status-check-order {
+  box-sizing: border-box;
+  position: absolute;
+  display: none;
+  top: 430px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: 350px;
+  height: auto;
+  background-color: rgb(243, 243, 243);
+  border-radius: 30px;
+  padding: 20px 20px;
+
+  z-index: 100;
+}
+
+.modal-bg .status-check-order .order-card {
+  box-sizing: border-box;
+}
+
+.modal-bg .status-check-order .order-card .card-title {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.modal-bg .status-check-order .order-card p {
+  margin-top: 10px;
+}
+
+.modal-bg .status-check-order .order-card em {
+  font-style: italic;
+}
+
+.modal-bg .status-check-order .order-card ol {
+  margin-top: 15px;
+  margin-left: 30px;
+  list-style-type: decimal;
+}
+
+.modal-bg .status-check-order .order-card hr {
+  margin-top: 15px;
+}
+
+.modal-bg .status-check-order .order-card .price {
+  font-size: 17px;
+  font-weight: 500;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+.modal-bg .status-check-order .check-status-btn {
+  display: flex;
+  justify-content: center;
+}
+
+.modal-bg .status-check-order .check-status-btn button {
+  margin-top: 30px;
+  width: 230px;
+  height: 40px;
+  border: none;
+  border-radius: 30px;
+  background-color: black;
+  color: #fff;
+  font-weight: 100;
+  letter-spacing: 1.5px;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+
+
+.modal-bg .status-check-order .close-modal-btn .close {
+  position: absolute;
+  right: 18px;
+  top: 14px;
+  width: 32px;
+  height: 32px;
+  opacity: 0.3;
+}
+
+.modal-bg .status-check-order .close-modal-btn .close:hover {
+  opacity: 1;
+}
+
+.modal-bg .status-check-order .close-modal-btn .close:before, .close:after {
+  position: absolute;
+  left: 15px;
+  content: ' ';
+  height: 33px;
+  width: 2px;
+  background-color: #333;
+}
+
+.modal-bg .status-check-order .close-modal-btn .close:before {
+  transform: rotate(45deg);
+}
+
+.modal-bg .status-check-order .close-modal-btn .close:after {
+  transform: rotate(-45deg);
+}

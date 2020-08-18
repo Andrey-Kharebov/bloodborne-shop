@@ -16,7 +16,7 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 
   function showHomeTabs(i = 0) {
-    if (tabs.length) { 
+    if (tabs.length) {
       homeTabs[i].style.display = 'table-row';
       tabs[i].classList.add('tab-active');
     }
@@ -25,7 +25,7 @@ window.addEventListener('DOMContentLoaded', () => {
   hideHomeTabs();
   showHomeTabs();
 
-  if (tabs.length) { 
+  if (tabs.length) {
     switchers.addEventListener('click', (event) => {
       const target = event.target;
 
@@ -100,14 +100,21 @@ window.addEventListener('DOMContentLoaded', () => {
               valueSection.value = 10;
             } else {
               valueSection.value++;
+              if (plusSelector == 'plus') {
+                showFlashMessage('Данные товара в корзине успешно обновлены.');
+              }
             }
           }
 
           if (event.target.classList.contains(minusSelector)) {
             if (valueSection.value == 1) {
               valueSection.value = 1;
+              showFlashMessage('Ожидаемое количество является недопустимым.');
             } else {
               valueSection.value--;
+              if (minusSelector == 'minus') {
+                showFlashMessage('Данные товара в корзине успешно обновлены.');
+              }
             }
           }
 
@@ -121,6 +128,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 setCartData(cartData);
                 document.querySelector(`[data-price="${key}"] p`).textContent = `${cartData[key][4]} отг. к.`;
                 showPrices('.total-price', '.delivery-price', '.total-modal-cost', '.modal-cart-product-price p', '.total-cost');
+
               }
             }
           }
@@ -176,18 +184,19 @@ window.addEventListener('DOMContentLoaded', () => {
   // Login modal
 
   const loginBtn = document.querySelector('.login .noauth'),
-        modalBg = document.querySelector('.modal-bg'),
-        loginModal = document.querySelector('.login-modal'),
-        forgotModal = document.querySelector('.forgot-modal'),
-        checkStatusModal = document.querySelector('.status-check-modal'),
-        registrationModal = document.querySelector('.registration-modal'),
-        closeModalBtns = document.querySelectorAll('.close-modal-btn'),
-        forgotModalBtn = document.querySelector('.forgot'),
-        cancelingModalBtn = document.querySelector('.canceling'),
-        checkStatusModalBtns = document.querySelectorAll('.check-status-btn'),
-        fastRegistrationModalBtn = document.querySelector('.fast-registration'),
-        registrationLoginBtn = document.querySelector('.registration-login'),
-        loginBtnSubmit = document.querySelector('.login-btn button');
+    modalBg = document.querySelector('.modal-bg'),
+    loginModal = document.querySelector('.login-modal'),
+    forgotModal = document.querySelector('.forgot-modal'),
+    checkStatusModal = document.querySelector('.status-check-modal'),
+    checkStatusOrder = document.querySelector('.status-check-order'),
+    registrationModal = document.querySelector('.registration-modal'),
+    closeModalBtns = document.querySelectorAll('.close-modal-btn'),
+    forgotModalBtn = document.querySelector('.forgot'),
+    cancelingModalBtn = document.querySelector('.canceling'),
+    checkStatusModalBtns = document.querySelectorAll('.check-status-btn'),
+    fastRegistrationModalBtn = document.querySelector('.fast-registration'),
+    registrationLoginBtn = document.querySelector('.registration-login'),
+    loginBtnSubmit = document.querySelector('.login-btn button');
 
   function openModal(modalSelector) {
     checkbox.click();
@@ -210,12 +219,12 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 
   loginBtnSubmit.addEventListener('click', (event) => {
-    console.log(event.target);
     if (localStorage.length) {
       localStorage.clear();
     }
+
   });
-  
+
 
   forgotModalBtn.addEventListener('click', (event) => {
     closeModal(loginModal);
@@ -238,6 +247,7 @@ window.addEventListener('DOMContentLoaded', () => {
       closeModal(forgotModal);
       closeModal(registrationModal);
       closeModal(checkStatusModal);
+      closeModal(checkStatusOrder);
     }
   });
 
@@ -252,9 +262,10 @@ window.addEventListener('DOMContentLoaded', () => {
       } else if (event.currentTarget.dataset.modal === 'forgot') {
         closeModal(forgotModal);
       } else if (event.currentTarget.dataset.modal === 'registration') {
-        closeModal(registrationModal)
+        closeModal(registrationModal);
       } else if (event.currentTarget.dataset.modal === 'check-status') {
-        closeModal(checkStatusModal)
+        closeModal(checkStatusModal);
+        closeModal(checkStatusOrder);
       }
     });
   });
@@ -271,46 +282,52 @@ window.addEventListener('DOMContentLoaded', () => {
 
   // LocalStorage create/update Cart
 
-  const user = document.querySelector('#user'), 
-        addToCartBtn = document.querySelector('.add-to-cart'),
-        productPage = document.querySelector('.product-page'),
-        makeAnOrderSection = document.querySelector('.make-an-order'),
-        csrf = document.querySelector('#csrf').value;
+  const user = document.querySelector('#user'),
+    addToCartBtn = document.querySelector('.add-to-cart'),
+    productPage = document.querySelector('.product-page'),
+    makeAnOrderSection = document.querySelector('.make-an-order'),
+    csrf = document.querySelector('#csrf').value;
   let cartId;
-
-  // if (user && +user.value != 0) {
-  //   console.log(+user.value);
-  // } 
-
 
   if (localStorage.length >= 1) {
     cartId = Object.keys(localStorage);
-    makeAnOrderSection.innerHTML += `
+    makeAnOrderSection.innerHTML = `
       <form action="/order/${cartId}/step1" method="POST">
         <input type="hidden" name="_csrf" value="${csrf}">
         <input type="hidden" name="id" value="${cartId}">
         <button type="submit" class="make-an-order-btn">Оформить заказ</button>
       </form>
     `;
-  } else if (user && +user.value != 0) {
+  } else if (user && +user.value != 0 && localStorage.length >= 1) {
     cartId = +user.value;
-    makeAnOrderSection.innerHTML += `
-      <form action="/order/${cartId}/step1" method="POST">
-      <input type="hidden" name="_csrf" value="${csrf}">
-        <input type="hidden" name="id" value="${cartId}">
-        <button type="submit" class="make-an-order-btn">Оформить заказ</button>
-      </form>
-    `;
-  } else {
-    cartId = Number(new Date());
-    makeAnOrderSection.innerHTML += `
+    makeAnOrderSection.innerHTML = `
     <form action="/order/${cartId}/step1" method="POST">
       <input type="hidden" name="_csrf" value="${csrf}">
       <input type="hidden" name="id" value="${cartId}">
-      <button type="submit" class="make-an-order-btn">Оформить заказ</button>
+      <button type="button" class="make-an-order-btn empty">Оформить заказ</button>
     </form>
     `;
-  } 
+  } else if (user && +user.value != 0) {
+    cartId = +user.value;
+    makeAnOrderSection.innerHTML = `
+      <input type="hidden" name="_csrf" value="${csrf}">
+      <input type="hidden" name="id" value="${cartId}">
+      <button type="button" class="make-an-order-btn empty">Оформить заказ</button>
+    `;
+    document.querySelector('.make-an-order-btn.empty').addEventListener('click', () => {
+      showFlashMessage('Вы не можете перейти к оформлению заказа, т.к. корзина пуста.');
+    });
+  } else {
+    cartId = Number(new Date());
+    makeAnOrderSection.innerHTML = `
+      <input type="hidden" name="_csrf" value="${csrf}">
+      <input type="hidden" name="id" value="${cartId}">
+      <button type="button" class="make-an-order-btn empty">Оформить заказ</button>
+    `;
+    document.querySelector('.make-an-order-btn.empty').addEventListener('click', () => {
+      showFlashMessage('Вы не можете перейти к оформлению заказа, т.к. корзина пуста.');
+    });
+  }
 
   function setCartData(cartItem) {
     localStorage.setItem(`${cartId}`, JSON.stringify(cartItem));
@@ -322,47 +339,55 @@ window.addEventListener('DOMContentLoaded', () => {
 
   if (addToCartBtn) {
     addToCartBtn.addEventListener('click', () => {
-      let cartData = getCartData() || {},
-        itemId = addToCartBtn.getAttribute('data-id'),
-        itemTitle = productPage.querySelector('h1').textContent,
-        itemImage = productPage.querySelector('.product-image img').getAttribute('src'),
-        itemSize = productPage.querySelector('.product-size-active').textContent,
-        itemQuantity = +productPage.querySelector('.counter-value').value,
-        itemPriceForOne = +productPage.querySelector('.product-price').textContent.trim(),
-        itemPrice = productPage.querySelector('.product-price').textContent.trim(),
-        itemTotalPrice = itemPrice * itemQuantity;
-      let itemDubId;
-        
-      if (cartData.hasOwnProperty(itemId)) {
-        if (cartData[itemId][2] == itemSize) {
-          cartData[itemId][3] += itemQuantity;
-          cartData[itemId][4] += itemTotalPrice;
-        } else {
-          itemDubId = itemId + itemSize;
-          if (cartData[itemDubId]) {
-            if (cartData[itemDubId][2] == itemSize) {
-              cartData[itemDubId][3] += itemQuantity;
-              cartData[itemDubId][4] += itemTotalPrice;
-            }
-          } else {
-            cartData[itemDubId] = [itemTitle, itemImage, itemSize, itemQuantity, itemTotalPrice, itemPriceForOne];
-          }
-        }
-      } else {
-        cartData[itemId] = [itemTitle, itemImage, itemSize, itemQuantity, itemTotalPrice, itemPriceForOne];
-      }
+      try {
+        let cartData = getCartData() || {},
+          itemId = addToCartBtn.getAttribute('data-id'),
+          itemTitle = productPage.querySelector('h1').textContent,
+          itemImage = productPage.querySelector('.product-image img').getAttribute('src'),
+          itemSize = productPage.querySelector('.product-size-active').textContent,
+          itemQuantity = +productPage.querySelector('.counter-value').value,
+          itemPriceForOne = +productPage.querySelector('.product-price').textContent.trim(),
+          itemPrice = productPage.querySelector('.product-price').textContent.trim(),
+          itemTotalPrice = itemPrice * itemQuantity;
+        let itemDubId;
 
-      setCartData(cartData);
-      clearModalCart();
-      showInModalCart();
-      valueSection.value = 1;
-      deleteInModalCart();
-      properSize();
-      showPrices('.total-price', '.delivery-price', '.total-modal-cost', '.modal-cart-product-price p', '.total-cost');
-      productCounter('.modal-cart-product-quantity-info', '.number', 'plus', 'minus');
-      productSizeChoosing('.modal-cart-product-size ul', 'modal-size-active');
-      if (!checkbox.checked) {
-        openCartModal();
+        if (cartData.hasOwnProperty(itemId)) {
+          if (cartData[itemId][2] == itemSize) {
+            cartData[itemId][3] += itemQuantity;
+            cartData[itemId][4] += itemTotalPrice;
+            showFlashMessage('Товар успешно добавлен в корзину.');
+          } else {
+            itemDubId = itemId + itemSize;
+            showFlashMessage('Товар успешно добавлен в корзину.');
+            if (cartData[itemDubId]) {
+              if (cartData[itemDubId][2] == itemSize) {
+                cartData[itemDubId][3] += itemQuantity;
+                cartData[itemDubId][4] += itemTotalPrice;
+                showFlashMessage('Данные у товара в корзине успешно обновлены.');
+              }
+            } else {
+              cartData[itemDubId] = [itemTitle, itemImage, itemSize, itemQuantity, itemTotalPrice, itemPriceForOne];
+            }
+          }
+        } else {
+          cartData[itemId] = [itemTitle, itemImage, itemSize, itemQuantity, itemTotalPrice, itemPriceForOne];
+          showFlashMessage('Товар успешно добавлен в корзину.');
+        }
+
+        setCartData(cartData);
+        clearModalCart();
+        showInModalCart();
+        valueSection.value = 1;
+        deleteInModalCart();
+        properSize();
+        showPrices('.total-price', '.delivery-price', '.total-modal-cost', '.modal-cart-product-price p', '.total-cost');
+        productCounter('.modal-cart-product-quantity-info', '.number', 'plus', 'minus');
+        productSizeChoosing('.modal-cart-product-size ul', 'modal-size-active');
+        if (!checkbox.checked) {
+          openCartModal();
+        }
+      } catch (e) {
+        showFlashMessage('Для добавления товара в корзину необходимо выбрать размер.');
       }
     });
   }
@@ -416,9 +441,28 @@ window.addEventListener('DOMContentLoaded', () => {
           </div> 
         `;
       }
+      if (localStorage.length >= 1) {
+        cartId = Object.keys(localStorage);
+        makeAnOrderSection.innerHTML = `
+          <form action="/order/${cartId}/step1" method="POST">
+            <input type="hidden" name="_csrf" value="${csrf}">
+            <input type="hidden" name="id" value="${cartId}">
+            <button type="submit" class="make-an-order-btn">Оформить заказ</button>
+          </form>
+        `;
+      } else if (user && +user.value != 0 && localStorage.length >= 1) {
+        cartId = +user.value;
+        makeAnOrderSection.innerHTML = `
+        <form action="/order/${cartId}/step1" method="POST">
+          <input type="hidden" name="_csrf" value="${csrf}">
+          <input type="hidden" name="id" value="${cartId}">
+          <button type="button" class="make-an-order-btn empty">Оформить заказ</button>
+        </form>
+        `;
+      }
     }
   }
-  
+
   function clearModalCart() {
     modalPurchasesList.innerHTML = '';
   }
@@ -442,6 +486,7 @@ window.addEventListener('DOMContentLoaded', () => {
         showPrices('.total-price', '.delivery-price', '.total-modal-cost', '.modal-cart-product-price p', '.total-cost');
         productCounter('.modal-cart-product-quantity-info', '.number', 'plus', 'minus');
         productSizeChoosing('.modal-cart-product-size ul', 'modal-size-active');
+        showFlashMessage('Вы успешно удалили товар из корзины.');
       });
     });
   }
@@ -486,15 +531,28 @@ window.addEventListener('DOMContentLoaded', () => {
       document.querySelector('#total-price').value = `${counter}`;
       document.querySelector('#delivery-price').value = `${deliveryCounter}`;
       document.querySelector('#total-cost').value = `${totalCostCounter}`;
-    }   
+    }
+
+    // очистка LS
+    if (counter == 0) {
+      const makeAnOrderSection = document.querySelector('.make-an-order');
+      localStorage.clear();
+      makeAnOrderSection.innerHTML = `
+      <input type="hidden" name="_csrf" value="${csrf}">
+      <input type="hidden" name="id" value="${cartId}">
+      <button type="button" class="make-an-order-btn empty">Оформить заказ</button>
+    `;
+      document.querySelector('.make-an-order-btn.empty').addEventListener('click', () => {
+        showFlashMessage('Вы не можете перейти к оформлению заказа, т.к. корзина пуста.');
+      });
+    }
   }
 
 
   // LS making an order page
 
   let orderProductsList = document.querySelector('.order-products-list'),
-      orderNumber = document.querySelector('.p-details'),
-      step2btn = document.querySelector('.continue-section button');
+    step2btn = document.querySelector('.continue-section button');
 
   function showInOrderDetails() {
     if (getCartData()) {
@@ -514,16 +572,13 @@ window.addEventListener('DOMContentLoaded', () => {
         `;
       }
     }
-  } 
-
-  if (step2btn) {
-    step2btn.addEventListener('click', (event) => {
-      localStorage.clear();
-    });
   }
 
-  
+  // Clear LS after making an order
 
+  if (+document.querySelector('.order-number').textContent > 0) {
+    localStorage.clear();
+  }
 
   // Profile changes mode
 
@@ -548,14 +603,139 @@ window.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  // Flash messages functionality
 
 
+  function showFlashMessage(messageText) {
+    let flashProgressBar = document.querySelector('.flash-progress-bar'),
+      flashMessage = document.querySelector('.flash-message'),
+      flashMessageText = document.querySelector('.flash-message p'),
+      flashMessageCloseBtn = document.querySelector('.close-flash-btn');
+
+    flashMessageCloseBtn.addEventListener('click', () => {
+      flashMessage.style.display = 'none';
+    });
+
+    flashMessage.style.display = 'block';
+    flashMessageText.textContent = messageText;
+
+    flashProgressBar.addEventListener('animationend', () => {
+      flashMessage.style.display = 'none';
+    })
+  }
+
+  // Check status modal functionality
 
 
+  function checkOrderStatus() {
+    const findOrderBtn = document.querySelector('#bl');
+
+    findOrderBtn.addEventListener('click', () => {
+      let checkStatusInput = +document.querySelector('.order-number input').value,
+        checkStatusOrder = document.querySelector('.status-check-order');
+
+      if (isNaN(checkStatusInput)) {
+        showFlashMessage('Поле id имеет ошибочный формат.');
+      } else {
+        fetch('/order/check/' + checkStatusInput, {
+            method: 'GET'
+          })
+          .then((res) => res.json())
+          .then(order => {
+            if (order === null) {
+              showFlashMessage('Выбранное значение для id некорректно.');
+            } else {
+              let orderItems = '';
+              order.orderItems.forEach(item => {
+                orderItems += `<li>${item.title} (<strong>${item.size}</strong> x <strong>${item.quantity}</strong>)</li>`
+              })
+              checkStatusOrder.style.display = 'block';
+              checkStatusOrder.innerHTML = `
+                <div class="order-card">
+                <div class="card-content">
+                  <span class="card-title">
+                    Заказ: ${order.id}
+                  </span>
+                  <p>
+                    Статус заказа: ${order.status}
+                  </p>
+          
+          
+                  <p class="date">${order.createdAt}</p>
+                  <p><em>${order.name} ${order.surname}</em> <small>(${order.email})</small></p>
+          
+                  <ol>
+                    ${orderItems}
+                  </ol>
+          
+                  <hr>
+          
+                  <p>Общая стоимость: <span class="price">${order.totalPrice} отг. к.</span></p>
+                  <p>Стоимость доставки: <span class="price">${order.deliveryPrice} отг. к.</span></p>
+                  <p>Итого: <span class="price">${order.totalCost} отг. к.</span></p>
+          
+                </div>
+              </div>
+              `
+            }
+          })
+      }
+    })
+  }
 
 
+  // clear LS after exit from account 
+
+  function cleasrLSafeterExit() {
+    let exitBtn = document.querySelector('.profile-list-menu-exit button');
+
+    exitBtn.addEventListener('click', () => {
+      localStorage.clear();
+    });
+  }
 
 
+  // fetch login
+
+  function login() {
+    const loginBtn = document.querySelector('.login-btn button'),
+      form = document.querySelector('.login-form');
+
+    loginBtn.addEventListener('click', (event) => {
+      event.preventDefault();
+
+      const formData = new FormData(form);
+      const body = JSON.stringify(Object.fromEntries(formData.entries()));
+
+      console.log(body);
+      fetch('http://localhost:3000/auth/login/', {
+          method: 'POST',
+          headers: {
+            "Content-Type": "application/json",
+            'X-XSRF-TOKEN': csrf
+          },
+          body: body
+        })
+        .then((res) => res.json())
+        .then((answer) => {
+          if (answer === 'logged in') {
+            closeModal(loginModal);
+            showFlashMessage('Добро пожаловать в Ярнам. Удачной охоты!');
+            setTimeout(() => {
+              window.location = 'http://localhost:3000/profile';
+            }, 1000);
+          } else if (answer === 'wrong email') {
+            showFlashMessage('Пользователь с данным Email не найден.');
+          } else if (answer === 'wrong password') {
+            showFlashMessage('Email адрес и пароль не совпадают.');
+          }
+        })
+    })
+  }
+
+
+  login();
+  checkOrderStatus();
   showInModalCart();
   deleteInModalCart();
   properSize();
@@ -567,5 +747,8 @@ window.addEventListener('DOMContentLoaded', () => {
   if (orderProductsList) {
     showInOrderDetails();
     showPrices('.order-total-price', '.order-delivery-price', '.order-total-cost', '.order-product-price p', '.total-cost');
+  }
+  if (document.querySelector('.profile-list-menu-exit button')) {
+    cleasrLSafeterExit();
   }
 });

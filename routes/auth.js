@@ -6,7 +6,12 @@ const User = require('../models/user');
 
 router.post('/login', async (req, res) => {
   try {
-    console.log(req.body);
+    // для req.body нужно добавить:
+    // 1) npm i body-parser
+    // в index.js
+    // 2) const bodyParser = require("body-parser");
+    // 3) app.use(bodyParser.urlencoded({ extended: false }));
+    //    app.use(bodyParser.json());
     const {email, password} = req.body;
     const candidate = await User.findOne({
       where: {
@@ -25,18 +30,13 @@ router.post('/login', async (req, res) => {
             throw err;
           }
         });
-        res.redirect(`/profile`);
-        
-        console.log('good job');
-      } else {
-        res.redirect('/');
-        console.log('wrong password');
+        res.status(200).json('logged in'); 
+      } else {  
+        res.status(200).json('wrong password'); 
       }
     } else {
-      res.redirect('/');
-      console.log('wrong email');
+      res.status(200).json('wrong email'); 
     }
-
   } catch (e) {
    console.log(e); 
   }
