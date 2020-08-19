@@ -733,7 +733,34 @@ window.addEventListener('DOMContentLoaded', () => {
     })
   }
 
+  // Pormotional button 
 
+  let promotionalBtn = document.querySelector('.promotional button');
+
+  if (promotionalBtn) {
+    promotionalBtn.addEventListener('click', (e) => {
+      showFlashMessage('Запрашиваемого промокода не существует или он закончился.');
+    })
+  }
+
+
+  // FAQ script 
+
+  function faq() {
+    const faqHeaders = document.querySelectorAll('.faq-item-header');
+
+    faqHeaders.forEach(item => {
+      item.addEventListener('click', (event) => {
+        item.nextElementSibling.classList.toggle('show');
+      })
+    })
+  }
+
+  
+
+  if (document.querySelector('.faq-section')) {
+    faq();
+  }
   login();
   checkOrderStatus();
   showInModalCart();
