@@ -17,7 +17,8 @@
     </div>
     <div class="product-info">
       <div class="product-price">
-        {{product.price}}<span><img src="/public/img/bloodechoes.png" alt="bloodechoes"></span>
+        <input type="hidden" id="hidden-price" value="{{product.price}}">
+        {{product.price}}
       </div>
       <hr>
       <div class="product-description">

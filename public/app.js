@@ -346,8 +346,8 @@ window.addEventListener('DOMContentLoaded', () => {
           itemImage = productPage.querySelector('.product-image img').getAttribute('src'),
           itemSize = productPage.querySelector('.product-size-active').textContent,
           itemQuantity = +productPage.querySelector('.counter-value').value,
-          itemPriceForOne = +productPage.querySelector('.product-price').textContent.trim(),
-          itemPrice = productPage.querySelector('.product-price').textContent.trim(),
+          itemPriceForOne = +productPage.querySelector('#hidden-price').value,
+          itemPrice = productPage.querySelector('#hidden-price').value,
           itemTotalPrice = itemPrice * itemQuantity;
         let itemDubId;
 
@@ -756,8 +756,18 @@ window.addEventListener('DOMContentLoaded', () => {
     })
   }
 
-  
+  // Prices spacing 
 
+  function priceSpacing(pricesSelecor) {
+    const prices = document.querySelectorAll(pricesSelecor);
+
+    prices.forEach(item => {
+      item.textContent = item.textContent.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+    })
+  } 
+
+  
+  priceSpacing('.product .product-price')
   if (document.querySelector('.faq-section')) {
     faq();
   }
