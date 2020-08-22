@@ -69,6 +69,12 @@
             <div class="td-element">
               <a href="/admin/order/{{id}}" target="_blank"><button class="status passing">Перейти</button></a>
             </div>
+            <div class="td-element">
+              <form action="/admin/order/{{id}}/remove" method="POST">
+                <input type="hidden" id="csrf" name="_csrf" value="{{@root.csrf}}">
+                <button type="submit" class="status passing">Удалить</button>
+              </form>
+            </div>
           </td>
         </tr>
         <tr class="order-brief-info-section">

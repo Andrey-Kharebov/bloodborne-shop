@@ -31,6 +31,7 @@ router.post('/:id/step1', async (req, res) => {
   });
 });
 
+
 // LS Order Step 2
 router.post('/:id/step2', async (req, res) => {
   try {
@@ -91,14 +92,7 @@ router.post('/:id/step2', async (req, res) => {
 
 router.get('/:id/step2', async (req, res) => {
   const order = await Order.findByPk(req.params.id);
-  let offset = +3;
-  if (new Date( new Date().getTime() + offset * 3600 * 1000) > (new Date( order.createdAt.getTime() + 30000))) {
-    res.redirect('/');
-  }
 
-  console.log(new Date( new Date().getTime() + offset * 3600 * 1000));
-  console.log(new Date( order.createdAt.getTime()));
-  console.log(new Date( new Date().getTime() + offset * 3600 * 1000) - new Date( order.createdAt.getTime()))
   res.render('order-step2', {
     title: 'Bloodborne shop',
     order: order

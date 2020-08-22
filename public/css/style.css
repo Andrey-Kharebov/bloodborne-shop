@@ -499,13 +499,79 @@ body {
 }
 
 .product-section .product-slider {
+  position: relative;
   width: 50%;
   text-align: center;
 }
 
-.product-section .product-slider .product-slider-center .product-image {
+.product-section .product-slider .product-slider-center .product-slider-inner {
+  display: flex;
+  transition: 1s;
+}
+
+.product-section .product-slider .product-slider-center .product-slider-inner .product-slide {
+  width: 400px;
+  height: 400px;
   margin: 0 auto;
 }
+
+.product-section .product-slider .product-slider-center .product-slider-inner .product-slide img {
+  max-width: 400px;
+  height: auto;
+  opacity: 0;
+  transition: 1s;
+}
+
+.product-section .product-slider .product-slider-center .product-slider-inner .product-slide.acti img {
+  opacity: 1;
+}
+
+.product-section .product-slider .product-slider-center .product-slider-arrow-left,
+.product-section .product-slider .product-slider-center .product-slider-arrow-right {
+  border: 3px solid #000;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  font-size: 20px;
+}
+
+.product-section .product-slider .product-slider-center .product-slider-arrow-left {
+  position: absolute;
+  top: 200px;
+  left: 0;
+}
+
+.product-section .product-slider .product-slider-center .product-slider-arrow-right {
+  position: absolute;
+  top: 200px;
+  right: 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .product-section .product-slider .product-slider-bottom {
   height: 30px;
@@ -513,8 +579,26 @@ body {
 }
 
 .product-section .product-slider .product-slider-bottom .product-switchers {
-  margin: 0 auto;
+  display: flex;
+  justify-content: center;
 }
+
+.product-section .product-slider .product-slider-bottom .product-switchers .product-switcher {
+  color: #000;
+  margin-left: 5px;
+  margin-right: 5px;
+}   
+
+.product-section .product-slider .product-slider-bottom .product-switchers .product-switcher.active {
+  color: #fff;
+  border: none;
+}
+
+.product-section .product-slider .product-slider-bottom .product-switchers .product-switcher:hover {
+  color: #fff;
+  border: none;
+}
+
 
 .product-section .product-info {
   box-sizing: border-box;
@@ -534,13 +618,6 @@ body {
   color: rgb(215, 215, 215);
   font-weight: 600;
   font-size: 30px;
-}
-
-.product-section .product-info .product-price span img {
-  position: absolute;
-  top: 3px;
-  width: 43px;
-  height: auto;
 }
 
 .product-section .product-info hr {

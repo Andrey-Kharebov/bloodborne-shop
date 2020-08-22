@@ -343,7 +343,7 @@ window.addEventListener('DOMContentLoaded', () => {
         let cartData = getCartData() || {},
           itemId = addToCartBtn.getAttribute('data-id'),
           itemTitle = productPage.querySelector('h1').textContent,
-          itemImage = productPage.querySelector('.product-image img').getAttribute('src'),
+          itemImage = productPage.querySelector('.product-slide img').getAttribute('src'),
           itemSize = productPage.querySelector('.product-size-active').textContent,
           itemQuantity = +productPage.querySelector('.counter-value').value,
           itemPriceForOne = +productPage.querySelector('#hidden-price').value,
@@ -766,7 +766,100 @@ window.addEventListener('DOMContentLoaded', () => {
     })
   } 
 
-  
+  // Product page slider 
+
+  function productSlider() {
+    const productSlider = document.querySelector('.product-slider'),
+          productSlides = document.querySelectorAll('.product-slide'),
+          productSliderWrapper = document.querySelector('.product-slider-center'),
+          productSliderField = document.querySelector('.product-slider-inner'),
+          productSliderPrev = document.querySelector('.product-slider-arrow-left'),
+          productSliderNext = document.querySelector('.product-slider-arrow-right'),
+          productSwitchers = document.querySelectorAll('.product-switcher'),
+          sliderWidth = window.getComputedStyle(productSliderWrapper).width;
+    let offset = 0;
+    let slideIndex = 1;
+
+    let i = 0;
+    productSwitchers.forEach(switcher => {
+      if (i == 0) {
+        switcher.classList.add('active');
+        productSlides[i].classList.add('acti');
+      }
+      switcher.setAttribute('data-slide-to', i + 1);
+      i++;
+      switcher.addEventListener('click', (event) => {
+        const slideTo = event.currentTarget.getAttribute('data-slide-to');
+        slideIndex = slideTo;
+
+        offset = +sliderWidth.slice(0, sliderWidth.length - 2) * (slideTo - 1);
+        productSliderField.style.transform = `translateX(-${offset}px)`;
+        productSwitchers.forEach(dot => dot.classList.remove('active'));
+        productSlides.forEach(slide => slide.classList.remove('acti'));
+        productSwitchers[slideIndex - 1].classList.add('active');
+        productSlides[slideIndex - 1].classList.add('acti');
+      })
+    }) 
+
+    productSliderField.style.width = 100 * productSlides.length + '%';
+
+
+    productSliderWrapper.style.overflow = 'hidden';
+    productSlides.forEach(slide => {
+      slide.style.width = sliderWidth;
+    })
+
+    productSliderNext.addEventListener('click', (event) => {
+      if (offset == +sliderWidth.slice(0, sliderWidth.length - 2) * (productSlides.length - 1)) {
+        offset = 0;
+      } else {
+        offset += +sliderWidth.slice(0, sliderWidth.length - 2);
+      }
+
+      if (slideIndex == productSlides.length) {
+        slideIndex = 1;
+      } else {
+        slideIndex++;
+      }
+
+      productSliderField.style.transform = `translateX(-${offset}px)`;
+      productSwitchers.forEach(dot => dot.classList.remove('active'));
+      productSlides.forEach(slide => slide.classList.remove('acti'));
+      productSwitchers[slideIndex - 1].classList.add('active');
+      productSlides[slideIndex - 1].classList.add('acti');
+    })
+
+    productSliderPrev.addEventListener('click', (event) => {
+      if (offset == 0) {
+        offset = +sliderWidth.slice(0, sliderWidth.length - 2) * (productSlides.length - 1);
+      } else {
+        offset -= +sliderWidth.slice(0, sliderWidth.length - 2);
+      }
+
+      if (slideIndex == 1) {
+        slideIndex = productSlides.length;
+      } else {
+        slideIndex--;
+      }
+
+      productSliderField.style.transform = `translateX(-${offset}px)`;
+      productSwitchers.forEach(dot => dot.classList.remove('active'));
+      productSlides.forEach(slide => slide.classList.remove('acti'));
+      productSwitchers[slideIndex - 1].classList.add('active');
+      productSlides[slideIndex - 1].classList.add('acti');
+    })
+  }
+
+
+
+
+
+
+
+
+  if (document.querySelector('.product-slider')) {
+    productSlider();
+  }
   priceSpacing('.product .product-price')
   if (document.querySelector('.faq-section')) {
     faq();

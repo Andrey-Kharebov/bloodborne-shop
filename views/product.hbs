@@ -5,13 +5,27 @@
   <div class="product-section">
     <div class="product-slider">
       <div class="product-slider-center">
-        <div class="product-image">
-          <img src="/{{product.imageUrl}}" alt="{{title}}">
+        <div class="product-slider-inner">
+          {{#each images}}
+          <div class="product-slide">
+            <img src="/{{imageUrl}}" alt="{{title}}">
+          </div>
+          {{/each}}
+        </div>
+        <div class="product-slider-arrow-left">
+          <i class="fas fa-arrow-left"></i>
+        </div>
+        <div class="product-slider-arrow-right">
+          <i class="fas fa-arrow-right"></i>
         </div>
       </div>
       <div class="product-slider-bottom">
         <div class="product-switchers">
-          switchers
+          {{#each images}}
+          <div class="product-switcher">
+            <i class="far fa-dot-circle"></i>
+          </div>
+          {{/each}}
         </div>
       </div>
     </div>
@@ -23,7 +37,7 @@
       <hr>
       <div class="product-description">
         {{{product.description}}}
-      </div>   
+      </div>
       <div class="product-size">
         <p>Выберите размер:</p>
         <ul>
@@ -44,11 +58,12 @@
             <input class="counter-value" type="number" value="1">
             <button class="counter-plus">+</button>
           </div>
-          
+
         </div>
         <div class="add">
           <input type="hidden" name="id" value="{{product.id}}">
-          <button class="add-to-cart" type="submit" data-id="{{product.id}}">Добавить в корзину <span>&#8640;</span></button>
+          <button class="add-to-cart" type="submit" data-id="{{product.id}}">Добавить в корзину
+            <span>&#8640;</span></button>
         </div>
       </div>
     </div>

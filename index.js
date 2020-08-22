@@ -36,6 +36,7 @@ const Category = require('./models/category');
 const Product = require('./models/product');
 const Order = require('./models/order');
 const OrderItem = require('./models/order-item');
+const ProductImage = require('./models/product-image');
 
 
 // Assossiations 
@@ -45,6 +46,7 @@ User.hasMany(Order);
 Order.belongsTo(User);
 
 Order.hasMany(OrderItem);
+Product.hasMany(ProductImage);
 
 Order.belongsToMany(Product, {
   through: {
@@ -95,7 +97,7 @@ app.use(csrf());
 app.use(flash());
 app.use(userMiddleware);
 app.use(varMiddleware);
-app.use(fileMiddleware.single('image')); // посмотреть еще раз после сессий
+app.use(fileMiddleware.array('image')); // посмотреть еще раз после сессий
 
 app.use('/', homeRoutes);
 app.use('/categories', categoriesRoutes);
@@ -132,6 +134,7 @@ async function start() {
       await Category.create({ title: 'outerwear'});
       await Category.create({ title: 'gloves'});
       await Category.create({ title: 'pants'});
+      await Category.create({ title: 'accessories'});
     }
 
     app.listen(PORT, () => {

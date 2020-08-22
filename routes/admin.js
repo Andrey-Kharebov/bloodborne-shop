@@ -1,4 +1,6 @@
-const {Router} = require('express');
+const {
+  Router
+} = require('express');
 const router = Router();
 const admin = require('../middleware/admin');
 const User = require('../models/user');
@@ -6,6 +8,7 @@ const Order = require('../models/order');
 const OrderItem = require('../models/order-item');
 const Product = require('../models/product');
 const Category = require('../models/category');
+const ProductImage = require('../models/product-image');
 
 function statusTranslate(item) {
   for (let key in item) {
@@ -62,13 +65,19 @@ router.get('/navsearch/:value', admin, async (req, res) => {
     attributes: ['id', 'name', 'surname', 'phone', 'email', 'totalCost', 'status']
   })
   const searchResult = {
-    products, users, orders
+    products,
+    users,
+    orders
   }
   res.status(200).json(searchResult);
 })
 router.get('/navbell', admin, async (req, res) => {
-  const newOrders = await Order.findAll({where: {status: 'new'}}); // для колокольчика
-  res.status(200).json(newOrders); 
+  const newOrders = await Order.findAll({
+    where: {
+      status: 'new'
+    }
+  }); // для колокольчика
+  res.status(200).json(newOrders);
 })
 
 
@@ -104,7 +113,7 @@ router.get('/users', admin, async (req, res) => {
 });
 
 router.get('/orders', admin, async (req, res) => {
-  const user = await req.user;
+  const user = req.user;
   const orders = await req.user.adminFetchOrders();
 
   res.render('admin-orders', {
@@ -181,6 +190,21 @@ router.post('/order/:id', admin, async (req, res) => {
   res.redirect(`/admin/order/${req.params.id}`);
 });
 
+router.post('/order/:id/remove', admin, async (req, res) => {
+  const order = await Order.findOne({
+    where: {
+      id: req.params.id
+    },
+    include: {
+      model: OrderItem
+    }
+  });
+
+  order.destroy();
+  res.redirect('/admin/orders');
+});
+
+
 router.post('/orderitem/:id', admin, async (req, res) => {
   let totalPrice = 0;
   let deliveryPrice = 0;
@@ -254,12 +278,20 @@ router.get('/product/add', admin, async (req, res) => {
 router.post('/product/add', admin, async (req, res) => {
   try {
     await Product.create({
-      title: req.body.title,
-      price: req.body.price,
-      imageUrl: req.file.path,
-      description: req.body.description,
-      categoryId: req.body.categoryId
-    });
+        title: req.body.title,
+        price: req.body.price,
+        imageUrl: req.files[0].path,
+        description: req.body.description,
+        categoryId: req.body.categoryId
+      })
+      .then((product) => {
+        for (let key in req.files) {
+          ProductImage.create({
+            productId: product.id,
+            imageUrl: req.files[key].path
+          });
+        }
+      })
 
     res.redirect('/admin');
   } catch (e) {

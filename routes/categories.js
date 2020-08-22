@@ -2,6 +2,7 @@ const {Router} = require('express');
 const router = Router();
 const Product = require('../models/product');
 const Category = require('../models/category');
+const ProductImage = require('../models/product-image');
 
 router.get('/:title', async (req, res) => {
   const category = await Category.findOne({
@@ -13,6 +14,7 @@ router.get('/:title', async (req, res) => {
     }
   });
   const products = category.products;
+  console.log(products);
   res.render('category', {
     title: `${category.title}`,
     category,

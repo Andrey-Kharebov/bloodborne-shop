@@ -1,16 +1,24 @@
 const {Router} = require('express');
 const router = Router();
-const admin = require('../middleware/admin');
 const Product = require('../models/product');
-const Category = require('../models/category');
+const ProductImage = require('../models/product-image');
 
 router.get('/:id', async (req, res) => {
   try {
     const user = req.session.user;
-    const product = await Product.findByPk(req.params.id);
+    const product = await Product.findOne({
+      where: {
+        id: req.params.id
+      },
+      include: {
+        model: ProductImage
+      }
+    });
+    const images = product.productImages
     res.render('product', {
       title: product.title,
       product,
+      images,
       user
     });
   } catch (e) {
