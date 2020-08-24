@@ -8,7 +8,7 @@
     </div>
   </div>
   <div class="admin-order-plates">
-    <div class="second-plate">
+    <div class="second-plate add-edit">
       <div class="second-plate-icons">
         <p class="icon"><i class="material-icons">person</i></p>
         <p class="icon"><i class="material-icons" id="edit">edit</i></p>
@@ -17,12 +17,12 @@
         <div class="plate-user-info change-unactive">
           <div class="input-field">
             <label for="title">Название: </label>
-            <input type="text" name="title">
+            <input type="text" name="title" disabled>
           </div>
           {{#if categories}}
           <div class="input-field">
             <label>Категория</label>
-            <select name="categoryId">
+            <select name="categoryId" disabled>
               <option value="" selected></option>
               {{#each categories}}
               <option value="{{id}}">{{title}}</option>
@@ -32,20 +32,20 @@
           {{/if}}
           <div class="input-field">
             <label for="price">Стоимость:</label>
-            <input type="number" name="price">
+            <input type="number" name="price" disabled>
           </div>
           <hr>
           <div class="input-field">
             <span>Файл:</span>
-            <input id="image" name="image" type="file" multiple>
+            <input id="image" name="image" type="file" multiple disabled>
           </div>
           <div class="input-field">
             <span></span>
           </div>
           <hr>
-          <div class="input-field">
+          <div class="input-field description">
             <label for="description">Описание:</label>
-            <textarea id="description" name="description"></textarea>
+            <textarea id="description" name="description" disabled></textarea>
           </div>
           <hr>
           <div class="save-changes-btn">

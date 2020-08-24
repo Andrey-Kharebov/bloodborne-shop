@@ -548,31 +548,6 @@ body {
   right: 0;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 .product-section .product-slider .product-slider-bottom {
   height: 30px;
   line-height: 30px;
@@ -751,6 +726,113 @@ input::-webkit-inner-spin-button {
   background-color: black;
 }
 
+.product-page .recommended-section {
+  margin: 0 7%;
+  margin-top: 50px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.product-page .recommended-section h1 {
+  text-transform: uppercase;
+  font-size: 25px;
+}
+
+.product-page .recommended-section .recommended-slider {
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.product-page .recommended-section .recommended-slider .recommended-slider-center {
+  box-sizing: border-box;
+  max-width: 1020px;
+  width: 100%;
+  height: auto;
+}
+
+.product-page .recommended-section .recommended-slider .recommended-slider-center .recommended-slider-inner {
+  /* border: 1px solid blue; */
+  display: flex;
+  max-width: 1020px;
+  width: 100%;
+  transition: 1s all;
+}
+
+
+.product-page .recommended-section .recommended-slider .recommended-slider-center .recommended-slider-inner .recommended-slide {
+  /* border: 1px solid red; */
+  box-sizing: border-box;
+  width: 170px;
+  height: 220px;
+  padding: 0 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+.product-page .recommended-section .recommended-slider .recommended-slider-center .recommended-slider-inner .recommended-slide .recommended-slide-img img {
+  width: 150px;
+  height: 150px;
+}
+
+.product-page .recommended-section .recommended-slider .recommended-slider-center .recommended-slider-inner .recommended-slide .recommended-slide-price {
+  max-width: 100px;
+  width: 100%;
+  height: auto;
+  padding-top: 2px;
+  padding-bottom: 3px;
+  border: none;
+  border-radius: 30px;
+  letter-spacing: 2px;
+  font-size: 20px;
+  font-weight: 300;
+  color: rgb(215, 215, 215);
+  background-color: black;
+}
+
+.product-page .recommended-section .recommended-slider .recommended-slider-center .recommended-slider-inner .recommended-slide .recommended-slide-title {
+  margin-top: 10px;
+}
+
+
+.product-page .recommended-section .recommended-slider .recommended-slider-arrow-left,
+.product-page .recommended-section .recommended-slider .recommended-slider-arrow-right {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  font-size: 20px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* Modals */
 
 .modal-bg {
@@ -761,3 +843,4 @@ input::-webkit-inner-spin-button {
   display: none;
   z-index: 100;
 }
+

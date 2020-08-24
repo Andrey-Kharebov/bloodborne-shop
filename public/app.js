@@ -347,7 +347,7 @@ window.addEventListener('DOMContentLoaded', () => {
           itemSize = productPage.querySelector('.product-size-active').textContent,
           itemQuantity = +productPage.querySelector('.counter-value').value,
           itemPriceForOne = +productPage.querySelector('#hidden-price').value,
-          itemPrice = productPage.querySelector('#hidden-price').value,
+          itemPrice = +productPage.querySelector('#hidden-price').value,
           itemTotalPrice = itemPrice * itemQuantity;
         let itemDubId;
 
@@ -387,6 +387,7 @@ window.addEventListener('DOMContentLoaded', () => {
           openCartModal();
         }
       } catch (e) {
+        console.log(e);
         showFlashMessage('Для добавления товара в корзину необходимо выбрать размер.');
       }
     });
@@ -764,19 +765,19 @@ window.addEventListener('DOMContentLoaded', () => {
     prices.forEach(item => {
       item.textContent = item.textContent.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
     })
-  } 
+  }
 
   // Product page slider 
 
   function productSlider() {
     const productSlider = document.querySelector('.product-slider'),
-          productSlides = document.querySelectorAll('.product-slide'),
-          productSliderWrapper = document.querySelector('.product-slider-center'),
-          productSliderField = document.querySelector('.product-slider-inner'),
-          productSliderPrev = document.querySelector('.product-slider-arrow-left'),
-          productSliderNext = document.querySelector('.product-slider-arrow-right'),
-          productSwitchers = document.querySelectorAll('.product-switcher'),
-          sliderWidth = window.getComputedStyle(productSliderWrapper).width;
+      productSlides = document.querySelectorAll('.product-slide'),
+      productSliderWrapper = document.querySelector('.product-slider-center'),
+      productSliderField = document.querySelector('.product-slider-inner'),
+      productSliderPrev = document.querySelector('.product-slider-arrow-left'),
+      productSliderNext = document.querySelector('.product-slider-arrow-right'),
+      productSwitchers = document.querySelectorAll('.product-switcher'),
+      sliderWidth = window.getComputedStyle(productSliderWrapper).width;
     let offset = 0;
     let slideIndex = 1;
 
@@ -799,7 +800,7 @@ window.addEventListener('DOMContentLoaded', () => {
         productSwitchers[slideIndex - 1].classList.add('active');
         productSlides[slideIndex - 1].classList.add('acti');
       })
-    }) 
+    })
 
     productSliderField.style.width = 100 * productSlides.length + '%';
 
@@ -851,6 +852,49 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 
 
+  // Recommended slider 
+
+  function recommendedSlider() {
+    const recSlider = document.querySelector('.recommended-slider'),
+      recSlides = document.querySelectorAll('.recommended-slide'),
+      recSlide = document.querySelector('.recommended-slide'),
+      recSliderWrapper = document.querySelector('.recommended-slider-center'),
+      recSliderField = document.querySelector('.recommended-slider-inner'),
+      recSliderPrev = document.querySelector('.recommended-slider-arrow-left'),
+      recSliderNext = document.querySelector('.recommended-slider-arrow-right'),
+      sliderWidth = window.getComputedStyle(recSliderWrapper).width;
+    let offset = 0;
+
+    recSliderField.style.width = 100 * recSlides.length + '%';
+    recSliderWrapper.style.overflow = 'hidden';
+
+    console.log(+document.querySelector('#hidden-price').value);
+
+    if (recSlides.length > 6) {
+      recSliderPrev.addEventListener('click', (event) => {
+        if (offset == (recSlide.offsetWidth * (recSlides.length - 6))) {
+        } else {
+          offset += recSlide.offsetWidth;
+        }
+        recSliderField.style.transform = `translateX(-${offset}px)`;
+      })
+    } else {
+      recSliderPrev.style.display = 'none';
+      recSliderNext.style.display = 'none';
+      recSliderField.style.justifyContent = 'center';
+    }
+    
+
+    recSliderNext.addEventListener('click', (event) => {
+      if (offset == 0) {
+      } else {
+        offset -= recSlide.offsetWidth;
+      }
+
+      recSliderField.style.transform = `translateX(-${offset}px)`;
+    })
+  }
+
 
 
 
@@ -859,8 +903,11 @@ window.addEventListener('DOMContentLoaded', () => {
 
   if (document.querySelector('.product-slider')) {
     productSlider();
+    recommendedSlider();
   }
   priceSpacing('.product .product-price')
+  priceSpacing('.product-info .product-price')
+  priceSpacing('.recommended-slide-price .product-price')
   if (document.querySelector('.faq-section')) {
     faq();
   }

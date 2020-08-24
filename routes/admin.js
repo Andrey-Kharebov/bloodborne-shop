@@ -343,7 +343,15 @@ router.get('/product/:id/edit', admin, async (req, res) => {
   try {
     const user = req.user;
     const categories = await Category.findAll();
-    const product = await Product.findByPk(req.params.id);
+    const product = await Product.findOne({
+      where: {
+        id: req.params.id
+      },
+      include: {
+        model: ProductImage
+      }
+    });
+    const images = product.productImages;
     const category = await Category.findOne({
       where: {
         id: product.categoryId
@@ -355,6 +363,7 @@ router.get('/product/:id/edit', admin, async (req, res) => {
       user,
       categories,
       category,
+      images,
       product
     });
   } catch (e) {
@@ -365,16 +374,27 @@ router.get('/product/:id/edit', admin, async (req, res) => {
 router.post('/product/:id/edit', admin, async (req, res) => {
   try {
     const user = req.user;
-    const product = await Product.findByPk(req.body.id);
-    console.log(product);
-    if (req.file) {
+    const product = await Product.findOne({
+      where: {
+        id: req.body.id
+      },
+      include: {
+        model: ProductImage
+      }
+    });
+    if (req.files) {
       product.update({
         title: req.body.title,
         price: req.body.price,
         categoryId: req.body.categoryId,
-        imageUrl: req.file.path,
+        imageUrl: req.files[0].path,
         description: req.body.description
-      });
+      })
+      .then(product => {
+        product.productImages[0].update({
+          imageUrl: req.files[0].path,
+        });
+      })
     } else {
       product.update({
         title: req.body.title,
@@ -384,7 +404,43 @@ router.post('/product/:id/edit', admin, async (req, res) => {
       });
     }
     product.save();
-    res.redirect(`/admin/catalog`);
+    res.redirect(`/admin/product/${req.body.id}/edit`);
+  } catch (e) {
+    console.log(e);
+  }
+});
+
+router.post('/product/add-img/add', admin, async (req, res) => {
+  try {
+    const user = req.user;
+    const product = await Product.findOne({
+      where: {
+        id: req.body.id
+      },
+      include: {
+        model: ProductImage
+      }
+    });
+    await ProductImage.create({
+      imageUrl: req.files[0].path,
+      productId: req.body.id
+    })
+    res.redirect(`/admin/product/${req.body.id}/edit`);
+  } catch (e) {
+    console.log(e);
+  }
+});
+
+router.post('/product/add-img/:id/edit', admin, async (req, res) => {
+  try {
+    const user = req.user;
+    const productImage = await ProductImage.findByPk(req.params.id);
+    console.log(req.files[0].path);
+    productImage.update({
+      imageUrl: req.files[0].path
+    })
+    productImage.save();
+    res.redirect(`/admin/product/${productImage.productId}/edit`);
   } catch (e) {
     console.log(e);
   }
@@ -395,6 +451,17 @@ router.post('/product/:id/remove', admin, async (req, res) => {
     const product = await Product.findByPk(req.params.id);
     product.destroy();
     res.redirect('/admin');
+  } catch (e) {
+    console.log(e);
+  }
+});
+
+router.post('/product/add-img/:id/remove', admin, async (req, res) => {
+  try {
+    const user = req.user;
+    const productImage = await ProductImage.findByPk(req.params.id);
+    productImage.destroy();
+    res.redirect(`/admin/product/${productImage.productId}/edit`);
   } catch (e) {
     console.log(e);
   }

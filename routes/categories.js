@@ -14,7 +14,6 @@ router.get('/:title', async (req, res) => {
     }
   });
   const products = category.products;
-  console.log(products);
   res.render('category', {
     title: `${category.title}`,
     category,

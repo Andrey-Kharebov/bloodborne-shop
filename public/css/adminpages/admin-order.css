@@ -42,6 +42,36 @@
   color: #fff;
   background: linear-gradient(90deg, #263238, #607d8b );
 }
+.admin-panel .admin-order-plates .second-plate.add-edit .main-image {
+}
+
+.admin-panel .admin-order-plates .second-plate.add-edit .main-image img {
+  max-width: 120px;
+  width: 100%;
+  height: auto;
+}
+
+.admin-panel .admin-order-plates .second-plate.add-edit .additional-images {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.admin-panel .admin-order-plates .second-plate.add-edit .additional-images img {
+  max-width: 120px;
+  width: 100%;
+  height: auto;
+}
+
+
+.admin-panel .admin-order-plates .second-plate.add-edit .description {
+  display: flex;
+  flex-direction: column;
+}
+.admin-panel .admin-order-plates .second-plate.add-edit .description textarea {
+  margin-top: 10px;
+  width: 355px;
+  height: 200px;
+}
 
 .admin-panel .admin-order-plates .second-plate .second-plate-icons {
   display: flex;
