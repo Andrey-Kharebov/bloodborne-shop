@@ -190,6 +190,7 @@ window.addEventListener('DOMContentLoaded', () => {
     checkStatusModal = document.querySelector('.status-check-modal'),
     checkStatusOrder = document.querySelector('.status-check-order'),
     registrationModal = document.querySelector('.registration-modal'),
+    recommendedModal = document.querySelector('.recommended-modal'),
     closeModalBtns = document.querySelectorAll('.close-modal-btn'),
     forgotModalBtn = document.querySelector('.forgot'),
     cancelingModalBtn = document.querySelector('.canceling'),
@@ -248,6 +249,7 @@ window.addEventListener('DOMContentLoaded', () => {
       closeModal(registrationModal);
       closeModal(checkStatusModal);
       closeModal(checkStatusOrder);
+      closeModal(recommendedModal);
     }
   });
 
@@ -266,6 +268,9 @@ window.addEventListener('DOMContentLoaded', () => {
       } else if (event.currentTarget.dataset.modal === 'check-status') {
         closeModal(checkStatusModal);
         closeModal(checkStatusOrder);
+      } else if (event.currentTarget.dataset.modal === 'recommended') {
+        closeModal(recommendedModal);
+        closeModal(recommendedModal);
       }
     });
   });
@@ -895,6 +900,19 @@ window.addEventListener('DOMContentLoaded', () => {
     })
   }
 
+  // Recommended modal
+
+  function recModal() {
+    const recSlides = document.querySelectorAll('.recommended-slide'),
+          recModal = document.querySelector('.recommended-modal');
+
+    recSlides.forEach(item => {
+      item.addEventListener('click', (event) => {
+        openModal(recModal);
+      })
+    })
+  }
+
 
 
 
@@ -904,6 +922,7 @@ window.addEventListener('DOMContentLoaded', () => {
   if (document.querySelector('.product-slider')) {
     productSlider();
     recommendedSlider();
+    recModal();
   }
   priceSpacing('.product .product-price')
   priceSpacing('.product-info .product-price')

@@ -11,6 +11,7 @@
 @import '/public/css/modals/registration-modal.css';
 @import '/public/css/modals/status-check-modal.css';
 @import '/public/css/modals/status-check-order.css';
+@import '/public/css/modals/recommended-modal.css';
 @import '/public/css/modals/flash-message.css';
 
 body {
@@ -517,6 +518,7 @@ body {
 
 .product-section .product-slider .product-slider-center .product-slider-inner .product-slide img {
   max-width: 400px;
+  width: 100%;
   height: auto;
   opacity: 0;
   transition: 1s;
@@ -750,7 +752,7 @@ input::-webkit-inner-spin-button {
   box-sizing: border-box;
   max-width: 1020px;
   width: 100%;
-  height: auto;
+  height: 225px;
 }
 
 .product-page .recommended-section .recommended-slider .recommended-slider-center .recommended-slider-inner {
@@ -780,6 +782,7 @@ input::-webkit-inner-spin-button {
 }
 
 .product-page .recommended-section .recommended-slider .recommended-slider-center .recommended-slider-inner .recommended-slide .recommended-slide-price {
+  margin-top: 10px;
   max-width: 100px;
   width: 100%;
   height: auto;

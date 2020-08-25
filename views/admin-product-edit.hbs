@@ -34,14 +34,11 @@
             <label for="price">Стоимость:</label>
             <input type="number" name="price" value="{{product.price}}" disabled>
           </div>
-          <hr>
-          {{!-- <div class="input-field">
-            <span>Файл:</span>
-            <input id="image" name="image" type="file" disabled>
-          </div>
           <div class="input-field">
-            <span>{{product.imageUrl}}</span>
-          </div> --}}
+            <label for="recommended">Рекомендуемый:</label>
+            <input type="checkbox" name="recommended" {{recommended}} disabled>
+          </div>
+          <hr>
           <div class="input-field">
             <span>Главное изображение:</span>
             <input id="image" name="image" type="file" multiple disabled>

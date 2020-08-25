@@ -22,7 +22,11 @@ const Product = sequelize.define('product', {
   description: {
     type: Sequelize.TEXT,
     allowNull: false
-  }
+  },
+  recommended: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false
+  },
 });
 
 module.exports = Product;

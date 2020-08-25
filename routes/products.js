@@ -14,12 +14,18 @@ router.get('/:id', async (req, res) => {
         model: ProductImage
       }
     });
+    const recommended = await Product.findAll({
+      where: {
+        recommended: 1
+      }
+    })
     const images = product.productImages
     res.render('product', {
       title: product.title,
       product,
       images,
-      user
+      user,
+      recommended
     });
   } catch (e) {
     console.log(e);

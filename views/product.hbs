@@ -76,20 +76,20 @@
       </div>
       <div class="recommended-slider-center">
         <div class="recommended-slider-inner">
+          {{#each recommended}}
           <div class="recommended-slide">
             <div class="recommended-slide-img">
-              <img
-                src="https://cdn4.iconfinder.com/data/icons/health-care-and-first-responders-with-masks/64/doctor-asian-female-coronavirus-2-512.png"
-                alt="image">
+              <img src="/{{imageUrl}}" alt="{{title}}">
             </div>
             <div class="recommended-slide-price">
-              <div class="product-price">124300</div>
+              <div class="product-price">{{price}}</div>
             </div>
             <div class="recommended-slide-title">
-              Первый
+              {{title}}
             </div>
           </div>
-          <div class="recommended-slide">
+          {{/each}}
+          {{!-- <div class="recommended-slide">
             <div class="recommended-slide-img">
               <img
                 src="https://cdn4.iconfinder.com/data/icons/health-care-and-first-responders-with-masks/64/doctor-asian-male-coronavirus-2-512.png"
@@ -205,7 +205,7 @@
             <div class="recommended-slide-title">
               Последний
             </div>
-          </div>
+          </div> --}}
         </div>
       </div>
       <div class="recommended-slider-arrow-right">

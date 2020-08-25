@@ -277,11 +277,16 @@ router.get('/product/add', admin, async (req, res) => {
 
 router.post('/product/add', admin, async (req, res) => {
   try {
+    let recommended;
+    if (req.body.recommended === 'on') {
+      recommended = 1;
+    }
     await Product.create({
         title: req.body.title,
         price: req.body.price,
         imageUrl: req.files[0].path,
         description: req.body.description,
+        recommended: recommended,
         categoryId: req.body.categoryId
       })
       .then((product) => {
@@ -292,7 +297,7 @@ router.post('/product/add', admin, async (req, res) => {
           });
         }
       })
-
+    console.log(req.body);
     res.redirect('/admin');
   } catch (e) {
     console.log(e);
@@ -351,6 +356,10 @@ router.get('/product/:id/edit', admin, async (req, res) => {
         model: ProductImage
       }
     });
+    let recommended;
+    if (product.recommended === true) {
+      recommended = 'checked'
+    }
     const images = product.productImages;
     const category = await Category.findOne({
       where: {
@@ -364,7 +373,8 @@ router.get('/product/:id/edit', admin, async (req, res) => {
       categories,
       category,
       images,
-      product
+      product,
+      recommended
     });
   } catch (e) {
     console.log(e);
@@ -382,10 +392,17 @@ router.post('/product/:id/edit', admin, async (req, res) => {
         model: ProductImage
       }
     });
-    if (req.files) {
+    let recommended;
+    if (req.body.recommended === 'on') {
+      recommended = 1;
+    } else {
+      recommended = 0;
+    }
+    if (req.files[0]) {
       product.update({
         title: req.body.title,
         price: req.body.price,
+        recommended: recommended,
         categoryId: req.body.categoryId,
         imageUrl: req.files[0].path,
         description: req.body.description
@@ -399,6 +416,7 @@ router.post('/product/:id/edit', admin, async (req, res) => {
       product.update({
         title: req.body.title,
         price: req.body.price,
+        recommended: recommended,
         categoryId: req.body.categoryId,
         description: req.body.description
       });
