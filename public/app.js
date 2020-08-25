@@ -41,11 +41,6 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 
 
-
-
-
-
-
   // Product size choosing
 
   function productSizeChoosing(sizeListSelector, activeSelector) {
@@ -269,7 +264,6 @@ window.addEventListener('DOMContentLoaded', () => {
         closeModal(checkStatusModal);
         closeModal(checkStatusOrder);
       } else if (event.currentTarget.dataset.modal === 'recommended') {
-        closeModal(recommendedModal);
         closeModal(recommendedModal);
       }
     });
@@ -877,8 +871,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     if (recSlides.length > 6) {
       recSliderPrev.addEventListener('click', (event) => {
-        if (offset == (recSlide.offsetWidth * (recSlides.length - 6))) {
-        } else {
+        if (offset == (recSlide.offsetWidth * (recSlides.length - 6))) {} else {
           offset += recSlide.offsetWidth;
         }
         recSliderField.style.transform = `translateX(-${offset}px)`;
@@ -888,11 +881,10 @@ window.addEventListener('DOMContentLoaded', () => {
       recSliderNext.style.display = 'none';
       recSliderField.style.justifyContent = 'center';
     }
-    
+
 
     recSliderNext.addEventListener('click', (event) => {
-      if (offset == 0) {
-      } else {
+      if (offset == 0) {} else {
         offset -= recSlide.offsetWidth;
       }
 
@@ -904,11 +896,127 @@ window.addEventListener('DOMContentLoaded', () => {
 
   function recModal() {
     const recSlides = document.querySelectorAll('.recommended-slide'),
-          recModal = document.querySelector('.recommended-modal');
+      recModal = document.querySelector('.recommended-modal'),
+      recModalSection = recModal.querySelector('.recommended-section');
 
     recSlides.forEach(item => {
       item.addEventListener('click', (event) => {
-        openModal(recModal);
+        let recId = +item.querySelector('.recId').value;
+        fetch('/products/recommended/' + recId, {
+            method: 'GET'
+          })
+          .then((res) => res.json())
+          .then(product => {
+            recModalSection.innerHTML = `
+              <div class="recommened-product-image">
+                <img src="/${product.imageUrl}" alt="${product.title}">
+              </div>
+              <div class="product-info">
+                <input type="hidden" id="hidden-price" value="${product.price}">
+                <div class="product-title">
+                  ${product.title}
+                </div>
+                <div class="product-price">
+                  ${product.price}
+                </div>
+                <hr>
+                <div class="product-description">
+                  ${product.description}
+                </div>
+                <div class="product-size">
+                  <p>Выберите размер:</p>
+                  <ul>
+                    <li><button class="product-size-btn">XS</button></li>
+                    <li><button class="product-size-btn">S</button></li>
+                    <li><button class="product-size-btn">M</button></li>
+                    <li><button class="product-size-btn">L</button></li>
+                    <li><button class="product-size-btn">XL</button></li>
+                    <li><button class="product-size-btn">2XL</button></li>
+                    <li><button class="product-size-btn">3XL</button></li>
+                  </ul>
+                </div>
+                <div class="quantity_add">
+                  <div class="quantity">
+                    <p>Количество:</p>
+                    <div class="product-counter">
+                      <button class="counter-minus">-</button>
+                      <input class="counter-value" type="number" value="1">
+                      <button class="counter-plus">+</button>
+                    </div>
+                  </div>
+                  <div class="add">
+                    <input type="hidden" name="id" value="${product.id}">
+                    <button class="add-to-cart" type="submit" data-id="${product.id}">Добавить в корзину
+                      <span>&#8640;</span></button>
+                  </div>
+                </div>
+              </div>
+          `
+          })
+          .then(product => {
+            openModal(recModal);
+          })
+          .then(product => {
+            let modalAddToCartBtn = recModal.querySelector('.add-to-cart');
+            console.log(modalAddToCartBtn);
+            productSizeChoosing('.product-size ul', 'product-size-active');
+            productCounter('.product-counter', '.counter-value', 'counter-plus', 'counter-minus');
+            modalAddToCartBtn.addEventListener('click', () => {
+              try {
+                let cartData = getCartData() || {},
+                  itemId = modalAddToCartBtn.getAttribute('data-id'),
+                  itemTitle = recModal.querySelector('.product-title').textContent,
+                  itemImage = recModal.querySelector('.recommened-product-image img').getAttribute('src'),
+                  itemSize = recModal.querySelector('.product-size-active').textContent,
+                  itemQuantity = +recModal.querySelector('.counter-value').value,
+                  itemPriceForOne = +recModal.querySelector('#hidden-price').value,
+                  itemPrice = +recModal.querySelector('#hidden-price').value,
+                  itemTotalPrice = itemPrice * itemQuantity;
+                let itemDubId;
+
+                if (cartData.hasOwnProperty(itemId)) {
+                  if (cartData[itemId][2] == itemSize) {
+                    cartData[itemId][3] += itemQuantity;
+                    cartData[itemId][4] += itemTotalPrice;
+                    showFlashMessage('Товар успешно добавлен в корзину.');
+                  } else {
+                    itemDubId = itemId + itemSize;
+                    showFlashMessage('Товар успешно добавлен в корзину.');
+                    if (cartData[itemDubId]) {
+                      if (cartData[itemDubId][2] == itemSize) {
+                        cartData[itemDubId][3] += itemQuantity;
+                        cartData[itemDubId][4] += itemTotalPrice;
+                        showFlashMessage('Данные у товара в корзине успешно обновлены.');
+                      }
+                    } else {
+                      cartData[itemDubId] = [itemTitle, itemImage, itemSize, itemQuantity, itemTotalPrice, itemPriceForOne];
+                    }
+                  }
+                } else {
+                  cartData[itemId] = [itemTitle, itemImage, itemSize, itemQuantity, itemTotalPrice, itemPriceForOne];
+                  showFlashMessage('Товар успешно добавлен в корзину.');
+                }
+
+                setCartData(cartData);
+                clearModalCart();
+                showInModalCart();
+                valueSection.value = 1;
+                deleteInModalCart();
+                properSize();
+                showPrices('.total-price', '.delivery-price', '.total-modal-cost', '.modal-cart-product-price p', '.total-cost');
+                productCounter('.modal-cart-product-quantity-info', '.number', 'plus', 'minus');
+                productSizeChoosing('.modal-cart-product-size ul', 'modal-size-active');
+                closeModal(recommendedModal);
+                // if (!checkbox.checked) {
+                  openCartModal();
+                // }
+              } catch (e) {
+                console.log(e);
+                showFlashMessage('Для добавления товара в корзину необходимо выбрать размер.');
+              }
+            });
+    
+          })
       })
     })
   }

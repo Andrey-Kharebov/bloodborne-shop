@@ -78,6 +78,7 @@
         <div class="recommended-slider-inner">
           {{#each recommended}}
           <div class="recommended-slide">
+            <input type="hidden" class="recId" name="id" value="{{id}}">
             <div class="recommended-slide-img">
               <img src="/{{imageUrl}}" alt="{{title}}">
             </div>
@@ -89,123 +90,6 @@
             </div>
           </div>
           {{/each}}
-          {{!-- <div class="recommended-slide">
-            <div class="recommended-slide-img">
-              <img
-                src="https://cdn4.iconfinder.com/data/icons/health-care-and-first-responders-with-masks/64/doctor-asian-male-coronavirus-2-512.png"
-                alt="image">
-            </div>
-            <div class="recommended-slide-price">
-              1000
-            </div>
-            <div class="recommended-slide-title">
-              Пузырек Крови
-            </div>
-          </div>
-          <div class="recommended-slide">
-            <div class="recommended-slide-img">
-              <img
-                src="https://cdn4.iconfinder.com/data/icons/health-care-and-first-responders-with-masks/64/doctor-white-female-coronavirus-512.png"
-                alt="image">
-            </div>
-            <div class="recommended-slide-price">
-              1000
-            </div>
-            <div class="recommended-slide-title">
-              Пузырек Крови
-            </div>
-          </div>
-          <div class="recommended-slide">
-            <div class="recommended-slide-img">
-              <img
-                src="https://cdn4.iconfinder.com/data/icons/health-care-and-first-responders-with-masks/64/nurse-asian-female-coronavirus-512.png"
-                alt="image">
-            </div>
-            <div class="recommended-slide-price">
-              1000
-            </div>
-            <div class="recommended-slide-title">
-              Пузырек Крови
-            </div>
-          </div>
-          <div class="recommended-slide">
-            <div class="recommended-slide-img">
-              <img
-                src="https://cdn4.iconfinder.com/data/icons/health-care-and-first-responders-with-masks/64/ems-white-male-coronavirus-512.png"
-                alt="image">
-            </div>
-            <div class="recommended-slide-price">
-              1000
-            </div>
-            <div class="recommended-slide-title">
-              Пузырек Крови
-            </div>
-          </div>
-          <div class="recommended-slide">
-            <div class="recommended-slide-img">
-              <img
-                src="https://cdn4.iconfinder.com/data/icons/health-care-and-first-responders-with-masks/64/police-black-female-coronavirus-512.png"
-                alt="image">
-            </div>
-            <div class="recommended-slide-price">
-              1000
-            </div>
-            <div class="recommended-slide-title">
-              Пузырек Крови
-            </div>
-          </div>
-          <div class="recommended-slide">
-            <div class="recommended-slide-img">
-              <img
-                src="https://cdn4.iconfinder.com/data/icons/health-care-and-first-responders-with-masks/64/nurse-asian-male-coronavirus-512.png"
-                alt="image">
-            </div>
-            <div class="recommended-slide-price">
-              1000
-            </div>
-            <div class="recommended-slide-title">
-              Пузырек Крови
-            </div>
-          </div>
-          <div class="recommended-slide">
-            <div class="recommended-slide-img">
-              <img
-                src="https://cdn4.iconfinder.com/data/icons/health-care-and-first-responders-with-masks/64/firefighter-white-male-coronavirus-512.png"
-                alt="image">
-            </div>
-            <div class="recommended-slide-price">
-              1000
-            </div>
-            <div class="recommended-slide-title">
-              Пузырек Крови
-            </div>
-          </div>
-          <div class="recommended-slide">
-            <div class="recommended-slide-img">
-              <img
-                src="https://cdn4.iconfinder.com/data/icons/health-care-and-first-responders-with-masks/64/ems-asian-female-coronavirus-512.png"
-                alt="image">
-            </div>
-            <div class="recommended-slide-price">
-              1000
-            </div>
-            <div class="recommended-slide-title">
-              Пузырек Крови
-            </div>
-          </div>
-          <div class="recommended-slide">
-            <div class="recommended-slide-img">
-              <img
-                src="https://cdn4.iconfinder.com/data/icons/health-care-and-first-responders-with-masks/64/pulmonologist-african-female-coronavirus-512.png"
-                alt="image">
-            </div>
-            <div class="recommended-slide-price">
-              1000
-            </div>
-            <div class="recommended-slide-title">
-              Последний
-            </div>
-          </div> --}}
         </div>
       </div>
       <div class="recommended-slider-arrow-right">

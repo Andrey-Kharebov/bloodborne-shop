@@ -3,6 +3,12 @@ const router = Router();
 const Product = require('../models/product');
 const ProductImage = require('../models/product-image');
 
+// fetch
+router.get('/recommended/:id', async (req, res) => {
+  const product = await Product.findByPk(req.params.id);
+  res.status(200).json(product);
+})
+
 router.get('/:id', async (req, res) => {
   try {
     const user = req.session.user;

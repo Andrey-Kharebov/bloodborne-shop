@@ -13,7 +13,7 @@ input[type='checkbox']
   top: 0;
   right: -380px;
   background: rgb(255, 255, 255);
-  z-index: 2;
+  z-index: 120;
   transition: all .5s;
   overflow-y: scroll;
 } 

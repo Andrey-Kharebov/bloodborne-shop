@@ -218,25 +218,23 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
     fetch('/admin/navbell/', {
-              method: 'GET'
-            })
-            .then((res) => res.json())
-            .then(newOrders => {
-              if (newOrders.length) {
-                notifcationCircle.innerHTML = `<p>${newOrders.length}</p>`
-              } else {
-                notifcationCircle.innerHTML = `<p>0</p>`
-              }
-            })
-            .then(res => {
-              if (notifcationCircle.querySelector('p') && notifcationCircle.querySelector('p').textContent > 0) {
-                notifcationCircle.style.display = 'block';
-              } else {
-                notifcationCircle.style.display = 'none';
-              }
-            })
-
-  
+        method: 'GET'
+      })
+      .then((res) => res.json())
+      .then(newOrders => {
+        if (newOrders.length) {
+          notifcationCircle.innerHTML = `<p>${newOrders.length}</p>`
+        } else {
+          notifcationCircle.innerHTML = `<p>0</p>`
+        }
+      })
+      .then(res => {
+        if (notifcationCircle.querySelector('p') && notifcationCircle.querySelector('p').textContent > 0) {
+          notifcationCircle.style.display = 'block';
+        } else {
+          notifcationCircle.style.display = 'none';
+        }
+      })
   }
 
 
@@ -363,24 +361,22 @@ window.addEventListener('DOMContentLoaded', () => {
                   `
                 }).join('');
                 document.querySelector('.home-panel-table-modal tbody').innerHTML += html
-              }       
+              }
             })
             .then(res => {
               let columns = document.querySelectorAll('.search-tr');
               columns.forEach(item => {
                 let tds = item.querySelectorAll('td.column');
                 tds.forEach(td => {
-                  if (td.textContent.trim().toLowerCase().search(val) == -1) {
-                  } else {
+                  if (td.textContent.trim().toLowerCase().search(val) == -1) {} else {
                     td.parentElement.classList.toggle('proper');
                   }
                 })
-                if (item.classList.contains('proper')) {
-                } else {
+                if (item.classList.contains('proper')) {} else {
                   item.remove();
                 }
               })
-            }) 
+            })
         } else {
           searchPanel.style.display = 'none';
         }
