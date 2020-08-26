@@ -551,8 +551,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
   // LS making an order page
 
-  let orderProductsList = document.querySelector('.order-products-list'),
-    step2btn = document.querySelector('.continue-section button');
+  let orderProductsList = document.querySelector('.order-products-list');
 
   function showInOrderDetails() {
     if (getCartData()) {
@@ -707,7 +706,6 @@ window.addEventListener('DOMContentLoaded', () => {
       const formData = new FormData(form);
       const body = JSON.stringify(Object.fromEntries(formData.entries()));
 
-      console.log(body);
       fetch('http://localhost:3000/auth/login/', {
           method: 'POST',
           headers: {
@@ -1021,10 +1019,132 @@ window.addEventListener('DOMContentLoaded', () => {
     })
   }
 
+  // Order step2 fetch
+
+  function step2fetch() {
+    const step2btn = document.querySelector('.continue-section button'),
+          orderDetails = document.querySelector('.order-details'),
+          form = document.querySelector('.order-form'),
+          navTotalCost = document.querySelector('.total-cost');
+
+    step2btn.addEventListener('click', (event) => {
+      event.preventDefault();
+      
+      const formData = new FormData(form);
+      const body = JSON.stringify(Object.fromEntries(formData.entries()));
+      console.log(body);
+
+      fetch('http://localhost:3000/order/step2', {
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json",
+          'X-XSRF-TOKEN': csrf
+        },
+        body: body
+      })
+      .then((res) => res.json())
+      .then((order) => {
+        localStorage.clear();
+        navTotalCost.textContent = 0;
+        orderDetails.innerHTML = `
+          <h1>Заказ успешно создан</h1>
+          <p class="p-details">Номер заказа: <span class="order-number">${order.id}</span></p>
+        
+          <div class="order-section">
+            <div class="delivery-info">
+              <h2>Данные для доставки</h2>
+              <div class="delivery-info-list">
+                <div class="input-field">
+                  <p class="p-input">Имя: <span class="info">${order.name}</span></p>
+                </div>
+                <div class="input-field">
+                  <p class="p-input">Фамилия: <span class="info">${order.surname}</span></p>
+                </div>
+                <div class="input-field">
+                  <p class="p-input">Отчество: <span class="info">${order.patronymic}</span></p>
+                </div>
+                <div class="input-field">
+                  <p class="p-input">Телефон: <span class="info">${order.phone}</span></p>
+                </div>
+                <div class="input-field">
+                  <p class="p-input">Эл. Почта: <span class="info">${order.email}</span></p>
+                </div>
+                <div class="input-field">
+                  <p class="p-input">Страна: <span class="info">${order.country}</span></p>
+                </div>
+                <div class="input-field">
+                  <p class="p-input">Город: <span class="info">${order.town}</span></p>
+                </div>
+                <div class="input-field">
+                  <p class="p-input">Край/Область/Регион: <span class="info">${order.region}</span></p>
+                </div>
+                <div class="input-field">
+                  <p class="p-input">Улица, Дом, Квартира: <span class="info">${order.address}</span></p>
+                </div>
+                <div class="input-field">
+                  <p class="p-input">Почтовый индекс: <span class="info">${order.zipcode}</span></p>
+                </div>
+                <hr>
+                <div class="input-field">
+                  <p class="p-input">Общая стоимость: <span class="info">${order.totalPrice} отг. к.</span></p>
+                </div>
+                <div class="input-field">
+                  <p class="p-input">Стоимость доставки: <span class="info">${order.deliveryPrice} отг. к.</span></p>
+                </div>
+                <div class="input-field">
+                  <p class="p-input">Итого: <span class="info">${order.totalCost} отг. к.</span></p>
+                </div>
+                <div class="continue-section">
+                  <a href="/"><button type="submit">На главную <span>&#8640;</span></button></a>
+                  <div class="continue-part">
+                    <p class="p-part">Этап 2 <span class="span-part">из 2</span></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        `
+      })
+    })
+
+    // loginBtn.addEventListener('click', (event) => {
+    //   event.preventDefault();
+
+    //   const formData = new FormData(form);
+    //   const body = JSON.stringify(Object.fromEntries(formData.entries()));
+
+    //   fetch('http://localhost:3000/auth/login/', {
+    //       method: 'POST',
+    //       headers: {
+    //         "Content-Type": "application/json",
+    //         'X-XSRF-TOKEN': csrf
+    //       },
+    //       body: body
+    //     })
+    //     .then((res) => res.json())
+    //     .then((answer) => {
+    //       if (answer === 'logged in') {
+    //         closeModal(loginModal);
+    //         showFlashMessage('Добро пожаловать в Ярнам. Удачной охоты!');
+    //         setTimeout(() => {
+    //           window.location = 'http://localhost:3000/profile';
+    //         }, 1000);
+    //       } else if (answer === 'wrong email') {
+    //         showFlashMessage('Пользователь с данным Email не найден.');
+    //       } else if (answer === 'wrong password') {
+    //         showFlashMessage('Email адрес и пароль не совпадают.');
+    //       }
+    //     })
+    // })
+
+  }
 
 
 
 
+  if (document.querySelector('.continue-section button')) {
+    step2fetch();
+  }
 
 
   if (document.querySelector('.product-slider')) {

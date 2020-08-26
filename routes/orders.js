@@ -18,23 +18,9 @@ router.get('/check/:id', async (req, res) => {
   });
   res.status(200).json(order); 
 })
-
-
-// LS Order Step 1
-router.post('/:id/step1', async (req, res) => {
-  const user = await User.findByPk(req.params.id);
-  const cartId = req.body.id;
-  res.render('order-step1', {
-    title: 'Bloodborne shop',
-    cartId: cartId,
-    user
-  });
-});
-
-
-// LS Order Step 2
-router.post('/:id/step2', async (req, res) => {
+router.post('/step2', async (req, res) => {
   try {
+    console.log(req.body);
     let userId;
     if (req.session.user) {
       userId = req.session.user.id;
@@ -84,20 +70,37 @@ router.post('/:id/step2', async (req, res) => {
         }
         return order;
       });
-    res.redirect(`/order/${order.id}/step2`);
+    res.status(200).json(order); 
+    // res.redirect(`/order/${order.id}/step2`);
   } catch (e) {
     console.log(e);
   }
 });
 
-router.get('/:id/step2', async (req, res) => {
-  const order = await Order.findByPk(req.params.id);
 
-  res.render('order-step2', {
+// LS Order Step 1
+router.post('/:id/step1', async (req, res) => {
+  const user = await User.findByPk(req.params.id);
+  const cartId = req.body.id;
+  res.render('order-step1', {
     title: 'Bloodborne shop',
-    order: order
+    cartId: cartId,
+    user
   });
 });
+
+
+// LS Order Step 2
+
+
+// router.get('/:id/step2', async (req, res) => {
+//   const order = await Order.findByPk(req.params.id);
+
+//   res.render('order-step2', {
+//     title: 'Bloodborne shop',
+//     order: order
+//   });
+// });
 
 
 module.exports = router;
