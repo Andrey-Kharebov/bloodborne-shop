@@ -1,4 +1,5 @@
 node_modules
+keys/keys.dev.js
 build
 npm-debug.log
 .env

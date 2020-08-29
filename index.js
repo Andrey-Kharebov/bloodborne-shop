@@ -5,6 +5,8 @@ const flash = require('connect-flash');
 const Handlebars = require('handlebars');
 const exphbs = require('express-handlebars');
 const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access');
+// const helmet = require('helmet');
+const compression = require('compression');
 const session = require('express-session');
 const MySQLStore = require('express-mysql-session')(session);
 const sequelize = require('./utils/database');
@@ -96,6 +98,8 @@ app.use(session({
 }));
 app.use(csrf());
 app.use(flash());
+// app.use(helmet());
+app.use(compression());
 app.use(userMiddleware);
 app.use(varMiddleware);
 app.use(fileMiddleware.array('image')); // посмотреть еще раз после сессий
