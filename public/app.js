@@ -706,7 +706,7 @@ window.addEventListener('DOMContentLoaded', () => {
       const formData = new FormData(form);
       const body = JSON.stringify(Object.fromEntries(formData.entries()));
 
-      fetch('https://hidden-taiga-36867.herokuapp.com/auth/login/', {
+      fetch('http://localhost:3000/auth/login/', {
           method: 'POST',
           headers: {
             "Content-Type": "application/json",
@@ -720,7 +720,7 @@ window.addEventListener('DOMContentLoaded', () => {
             closeModal(loginModal);
             showFlashMessage('Добро пожаловать в Ярнам. Удачной охоты!');
             setTimeout(() => {
-              window.location = 'https://hidden-taiga-36867.herokuapp.com/profile';
+              window.location = 'http://localhost:3000/profile';
             }, 1000);
           } else if (answer === 'wrong email') {
             showFlashMessage('Пользователь с данным Email не найден.');
@@ -1034,7 +1034,7 @@ window.addEventListener('DOMContentLoaded', () => {
       const body = JSON.stringify(Object.fromEntries(formData.entries()));
       console.log(body);
 
-      fetch('https://hidden-taiga-36867.herokuapp.com/order/step2', {
+      fetch('http://localhost:3000/order/step2', {
         method: 'POST',
         headers: {
           "Content-Type": "application/json",
