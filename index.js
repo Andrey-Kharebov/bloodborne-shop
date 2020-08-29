@@ -71,12 +71,19 @@ const hbs = exphbs.create({
   extname: 'hbs',
   handlebars: allowInsecurePrototypeAccess(Handlebars)
 });
+// const options = {
+//   host: 'localhost',
+//   port: 3306,
+//   user: 'root',
+//   password: 'a4563210',
+//   database: 'bloodborne'
+// };
 const options = {
-  host: 'localhost',
+  host: 'us-cdbr-east-02.cleardb.com',
   port: 3306,
-  user: 'root',
-  password: 'a4563210',
-  database: 'bloodborne'
+  user: 'b1f00dbed9c6d1',
+  password: 'c9533d9e',
+  database: 'heroku_48211aba3860de9'
 };
 const sessionStore = new MySQLStore(options);
 
