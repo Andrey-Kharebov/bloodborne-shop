@@ -55,6 +55,12 @@ const User = sequelize.define('user', {
   zipcode: {
     type: Sequelize.STRING
   },
+  resetToken: {
+    type: Sequelize.STRING,
+  },
+  resetTokenExp: {
+    type: Sequelize.DATE
+  },
   createdAt: {
     type: Sequelize.DataTypes.DATE,
     defaultValue: new Date(new Date().getTime() + offset * 3600 * 1000)

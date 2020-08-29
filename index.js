@@ -10,6 +10,7 @@ const MySQLStore = require('express-mysql-session')(session);
 const sequelize = require('./utils/database');
 const path = require('path');
 const bodyParser = require("body-parser");
+const keys = require('./keys');
 
 
 // Middlewares
@@ -88,7 +89,7 @@ app.use(express.urlencoded({extended: true}));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(session({
-  secret: 'some secret value',
+  secret: keys.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
   store: sessionStore
