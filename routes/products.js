@@ -3,6 +3,10 @@ const router = Router();
 const Product = require('../models/product');
 const ProductImage = require('../models/product-image');
 
+// // AWS
+// const aws = require('aws-sdk');
+// const keys = require('../keys');
+
 // fetch
 router.get('/recommended/:id', async (req, res) => {
   const product = await Product.findByPk(req.params.id);
@@ -26,12 +30,18 @@ router.get('/:id', async (req, res) => {
       }
     })
     const images = product.productImages
+
+    const response = {};
+    response.bucket = 'bloodborne-images';
+    response.region = 'eu-central-1';
+
     res.render('product', {
       title: product.title,
       product,
       images,
       user,
-      recommended
+      recommended,
+      response
     });
   } catch (e) {
     console.log(e);

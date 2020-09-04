@@ -7,7 +7,7 @@
       <div class="product">
         <a href="/products/{{id}}">
           <div class="product-cover">
-            <img src="/{{imageUrl}}" alt="{{title}}">
+            <img src="https://{{@root.response.bucket}}.s3.{{@root.response.region}}.amazonaws.com/{{imageUrl}}" alt="{{title}}">
           </div>
           <div class="product-title">{{title}}</div>
           <div class="product-price">{{price}}</div>

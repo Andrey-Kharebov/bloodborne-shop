@@ -8,7 +8,8 @@
         <div class="product-slider-inner">
           {{#each images}}
           <div class="product-slide">
-            <img src="/{{imageUrl}}" alt="{{title}}">
+            {{!-- <img src="/{{imageUrl}}" alt="{{title}}"> --}}
+            <img src="https://{{@root.response.bucket}}.s3.{{@root.response.region}}.amazonaws.com/{{imageUrl}}" alt="{{title}}">
           </div>
           {{/each}}
         </div>
@@ -80,7 +81,7 @@
           <div class="recommended-slide">
             <input type="hidden" class="recId" name="id" value="{{id}}">
             <div class="recommended-slide-img">
-              <img src="/{{imageUrl}}" alt="{{title}}">
+              <img src="https://{{@root.response.bucket}}.s3.{{@root.response.region}}.amazonaws.com/{{imageUrl}}" alt="{{title}}">
             </div>
             <div class="recommended-slide-price">
               <div class="product-price">{{price}}</div>

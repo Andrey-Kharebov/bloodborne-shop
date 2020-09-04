@@ -905,9 +905,12 @@ window.addEventListener('DOMContentLoaded', () => {
           })
           .then((res) => res.json())
           .then(product => {
+            const response = {};
+            response.bucket = 'bloodborne-images';
+            response.region = 'eu-central-1';
             recModalSection.innerHTML = `
               <div class="recommened-product-image">
-                <img src="/${product.imageUrl}" alt="${product.title}">
+                <img src="https://${response.bucket}.s3.${response.region}.amazonaws.com/${product.imageUrl}" alt="${product.title}">
               </div>
               <div class="product-info">
                 <input type="hidden" id="hidden-price" value="${product.price}">

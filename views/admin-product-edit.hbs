@@ -44,7 +44,7 @@
             <input id="image" name="image" type="file" multiple disabled>
           </div>
           <div class="input-field main-image">
-            <img src="/{{product.imageUrl}}" alt="">
+            <img src="https://{{response.bucket}}.s3.{{response.region}}.amazonaws.com/{{product.imageUrl}}" alt="{{product.title}}">
           </div>
           <hr>
           <div class="input-field">
@@ -55,7 +55,7 @@
             <form action="/admin/product/add-img/{{id}}/edit/?_csrf={{@root.csrf}}" method="post"
               enctype="multipart/form-data">
               <div class="add-img">
-                <img src="/{{imageUrl}}" alt="{{title}}">
+                <img src="https://{{@root.response.bucket}}.s3.{{@root.response.region}}.amazonaws.com/{{imageUrl}}" alt="{{title}}">
                 <input id="image" name="image" type="file" multiple disabled>
                 <div class="save-changes-btn">
                   <input type="hidden" name="id" value="{{id}}">

@@ -15,11 +15,45 @@ const bodyParser = require("body-parser");
 const keys = require('./keys');
 
 // AWS
+const multer = require('multer');
+const multerS3 = require('multer-s3');
 const aws = require('aws-sdk');
+const s3 = new aws.S3({
+  accessKeyId: keys.AWSAccessKeyId,
+  secretAccessKey: keys.AWSSecretKey,
+  region: 'eu-central-1'
+});
+
+const uploadS3 = multer({
+  storage: multerS3({
+    s3: s3,
+    bucket: 'bloodborne-images',
+    key: (req, file, cb) => {
+      console.log(file);
+      cb(null, new Date().toISOString() + '-' + file.originalname);
+    }
+  })
+});
+
+// const allowedTypes = ['image/png', 'image/jpg', 'image/jpeg', 'image/svg'];
+
+// const fileFilter = (req, file, cb) => {
+//   if (allowedTypes.includes(file.mimetype)) {
+//     cb(null, true);
+//   } else {
+//     cb(null, false);
+//   }
+// };
+
+
+
+
+
+
 
 
 // Middlewares
-const fileMiddleware = require('./middleware/file');
+// const fileMiddleware = require('./middleware/file');
 const varMiddleware = require('./middleware/variables');
 const userMiddleware = require('./middleware/user');
 
@@ -74,20 +108,20 @@ const hbs = exphbs.create({
   extname: 'hbs',
   handlebars: allowInsecurePrototypeAccess(Handlebars)
 });
-const options = {
-  host: 'localhost',
-  port: 3306,
-  user: 'root',
-  password: 'a4563210',
-  database: 'bloodborne'
-};
 // const options = {
-//   host: 'us-cdbr-east-02.cleardb.com',
+//   host: 'localhost',
 //   port: 3306,
-//   user: 'b1f00dbed9c6d1',
-//   password: 'c9533d9e',
-//   database: 'heroku_48211aba3860de9'
+//   user: 'root',
+//   password: 'a4563210',
+//   database: 'bloodborne'
 // };
+const options = {
+  host: 'us-cdbr-east-02.cleardb.com',
+  port: 3306,
+  user: 'b1f00dbed9c6d1',
+  password: 'c9533d9e',
+  database: 'heroku_48211aba3860de9'
+};
 const sessionStore = new MySQLStore(options);
 
 
@@ -112,7 +146,8 @@ app.use(flash());
 app.use(compression());
 app.use(userMiddleware);
 app.use(varMiddleware);
-app.use(fileMiddleware.array('image')); // посмотреть еще раз после сессий
+app.use(uploadS3.array('image'));
+// app.use(fileMiddleware.array('image')); // посмотреть еще раз после сессий
 
 app.use('/', homeRoutes);
 app.use('/categories', categoriesRoutes);

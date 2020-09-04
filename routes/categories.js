@@ -14,10 +14,18 @@ router.get('/:title', async (req, res) => {
     }
   });
   const products = category.products;
+
+  const response = {};
+  response.bucket = 'bloodborne-images';
+  response.region = 'eu-central-1';
+
+
+  console.log(products);
   res.render('category', {
     title: `${category.title}`,
     category,
-    products
+    products,
+    response
   });
 });
 

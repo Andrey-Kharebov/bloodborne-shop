@@ -1,6 +1,4 @@
-const {
-  Router
-} = require('express');
+const {Router} = require('express');
 const router = Router();
 const admin = require('../middleware/admin');
 const User = require('../models/user');
@@ -9,6 +7,11 @@ const OrderItem = require('../models/order-item');
 const Product = require('../models/product');
 const Category = require('../models/category');
 const ProductImage = require('../models/product-image');
+
+// AWS
+const aws = require('aws-sdk');
+const keys = require('../keys');
+
 
 function statusTranslate(item) {
   for (let key in item) {
@@ -267,6 +270,19 @@ router.post('/orderitem/:id', admin, async (req, res) => {
 router.get('/product/add', admin, async (req, res) => {
   const user = req.user;
   const categories = await Category.findAll();
+
+  // const s3 = new aws.S3({
+  //   accessKeyId: keys.AWSAccessKeyId,
+  //   secretAccessKey: keys.AWSSecretKey,
+  //   region: 'eu-central-1'
+  // });
+  
+  // const response = await s3.listObjectsV2({
+  //   Bucket: 'bloodborne-images'
+  //   // Prefix: 'folder1'
+  // }).promise();
+
+  // console.log(response);
   res.render('admin-product-add', {
     layout: 'admin',
     title: 'Adding page',
@@ -281,10 +297,15 @@ router.post('/product/add', admin, async (req, res) => {
     if (req.body.recommended === 'on') {
       recommended = 1;
     }
+    for (let key in req.files) {
+      // console.log(req.files[key]);
+      // console.log(req.files[key].path);
+      console.log(req.files[key].key);
+    }
     await Product.create({
         title: req.body.title,
         price: req.body.price,
-        imageUrl: req.files[0].path,
+        imageUrl: req.files[0].key,
         description: req.body.description,
         recommended: recommended,
         categoryId: req.body.categoryId
@@ -293,7 +314,7 @@ router.post('/product/add', admin, async (req, res) => {
         for (let key in req.files) {
           ProductImage.create({
             productId: product.id,
-            imageUrl: req.files[key].path
+            imageUrl: req.files[key].key
           });
         }
       })
@@ -366,6 +387,10 @@ router.get('/product/:id/edit', admin, async (req, res) => {
         id: product.categoryId
       }
     });
+
+    const response = {};
+    response.bucket = 'bloodborne-images';
+    response.region = 'eu-central-1';
     res.render('admin-product-edit', {
       layout: 'admin',
       title: `Редактировать '${product.title}'`,
@@ -374,7 +399,8 @@ router.get('/product/:id/edit', admin, async (req, res) => {
       category,
       images,
       product,
-      recommended
+      recommended,
+      response
     });
   } catch (e) {
     console.log(e);
@@ -399,17 +425,31 @@ router.post('/product/:id/edit', admin, async (req, res) => {
       recommended = 0;
     }
     if (req.files[0]) {
+      const s3 = new aws.S3({
+        accessKeyId: keys.AWSAccessKeyId,
+        secretAccessKey: keys.AWSSecretKey,
+        region: 'eu-central-1'
+      });
+      const params = {
+        Bucket: 'bloodborne-images',
+        Key: product.imageUrl
+      }
+      s3.deleteObject(params, function(err, data) {
+        if (err) console.log(err, err.stack);  // error
+        else     console.log();                 // deleted
+      });
+
       product.update({
         title: req.body.title,
         price: req.body.price,
         recommended: recommended,
         categoryId: req.body.categoryId,
-        imageUrl: req.files[0].path,
+        imageUrl: req.files[0].key,
         description: req.body.description
       })
       .then(product => {
         product.productImages[0].update({
-          imageUrl: req.files[0].path,
+          imageUrl: req.files[0].key,
         });
       })
     } else {
@@ -422,7 +462,7 @@ router.post('/product/:id/edit', admin, async (req, res) => {
       });
     }
     product.save();
-    res.redirect(`/admin/product/${req.body.id}/edit`);
+    res.redirect(`/admin/catalog`);
   } catch (e) {
     console.log(e);
   }
@@ -440,7 +480,7 @@ router.post('/product/add-img/add', admin, async (req, res) => {
       }
     });
     await ProductImage.create({
-      imageUrl: req.files[0].path,
+      imageUrl: req.files[0].key,
       productId: req.body.id
     })
     res.redirect(`/admin/product/${req.body.id}/edit`);
@@ -453,9 +493,21 @@ router.post('/product/add-img/:id/edit', admin, async (req, res) => {
   try {
     const user = req.user;
     const productImage = await ProductImage.findByPk(req.params.id);
-    console.log(req.files[0].path);
+    const s3 = new aws.S3({
+      accessKeyId: keys.AWSAccessKeyId,
+      secretAccessKey: keys.AWSSecretKey,
+      region: 'eu-central-1'
+    });
+    const params = {
+      Bucket: 'bloodborne-images',
+      Key: productImage.imageUrl
+    }
+    s3.deleteObject(params, function(err, data) {
+      if (err) console.log(err, err.stack);  // error
+      else     console.log();                 // deleted
+    });
     productImage.update({
-      imageUrl: req.files[0].path
+      imageUrl: req.files[0].key
     })
     productImage.save();
     res.redirect(`/admin/product/${productImage.productId}/edit`);
@@ -467,7 +519,29 @@ router.post('/product/add-img/:id/edit', admin, async (req, res) => {
 router.post('/product/:id/remove', admin, async (req, res) => {
   try {
     const product = await Product.findByPk(req.params.id);
+    const productImages = await ProductImage.findAll({
+      where: {
+        productId: product.id
+      }
+    })
+
     product.destroy();
+    productImages.forEach(item => {
+      const s3 = new aws.S3({
+        accessKeyId: keys.AWSAccessKeyId,
+        secretAccessKey: keys.AWSSecretKey,
+        region: 'eu-central-1'
+      });
+      const params = {
+        Bucket: 'bloodborne-images',
+        Key: item.imageUrl
+      }
+      s3.deleteObject(params, function(err, data) {
+        if (err) console.log(err, err.stack);  // error
+        else     console.log();                 // deleted
+      });
+      item.destroy()
+    });
     res.redirect('/admin');
   } catch (e) {
     console.log(e);
@@ -478,6 +552,19 @@ router.post('/product/add-img/:id/remove', admin, async (req, res) => {
   try {
     const user = req.user;
     const productImage = await ProductImage.findByPk(req.params.id);
+    const s3 = new aws.S3({
+      accessKeyId: keys.AWSAccessKeyId,
+      secretAccessKey: keys.AWSSecretKey,
+      region: 'eu-central-1'
+    });
+    const params = {
+      Bucket: 'bloodborne-images',
+      Key: productImage.imageUrl
+    }
+    s3.deleteObject(params, function(err, data) {
+      if (err) console.log(err, err.stack);  // error
+      else     console.log();                 // deleted
+    });
     productImage.destroy();
     res.redirect(`/admin/product/${productImage.productId}/edit`);
   } catch (e) {
