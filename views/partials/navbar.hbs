@@ -1,6 +1,6 @@
 <div class="nav">
   <div class="navbar">
-    <ul>
+    <ul class="menu-list">
       <li><a href="/categories/weapons">Оружие</a></li>
       <li><a href="/categories/hats">Головные уборы</a></li>
       <li><a href="/categories/outerwear">Верхняя одежда</a></li>
@@ -17,7 +17,7 @@
       <li class="check-status-btn">Статус заказа</li>
 
     </ul>
-    <div class="login_cart">
+    <div class="login_cart_burger">
       {{#if isAuth}}
         <div class="login">
           <a href="/profile"><button class="isauth"><i class="fas fa-user"></i></button></a>
@@ -31,12 +31,15 @@
           <button class="noauth"><i class="fas fa-user"></i></button>
         </div>
       {{/if}}
-      <input type="checkbox" id="check">
+        <input type="checkbox" id="check">
         <div class="cart"> 
           <button><i class="fas fa-shopping-cart"></i></button>
           <p class="total-cost">0</p>
-          <img src="/public/img/bloodechoes.png" alt="bloodechoes">
+          {{!-- <img src="/public/img/bloodechoes.png" alt="bloodechoes"> --}}
         </div>      
+        <div class="burger">
+          <button><i class="fas fa-bars"></i></button>
+        </div>
     </div>
   </div>
 </div>
