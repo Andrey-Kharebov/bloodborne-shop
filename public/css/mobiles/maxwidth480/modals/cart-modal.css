@@ -9,7 +9,7 @@ input[type='checkbox']
   box-sizing: border-box;
   position: fixed;
   height: 100vh;
-  max-width: 380px !important;
+  max-width: 480px;
   width: 100%;
   top: 0;
   right: -380px;

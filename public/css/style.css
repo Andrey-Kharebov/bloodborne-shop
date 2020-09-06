@@ -8,6 +8,7 @@
 
 /* modals */
 @import '/public/css/modals/cart-modal.css';
+@import '/public/css/modals/categories-modal.css';
 @import '/public/css/modals/login-modal.css';
 @import '/public/css/modals/forgot-password-modal.css';
 @import '/public/css/modals/registration-modal.css';
@@ -16,8 +17,22 @@
 @import '/public/css/modals/recommended-modal.css';
 @import '/public/css/modals/flash-message.css';
 
-/* mobile css */
-@import '/public/css/mobiles/maxwidth420/style.css';
+/* mobile max-w 480px */
+@import '/public/css/mobiles/maxwidth480/style.css';
+
+/* mobile pages max-w 480px */
+
+@import '/public/css/mobiles/maxwidth480/pages/order-details.css';
+@import '/public/css/mobiles/maxwidth480/pages/faq.css';
+@import '/public/css/mobiles/maxwidth480/pages/password.css';
+
+/* modals max-w 480px */
+@import '/public/css/mobiles/maxwidth480/modals/login-modal.css';
+@import '/public/css/mobiles/maxwidth480/modals/forgot-password-modal.css';
+@import '/public/css/mobiles/maxwidth480/modals/registration-modal.css';
+@import '/public/css/mobiles/maxwidth480/modals/cart-modal.css';
+@import '/public/css/mobiles/maxwidth480/modals/categories-modal.css';
+@import '/public/css/mobiles/maxwidth480/modals/recommended-modal.css';
 
 
 body {

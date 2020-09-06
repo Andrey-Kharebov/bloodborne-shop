@@ -1,0 +1,25 @@
+/* modals */
+
+input[type='checkbox']
+{
+  display: none;
+}
+
+.categories-modal {
+  box-sizing: border-box;
+  position: fixed;
+  height: 100vh;
+  max-width: 380px !important;
+  width: 100%;
+  top: 0;
+  right: -380px;
+  background: rgb(255, 255, 255);
+  z-index: 120;
+  transition: all .5s;
+  overflow-y: scroll;
+} 
+
+input[type='checkbox']:checked ~ .categories-modal
+{
+  transform: translateX(350px);
+}

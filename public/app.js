@@ -175,6 +175,33 @@ window.addEventListener('DOMContentLoaded', () => {
     closeCartModal();
   });
 
+  // Modal Categories
+  const burgerBtn = document.querySelector('.burger'),
+        categoriesModal = document.querySelector('.categories-modal'),
+        closeCategoriesModalBtn = document.querySelector('.categories-close p');
+
+  function openCategoriesModal() {
+    checkbox.click();
+    container.style.opacity = '0.7';
+    categoriesModal.style.transform = "translateX(-380px)";
+    body.style.overflowY = 'hidden';
+  }
+
+  function closeCategoriesModal() {
+    checkbox.click();
+    container.style.opacity = '1';
+    categoriesModal.style.transform = "translateX(380px)";
+    body.style.overflowY = 'scroll';
+  }
+
+  burgerBtn.addEventListener('click', (event) => {
+    openCategoriesModal();
+  })
+
+  closeCategoriesModalBtn.addEventListener('click', () => {
+    closeCategoriesModal();
+  });
+
   // Modals
   // Login modal
 
@@ -271,6 +298,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
   checkStatusModalBtns.forEach(item => {
     item.addEventListener('click', (event) => {
+      closeCategoriesModal();
       openModal(checkStatusModal);
     })
   })
