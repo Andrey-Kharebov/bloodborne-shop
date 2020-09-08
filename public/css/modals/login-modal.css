@@ -13,16 +13,6 @@
   z-index: 100;
 }
 
-@media only screen and (min-device-width : 321px) and (max-device-width : 480px) {
-  .modal-bg .login-modal {
-    top: 65px;
-    left: 0;
-    right: 0;
-    margin: 0 auto;
-  }
-}
-
-
 .login-modal .login-info .p-input {
   text-align: left;
   font-weight: 500;
@@ -229,32 +219,18 @@
   transform: rotate(-45deg);
 }
 
-
-
-/* .modal-bg .fall-effect  {
-  -webkit-perspective: 1300px;
-	-moz-perspective: 1300px;
-	perspective: 1300px;
+@media (min-width : 321px) and (max-width : 480px) {
+  .modal-bg .login-modal {
+    top: 65px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+  }
 }
 
-.login-modal .fall-effect {
-  -webkit-transform-style: preserve-3d;
-	-moz-transform-style: preserve-3d;
-	transform-style: preserve-3d;
-	-webkit-transform: translateZ(600px) rotateX(20deg); 
-	-moz-transform: translateZ(600px) rotateX(20deg); 
-	-ms-transform: translateZ(600px) rotateX(20deg); 
-	transform: translateZ(600px) rotateX(20deg); 
-	opacity: 0;
+@media (min-width : 768px) and (max-width : 1024px) {
+  .modal-bg .login-modal {
+    top: 65px;
+    right: 85px;
+  }
 }
-
-.login-modal .fall-effect .md-show  {
-	-webkit-transition: all 0.3s ease-in;
-	-moz-transition: all 0.3s ease-in;
-	transition: all 0.3s ease-in;
-	-webkit-transform: translateZ(0px) rotateX(0deg);
-	-moz-transform: translateZ(0px) rotateX(0deg);
-	-ms-transform: translateZ(0px) rotateX(0deg);
-	transform: translateZ(0px) rotateX(0deg); 
-	opacity: 1;
-} */

@@ -11,7 +11,6 @@
   background-color: rgb(243, 243, 243);
   border-radius: 30px;
   padding: 20px 20px;
-
   z-index: 100;
 }
 
@@ -108,4 +107,13 @@
 
 .modal-bg .status-check-order .close-modal-btn .close:after {
   transform: rotate(-45deg);
+}
+
+@media (min-width : 768px) and (max-width : 1024px) {
+  .modal-bg .status-check-order {
+    top: 330px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+  }
 }

@@ -15,16 +15,6 @@
   z-index: 100;
 }
 
-@media only screen and (min-device-width : 321px) and (max-device-width : 480px) {
-  .modal-bg .registration-modal {
-    top: 65px;
-    left: 0;
-    right: 0;
-    margin: 0 auto;
-  }
-}
-
-
 .modal-bg .registration-modal .heading {
   position: relative;
   margin-top: 20px;
@@ -174,4 +164,22 @@
 
 .modal-bg .registration-modal .close-modal-btn .close:after {
   transform: rotate(-45deg);
+}
+
+@media (min-width : 321px) and (max-width : 480px) {
+  .modal-bg .registration-modal {
+    top: 65px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+  }
+}
+
+@media (min-width : 768px) and (max-width : 1024px) {
+  .modal-bg .registration-modal {
+    top: 65px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+  }
 }

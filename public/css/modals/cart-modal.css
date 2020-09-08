@@ -9,7 +9,7 @@ input[type='checkbox']
   box-sizing: border-box;
   position: fixed;
   height: 100vh;
-  max-width: 380px !important;
+  max-width: 380px;
   width: 100%;
   top: 0;
   right: -380px;
@@ -18,22 +18,6 @@ input[type='checkbox']
   transition: all .5s;
   overflow-y: scroll;
 } 
-
-@media only screen and (min-device-width : 321px) and (max-device-width : 480px) {
-  .cart-modal {
-    box-sizing: border-box;
-    position: fixed;
-    height: 100vh;
-    max-width: 480px;
-    width: 100%;
-    top: 0;
-    right: -380px;
-    background: rgb(255, 255, 255);
-    z-index: 120;
-    transition: all .5s;
-    overflow-y: scroll;
-  } 
-}
 
 input[type='checkbox']:checked ~ .cart-modal
 {
@@ -320,4 +304,23 @@ input[type='checkbox']:checked ~ .cart-modal
   font-size: 15px;
   text-transform: uppercase;
   margin-bottom: 100px;
+}
+
+@media (min-width : 321px) and (max-width : 480px) {
+  .cart-modal {
+    box-sizing: border-box;
+    position: fixed;
+    height: 100vh;
+    max-width: 480px;
+    width: 100%;
+    top: 0;
+    right: -380px;
+    background: rgb(255, 255, 255);
+    z-index: 120;
+    transition: all .5s;
+    overflow-y: scroll;
+  } 
+}
+
+@media (min-width : 768px) and (max-width : 1024px) {
 }
