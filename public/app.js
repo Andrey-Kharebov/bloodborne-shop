@@ -226,6 +226,7 @@ window.addEventListener('DOMContentLoaded', () => {
     container.style.opacity = '0.7';
     modalBg.style.display = 'block';
     modalSelector.style.display = 'block';
+    document.body.style.overflow = 'hidden';
   }
 
   function closeModal(modalSelector) {
@@ -233,6 +234,7 @@ window.addEventListener('DOMContentLoaded', () => {
     container.style.opacity = '1';
     modalBg.style.display = 'none';
     modalSelector.style.display = 'none';
+    document.body.style.overflow = '';
   }
 
   if (loginBtn) {
@@ -734,7 +736,7 @@ window.addEventListener('DOMContentLoaded', () => {
       const formData = new FormData(form);
       const body = JSON.stringify(Object.fromEntries(formData.entries()));
 
-      fetch('https://hidden-taiga-36867.herokuapp.com/auth/login/', {
+      fetch('http://hidden-taiga-36867.herokuapp.com/auth/login/', {
           method: 'POST',
           headers: {
             "Content-Type": "application/json",
@@ -748,7 +750,7 @@ window.addEventListener('DOMContentLoaded', () => {
             closeModal(loginModal);
             showFlashMessage('Добро пожаловать в Ярнам. Удачной охоты!');
             setTimeout(() => {
-              window.location = 'https://hidden-taiga-36867.herokuapp.com/profile';
+              window.location = 'http://hidden-taiga-36867.herokuapp.com/profile';
             }, 1000);
           } else if (answer === 'wrong email') {
             showFlashMessage('Пользователь с данным Email не найден.');
@@ -882,7 +884,7 @@ window.addEventListener('DOMContentLoaded', () => {
   function recommendedSlider() {
     const recSlider = document.querySelector('.recommended-slider'),
       recSlides = document.querySelectorAll('.recommended-slide'),
-      recSlide = document.querySelector('.recommended-slide'),
+      recSlide = recSlider.querySelector('.recommended-slide'),
       recSliderWrapper = document.querySelector('.recommended-slider-center'),
       recSliderField = document.querySelector('.recommended-slider-inner'),
       recSliderPrev = document.querySelector('.recommended-slider-arrow-left'),
@@ -893,27 +895,59 @@ window.addEventListener('DOMContentLoaded', () => {
     recSliderField.style.width = 100 * recSlides.length + '%';
     recSliderWrapper.style.overflow = 'hidden';
 
-    console.log(+document.querySelector('#hidden-price').value);
+    console.log(`${recSlide.offsetWidth} / ширина слайда`);
+    console.log(`${recSlide.offsetWidth * recSlides.length} / ширина слайдов * кол-во`);
+    console.log(`${recSliderWrapper.offsetWidth} / ширина center`);
+    console.log(`${recSliderField.offsetWidth} / ширина inner`);
 
-    if (recSlides.length > 6) {
+    let difference = (recSlide.offsetWidth * recSlides.length) - recSliderWrapper.offsetWidth;
+    console.log(`${difference} / разница`);
+    // difference >= recSlide.offsetWidth && offset <= difference
+
+
+    if ((recSlide.offsetWidth * recSlides.length) > recSliderWrapper.offsetWidth) {
       recSliderPrev.addEventListener('click', (event) => {
-        if (offset == (recSlide.offsetWidth * (recSlides.length - 6))) {} else {
+        if (offset == difference) {} else {
           offset += recSlide.offsetWidth;
+          console.log(offset);
         }
         recSliderField.style.transform = `translateX(-${offset}px)`;
       })
     } else {
+      recSliderField.style.width = recSliderWrapper.offsetWidth + 'px'; 
       recSliderPrev.style.display = 'none';
       recSliderNext.style.display = 'none';
       recSliderField.style.justifyContent = 'center';
+      // console.log(recSliderField.offsetWidth);
     }
+    
+    recSlides.forEach(item => {
+      item.addEventListener('touchstart', (event) => {
+        let touchStart = event.targetTouches[0].screenX;
+        recSlides.forEach(item => {
+          item.addEventListener('touchmove', (event) => {
+            if (touchStart > event.targetTouches[0].screenX) {
+              if (offset == difference) {} else {
+                offset += recSlide.offsetWidth;
+              }
+              return recSliderField.style.transform = `translateX(-${offset}px)`;
+            } else {
+              if (offset == 0) {} else {
+                offset -= recSlide.offsetWidth;
+              }
+              return recSliderField.style.transform = `translateX(-${offset}px)`;
+            }
+          });
+        })
+      })
+    })
+  
 
 
     recSliderNext.addEventListener('click', (event) => {
       if (offset == 0) {} else {
         offset -= recSlide.offsetWidth;
       }
-
       recSliderField.style.transform = `translateX(-${offset}px)`;
     })
   }
@@ -1065,7 +1099,7 @@ window.addEventListener('DOMContentLoaded', () => {
       const body = JSON.stringify(Object.fromEntries(formData.entries()));
       console.log(body);
 
-      fetch('https://hidden-taiga-36867.herokuapp.com/order/step2', {
+      fetch('http://hidden-taiga-36867.herokuapp.com/order/step2', {
         method: 'POST',
         headers: {
           "Content-Type": "application/json",

@@ -13,6 +13,16 @@
   z-index: 100;
 }
 
+@media only screen and (min-device-width : 321px) and (max-device-width : 480px) {
+  .modal-bg .login-modal {
+    top: 65px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+  }
+}
+
+
 .login-modal .login-info .p-input {
   text-align: left;
   font-weight: 500;

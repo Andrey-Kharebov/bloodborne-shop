@@ -7,6 +7,18 @@
   padding-bottom: 70px;
 }
 
+@media only screen and (min-device-width : 321px) and (max-device-width : 480px) {
+  .order-details {
+    margin-top: -25px;
+    box-sizing: border-box;
+    width: 100%;
+    height: auto;
+    background-color: rgba(255, 255, 255, 0.95);
+    padding-top: 25px;
+    padding-bottom: 30px;
+  }
+}
+
 .order-details h1 {
   text-transform: capitalize;
   font-weight: 600;
@@ -41,16 +53,45 @@
   text-align: left;
 }
 
+@media only screen and (min-device-width : 321px) and (max-device-width : 480px) {
+  .order-details .order-section {
+    margin: 0 2% !important;
+    margin-top: 25px !important;
+    display: flex;
+    flex-wrap: wrap-reverse;
+    justify-content: center;
+    text-align: left;
+  }
+}
+
 .order-details .order-section h2 {
   font-weight: 600;
   font-size: 25px;
   margin-bottom: 40px;
 }
 
+@media only screen and (min-device-width : 321px) and (max-device-width : 480px) {
+  .order-details .order-section h2 {
+    font-weight: 600;
+    font-size: 25px !important;
+    margin-bottom: 25px !important;
+    text-align: center;
+  }
+}
+
 .order-details .order-section .delivery-info {
   /* border: 1px solid green; */
   padding-right: 30px;
   width: 60%;
+}
+
+@media only screen and (min-device-width : 321px) and (max-device-width : 480px) {
+  .order-details .order-section .delivery-info {
+    /* border: 1px solid green; */
+    padding-right: 0px !important;
+    width: 100% !important;
+    margin: 0 2% !important;
+  }
 }
 
 .order-details .order-section .delivery-info .delivery-info-list .input-field {
@@ -125,6 +166,14 @@
   /* border: 1px solid green; */
 }  
 
+@media only screen and (min-device-width : 321px) and (max-device-width : 480px) {
+  .order-details .order-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }  
+}
+
 .order-details .order-info .order-products-section {
   width: 325px;
   height: auto;
@@ -133,6 +182,19 @@
   border-radius: 30px;
   padding-top: 10px;
   padding-bottom: 40px;
+}
+
+@media only screen and (min-device-width : 321px) and (max-device-width : 480px) {
+  .order-details .order-info .order-products-section {
+    max-width: 280px;
+    width: 100%;
+    height: auto;
+    background-color: #fff;
+    padding: 0 10px;
+    border-radius: 30px;
+    padding-top: 10px;
+    padding-bottom: 40px;
+  }
 }
 
 .order-details .order-info .order-products-section .order-products-list {
@@ -179,10 +241,26 @@
   left: -20px;
 }
 
+@media only screen and (min-device-width : 321px) and (max-device-width : 480px) {
+  .order-details .order-info .order-products-section .order-products-list .order-product-item hr {
+    display: none;
+  }
+}
+
 .order-details .order-info .order-products-section .order-products-cost {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+}
+
+@media only screen and (min-device-width : 321px) and (max-device-width : 480px) {
+  .order-details .order-info .order-products-section .order-products-cost {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
 }
 
 .order-details .order-info .total-cost {
@@ -192,6 +270,17 @@
   justify-content: center;
   border-bottom: 2px solid rgb(150, 150, 150);
   padding-bottom: 30px;
+}
+
+@media only screen and (min-device-width : 321px) and (max-device-width : 480px) {
+  .order-details .order-info .total-cost {
+    margin-top: 35px;
+    margin-bottom: 50px;
+    display: flex;
+    justify-content: center;
+    border-bottom: 2px solid rgb(150, 150, 150);
+    padding-bottom: 30px;
+  }
 }
 
 .order-details .order-info .order-products-section .order-products-cost p {
@@ -205,6 +294,20 @@
   font-size: 20px;
   font-weight: 700;
   color: black;
+}
+
+@media only screen and (min-device-width : 321px) and (max-device-width : 480px) {
+  .order-details .order-info .order-products-section .order-products-cost .price {
+    font-size: 15px;
+    font-weight: 700;
+    color: black;
+  }
+  
+  .order-details .order-info .total-cost p {
+    font-size: 20px;
+    color: rgb(150, 150, 150);
+    margin-left: 10px;
+  }
 }
 
 .order-details .order-info .total-cost p {

@@ -15,6 +15,16 @@
   z-index: 100;
 }
 
+@media only screen and (min-device-width : 321px) and (max-device-width : 480px) {
+  .modal-bg .registration-modal {
+    top: 65px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+  }
+}
+
+
 .modal-bg .registration-modal .heading {
   position: relative;
   margin-top: 20px;

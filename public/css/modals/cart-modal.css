@@ -19,6 +19,22 @@ input[type='checkbox']
   overflow-y: scroll;
 } 
 
+@media only screen and (min-device-width : 321px) and (max-device-width : 480px) {
+  .cart-modal {
+    box-sizing: border-box;
+    position: fixed;
+    height: 100vh;
+    max-width: 480px;
+    width: 100%;
+    top: 0;
+    right: -380px;
+    background: rgb(255, 255, 255);
+    z-index: 120;
+    transition: all .5s;
+    overflow-y: scroll;
+  } 
+}
+
 input[type='checkbox']:checked ~ .cart-modal
 {
   transform: translateX(350px);
