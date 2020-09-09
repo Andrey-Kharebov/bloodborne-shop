@@ -126,3 +126,12 @@
     margin: 0 auto;
   }
 }
+
+@media (min-width : 1025px) and (max-width : 1300px) {
+  .modal-bg .status-check-modal {
+    top: 190px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+  }
+}

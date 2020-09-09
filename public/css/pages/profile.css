@@ -234,3 +234,6 @@
     margin-top: -25px;
   }
 }
+
+@media (min-width : 1025px) and (max-width : 1300px) {}
+

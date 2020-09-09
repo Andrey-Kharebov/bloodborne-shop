@@ -192,3 +192,12 @@
     margin: 0 auto;
   }
 }
+
+@media (min-width : 1025px) and (max-width : 1300px) {
+  .modal-bg .registration-modal {
+    top: 120px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+  }
+}

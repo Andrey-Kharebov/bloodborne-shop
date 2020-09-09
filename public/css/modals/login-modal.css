@@ -241,3 +241,10 @@
     right: 85px;
   }
 }
+
+@media (min-width : 1025px) and (max-width : 1300px) {
+  .modal-bg .login-modal {
+    top: 190px;
+    right: 85px;
+  }
+}
