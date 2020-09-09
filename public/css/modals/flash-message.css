@@ -83,6 +83,8 @@
   transform: rotate(-45deg);
 }
 
+@media (min-width : 481px) and (max-width : 767px) {}
+
 @media only screen and (min-device-width : 321px) and (max-device-width : 480px) {
   .flash-message {
     left: 0;

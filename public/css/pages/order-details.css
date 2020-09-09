@@ -293,6 +293,12 @@
   }
 }
 
+@media (min-width : 481px) and (max-width : 767px) {
+  .order-details {
+    margin-top: -25px;
+  }
+}
+
 @media (min-width : 768px) and (max-width : 1024px) {
   .order-details {
     margin-top: -25px;

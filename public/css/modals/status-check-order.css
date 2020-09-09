@@ -109,6 +109,15 @@
   transform: rotate(-45deg);
 }
 
+@media (min-width : 481px) and (max-width : 767px) {
+  .modal-bg .status-check-order {
+    top: 330px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+  }
+}
+
 @media (min-width : 768px) and (max-width : 1024px) {
   .modal-bg .status-check-order {
     top: 330px;

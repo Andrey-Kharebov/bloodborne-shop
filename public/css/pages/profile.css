@@ -77,14 +77,6 @@
   margin-bottom: 20px;
 }
 
-
-
-
-
-
-
-
-
 .profile .profile-list .profile-list-info {
   /* border: 1px solid blue; */
   max-width: 900px;
@@ -229,6 +221,12 @@
 .profile .profile-list .profile-list-info .profile-list-orders .order-card .price {
   font-size: 17px;
   font-weight: 500;
+}
+
+@media (min-width : 481px) and (max-width : 767px) {
+  .profile {
+    margin-top: -25px;
+  }
 }
 
 @media (min-width : 768px) and (max-width : 1024px) {
