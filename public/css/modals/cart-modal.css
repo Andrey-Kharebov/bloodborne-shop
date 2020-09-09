@@ -1,7 +1,6 @@
 /* modals */
 
-input[type='checkbox']
-{
+input[type='checkbox'] {
   display: none;
 }
 
@@ -17,10 +16,9 @@ input[type='checkbox']
   z-index: 120;
   transition: all .5s;
   overflow-y: scroll;
-} 
+}
 
-input[type='checkbox']:checked ~ .cart-modal
-{
+input[type='checkbox']:checked~.cart-modal {
   transform: translateX(350px);
 }
 
@@ -103,7 +101,7 @@ input[type='checkbox']:checked ~ .cart-modal
   left: -10px;
   font-size: 25px;
 }
- 
+
 .cart-modal .purchases .purchases-list .modal-cart-product-section .modal-cart-product-info {
   width: 55%;
 }
@@ -115,9 +113,9 @@ input[type='checkbox']:checked ~ .cart-modal
   letter-spacing: 1px;
 }
 
- 
+
 .cart-modal .purchases .purchases-list .modal-cart-product-section .modal-cart-product-info .modal-cart-product-size {
- margin-top: 10px; 
+  margin-top: 10px;
 }
 
 .cart-modal .purchases .purchases-list .modal-cart-product-section .modal-cart-product-info .modal-cart-product-size p {
@@ -226,6 +224,7 @@ input[type='checkbox']:checked ~ .cart-modal
   height: 35px;
   border-radius: 30px;
 }
+
 .cart-modal .promotional button {
   position: absolute;
   margin-top: 10px;
@@ -306,12 +305,16 @@ input[type='checkbox']:checked ~ .cart-modal
   margin-bottom: 100px;
 }
 
-@media (min-width : 321px) and (max-width : 480px) {
+@media (max-width : 480px) {
+  input[type='checkbox'] {
+    display: none;
+  }
+
   .cart-modal {
     box-sizing: border-box;
     position: fixed;
     height: 100vh;
-    max-width: 480px;
+    max-width: 380px;
     width: 100%;
     top: 0;
     right: -380px;
@@ -319,13 +322,15 @@ input[type='checkbox']:checked ~ .cart-modal
     z-index: 120;
     transition: all .5s;
     overflow-y: scroll;
-  } 
+  }
+
+  input[type='checkbox']:checked ~ .cart-modal {
+    transform: translateX(350px);
+  }
 }
 
-@media (min-width : 481px) and (max-width : 767px) {
-}
+@media (min-width : 481px) and (max-width : 767px) {}
 
-@media (min-width : 768px) and (max-width : 1024px) {
-}
+@media (min-width : 768px) and (max-width : 1024px) {}
 
 @media (min-width : 1025px) and (max-width : 1300px) {}

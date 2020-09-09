@@ -4,7 +4,7 @@
   display: none;
 }
 
-@media (min-width : 321px) and (max-width : 480px) {
+@media (max-width : 480px) {
   input[type = 'checkbox'] {
     display: none;
   }
@@ -14,7 +14,7 @@
     box-sizing: border-box;
     position: fixed;
     height: 100vh;
-    max-width: 480px;
+    max-width: 380px;
     width: 100%;
     top: 0;
     right: -380px;
@@ -24,8 +24,7 @@
     overflow-y: scroll;
   }
 
-
-  input[type='checkbox']:checked~.categories-modal {
+  input[type='checkbox']:checked ~ .categories-modal {
     transform: translateX(350px);
   }
 
