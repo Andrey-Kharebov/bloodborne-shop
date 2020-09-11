@@ -8,11 +8,12 @@ const keys = require('../keys');
 const regEmail = require('../emails/registration');
 const resetEmail = require('../emails/reset');
 const crypto = require('crypto');
-const { Op } = require('sequelize');
-
+const {Op} = require('sequelize');
 
 const transporter = nodemailer.createTransport(sendgrid({
-  auth: {api_key: keys.SENDGRID_API_KEY}
+  auth: {
+    api_key: keys.SENDGRID_API_KEY
+  }
 }))
 
 router.post('/login', async (req, res) => {
@@ -23,6 +24,7 @@ router.post('/login', async (req, res) => {
     // 2) const bodyParser = require("body-parser");
     // 3) app.use(bodyParser.urlencoded({ extended: false }));
     //    app.use(bodyParser.json());
+
     const {email, password} = req.body;
     const candidate = await User.findOne({
       where: {
@@ -34,22 +36,34 @@ router.post('/login', async (req, res) => {
       const areSame = await bcrypt.compare(password, candidate.password);
 
       if (areSame) {
-        req.session.user = candidate;
-        req.session.isAuthenticated = true;
-        req.session.save(err => {
-          if (err) {
-            throw err;
-          }
-        });
-        res.status(200).json('logged in'); 
-      } else {  
-        res.status(200).json('wrong password'); 
+        if (req.body.remember) {
+          req.session.user = candidate;
+          req.session.isAuthenticated = true;
+          req.session.cookie.originalMaxAge = 31 * 24 * 60 * 60 * 1000;
+          req.session.save(err => {
+            if (err) {
+              throw err;
+            }
+          });
+          res.status(200).json('logged in');
+        } else {
+          req.session.user = candidate;
+          req.session.isAuthenticated = true;
+          req.session.save(err => {
+            if (err) {
+              throw err;
+            }
+          });
+          res.status(200).json('logged in');
+        }
+      } else {
+        res.status(200).json('wrong password');
       }
     } else {
-      res.status(200).json('wrong email'); 
+      res.status(200).json('wrong email');
     }
   } catch (e) {
-   console.log(e); 
+    console.log(e);
   }
 });
 
@@ -62,7 +76,11 @@ router.get('/logout', async (req, res) => {
 router.post('/register', async (req, res) => {
   try {
     console.log(req.body);
-    const {email, password, confirm} = req.body; 
+    const {
+      email,
+      password,
+      confirm
+    } = req.body;
 
     const candidate = await User.findOne({
       where: {
@@ -75,11 +93,12 @@ router.post('/register', async (req, res) => {
     } else {
       // Moscow time
       let offset = +3;
-      let date = new Date( new Date().getTime() + offset * 3600 * 1000);
+      let date = new Date(new Date().getTime() + offset * 3600 * 1000);
 
       const hashPassword = await bcrypt.hash(password, 10);
       const user = await User.create({
-        email, password: hashPassword,
+        email,
+        password: hashPassword,
         createdAt: date,
         updatedAt: date
       });
@@ -134,7 +153,9 @@ router.get('/password/:token', async (req, res) => {
     const user = await User.findOne({
       where: {
         resetToken: req.params.token,
-        resetTokenExp: {[Op.gte]: Date.now()}
+        resetTokenExp: {
+          [Op.gte]: Date.now()
+        }
       }
     });
 
@@ -159,7 +180,9 @@ router.post('/password', async (req, res) => {
       where: {
         id: req.body.userId,
         resetToken: req.body.token,
-        resetTokenExp: {[Op.gte]: Date.now()}
+        resetTokenExp: {
+          [Op.gte]: Date.now()
+        }
       }
     });
 

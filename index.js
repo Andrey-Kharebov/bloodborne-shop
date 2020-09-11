@@ -14,6 +14,7 @@ const path = require('path');
 const bodyParser = require("body-parser");
 const keys = require('./keys');
 
+
 // AWS
 const multer = require('multer');
 const multerS3 = require('multer-s3');
@@ -108,22 +109,21 @@ const hbs = exphbs.create({
   extname: 'hbs',
   handlebars: allowInsecurePrototypeAccess(Handlebars)
 });
-// const options = {
-//   host: 'localhost',
-//   port: 3306,
-//   user: 'root',
-//   password: 'a4563210',
-//   database: 'bloodborne'
-// };
 const options = {
-  host: 'us-cdbr-east-02.cleardb.com',
+  host: 'localhost',
   port: 3306,
-  user: 'b1f00dbed9c6d1',
-  password: 'c9533d9e',
-  database: 'heroku_48211aba3860de9'
+  user: 'root',
+  password: 'a4563210',
+  database: 'bloodborne'
 };
+// const options = {
+//   host: 'us-cdbr-east-02.cleardb.com',
+//   port: 3306,
+//   user: 'b1f00dbed9c6d1',
+//   password: 'c9533d9e',
+//   database: 'heroku_48211aba3860de9'
+// };
 const sessionStore = new MySQLStore(options);
-
 
 app.engine('hbs', hbs.engine);
 app.set('view engine', 'hbs');
@@ -138,6 +138,10 @@ app.use(session({
   secret: keys.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
+  cookie: {
+    // _expires: false,
+    originalMaxAge: 20 * 60 * 1000
+    },
   store: sessionStore
 }));
 app.use(csrf());
