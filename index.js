@@ -183,12 +183,12 @@ async function start() {
     
     const category = await Category.findByPk('1');
     if (!category) {
-      await Category.create({ title: 'weapons'});
-      await Category.create({ title: 'hats'});
-      await Category.create({ title: 'outerwear'});
-      await Category.create({ title: 'gloves'});
-      await Category.create({ title: 'pants'});
-      await Category.create({ title: 'accessories'});
+      await Category.create({ title: 'weapons', rustitle: 'оружие'});
+      await Category.create({ title: 'hats', rustitle: 'головные уборы'});
+      await Category.create({ title: 'outerwear', rustitle: 'верхняя одежда'});
+      await Category.create({ title: 'gloves', rustitle: 'перчатки'});
+      await Category.create({ title: 'pants', rustitle: 'брюки'});
+      await Category.create({ title: 'accessories', rustitle: 'аксессуары'});
     }
 
     app.listen(PORT, () => {

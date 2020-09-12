@@ -11,6 +11,10 @@ const Category = sequelize.define('category', {
   title: {
       type: Sequelize.STRING,
       allowNull: false
+  },
+  rustitle: {
+      type: Sequelize.STRING,
+      allowNull: false
   }
 });
 
