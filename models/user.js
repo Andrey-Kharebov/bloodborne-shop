@@ -1,7 +1,5 @@
 const Sequelize = require('sequelize');
-const {
-  Op
-} = require('sequelize');
+const {Op} = require('sequelize');
 const sequelize = require('../utils/database');
 const Order = require('../models/order');
 const OrderItem = require('../models/order-item');
@@ -83,39 +81,70 @@ User.prototype.adminLastOrders = async function () {
 };
 
 User.prototype.adminMonthOrdersQuantity = async function () {
-  let yesterday = new Date();
-  yesterday.setDate(yesterday.getDate() - 1);
-  yesterday.setHours(3, 0, 0, 0);
+  let firstDayPrevMonth = new Date();
+  firstDayPrevMonth.setMonth(firstDayPrevMonth.getMonth() - 1);
+  firstDayPrevMonth.setDate(1);
+  firstDayPrevMonth.setHours(3, 0, 0, 0);
 
-  let today = new Date();
-  today.setHours(3, 0, 0, 0);
+  let firstDayCurMonth = new Date();
+  firstDayCurMonth.setDate(1);
+  firstDayCurMonth.setHours(3, 0, 0, 0);
+
+  // let yesterday = new Date();
+  // yesterday.setDate(yesterday.getDate() - 1);
+  // yesterday.setHours(3, 0, 0, 0);
+
+  // let today = new Date();
+  // today.setHours(3, 0, 0, 0);
 
   let offset = +3;
-  console.log(yesterday);
-  console.log(today);
 
-  let yesterdayQuery = {
+  let prevMonthQuery = {
     where: {
       createdAt: {
-        [Op.gte]: yesterday,
-        [Op.lt]: today
+        [Op.gte]: firstDayPrevMonth,
+        [Op.lt]: firstDayCurMonth
       }
     }
-  };
+  }
 
-  let todayQuery = {
+  let curMonthQuery = {
     where: {
       createdAt: {
-        [Op.gte]: today,
+        [Op.gte]: firstDayCurMonth,
         [Op.lt]: new Date(new Date().getTime() + offset * 3600 * 1000)
       }
     }
   };
 
-  let yesterdayDay = await Order.findAll(yesterdayQuery);
-  let todayDay = await Order.findAll(todayQuery);
-  let a = yesterdayDay;
-  let b = todayDay;
+  // let yesterdayQuery = {
+  //   where: {
+  //     createdAt: {
+  //       [Op.gte]: yesterday,
+  //       [Op.lt]: today
+  //     }
+  //   }
+  // };
+
+  // let todayQuery = {
+  //   where: {
+  //     createdAt: {
+  //       [Op.gte]: today,
+  //       [Op.lt]: new Date(new Date().getTime() + offset * 3600 * 1000)
+  //     }
+  //   }
+  // };
+
+  let prevMonth = await Order.findAll(prevMonthQuery);
+  let curMonth = await Order.findAll(curMonthQuery);
+  let a = prevMonth;
+  let b = curMonth;
+
+
+  // let yesterdayDay = await Order.findAll(yesterdayQuery);
+  // let todayDay = await Order.findAll(todayQuery);
+  // let a = yesterdayDay;
+  // let b = todayDay;
 
   let ordersStatistic = {
     increase: 0,
@@ -145,65 +174,173 @@ User.prototype.adminMonthOrdersQuantity = async function () {
 };
 
 User.prototype.adminMonthUsersQuantity = async function () {
-  let yesterday = new Date();
-  yesterday.setDate(yesterday.getDate() - 1);
-  yesterday.setHours(3, 0, 0, 0);
+  let firstDayPrevMonth = new Date();
+  firstDayPrevMonth.setMonth(firstDayPrevMonth.getMonth() - 1);
+  firstDayPrevMonth.setDate(1);
+  firstDayPrevMonth.setHours(3, 0, 0, 0);
 
-  let today = new Date();
-  today.setHours(3, 0, 0, 0);
+  let firstDayCurMonth = new Date();
+  firstDayCurMonth.setDate(1);
+  firstDayCurMonth.setHours(3, 0, 0, 0);
+
+  // let yesterday = new Date();
+  // yesterday.setDate(yesterday.getDate() - 1);
+  // yesterday.setHours(3, 0, 0, 0);
+
+  // let today = new Date();
+  // today.setHours(3, 0, 0, 0);
 
   let offset = +3;
-  console.log(yesterday);
-  console.log(today);
+  // console.log(yesterday);
+  // console.log(today);
+  console.log(firstDayPrevMonth);
+  console.log(firstDayCurMonth);
 
-  let yesterdayQuery = {
+  let prevMonthQuery = {
     where: {
       createdAt: {
-        [Op.gte]: yesterday,
-        [Op.lt]: today
+        [Op.gte]: firstDayPrevMonth,
+        [Op.lt]: firstDayCurMonth
       }
     }
-  };
+  }
 
-  let todayQuery = {
+  let curMonthQuery = {
     where: {
       createdAt: {
-        [Op.gte]: today,
+        [Op.gte]: firstDayCurMonth,
         [Op.lt]: new Date(new Date().getTime() + offset * 3600 * 1000)
       }
     }
   };
 
-  let yesterdayDay = await User.findAll(yesterdayQuery);
-  let todayDay = await User.findAll(todayQuery);
-  let a = yesterdayDay;
-  let b = todayDay;
 
-  let ordersStatistic = {
+  // let yesterdayQuery = {
+  //   where: {
+  //     createdAt: {
+  //       [Op.gte]: yesterday,
+  //       [Op.lt]: today
+  //     }
+  //   }
+  // };
+
+  // let todayQuery = {
+  //   where: {
+  //     createdAt: {
+  //       [Op.gte]: today,
+  //       [Op.lt]: new Date(new Date().getTime() + offset * 3600 * 1000)
+  //     }
+  //   }
+  // };
+
+  let prevMonth = await User.findAll(prevMonthQuery);
+  let curMonth = await User.findAll(curMonthQuery);
+  let a = prevMonth;
+  let b = curMonth;
+
+  // let yesterdayDay = await User.findAll(yesterdayQuery);
+  // let todayDay = await User.findAll(todayQuery);
+  // let a = yesterdayDay;
+  // let b = todayDay;
+
+  let usersStatistic = {
     increase: 0,
     percents: 0
   };
 
   if (a > b) {
-    ordersStatistic.increase = -(a.length - b.length);
-    ordersStatistic.percents = 0;
+    usersStatistic.increase = -(a.length - b.length);
+    usersStatistic.percents = 0;
   } else if (b > a) {
-    ordersStatistic.increase = (b.length - a.length);
+    usersStatistic.increase = (b.length - a.length);
   } else {
-    ordersStatistic.increase = 0;
+    usersStatistic.increase = 0;
   }
 
-  ordersStatistic.percents = ((b.length - a.length) / a.length * 100);
-  if (ordersStatistic.percents < 0) {
-    ordersStatistic.percents = 0;
+  usersStatistic.percents = ((b.length - a.length) / a.length * 100);
+  if (usersStatistic.percents < 0) {
+    usersStatistic.percents = 0;
   }
 
-  if (ordersStatistic.increase > 0) {
-    ordersStatistic.increase = '+' + ordersStatistic.increase;
+  if (usersStatistic.increase > 0) {
+    usersStatistic.increase = '+' + usersStatistic.increase;
   }
 
-  return ordersStatistic;
+  return usersStatistic;
 };
+
+User.prototype.adminProfitSum = async function() {
+  let firstDayPrevMonth = new Date();
+  firstDayPrevMonth.setMonth(firstDayPrevMonth.getMonth() - 1);
+  firstDayPrevMonth.setDate(1);
+  firstDayPrevMonth.setHours(3, 0, 0, 0);
+
+  let firstDayCurMonth = new Date();
+  firstDayCurMonth.setDate(1);
+  firstDayCurMonth.setHours(3, 0, 0, 0);
+
+  let offset = +3;
+
+  let prevMonthQuery = {
+    where: {
+      createdAt: {
+        [Op.gte]: firstDayPrevMonth,
+        [Op.lt]: firstDayCurMonth
+      }
+    }
+  }
+
+  let curMonthQuery = {
+    where: {
+      createdAt: {
+        [Op.gte]: firstDayCurMonth,
+        [Op.lt]: new Date(new Date().getTime() + offset * 3600 * 1000)
+      }
+    }
+  };
+
+  let prevMonth = await Order.findAll(prevMonthQuery);
+  let prevMonthCompleted = prevMonth.filter(order => order.status == 'completed');
+  let prevMonthCompletedProfit = 0;
+  prevMonthCompleted.forEach(order => {
+    prevMonthCompletedProfit += order.totalCost;
+  })
+
+  let curMonth = await Order.findAll(curMonthQuery);
+  let curMonthCompleted = curMonth.filter(order => order.status == 'completed');
+  let curMonthCompletedProfit = 0;
+  curMonthCompleted.forEach(order => {
+    curMonthCompletedProfit += order.totalCost;
+  })
+
+  let a = prevMonthCompletedProfit;
+  let b = curMonthCompletedProfit;
+
+  let profitStatistic = {
+    increase: 0,
+    percents: 0
+  };
+
+  if (a > b) {
+    profitStatistic.increase = -(a - b);
+    profitStatistic.percents = 0;
+  } else if (b > a) {
+    profitStatistic.increase = (b - a);
+  } else {
+    profitStatistic.increase = 0;
+  }
+
+  profitStatistic.percents = ((b - a) / a * 100);
+  if (profitStatistic.percents < 0) {
+    profitStatistic.percents = 0;
+  }
+
+  if (profitStatistic.increase > 0) {
+    profitStatistic.increase = '+' + profitStatistic.increase;
+  }
+
+  return profitStatistic;
+}
 
 User.prototype.adminFetchUsers = async function () {
   const users = await User.findAll({

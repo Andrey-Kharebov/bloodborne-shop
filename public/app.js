@@ -736,7 +736,7 @@ window.addEventListener('DOMContentLoaded', () => {
       const formData = new FormData(form);
       const body = JSON.stringify(Object.fromEntries(formData.entries()));
 
-      fetch('http://localhost:3000/auth/login/', {
+      fetch('https://hidden-taiga-36867.herokuapp.com/auth/login/', {
           method: 'POST',
           headers: {
             "Content-Type": "application/json",
@@ -750,7 +750,7 @@ window.addEventListener('DOMContentLoaded', () => {
             closeModal(loginModal);
             showFlashMessage('Добро пожаловать в Ярнам. Удачной охоты!');
             setTimeout(() => {
-              window.location = 'http://localhost:3000/profile';
+              window.location = 'https://hidden-taiga-36867.herokuapp.com/profile';
             }, 1000);
           } else if (answer === 'wrong email') {
             showFlashMessage('Пользователь с данным Email не найден.');
@@ -895,13 +895,13 @@ window.addEventListener('DOMContentLoaded', () => {
     recSliderField.style.width = 100 * recSlides.length + '%';
     recSliderWrapper.style.overflow = 'hidden';
 
-    console.log(`${recSlide.offsetWidth} / ширина слайда`);
-    console.log(`${recSlide.offsetWidth * recSlides.length} / ширина слайдов * кол-во`);
-    console.log(`${recSliderWrapper.offsetWidth} / ширина center`);
-    console.log(`${recSliderField.offsetWidth} / ширина inner`);
+    // console.log(`${recSlide.offsetWidth} / ширина слайда`);
+    // console.log(`${recSlide.offsetWidth * recSlides.length} / ширина слайдов * кол-во`);
+    // console.log(`${recSliderWrapper.offsetWidth} / ширина center`);
+    // console.log(`${recSliderField.offsetWidth} / ширина inner`);
 
     let difference = (recSlide.offsetWidth * recSlides.length) - recSliderWrapper.offsetWidth;
-    console.log(`${difference} / разница`);
+    // console.log(`${difference} / разница`);
     // difference >= recSlide.offsetWidth && offset <= difference
 
 
@@ -1099,7 +1099,7 @@ window.addEventListener('DOMContentLoaded', () => {
       const body = JSON.stringify(Object.fromEntries(formData.entries()));
       console.log(body);
 
-      fetch('http://localhost:3000/order/step2', {
+      fetch('https://hidden-taiga-36867.herokuapp.com/order/step2', {
         method: 'POST',
         headers: {
           "Content-Type": "application/json",

@@ -85,13 +85,13 @@ router.get('/navbell', admin, async (req, res) => {
 
 
 
-
-
 router.get('/', admin, async (req, res) => {
   const user = req.user;
   const lastOrders = await req.user.adminLastOrders();
   const monthOrdersQuantity = await req.user.adminMonthOrdersQuantity();
   const monthUsersQuantity = await req.user.adminMonthUsersQuantity();
+  const monthProfitSum = await req.user.adminProfitSum();
+
 
   res.render('admin-home', {
     layout: 'admin',
@@ -99,7 +99,8 @@ router.get('/', admin, async (req, res) => {
     user,
     lastOrders,
     monthOrdersQuantity,
-    monthUsersQuantity
+    monthUsersQuantity,
+    monthProfitSum
   });
 });
 

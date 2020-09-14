@@ -31,16 +31,16 @@
           </div>
           <div class="plate-catalog-item-text">
             <p>Стоимость: <span class="plate-price"></span></p>
-            <p>Остаток: <span class="plate-quantity"></span></p>
+            {{!-- <p>Остаток: <span class="plate-quantity"></span></p> --}}
           </div>
-          <div class="plate-catalog-item-residue">
+          {{!-- <div class="plate-catalog-item-residue">
             <p>Размер: <span>S</span> <span>99 шт</span></p>
             <p>Размер: <span>M</span> <span>99 шт</span></p>
             <p>Размер: <span>L</span> <span>99 шт</span></p>
             <p>Размер: <span>XL</span> <span>99 шт</span></p>
             <p>Размер: <span>2XL</span> <span>99 шт</span></p>
             <p>Размер: <span>3XL</span> <span>99 шт</span></p>
-          </div>
+          </div> --}}
         </div>
       </div>
     </div>
@@ -69,7 +69,7 @@
     </div>
     <div class="catalog-tabs">
       {{#each categories}}
-      <button class="category-tab">{{title}}</button>
+      <button class="category-tab">{{rustitle}}</button>
       {{/each}}
     </div>
     {{#each categories}}
@@ -107,7 +107,7 @@
         </tr>
         {{/each}}
         {{else}}
-        <p>Здесь пока нет ни одного продукта</p>
+        {{!-- <p>Здесь пока нет ни одного продукта</p> --}}
         {{/if}}
       <tbody>
     </table>

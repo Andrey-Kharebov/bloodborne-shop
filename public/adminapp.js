@@ -201,11 +201,14 @@ window.addEventListener('DOMContentLoaded', () => {
     productRowSection.forEach((item) => {
       item.addEventListener('click', (event) => {
         plateName.textContent = event.currentTarget.querySelector('.productTitle').textContent;
+        // <img src="https://{{response.bucket}}.s3.{{response.region}}.amazonaws.com/{{product.imageUrl}}" alt="{{product.title}}"></img>
+        // <img src='${event.currentTarget.querySelector('#imageUrl').value}' alt='${event.currentTarget.querySelector('.productTitle').textContent}'>
+
         plateImg.innerHTML = `
-          <img src='${event.currentTarget.querySelector('#imageUrl').value}' alt='${event.currentTarget.querySelector('.productTitle').textContent}'>
+          <img src='https://bloodborne-images.s3.eu-central-1.amazonaws.com${event.currentTarget.querySelector('#imageUrl').value}' alt='${event.currentTarget.querySelector('.productTitle').textContent}'></img>
         `;
         platePrice.textContent = event.currentTarget.querySelector('.productPrice').textContent;
-        plateQuantity.textContent = event.currentTarget.querySelector('.productQuantity').textContent;
+        // plateQuantity.textContent = event.currentTarget.querySelector('.productQuantity').textContent;
       });
     });
   }
