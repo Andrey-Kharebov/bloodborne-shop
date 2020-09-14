@@ -34,7 +34,7 @@ router.post('/login', async (req, res) => {
 
     if (candidate) {
       const areSame = await bcrypt.compare(password, candidate.password);
-
+      
       if (areSame) {
         if (req.body.remember) {
           req.session.user = candidate;
