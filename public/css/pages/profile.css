@@ -148,6 +148,8 @@
 }
 
 .change-active .input-field input {
+  box-sizing: border-box;
+  padding: 0 10px;
   margin-top: 5px;
   border: none;
   background-color: #fff;

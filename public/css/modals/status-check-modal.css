@@ -50,6 +50,8 @@
 }
 
 .modal-bg .status-check-modal .order-number input {
+  box-sizing: border-box;
+  padding: 0 10px;
   margin-top: 10px;
   border: none;
   background-color: #fff;

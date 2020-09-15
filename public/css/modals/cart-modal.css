@@ -216,6 +216,8 @@ input[type='checkbox']:checked~.cart-modal {
 }
 
 .cart-modal .promotional input {
+  box-sizing: border-box;
+  padding: 0 10px;
   position: relative;
   margin-top: 10px;
   border: none;

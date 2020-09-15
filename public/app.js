@@ -41,7 +41,9 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 
 
-  // Product size choosing
+  // Product size choosing !!!
+  // productSizeChoosing('.product-size ul', 'product-size-active');
+  // productSizeChoosing('.modal-cart-product-size ul', 'modal-size-active');
 
   function productSizeChoosing(sizeListSelector, activeSelector) {
     let sizeList = document.querySelectorAll(sizeListSelector);
@@ -57,8 +59,14 @@ window.addEventListener('DOMContentLoaded', () => {
       item.addEventListener('click', (event) => {
         let LSkey = event.currentTarget.dataset.size;
         itemList = event.currentTarget;
-        removeAllSizeActive(itemList);
-        event.target.classList.add(activeSelector);
+        console.log(event.currentTarget);
+        console.log(event.target);
+        if (event.target.tagName.toLowerCase() === 'button') {
+          removeAllSizeActive(itemList);
+          event.target.classList.add(activeSelector);
+        }
+        // removeAllSizeActive(itemList);
+        // event.target.classList.add(activeSelector);
         if (LSkey) {
           let cartData = getCartData();
           for (let key in cartData) {
