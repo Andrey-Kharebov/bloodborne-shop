@@ -1,33 +1,52 @@
 <div class="category">
   {{#if category}}
   <h1>{{category.rustitle}}</h1>
+  {{#if outerProducts.products.length}}
   <div class="product-list">
-    {{#if products.length}}
-    {{#each products}}
-      <div class="product">
-        <a href="/products/{{id}}">
-          <div class="product-cover">
-            <img src="https://{{@root.response.bucket}}.s3.{{@root.response.region}}.amazonaws.com/{{imageUrl}}" alt="{{title}}">
-          </div>
-          <div class="product-title">{{title}}</div>
-          <div class="product-price">{{price}}</div>
-          <div class="more">Подробнеe <span>&#8640;</span></div>
-        </a>
-        {{#if @root.isAdmin}}
-        <div class="edit_delete">
-          <a href="/admin/product/{{id}}/edit"><button class="product-edit"><i class="far fa-edit"></i></button></a>
-          <form action="/admin/product/{{id}}/remove" method="POST">
-            <input type="hidden" name="_csrf" value="{{@root.csrf}}">
-            <input type="hidden" name="id" value="{{product.id}}">
-            <button class="product-delete"><i class="far fa-trash-alt"></i></button>
-          </form>
+    <input type="hidden" id="categoryTitle" value="{{category.title}}">
+    <input type="hidden" id="pagesQuantity" value="{{outerProducts.pagesQuantity}}">
+    <input type="hidden" id="pageNumber" value="{{page}}">
+    {{#each outerProducts.products}}
+    <div class="product">
+      <a href="/products/{{id}}">
+        <div class="product-cover">
+          <img src="https://{{@root.response.bucket}}.s3.{{@root.response.region}}.amazonaws.com/{{imageUrl}}"
+            alt="{{title}}">
         </div>
-        {{/if}}
+        <div class="product-title">{{title}}</div>
+        <div class="product-price">{{price}}</div>
+        <div class="more">Подробнеe <span>&#8640;</span></div>
+      </a>
+      {{#if @root.isAdmin}}
+      <div class="edit_delete">
+        <a href="/admin/product/{{id}}/edit"><button class="product-edit"><i class="far fa-edit"></i></button></a>
+        <form action="/admin/product/{{id}}/remove" method="POST">
+          <input type="hidden" name="_csrf" value="{{@root.csrf}}">
+          <input type="hidden" name="id" value="{{product.id}}">
+          <button class="product-delete"><i class="far fa-trash-alt"></i></button>
+        </form>
       </div>
+      {{/if}}
+    </div>
     {{/each}}
-    {{else}}
-      <p>Здесь пока нет ни одного продукта</p>
-    {{/if}}
   </div>
+  {{!-- <div class="pagination-section">
+    <ul class="pagination">
+      <li><a href="">«</a></li>
+      <li><a href="">1</a></li>
+      <li><a class="active" href="">2</a></li>
+      <li><a href="">3</a></li>
+      <li><a href="">4</a></li>
+      <li><a href="">5</a></li>
+      <li><a href="">6</a></li>
+      <li><a href="">7</a></li>
+      <li><a href="">»</a></li>
+    </ul>
+  </div> --}}
+  {{else}}
+  <div class="product-list">
+    <p>Здесь пока нет ни одного продукта</p>
+  </div>
+  {{/if}}
   {{/if}}
 </div>

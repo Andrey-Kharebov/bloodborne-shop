@@ -185,8 +185,8 @@ window.addEventListener('DOMContentLoaded', () => {
 
   // Modal Categories
   const burgerBtn = document.querySelector('.burger'),
-        categoriesModal = document.querySelector('.categories-modal'),
-        closeCategoriesModalBtn = document.querySelector('.categories-close p');
+    categoriesModal = document.querySelector('.categories-modal'),
+    closeCategoriesModalBtn = document.querySelector('.categories-close p');
 
   function openCategoriesModal() {
     checkbox.click();
@@ -736,36 +736,206 @@ window.addEventListener('DOMContentLoaded', () => {
 
   function login() {
     const loginBtn = document.querySelector('.login-btn button'),
-      form = document.querySelector('.login-form');
+      form = document.querySelector('.login-form'),
+      loginInputs = document.querySelectorAll('.required-login-input'),
+      email = document.querySelector('#login-email'),
+      password = document.querySelector('#login-password');
 
     loginBtn.addEventListener('click', (event) => {
       event.preventDefault();
+      let filledInput = 0;
+      loginInputs.forEach(item => {
+        if (item.value === '' || item.value === null) {
+          if (item.parentElement.querySelector('.input-error-message')) {} else {
+            let errorMessage = document.createElement('p');
+            errorMessage.classList.add('input-error-message');
+            errorMessage.textContent = `Поле '${item.parentElement.firstElementChild.textContent}' не может быть пустым.`;
+            item.parentNode.insertBefore(errorMessage, item);
+          }
+        } else if (item.parentElement.lastElementChild.name === 'email') {
+          function emailIsValid(email) {
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+          }
+          emailIsValid(item.value);
+          if (emailIsValid(item.value) === true) {
+            filledInput++;
+          } else {  
+            if (item.parentElement.querySelector('.input-error-message')) {
+              // item.parentElement.removeChild(item.parentElement.querySelector('.input-error-message'));
+            } else {
+              let errorMessage = document.createElement('p');
+              errorMessage.classList.add('input-error-message');
+              errorMessage.textContent = `Введите действительный адрес эл. почты.`;
+              item.parentNode.insertBefore(errorMessage, item); 
+            }
+          }
+        } else {
+          filledInput++;
+        }
+      })
 
-      const formData = new FormData(form);
-      const body = JSON.stringify(Object.fromEntries(formData.entries()));
+      inputChangeClearErrorMessage(email);
+      inputChangeClearErrorMessage(password);
 
-      fetch('https://hidden-taiga-36867.herokuapp.com/auth/login/', {
-          method: 'POST',
-          headers: {
-            "Content-Type": "application/json",
-            'X-XSRF-TOKEN': csrf
-          },
-          body: body
-        })
-        .then((res) => res.json())
-        .then((answer) => {
-          if (answer === 'logged in') {
-            closeModal(loginModal);
-            showFlashMessage('Добро пожаловать в Ярнам. Удачной охоты!');
-            setTimeout(() => {
-              window.location = 'https://hidden-taiga-36867.herokuapp.com/profile';
-            }, 1000);
-          } else if (answer === 'wrong email') {
-            showFlashMessage('Пользователь с данным Email не найден.');
-          } else if (answer === 'wrong password') {
-            showFlashMessage('Email адрес и пароль не совпадают.');
+      if (filledInput === loginInputs.length) {
+        const formData = new FormData(form);
+        const body = JSON.stringify(Object.fromEntries(formData.entries()));
+
+        fetch('https://hidden-taiga-36867.herokuapp.com/auth/login/', {
+            method: 'POST',
+            headers: {
+              "Content-Type": "application/json",
+              'X-XSRF-TOKEN': csrf
+            },
+            body: body
+          })
+          .then((res) => res.json())
+          .then((answer) => {
+            if (answer === 'logged in') {
+              closeModal(loginModal);
+              showFlashMessage('Добро пожаловать в Ярнам. Удачной охоты!');
+              setTimeout(() => {
+                window.location = 'https://hidden-taiga-36867.herokuapp.com/profile';
+              }, 1000);
+            } else if (answer === 'wrong email') {
+              showFlashMessage('Пользователь с данным Email не найден.');
+            } else if (answer === 'wrong password') {
+              showFlashMessage('Email адрес и пароль не совпадают.');
+            }
+          })
+      }
+    })
+  }
+
+  // registration validation
+
+  function regValidation() {
+    const registrationBtn = document.querySelector('.registration-btn button'),
+      form = document.querySelector('.login-form'),
+      regInputs = document.querySelectorAll('.required-reg-input'),
+      email = document.querySelector('#reg-email'),
+      password = document.querySelector('#reg-password'),
+      confirmPassword = document.querySelector('#reg-confirm-password');
+
+      registrationBtn.addEventListener('click', (event) => {
+        let filledInput = 0;
+        regInputs.forEach(item => {
+          if (item.value === '' || item.value === null) {
+            if (item.parentElement.querySelector('.input-error-message')) {} else {
+              let errorMessage = document.createElement('p');
+              errorMessage.classList.add('input-error-message');
+              errorMessage.textContent = `Поле '${item.parentElement.firstElementChild.textContent}' не может быть пустым.`;
+              item.parentNode.insertBefore(errorMessage, item);
+            }
+          } else if (item.parentElement.lastElementChild.name === 'email') {
+            function emailIsValid(email) {
+              return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+            }
+            emailIsValid(item.value);
+            if (emailIsValid(item.value) === true) {
+              filledInput++;
+            } else {  
+              if (item.parentElement.querySelector('.input-error-message')) {
+                // item.parentElement.removeChild(item.parentElement.querySelector('.input-error-message'));
+              } else {
+                let errorMessage = document.createElement('p');
+                errorMessage.classList.add('input-error-message');
+                errorMessage.textContent = `Введите действительный адрес эл. почты.`;
+                item.parentNode.insertBefore(errorMessage, item); 
+              }
+            }
+          } else if (item.parentElement.lastElementChild.name === 'password') {
+            let itemValue = item.value;
+            if (itemValue.length <= 4) {
+              if (item.parentElement.querySelector('.input-error-message')) {
+                // item.parentElement.removeChild(item.parentElement.querySelector('.input-error-message'));
+              } else {
+                let errorMessage = document.createElement('p');
+                errorMessage.classList.add('input-error-message');
+                errorMessage.textContent = `Минимальная длина пароля составляет 5 символов.`;
+                item.parentNode.insertBefore(errorMessage, item);
+              }
+            } else {
+              filledInput++;
+            }
+          } else if (item.parentElement.lastElementChild.name === 'confirm') {
+            let itemValue = item.value;
+            let passwordValue = password.value;
+          
+            if (itemValue != passwordValue) {
+              if (item.parentElement.querySelector('.input-error-message')) {
+                // item.parentElement.removeChild(item.parentElement.querySelector('.input-error-message'));
+              } else {
+                let errorMessage = document.createElement('p');
+                errorMessage.classList.add('input-error-message');
+                errorMessage.textContent = `Поля 'Пароль' и 'Подтвердите пароль' должны совпадать.`;
+                item.parentNode.insertBefore(errorMessage, item);
+              }
+            } else {
+              filledInput++;
+            }
+          } else {
+            filledInput++;
           }
         })
+
+        console.log(filledInput);
+  
+        inputChangeClearErrorMessage(email);
+        inputChangeClearErrorMessage(password);
+        inputChangeClearErrorMessage(confirmPassword);
+  
+        if (filledInput != regInputs.length) {
+          event.preventDefault();
+        }
+      })
+
+    
+
+  }
+
+  // forgot password validation 
+
+  function fogPassValidation() {
+    const fogBtn = document.querySelector('.forgot-buttons button'),
+          email = document.querySelector('#fog-email');
+
+    fogBtn.addEventListener('click', (event) => {
+      let filledInput = 0;
+
+      if (email.value === '' || email.value === null) {
+        if (email.parentElement.querySelector('.input-error-message')) {} else {
+          let errorMessage = document.createElement('p');
+          errorMessage.classList.add('input-error-message');
+          errorMessage.textContent = `Поле '${email.parentElement.firstElementChild.textContent}' не может быть пустым.`;
+          email.parentNode.insertBefore(errorMessage, email);
+        }
+      } else {
+        function emailIsValid(email) {
+          return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+        }
+        emailIsValid(email.value);
+  
+        if (emailIsValid(email.value) === true) {
+          filledInput++;
+        } else {  
+          if (email.parentElement.querySelector('.input-error-message')) {
+            // item.parentElement.removeChild(item.parentElement.querySelector('.input-error-message'));
+          } else {
+            let errorMessage = document.createElement('p');
+            errorMessage.classList.add('input-error-message');
+            errorMessage.textContent = `Введите действительный адрес эл. почты.`;
+            email.parentNode.insertBefore(errorMessage, email); 
+          }
+        }
+      }
+      
+
+      inputChangeClearErrorMessage(email);
+
+      if (filledInput != 1) {
+        event.preventDefault();
+      }
     })
   }
 
@@ -922,13 +1092,13 @@ window.addEventListener('DOMContentLoaded', () => {
         recSliderField.style.transform = `translateX(-${offset}px)`;
       })
     } else {
-      recSliderField.style.width = recSliderWrapper.offsetWidth + 'px'; 
+      recSliderField.style.width = recSliderWrapper.offsetWidth + 'px';
       recSliderPrev.style.display = 'none';
       recSliderNext.style.display = 'none';
       recSliderField.style.justifyContent = 'center';
       // console.log(recSliderField.offsetWidth);
     }
-    
+
     recSlides.forEach(item => {
       item.addEventListener('touchstart', (event) => {
         let touchStart = event.targetTouches[0].screenX;
@@ -949,7 +1119,7 @@ window.addEventListener('DOMContentLoaded', () => {
         })
       })
     })
-  
+
 
 
     recSliderNext.addEventListener('click', (event) => {
@@ -1079,105 +1249,170 @@ window.addEventListener('DOMContentLoaded', () => {
                 productSizeChoosing('.modal-cart-product-size ul', 'modal-size-active');
                 closeModal(recommendedModal);
                 // if (!checkbox.checked) {
-                  openCartModal();
+                openCartModal();
                 // }
               } catch (e) {
                 console.log(e);
                 showFlashMessage('Для добавления товара в корзину необходимо выбрать размер.');
               }
             });
-    
+
           })
       })
     })
   }
 
   // Order step2 fetch
+  function inputChangeClearErrorMessage(inputField) {
+
+    inputField.addEventListener('input', (event) => {
+      // console.log(inputField.parentElement);
+      if (inputField.parentElement.querySelector('.input-error-message')) {
+        inputField.parentElement.removeChild(inputField.parentElement.querySelector('.input-error-message'));
+      }
+    })
+  }
 
   function step2fetch() {
     const step2btn = document.querySelector('.continue-section button'),
-          orderDetails = document.querySelector('.order-details'),
-          form = document.querySelector('.order-form'),
-          navTotalCost = document.querySelector('.total-cost');
+      orderDetails = document.querySelector('.order-details'),
+      form = document.querySelector('.order-form'),
+      navTotalCost = document.querySelector('.total-cost'),
+      orderForm = document.querySelector('.order-form'),
+      deliveryInputs = document.querySelectorAll('.required-input'),
+      name = document.querySelector('#name'),
+      surname = document.querySelector('#surname'),
+      patronymic = document.querySelector('#patronymic'),
+      phone = document.querySelector('#phone'),
+      email = document.querySelector('#email'),
+      country = document.querySelector('#country'),
+      town = document.querySelector('#town'),
+      region = document.querySelector('#region'),
+      address = document.querySelector('#address'),
+      zipcode = document.querySelector('#zipcode');
+
 
     step2btn.addEventListener('click', (event) => {
       event.preventDefault();
-      
-      const formData = new FormData(form);
-      const body = JSON.stringify(Object.fromEntries(formData.entries()));
-      console.log(body);
-
-      fetch('https://hidden-taiga-36867.herokuapp.com/order/step2', {
-        method: 'POST',
-        headers: {
-          "Content-Type": "application/json",
-          'X-XSRF-TOKEN': csrf
-        },
-        body: body
+      let filledInput = 0;
+      deliveryInputs.forEach(item => {
+        if (item.value === '' || item.value === null) {
+          if (item.parentElement.querySelector('.input-error-message')) {} else {
+            let errorMessage = document.createElement('p');
+            errorMessage.classList.add('input-error-message');
+            errorMessage.textContent = `Поле '${item.parentElement.firstElementChild.textContent}' не может быть пустым.`;
+            item.parentNode.insertBefore(errorMessage, item);
+          }
+        } else if (item.parentElement.lastElementChild.name === 'email') {
+          function emailIsValid(email) {
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+          }
+          emailIsValid(item.value);
+          if (emailIsValid(item.value) === true) {
+            filledInput++;
+          } else {
+            let errorMessage = document.createElement('p');
+            errorMessage.classList.add('input-error-message');
+            errorMessage.textContent = `Введите действительный адрес эл. почты.`;
+            item.parentNode.insertBefore(errorMessage, item);
+          }
+        } else {
+          filledInput++;
+        }
       })
-      .then((res) => res.json())
-      .then((order) => {
-        localStorage.clear();
-        navTotalCost.textContent = 0;
-        orderDetails.innerHTML = `
-          <h1>Заказ успешно создан</h1>
-          <p class="p-details">Номер заказа: <span class="order-number">${order.id}</span></p>
-        
-          <div class="order-section">
-            <div class="delivery-info">
-              <h2>Данные для доставки</h2>
-              <div class="delivery-info-list">
-                <div class="input-field">
-                  <p class="p-input">Имя: <span class="info">${order.name}</span></p>
-                </div>
-                <div class="input-field">
-                  <p class="p-input">Фамилия: <span class="info">${order.surname}</span></p>
-                </div>
-                <div class="input-field">
-                  <p class="p-input">Отчество: <span class="info">${order.patronymic}</span></p>
-                </div>
-                <div class="input-field">
-                  <p class="p-input">Телефон: <span class="info">${order.phone}</span></p>
-                </div>
-                <div class="input-field">
-                  <p class="p-input">Эл. Почта: <span class="info">${order.email}</span></p>
-                </div>
-                <div class="input-field">
-                  <p class="p-input">Страна: <span class="info">${order.country}</span></p>
-                </div>
-                <div class="input-field">
-                  <p class="p-input">Город: <span class="info">${order.town}</span></p>
-                </div>
-                <div class="input-field">
-                  <p class="p-input">Край/Область/Регион: <span class="info">${order.region}</span></p>
-                </div>
-                <div class="input-field">
-                  <p class="p-input">Улица, Дом, Квартира: <span class="info">${order.address}</span></p>
-                </div>
-                <div class="input-field">
-                  <p class="p-input">Почтовый индекс: <span class="info">${order.zipcode}</span></p>
-                </div>
-                <hr>
-                <div class="input-field">
-                  <p class="p-input">Общая стоимость: <span class="info">${order.totalPrice} отг. к.</span></p>
-                </div>
-                <div class="input-field">
-                  <p class="p-input">Стоимость доставки: <span class="info">${order.deliveryPrice} отг. к.</span></p>
-                </div>
-                <div class="input-field">
-                  <p class="p-input">Итого: <span class="info">${order.totalCost} отг. к.</span></p>
-                </div>
-                <div class="continue-section">
-                  <a href="/"><button type="submit">На главную <span>&#8640;</span></button></a>
-                  <div class="continue-part">
-                    <p class="p-part">Этап 2 <span class="span-part">из 2</span></p>
+
+      inputChangeClearErrorMessage(name);
+      inputChangeClearErrorMessage(surname);
+      inputChangeClearErrorMessage(patronymic);
+      inputChangeClearErrorMessage(phone);
+      inputChangeClearErrorMessage(email);
+      inputChangeClearErrorMessage(country);
+      inputChangeClearErrorMessage(town);
+      inputChangeClearErrorMessage(region);
+      inputChangeClearErrorMessage(address);
+      inputChangeClearErrorMessage(zipcode);
+
+      // console.log(filledInput);
+
+      if (filledInput === deliveryInputs.length) {
+        const formData = new FormData(form);
+        const body = JSON.stringify(Object.fromEntries(formData.entries()));
+        console.log(body);
+
+        fetch('https://hidden-taiga-36867.herokuapp.com/order/step2', {
+            method: 'POST',
+            headers: {
+              "Content-Type": "application/json",
+              'X-XSRF-TOKEN': csrf
+            },
+            body: body
+          })
+          .then((res) => res.json())
+          .then((order) => {
+            localStorage.clear();
+            navTotalCost.textContent = 0;
+            orderDetails.innerHTML = `
+            <h1>Заказ успешно создан</h1>
+            <p class="p-details">Номер заказа: <span class="order-number">${order.id}</span></p>
+          
+            <div class="order-section">
+              <div class="delivery-info">
+                <h2>Данные для доставки</h2>
+                <div class="delivery-info-list">
+                  <div class="input-field">
+                    <p class="p-input">Имя: <span class="info">${order.name}</span></p>
+                  </div>
+                  <div class="input-field">
+                    <p class="p-input">Фамилия: <span class="info">${order.surname}</span></p>
+                  </div>
+                  <div class="input-field">
+                    <p class="p-input">Отчество: <span class="info">${order.patronymic}</span></p>
+                  </div>
+                  <div class="input-field">
+                    <p class="p-input">Телефон: <span class="info">${order.phone}</span></p>
+                  </div>
+                  <div class="input-field">
+                    <p class="p-input">Эл. Почта: <span class="info">${order.email}</span></p>
+                  </div>
+                  <div class="input-field">
+                    <p class="p-input">Страна: <span class="info">${order.country}</span></p>
+                  </div>
+                  <div class="input-field">
+                    <p class="p-input">Город: <span class="info">${order.town}</span></p>
+                  </div>
+                  <div class="input-field">
+                    <p class="p-input">Край/Область/Регион: <span class="info">${order.region}</span></p>
+                  </div>
+                  <div class="input-field">
+                    <p class="p-input">Улица, Дом, Квартира: <span class="info">${order.address}</span></p>
+                  </div>
+                  <div class="input-field">
+                    <p class="p-input">Почтовый индекс: <span class="info">${order.zipcode}</span></p>
+                  </div>
+                  <hr>
+                  <div class="input-field">
+                    <p class="p-input">Общая стоимость: <span class="info">${order.totalPrice} отг. к.</span></p>
+                  </div>
+                  <div class="input-field">
+                    <p class="p-input">Стоимость доставки: <span class="info">${order.deliveryPrice} отг. к.</span></p>
+                  </div>
+                  <div class="input-field">
+                    <p class="p-input">Итого: <span class="info">${order.totalCost} отг. к.</span></p>
+                  </div>
+                  <div class="continue-section">
+                    <a href="/"><button type="submit">На главную <span>&#8640;</span></button></a>
+                    <div class="continue-part">
+                      <p class="p-part">Этап 2 <span class="span-part">из 2</span></p>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        `
-      })
+          `
+          })
+      } else {
+        showFlashMessage('Все поля формы должны быть верно заполнены.');
+      }
     })
 
     // loginBtn.addEventListener('click', (event) => {
@@ -1212,13 +1447,101 @@ window.addEventListener('DOMContentLoaded', () => {
 
   }
 
+  // Categories pagination block 
+
+  function pagination() {
+    const category = document.querySelector('.category'),
+      pages = +document.querySelector('#pagesQuantity').value,
+      currentPage = +document.querySelector('#pageNumber').value,
+      categoryTitle = document.querySelector('#categoryTitle').value;
+
+
+    let pagSection = document.createElement('div');
+    let ulPagSection = document.createElement('ul');
+
+    pagSection.classList.add('pagination-section');
+    ulPagSection.classList.add('pagination');
+
+    pagSection.appendChild(ulPagSection);
+    // console.log(pagSection);
+    // console.log(currentPage);
+
+    // Left arrow 'li'
+    let liLeftArrowPagSection = document.createElement('li');
+    let aLeftArrowPagSection = document.createElement('a');
+    aLeftArrowPagSection.setAttribute('href', `/categories/${categoryTitle}?page=${currentPage - 1}&limit=6`);
+    aLeftArrowPagSection.setAttribute('class', 'paginaiton-left-arrow');
+    aLeftArrowPagSection.textContent = '«';
+
+    liLeftArrowPagSection.appendChild(aLeftArrowPagSection);
+    ulPagSection.appendChild(liLeftArrowPagSection);
+
+    // Center 'li's
+    for (let i = 0; i < pages; i++) {
+      let liPagSection = document.createElement('li');
+      let aPagSection = document.createElement('a');
+      aPagSection.setAttribute('href', `/categories/${categoryTitle}?page=${i + 1}&limit=6`);
+      aPagSection.textContent = i + 1;
+
+      if ((i + 1) === currentPage) {
+        aPagSection.setAttribute('class', 'active');
+      }
+
+      liPagSection.appendChild(aPagSection);
+      ulPagSection.appendChild(liPagSection);
+    }
+
+    // Right arrow 'li'
+    let liRightArrowPagSection = document.createElement('li');
+    let aRightArrowPagSection = document.createElement('a');
+    aRightArrowPagSection.setAttribute('href', `/categories/${categoryTitle}?page=${currentPage + 1}&limit=6`);
+    aRightArrowPagSection.setAttribute('class', 'paginaiton-right-arrow');
+    aRightArrowPagSection.textContent = '»';
+
+    liRightArrowPagSection.appendChild(aRightArrowPagSection);
+    ulPagSection.appendChild(liRightArrowPagSection);
+
+
+    if (pages > 1) {
+      category.appendChild(pagSection);
+    }
+  }
+
+  // Pagination arrows no-pages prevent 
+
+  function paginaitonArrows() {
+    let leftPagArrow = document.querySelector('.paginaiton-left-arrow'),
+      rightPagArrow = document.querySelector('.paginaiton-right-arrow'),
+      pages = +document.querySelector('#pagesQuantity').value,
+      currentPage = +document.querySelector('#pageNumber').value;
+
+    if (leftPagArrow) {
+      leftPagArrow.addEventListener('click', (event) => {
+        if (currentPage - 1 === 0) {
+          event.preventDefault();
+        }
+      })
+    }
+    
+    if (rightPagArrow) {
+      rightPagArrow.addEventListener('click', (event) => {
+        if (currentPage === pages) {
+          event.preventDefault();
+        }
+      })
+    } 
+  }
+
 
 
 
   if (document.querySelector('.continue-section button')) {
     step2fetch();
   }
-
+  if (document.querySelector('.category')) {
+    pagination();
+    paginaitonArrows();
+  }
 
   if (document.querySelector('.product-slider')) {
     productSlider();
@@ -1232,6 +1555,8 @@ window.addEventListener('DOMContentLoaded', () => {
     faq();
   }
   login();
+  regValidation();
+  fogPassValidation();
   checkOrderStatus();
   showInModalCart();
   deleteInModalCart();
