@@ -13,6 +13,7 @@ const sequelize = require('./utils/database');
 const path = require('path');
 const bodyParser = require("body-parser");
 const keys = require('./keys');
+const error404 = require('./middleware/error');
 
 
 
@@ -163,6 +164,7 @@ app.use('/order', ordersRoutes);
 app.use('/admin', adminRoutes);
 app.use('/auth', authRoutes);
 app.use('/profile', profileRoutes);
+app.use(error404);
 
 
 

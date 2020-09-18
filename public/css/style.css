@@ -5,6 +5,7 @@
 @import '/public/css/pages/profile.css';
 @import '/public/css/pages/faq.css';
 @import '/public/css/pages/password.css';
+@import '/public/css/pages/404.css';
 
 /* modals */
 @import '/public/css/modals/cart-modal.css';
