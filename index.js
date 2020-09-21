@@ -134,7 +134,7 @@ app.set('views', 'views');
 app.use(express.static(path.join(__dirname, '')));
 app.use(express.static(path.join(__dirname, 'images')));
 app.use(express.urlencoded({extended: true}));
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(session({
   secret: keys.SESSION_SECRET,

@@ -20,58 +20,58 @@ router.get('/check/:id', async (req, res) => {
 })
 router.post('/step2', async (req, res) => {
   try {
-    console.log(req.body);
+    
+    let products = [];
+    let string = 'product';
+
+    // console.log(req.body);
+    for (let key in req.body) {
+      if (key.includes(string)) {
+        products.push(req.body[key])
+        // console.log(key);
+        // console.log(req.body[key]);
+      }
+    }
+    console.log(products.length);
+    console.log(products);
+    products.forEach(item => {
+      console.log(item.split(',')[1]);
+    })
+    
     let userId;
     if (req.session.user) {
       userId = req.session.user.id;
     }
-    let products = req.body.products;
-    
-    let order = await Order.create({
-        totalPrice: req.body.totalPrice,
-        deliveryPrice: req.body.deliveryPrice,
-        totalCost: req.body.totalCost,
-        name: req.body.name,
-        surname: req.body.surname,
-        patronymic: req.body.patronymic,
-        phone: req.body.phone,
-        email: req.body.email,
-        country: req.body.country,
-        town: req.body.town,
-        region: req.body.region,
-        address: req.body.address,
-        zipcode: req.body.zipcode,
-        userId: userId
-      })
-      .then((order) => {
-        if (JSON.stringify(req.body.products).match(/,/g).length <= 6) {
-          OrderItem.create({
-            orderId: order.id,
-            productId: products.split(',')[0],
-            title: products.split(',')[1],
-            size: products.split(',')[3],
-            quantity: products.split(',')[4]
-          });
-        } else {
-          products.forEach(async item => {
-            let size = item.split(',')[3];
 
-            OrderItem.create({
-              orderId: order.id,
-              productId: item.split(',')[0].replace(size, ''),
-              title: item.split(',')[1],
-              size: item.split(',')[3],
-              quantity: item.split(',')[4]
-            })
-            .catch((err) => {
-              console.log(err);
-            });
-          });
-        }
-        return order;
-      });
+    let order = await Order.create({
+      totalPrice: req.body.totalPrice,
+      deliveryPrice: req.body.deliveryPrice,
+      totalCost: req.body.totalCost,
+      name: req.body.name,
+      surname: req.body.surname,
+      patronymic: req.body.patronymic,
+      phone: req.body.phone,
+      email: req.body.email,
+      country: req.body.country,
+      town: req.body.town,
+      region: req.body.region,
+      address: req.body.address,
+      zipcode: req.body.zipcode,
+      userId: userId
+    })
+    .then(order => {
+      products.forEach(item => {
+        OrderItem.create({
+          orderId: order.id,
+          productId: item.split(',')[0],
+          title: item.split(',')[1],
+          size: item.split(',')[3],
+          quantity: item.split(',')[4]
+        })
+      })
+      return order;
+    })
     res.status(200).json(order); 
-    // res.redirect(`/order/${order.id}/step2`);
   } catch (e) {
     console.log(e);
   }

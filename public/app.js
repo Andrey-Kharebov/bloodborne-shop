@@ -597,7 +597,7 @@ window.addEventListener('DOMContentLoaded', () => {
       for (let key in LSCart) {
         orderProductsList.innerHTML += `
         <div class="order-product-item" id="${key}">
-          <input type="hidden" name="products" value="${key},${LSCart[key]}">
+          <input type="hidden" name="product${key}" value="${key},${LSCart[key]}">
           <h3>${LSCart[key][0]}</h3>
           <p>Размер: <span>${LSCart[key][2]}</span></p>
           <p>Количество: <span>${LSCart[key][3]}</span></p>
@@ -1338,6 +1338,7 @@ window.addEventListener('DOMContentLoaded', () => {
         const formData = new FormData(form);
         const body = JSON.stringify(Object.fromEntries(formData.entries()));
         console.log(body);
+        console.log(formData);
 
         fetch('https://hidden-taiga-36867.herokuapp.com/order/step2', {
             method: 'POST',
